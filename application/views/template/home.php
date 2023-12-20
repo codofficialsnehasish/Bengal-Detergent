@@ -27,8 +27,9 @@
                      <div class="slideshow__text-content mt-0 left te_lef">
                            <div class="container">
                               <div class="wrap-caption left">
-                                 <h2 class="h1 mega-title slideshow__title">Welcome to BDP</h2>
-                                 <span class="mega-subtitle slideshow__subtitle">We have created a Store  that looks Awesome and performs Brilliantly</span>
+                                 <?php $array = preg_split("/\r\n|\n|\r/", get_desc($slide->id)); ?>
+                                 <h2 class="h1 mega-title slideshow__title"><?= strip_tags($array[0]); ?></h2>
+                                 <span class="mega-subtitle slideshow__subtitle"><?= strip_tags($array[1]); ?></span>
                                  <a href="<?= base_url('/products/all_products'); ?>" class="btn btn--large">Purchase Now</a>
                               </div>
                            </div>

@@ -204,32 +204,29 @@
                      <h2 class="payment-title mb-3">Payment Method</h2>
                      <div class="payment-method">
                            <div class="payment-accordion">
-                           <?php if ($this->payment_settings->square_enabled): ?>
-                              <li style="list-style:none;">
+                              <?php //if ($this->payment_settings->square_enabled): ?>
+                              <!-- <li style="list-style:none;">
                                  <div class="option-payment">
                                     <div class="list-left">
-                                       <!-- <div class="custom-control custom-radio"> -->
-                                          <input type="radio" class="payment-way-input" id="option_razorpay" name="payment_option" value="square" required <?php echo ($check_option == true) ? 'checked' : ''; ?>>
-                                          <!-- <label class="custom-control-label label-payment-option" for="option_razorpay">Razorpay</label> -->
+                                          <input type="radio" class="payment-way-input" id="option_razorpay" name="payment_option" value="square" required <?php //echo ($check_option == true) ? 'checked' : ''; ?>>
                                           <label class="ps-4" for="option_razorpay">
                                           <div class="payment-way-hd">Pay Now</div>
                                           <div class="payment-way-text">We accept all major credit and debit cards.</div>
                                           <div class="payment-way-image">
                                           <label for="option_razorpay">
-                                          <img src="<?php echo base_url(); ?>assets/admin/images/icon/paymant/visa.png" alt="visa" width="50">
-                                          <img src="<?php echo base_url(); ?>assets/admin/images/icon/paymant/discover.png" alt="mastercard" width="50">
-                                          <img src="<?php echo base_url(); ?>assets/admin/images/icon/paymant/american.png" alt="amex" width="50">
-                                          <img src="<?php echo base_url(); ?>assets/admin/images/icon/paymant/master-card.png" alt="maestro" width="50">
-                                          <img src="<?php echo base_url(); ?>assets/admin/images/icon/paymant/giro-pay.png" alt="diners" width="50">
+                                          <img src="<?php //echo base_url(); ?>assets/admin/images/icon/paymant/visa.png" alt="visa" width="50">
+                                          <img src="<?php //echo base_url(); ?>assets/admin/images/icon/paymant/discover.png" alt="mastercard" width="50">
+                                          <img src="<?php //echo base_url(); ?>assets/admin/images/icon/paymant/american.png" alt="amex" width="50">
+                                          <img src="<?php //echo base_url(); ?>assets/admin/images/icon/paymant/master-card.png" alt="maestro" width="50">
+                                          <img src="<?php //echo base_url(); ?>assets/admin/images/icon/paymant/giro-pay.png" alt="diners" width="50">
                                           </label>
                                           </div>
                                        </label>
-                                       <!-- </div> -->
                                     </div>
                                     
                                  </div>
-                              </li>
-                              <?php $check_option = false; endif; ?>
+                              </li> -->
+                              <?php //$check_option = false; endif; ?>
 								
 									<?php if ($this->auth_check == 1 && $this->payment_settings->cash_on_delivery_enabled): ?>
 										<li style="list-style:none;">

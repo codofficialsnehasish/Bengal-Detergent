@@ -2137,6 +2137,16 @@ if (!function_exists('numberTowords')) {
             }
         }
     }
+    if (!function_exists('get_desc')) {
+        function get_desc($id){
+            $ci =& get_instance();
+            $conditions['tblName']='slider';
+            $conditions['where']=array('id'=>$id,'is_visible'=>1);
+            $conditions['limit'] = 1;
+            $result=$ci->select->getResult($conditions);
+            return $result[0]->desc;
+        }
+    }
 
 
 

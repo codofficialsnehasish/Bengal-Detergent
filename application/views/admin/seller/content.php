@@ -5,18 +5,18 @@
                         <div class="page-title-box">
                             <div class="row align-items-center">
                                 <div class="col-md-8">
-                                    <h6 class="page-title">Seller</h6>
+                                    <h6 class="page-title">Dristributor</h6>
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="<?= admin_url();?>">Home</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">All Seller</li>
+                                        <li class="breadcrumb-item active" aria-current="page">All Dristributor</li>
                                     </ol>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="float-end d-none d-md-block">
                                         <div class="dropdown">
-                                        <!-- <a href="<?= admin_url('seller/add-new')?>" class="btn btn-primary  dropdown-toggle" aria-expanded="false">
-                                        <i class="fas fa-plus me-2"></i> Add New
-                                        </a> -->
+                                            <a href="<?= admin_url('seller/add-new')?>" class="btn btn-primary  dropdown-toggle" aria-expanded="false">
+                                                <i class="fas fa-plus me-2"></i> Add New
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

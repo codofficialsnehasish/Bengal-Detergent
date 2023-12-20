@@ -102,12 +102,12 @@ class Orders extends Core_Controller
 					if ($order_status == 'completed') {
                     /////send sms
                     		$buyers = $this->auth_model->get_user($order_product->buyer_id);
-                            $senderId = 'MAGXRT';
-             				$templateID = '1707167113092657812';  	
+                            // $senderId = 'MAGXRT';
+             				// $templateID = '1707167113092657812';  	
                     
-             				$smstext = 'Dear '.$buyers->first_name.', Your Order is delivered, Order ID is '.select_value_by_id('orders','id',$order_product->order_id,'order_number') .' - Magxmart india.';
-							send_sms($buyers->phone_number,$senderId,$templateID,$smstext);
-                            $this->email_template->order_delivered_to_buyer($order_product->buyer_id,$order_product->order_id,$order_product->id);
+             				// $smstext = 'Dear '.$buyers->first_name.', Your Order is delivered, Order ID is '.select_value_by_id('orders','id',$order_product->order_id,'order_number') .' - Magxmart india.';
+							// send_sms($buyers->phone_number,$senderId,$templateID,$smstext);
+                            // $this->email_template->order_delivered_to_buyer($order_product->buyer_id,$order_product->order_id,$order_product->id);
 						//add seller earnings
 					//	$this->earnings_model->add_seller_earnings($order_product);
                     

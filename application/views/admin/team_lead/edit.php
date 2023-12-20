@@ -4,17 +4,17 @@
       <div class="page-title-box">
          <div class="row align-items-center">
             <div class="col-md-8">
-               <h6 class="page-title">Dristributor</h6>
+               <h6 class="page-title">Team Lead</h6>
                <ol class="breadcrumb m-0">
                   <li class="breadcrumb-item"><a href="<?= admin_url('')?>">Home</a></li>
-                  <li class="breadcrumb-item"><a href="<?= admin_url('seller')?>">Dristributor</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Edit Dristributor</li>
+                  <li class="breadcrumb-item"><a href="<?= admin_url('team-lead')?>">Team Lead</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Edit Team Lead</li>
                </ol>
             </div>
             <div class="col-md-4">
                <div class="float-end d-none d-md-block">
                   <div class="dropdown">
-                     <a href="<?= admin_url('seller/')?>" class="btn btn-primary  dropdown-toggle" aria-expanded="false">
+                     <a href="<?= admin_url('team-lead/')?>" class="btn btn-primary  dropdown-toggle" aria-expanded="false">
                      <i class="fas fa-arrow-left me-2"></i> Back
                      </a>
                   </div>
@@ -33,7 +33,7 @@
             <div class="col-lg-9">
                <div class="card">
                   <div class="card-header bg-primary text-light">
-                     Edit Personal Details
+                     Edit Team Lead Details
                   </div>
                   <div class="card-body">
                      <div class="mb-3">

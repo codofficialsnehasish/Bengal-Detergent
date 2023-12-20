@@ -16,7 +16,7 @@ class seller extends Core_Controller {
 	public function index()
 	{
 		$header['pagecss']="contentCss";
-		$header['title']='sellers';
+		$header['title']='Dristributor';
 		$this->load->view('admin/partials/header',$header);
 		$data['allitems']=$this->select->select_teamlead($this->table_name,'role','dristributor','is_approved',1);
 		$this->load->view($this->view_path.'content',$data);
@@ -62,7 +62,7 @@ class seller extends Core_Controller {
 		$id=$this->uri->segment(4);
 		
 		$header['pagecss']="contentCss";
-		$header['title']='Sellers';
+		$header['title']='Dristributor';
 		$this->load->view('admin/partials/header',$header);
 		$items=$this->select->select_single_data($this->table_name,'id',$id);
 		$data['item']=$items[0];
@@ -76,7 +76,7 @@ class seller extends Core_Controller {
 	{
 		$id=$this->uri->segment(4);
 		$header['pagecss']="";
-		$header['title']='Edit seller';
+		$header['title']='Edit Dristributor';
 		$this->load->view('admin/partials/header',$header);
 		$sellerArray=$this->select->select_single_data($this->table_name,'id',$id);
 		$data['item']=$sellerArray[0];
@@ -121,6 +121,62 @@ class seller extends Core_Controller {
 
 			$update=$this->edit_model->edit($data,$id,'id',$this->table_name);
 			if($update){
+				$this->session->set_flashdata('success', 'Data has been updated successfully');
+				redirect($this->agent->referrer());
+			}else{
+				$this->session->set_flashdata('errors', 'Query error');
+		     	redirect($this->agent->referrer());
+			}
+		}
+	}
+
+	public function add_new(){
+		$header['pagecss']="";
+		$header['title']='Add Dristributor';
+		$this->load->view('admin/partials/header',$header);
+		$this->load->view($this->view_path.'add');
+		$script['pagescript']='formScript';
+		$this->load->view('admin/partials/footer',$script);
+	}
+
+	public function add_new_process()
+	{
+	//	$id=$this->uri->segment(4);
+		$this->form_validation->set_rules('first_name', 'Title', 'required|xss_clean|max_length[200]');
+		if ($this->form_validation->run() == false) {
+			$this->session->set_flashdata('errors', validation_errors());
+			//$this->session->set_flashdata('form_data', $this->auth_model->input_values());
+			redirect($this->agent->referrer());
+		}else{
+			$data=array(
+				'first_name'=>$this->input->post('first_name', true),
+				'last_name'=>$this->input->post('last_name', true),
+				'full_name'=>$this->input->post('first_name', true).' '.$this->input->post('last_name', true),
+				'email'=>$this->input->post('email', true),
+				'status'=>$this->input->post('status', true),
+				'phone_number'=>$this->input->post('phone_number', true),
+				'address'=>$this->input->post('address', true),
+				'shop_name'=>$this->input->post('shop_name', true),
+				'pan_no'=>$this->input->post('pan_no', true),
+				'gst_no'=>$this->input->post('gst_no', true),
+				'role'=>'dristributor',
+				'is_approved'=>1,
+
+			);
+
+			// if(is_uploaded_file($_FILES['pan_proof']['tmp_name'])) 
+			// {  
+			// 	$data['pan_proof']=$this->mediaupload->doUploadFile('pan_proof');
+			// }
+			// if(is_uploaded_file($_FILES['gst_proof']['tmp_name'])) 
+			// {  
+			// 	$data['gst_proof']=$this->mediaupload->doUploadFile('gst_proof');
+			// }
+
+
+			// $update=$this->edit_model->edit($data,$id,'id',$this->table_name);
+			$insert=$this->insert_model->insert_data($data,$this->table_name);
+			if($insert){
 				$this->session->set_flashdata('success', 'Data has been updated successfully');
 				redirect($this->agent->referrer());
 			}else{

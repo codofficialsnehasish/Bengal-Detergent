@@ -84,6 +84,7 @@
                $usegment='';
                if($this->uri->segment(2)=='buyer'){$usegment='buyer';}
                if($this->uri->segment(2)=='seller'){$usegment='seller';}
+               if($this->uri->segment(2)=='team-lead'){$usegment='team-lead';}
                ?>
                 <li class="<?= active_menu($usegment);?>">
                     <a href="javascript: void(0);" class="has-arrow waves-effect <?= active_menu($usegment);?>">
@@ -93,7 +94,7 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li class="<?= tab_active('buyer');?>"><a href="<?= base_url('admin/buyer/')?>" class="<?= active_link('buyer');?>">Retailer</a></li>
                         <li class="<?= tab_active('seller');?>"><a href="<?= base_url('admin/seller/')?>" class="<?= active_link('seller');?>">Dristributor</a></li>                    
-                        <li class="<?= tab_active('team_lead');?>"><a href="<?= base_url('admin/team_lead/')?>" class="<?= active_link('team_lead');?>">Team Lead</a></li>                    
+                        <li class="<?= tab_active('team-lead');?>"><a href="<?= base_url('admin/team-lead/')?>" class="<?= active_link('team-lead');?>">Team Lead</a></li>                    
                     </ul>
                 </li>
                

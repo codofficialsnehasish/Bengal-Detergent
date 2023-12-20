@@ -14,9 +14,9 @@
                                 <div class="col-md-4">
                                     <div class="float-end d-none d-md-block">
                                         <div class="dropdown">
-                                        <!-- <a href="<?= admin_url('seller/add-new')?>" class="btn btn-primary  dropdown-toggle" aria-expanded="false">
-                                        <i class="fas fa-plus me-2"></i> Add New
-                                        </a> -->
+                                            <a href="<?= admin_url('team-lead/add-new')?>" class="btn btn-primary  dropdown-toggle" aria-expanded="false">
+                                                <i class="fas fa-plus me-2"></i> Add New
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -50,23 +50,24 @@
                                                 foreach($allitems as $item):?>
                                                 <tr>
                                                     <td><?= $i++;?></td>
-                                                    <td><a href="<?= admin_url('seller/details/'.$item->id);?>"><?= $item->full_name;?></a></td>
+                                                    <td><a href="<?= admin_url('team-lead/details/'.$item->id);?>"><?= $item->full_name;?></a></td>
                                                     <!-- <td><a href="<= admin_url('seller/details/'.$item->id);?>"><= $item->shop_name;?></a></td> -->
                                                     <!-- <td><a href="<= admin_url('seller/details/'.$item->id);?>"><= $item->designation;?></a></td> -->
-                                                    <td><a href="<?= admin_url('seller/details/'.$item->id);?>"><?= $item->phone_number;?></a></td>
-                                                    <td><a href="<?= admin_url('seller/details/'.$item->id);?>"><?= $item->email;?></a></td>
-                                                    <td><a href="<?= admin_url('seller/details/'.$item->id);?>"><?= $item->zip_code;?></a></td>
-                                                    <td><a href="<?= admin_url('seller/details/'.$item->id);?>"><?= $item->prefarable_zip_code;?></a></td>
+                                                    <td><a href="<?= admin_url('team-lead/details/'.$item->id);?>"><?= $item->phone_number;?></a></td>
+                                                    <td><a href="<?= admin_url('team-lead/details/'.$item->id);?>"><?= $item->email;?></a></td>
+                                                    <td><a href="<?= admin_url('team-lead/details/'.$item->id);?>"><?= $item->zip_code;?></a></td>
+                                                    <td><a href="<?= admin_url('team-lead/details/'.$item->id);?>"><?= $item->prefarable_zip_code;?></a></td>
                                                     <td><?= check_visibility($item->status);?> </td>
                                                     
                                                     <td>
-                                                            <a href="<?= admin_url('seller/edit/'.$item->id);?>" class="btn btn-primary btn-sm edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit this Item">
-                                                                <i class="fas fa-pencil-alt" title="Edit"></i>
-                                                            </a>
+                                                        <a href="<?= admin_url('team-lead/edit/'.$item->id);?>" class="btn btn-primary btn-sm edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit this Item">
+                                                            <i class="fas fa-pencil-alt" title="Edit"></i>
+                                                        </a>
 
-                                                            <a class="btn btn-danger btn-sm edit" onclick="confirmDelete(this.id,'seller');" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove this Item" id="<?= $item->id;?>">
-                                                                <i class="fas fa-trash-alt" title="Remove"></i>
-                                                            </a></td>
+                                                        <a class="btn btn-danger btn-sm edit" onclick="confirmDelete(this.id,'team-lead');" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove this Item" id="<?= $item->id;?>">
+                                                            <i class="fas fa-trash-alt" title="Remove"></i>
+                                                        </a>
+                                                    </td>
                                                 </tr>
                                                 <?php endforeach;?>
                                                

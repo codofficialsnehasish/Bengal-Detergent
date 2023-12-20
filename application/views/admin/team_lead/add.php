@@ -7,14 +7,14 @@
                <h6 class="page-title">Dristributor</h6>
                <ol class="breadcrumb m-0">
                   <li class="breadcrumb-item"><a href="<?= admin_url('')?>">Home</a></li>
-                  <li class="breadcrumb-item"><a href="<?= admin_url('seller')?>">Dristributor</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Edit Dristributor</li>
+                  <li class="breadcrumb-item"><a href="<?= admin_url('team-lead')?>">Team Lead</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Add Team Lead</li>
                </ol>
             </div>
             <div class="col-md-4">
                <div class="float-end d-none d-md-block">
                   <div class="dropdown">
-                     <a href="<?= admin_url('seller/')?>" class="btn btn-primary  dropdown-toggle" aria-expanded="false">
+                     <a href="<?= admin_url('team-lead/')?>" class="btn btn-primary  dropdown-toggle" aria-expanded="false">
                      <i class="fas fa-arrow-left me-2"></i> Back
                      </a>
                   </div>
@@ -26,14 +26,13 @@
       <?php $this->load->view('admin/partials/_messages');?>
       </div>
       <!-- end page title -->
-      <?= form_open_multipart('admin/seller/updateProcess', 'class="custom-validation"');?>
-      <input type="hidden" name="id" value="<?= $item->id?>" />
-      
+      <?= form_open_multipart('admin/team-lead/team-lead-process', 'class="custom-validation"');?>
+
          <div class="row">
             <div class="col-lg-9">
                <div class="card">
                   <div class="card-header bg-primary text-light">
-                     Edit Personal Details
+                     Edit Team Lead Details
                   </div>
                   <div class="card-body">
                      <div class="mb-3">
@@ -41,7 +40,7 @@
                         <div>
                            <input data-parsley-type="text" type="text"
                               class="form-control" required
-                              placeholder="Enter Name" name="first_name" value="<?= $item->first_name;?>">
+                              placeholder="Enter Name" name="first_name">
                         </div>
                      </div>
                      <div class="mb-3">
@@ -49,7 +48,7 @@
                         <div>
                            <input data-parsley-type="text" type="text"
                               class="form-control" required
-                              placeholder="Enter Name" name="last_name" value="<?= $item->last_name;?>">
+                              placeholder="Enter Last Name" name="last_name">
                         </div>
                      </div>
                      <div class="mb-3">
@@ -57,7 +56,7 @@
                         <div>
                            <input data-parsley-type="text" type="text"
                               class="form-control" 
-                              placeholder="Enter eMail" name="email" value="<?= $item->email;?>">
+                              placeholder="Enter eMail" name="email">
                         </div>
                      </div>
                      <div class="mb-3">
@@ -65,7 +64,7 @@
                         <div>
                            <input data-parsley-type="text" type="text"
                               class="form-control" 
-                              placeholder="Enter Phone Number" name="phone_number" value="<?= $item->phone_number;?>">
+                              placeholder="Enter Phone Number" name="phone_number">
                         </div>
                      </div>
                      <div class="mb-3">
@@ -73,7 +72,7 @@
                         <div>
                            <input data-parsley-type="text" type="text"
                               class="form-control" 
-                              placeholder="Enter Address" name="address" value="<?= $item->address;?>">
+                              placeholder="Enter Address" name="address">
                         </div>
                      </div>
                   </div>
@@ -88,7 +87,7 @@
                         <div>
                            <input data-parsley-type="text" type="text"
                               class="form-control" required
-                              placeholder="Shop Name" name="shop_name" value="<?= $item->shop_name;?>">
+                              placeholder="Shop Name" name="shop_name">
                         </div>
                      </div>
                      <div class="mb-3">
@@ -96,7 +95,7 @@
                         <div>
                            <input data-parsley-type="text" type="text"
                               class="form-control" 
-                              placeholder="Pan" name="pan_no" value="<?= $item->pan_no;?>">
+                              placeholder="Pan" name="pan_no">
                         </div>
                      </div>
                      <div class="mb-3">
@@ -113,7 +112,7 @@
                         <div>
                            <input data-parsley-type="text" type="text"
                               class="form-control" 
-                              placeholder="Enter GST" name="gst_no" value="<?= $item->gst_no;?>">
+                              placeholder="Enter GST" name="gst_no">
                         </div>
                      </div>
 
@@ -139,11 +138,11 @@
                      <div class="mb-3">
                         <label class="form-label mb-3 d-flex">Visiblity</label>
                         <div class="form-check form-check-inline">
-                           <input type="radio" id="customRadioInline1" name="status" class="form-check-input" value="1" <?= check_uncheck($item->status,1);?>>
+                           <input type="radio" id="customRadioInline1" name="status" class="form-check-input" value="1" checked>
                            <label class="form-check-label" for="customRadioInline1">Active</label>
                         </div>
                         <div class="form-check form-check-inline">
-                           <input type="radio" id="customRadioInline2" name="status" class="form-check-input" value="0" <?= check_uncheck($item->status,0);?>>
+                           <input type="radio" id="customRadioInline2" name="status" class="form-check-input" value="0">
                            <label class="form-check-label" for="customRadioInline2">Inactive</label>
                         </div>
                      </div>

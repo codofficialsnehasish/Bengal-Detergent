@@ -95,11 +95,11 @@
 					</table> 
 				</form>                   
 			</div>
-
+			<?php if(!empty($cartitems)): ?>
 			<div class="container mt-4">
 				<div class="row d-flex justify-content-center">
 					<div class="col-12 col-sm-12 col-md-6 col-lg-4 mb-4 cart-col">
-						<h5>Discount Codes</h5>
+						<!-- <h5>Discount Codes</h5>
 						<form action="#" method="post">
 							<div class="form-group">
 								<label for="address_zip">Enter your coupon code if you have one.</label>
@@ -108,7 +108,7 @@
 							<div class="actionRow">
 								<div><input type="button" class="btn btn-secondary btn--small" value="Apply Coupon"></div>
 							</div>
-						</form>
+						</form> -->
 					</div>
 					<div class="col-12 col-sm-12 col-md-12 col-lg-4 cart__footer">
 						<div class="solid-border">  
@@ -129,17 +129,18 @@
 								<span class="col-12 col-sm-6 cart__subtotal-title cart__subtotal text-right"><span class="money"><?= formatted_price($cart_total->total, $cart_total->currency);?></span></span>
 							</div>
 							<div class="cart__shipping">Shipping &amp; taxes calculated at checkout</div>
-							<div class="customCheckbox cart_tearm">
+							<!-- <div class="customCheckbox cart_tearm">
 								<input type="checkbox" value="allen-vela" id="1532947863384-0">
 								<label for="1532947863384-0">I agree with the terms and conditions</label>
-							</div>
+							</div> -->
 							<a href="#" id="cartCheckout" class="btn btn--small-wide checkout goCheckout">Proceed To Checkout</a>
-							<div class="paymnet-img"><img src="<?= base_url('assets/site/images/payment-img.jpg') ?>" alt="Payment"></div>
-							<p class="mt-2"><a href="#">Checkout with Multiple Addresses</a></p>
+							<!-- <div class="paymnet-img"><img src="<?= base_url('assets/site/images/payment-img.jpg') ?>" alt="Payment"></div>
+							<p class="mt-2"><a href="#">Checkout with Multiple Addresses</a></p> -->
 						</div>
 					</div>
 				</div>
 			</div>
+			<?php endif; ?>
 			<!-- End Main Content -->
 		</div>
 	</div>
