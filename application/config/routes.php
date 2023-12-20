@@ -1,0 +1,111 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+
+$route['default_controller'] = 'welcome';
+$route['404_override'] = '';
+$route['translate_uri_dashes'] = TRUE;
+
+$route['mdm']='admin/authentication/index';
+$route['admin/dashboard']='admin/dashboard/index';
+$route['retailer/dashboard']='my_dashboard/seller_dashboard';
+$route['distributer/dashboard']='my_dashboard/distributer_dashboard';
+$route['my-dashboard']='my_dashboard/index';
+$route['login']='authentication/login';
+$route['signup']='authentication/signup';
+$route['login-distributer']='authentication/login_distributor';
+
+////services
+
+$route['add-variation-post']='admin/field_controller/add_variation_post';
+$route['delete-variation-post']='admin/field_controller/delete_variation_post';
+$route['add-variation-option']='admin/field_controller/add_variation_option';
+$route['add-variation-option-post']='admin/field_controller/add_variation_option_post';
+$route['view-variation-options']='admin/field_controller/view_variation_options';
+$route['delete-variation-option-post']='admin/field_controller/delete_variation_option_post';
+$route['get-product-temp-images']='admin/products/get_product_temp_images';
+$route['delete-product-images']='admin/products/delete_product_images';
+$route['set-main-product-image']='admin/products/set_main_product_image';
+$route['select-variation-option']='ajax/select_product_variation_option';
+
+$route['add-to-cart']='cart_controller/add_to_cart';
+$route['cart']='cart_controller/cart';
+$route['fetchCartCount']='cart_controller/fetchCartCount';
+
+$route['update-cart-product-quantity']='cart_controller/update_cart_product_quantity';
+$route['checkout']='cart_controller/checkout';
+
+$route['payment-method-post']='cart_controller/payment_method_post';
+// $route['razorpay-payment-post']='cart_controller/razorpay_payment_post';
+// $route['payment']='cart_controller/payment';
+
+// $route['paymentmethod']='cart_controller/subscription_payment_method';
+// $route['payment-processing']='cart_controller/subscription_payment_processing';
+
+$route['auth-process'] = 'authentication/ajax_login_process';
+$route['registration'] = 'authentication/reg_process';
+$route['saveReview'] = 'ajax/saveReview';
+
+$route['change-password']='authentication/change_password';
+
+//$route['forgot-password']='authentication/forgot_password_post';
+$route['reset-password']='authentication/reset_password';
+$route['reset-password-post']='authentication/reset_password_post';
+
+
+$route['get-state-list']='authentication/get_state_list';
+$route['get-city-list']='authentication/get_city_list';
+
+$route['logout']='admin/dashboard/logout';
+
+
+require_once(BASEPATH . 'database/DB.php');
+$db =& DB();
+$db->select('*');
+$db->from('pages');
+$query = $db->get(); 
+$result=$query->result();
+
+foreach($result as $r){
+  // if($this->uri->segment(1)!='cart' && $this->uri->segment(1)!='productQuickView'){
+  if($this->uri->segment(1)==$r->page_slug){
+    $route['(:any)'] = 'page/pages/$1'; 
+}
+}
+
+
+/*
+*products page
+*/
+if($this->uri->segment(2)=='all_products'){
+  $route['all_product']='products/all_products';
+}
+if($this->uri->segment(3)==''){
+  // $route['products/(:any)']='products/products/$1';
+}else{
+  $route['products/(:any)/(:any)']='products/products/$1';
+}
+$route['product/(:any)']='products/details/$1';
+/*
+*/
+
+$route['add-to-cart']='cart_controller/add_to_cart';
+$route['cart']='cart_controller/cart';
+
+$route['update-cart-product-quantity']='cart_controller/update_cart_product_quantity';
+$route['checkout']='cart_controller/checkout';
+$route['productQuickView']='ajax/productQuickView';
+
+$route['payment-method-post']='cart_controller/payment_method_post';
+
+$route['order-details/(:num)'] = 'order_controller/order/$1';
+$route['order/completed-orders'] = 'order_controller/completed_orders';
+
+$route['orders'] = 'order_controller/orders';
+$route['invoice/(:any)/(:any)/(:any)/(:any)'] = 'order_controller/invoice/$1/$2/$3/$4';
+
+$route['square-payment-post']='cart_controller/square_payment_post';
+$route['payment']='cart_controller/payment';
+
+//$route['paymentmethod']='cart_controller/subscription_payment_method';
+//$route['payment-processing']='cart_controller/subscription_payment_processing';
