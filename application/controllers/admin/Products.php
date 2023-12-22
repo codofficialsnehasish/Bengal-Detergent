@@ -43,6 +43,7 @@ class Products extends Core_Controller {
 		$script['pagescript']='contentScript';
 		$this->load->view('admin/partials/footer',$script);
 	}
+
 	public function add_new()
 	{
 		$header['pagecss']="";
@@ -57,10 +58,10 @@ class Products extends Core_Controller {
 
 	public function price_details()
 	{
-		//echo $this->session->userdata('modesy_sess_product_id');
-		if($this->uri->segment(4)=='' || $this->uri->segment(4)!=$this->session->userdata('modesy_sess_product_id')){
+		//echo $this->input->post('product_id');
+		if($this->uri->segment(4)=='' || $this->uri->segment(4)!=$this->input->post('product_id')){
 			//echo $this->uri->segment(4);
-		//	echo '<br>Session '.$this->session->userdata('modesy_sess_product_id');die;
+		//	echo '<br>Session '.$this->input->post('product_id');die;
 			redirect('admin/products/add-new');
 		}
 		$header['pagecss']="";
@@ -89,9 +90,45 @@ class Products extends Core_Controller {
 		$this->load->view('admin/partials/footer',$script);
 	}
 
+
+	public function inventory()
+	{
+		//echo $this->input->post('product_id');
+		if($this->uri->segment(4)=='' || $this->uri->segment(4)!=$this->input->post('product_id')){
+			//echo $this->uri->segment(4);
+		//	echo '<br>Session '.$this->input->post('product_id');die;
+			redirect('admin/products/add-new');
+		}
+		$header['pagecss']="";
+		$header['title']='Add New Inventory';
+		$this->load->view('admin/partials/header',$header);
+		// $data['categories']=$this->select->get_parent_categories();
+		// $data['currencies']=$this->select->select_single_data('currencies','is_visible',1);
+		$this->load->view($this->view_path.'inventory');
+		$script['pagescript']='productScript';
+		$this->load->view('admin/partials/footer',$script);
+	}
+
+	public function inventory_edit()
+	{
+		$id=$this->uri->segment(4);
+		$header['pagecss']="";
+		$header['title']='Edit Product';
+		$this->load->view('admin/partials/header',$header);
+		$data['categories']=$this->select->get_parent_categories();
+		$data['currencies']=$this->select->select_single_data('currencies','is_visible',1);
+		$productArray=$this->select->select_single_data($this->table_name,'id',$id);
+		$data['subcategories']=$this->select->select_single_data('categories','parent_id',$productArray[0]->category_id);
+		$data['item']=$productArray[0];
+		$this->load->view($this->view_path.'inventory_edit',$data);
+		$script['pagescript']='productScript';
+		$this->load->view('admin/partials/footer',$script);
+	}
+
+
 	public function variations()
 	{
-		if($this->uri->segment(4)=='' || $this->uri->segment(4)!=$this->session->userdata('modesy_sess_product_id')){
+		if($this->uri->segment(4)=='' || $this->uri->segment(4)!=$this->input->post('product_id')){
 			redirect('admin/products/add-new');
 		}
 		$header['pagecss']="uploadCss";
@@ -125,7 +162,7 @@ class Products extends Core_Controller {
 
 	public function add_images()
 	{
-		if($this->uri->segment(4)=='' || $this->uri->segment(4)!=$this->session->userdata('modesy_sess_product_id')){
+		if($this->uri->segment(4)=='' || $this->uri->segment(4)!=$this->input->post('product_id')){
 			redirect('admin/products/add-new');
 		}
 		$header['pagecss']="uploadCss";
@@ -240,14 +277,79 @@ class Products extends Core_Controller {
 		   }
 
 			//$product_id=$this->insert_model->insert_data($data,$this->table_name);
-			$update=$this->edit_model->edit($data,$this->session->userdata('modesy_sess_product_id'),'id',$this->table_name);
+			$update=$this->edit_model->edit($data,$this->input->post('product_id'),'id',$this->table_name);
 			if($update){
 				$this->session->set_flashdata('success', 'Data has been inserted successfully');
 				$user_data = array(
-                    'modesy_sess_product_id' => $this->session->userdata('modesy_sess_product_id')
+                    'modesy_sess_product_id' => $this->input->post('product_id')
                 );
                 $this->session->set_userdata($user_data);
-				redirect('admin/products/variations/'.$this->session->userdata('modesy_sess_product_id'));
+				redirect('admin/products/inventory-edit/'.$this->input->post('product_id'));
+				//redirect($this->agent->referrer());
+			}else{
+				$this->session->set_flashdata('errors', 'Query error');
+		     	redirect($this->agent->referrer());
+			}
+		}
+	}
+
+	public function inventory_process()
+	{
+		$this->form_validation->set_rules('stockstatus', 'Stockstatus', 'required|xss_clean|max_length[200]');
+		if ($this->form_validation->run() == false) {
+			$this->session->set_flashdata('errors', validation_errors());
+			//$this->session->set_flashdata('form_data', $this->auth_model->input_values());
+			redirect($this->agent->referrer());
+		}else{
+			$data=array(
+				'is_stock_manage'=>$this->input->post('is_stock_manage', true),
+				'sku'=>$this->input->post('sku', true),
+				'stock'=>$this->input->post('qty', true),
+				'stock_status'=>$this->input->post('stockstatus', true)
+			);
+
+			//$product_id=$this->insert_model->insert_data($data,$this->table_name);
+			$update=$this->edit_model->edit($data,$this->input->post('product_id'),'id',$this->table_name);
+			if($update){
+				$this->session->set_flashdata('success', 'Data has been inserted successfully');
+				$user_data = array(
+                    'modesy_sess_product_id' => $this->input->post('product_id')
+                );
+                $this->session->set_userdata($user_data);
+				redirect('admin/products/variation/'.$this->input->post('product_id'));
+				//redirect($this->agent->referrer());
+			}else{
+				$this->session->set_flashdata('errors', 'Query error');
+		     	redirect($this->agent->referrer());
+			}
+		}
+	}
+
+
+	public function inventory_update_process()
+	{
+		$this->form_validation->set_rules('stockstatus', 'Stockstatus', 'required|xss_clean|max_length[200]');
+		if ($this->form_validation->run() == false) {
+			$this->session->set_flashdata('errors', validation_errors());
+			//$this->session->set_flashdata('form_data', $this->auth_model->input_values());
+			redirect($this->agent->referrer());
+		}else{
+			$data=array(
+				'is_stock_manage'=>$this->input->post('is_stock_manage', true),
+				'sku'=>$this->input->post('sku', true),
+				'stock'=>$this->input->post('qty', true),
+				'stock_status'=>$this->input->post('stockstatus', true)
+			);
+
+			//$product_id=$this->insert_model->insert_data($data,$this->table_name);
+			$update=$this->edit_model->edit($data,$this->input->post('product_id'),'id',$this->table_name);
+			if($update){
+				$this->session->set_flashdata('success', 'Data has been inserted successfully');
+				$user_data = array(
+                    'modesy_sess_product_id' => $this->input->post('product_id')
+                );
+                $this->session->set_userdata($user_data);
+				redirect('admin/products/variations-edit/'.$this->input->post('product_id'));
 				//redirect($this->agent->referrer());
 			}else{
 				$this->session->set_flashdata('errors', 'Query error');
@@ -308,7 +410,7 @@ public function price_update_process()
 		if($update){
 			$this->session->set_flashdata('success', 'Data Updated successfully');
 			
-			redirect('admin/products/variations-edit/'.$this->input->post('product_id'));
+			redirect('admin/products/inventory-edit/'.$this->input->post('product_id'));
 		//	redirect($this->agent->referrer());
 		}else{
 			$this->session->set_flashdata('errors', 'Query error');
@@ -459,7 +561,7 @@ public function price_update_process()
     public function remove_tmpimages(){
         $name=$this->input->post('name');
       //  unlink('./uploads/media/tmp/'.$name);
-        $this->delete_model->delete_multiple_clause('product_images','file_name',$name,'product_id',$this->session->userdata('modesy_sess_product_id'));
+        $this->delete_model->delete_multiple_clause('product_images','file_name',$name,'product_id',$this->input->post('product_id'));
     }
 
     public function delete_product_images(){

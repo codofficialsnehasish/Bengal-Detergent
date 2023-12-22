@@ -154,7 +154,7 @@ tr:nth-child(even) {
 <table style="width: 800; border-collapse: collapse;">
   <tr style="height: 18px;">
     <th style="text-align: right;">
-      <p>For Filthygainzinc.</p>
+      <p>For Bengal Detergent.</p>
     </th>
   </tr>
   <tr>

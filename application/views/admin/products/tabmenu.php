@@ -17,6 +17,11 @@
             <span class="d-none d-md-block">Price Details</span><span class="d-block d-md-none"><i class="mdi mdi-account h5"></i></span>
         </a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link  <?= tab_active('inventory')?>"  href="<?= admin_url('products/inventory/'.$queryString);?>" role="tab">
+            <span class="d-none d-md-block">Inventory</span><span class="d-block d-md-none"><i class="mdi mdi-account h5"></i></span>
+        </a>
+    </li>
 
     <li class="nav-item">
         <a class="nav-link  <?= tab_active('variations')?>"  href="<?= admin_url('products/variations/'.$queryString);?>" role="tab">
