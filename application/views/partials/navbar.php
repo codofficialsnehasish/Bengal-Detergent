@@ -246,7 +246,7 @@ $categoriesMenu=$this->select->get_parent_categories();
 
                                         <!-- Minicart -->
                                         <div class="item site-cart" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cart">
-                                            <a href="#" class="site-header__cart btn-minicart" data-bs-toggle="modal" data-bs-target="#minicart-drawer" onclick="fetchCart()">
+                                            <a href="#" class="site-header__cart btn-minicart" data-bs-toggle="modal" data-bs-target="#minicart-drawer" onclick="cart_popup_data()"><!-- fetchCart -->
                                                 <i class="icon an an-shopping-bag"></i><?php //if($this->auth_check){ ?><span id="CartCount" class="site-header__cart-count .cartcount"></span> <?php //} ?>
                                             </a>  
                                         </div>

@@ -31,6 +31,8 @@ $route['select-variation-option']='ajax/select_product_variation_option';
 $route['add-to-cart']='cart_controller/add_to_cart';
 $route['cart']='cart_controller/cart';
 $route['fetchCartCount']='cart_controller/fetchCartCount';
+$route['showCartPopupData']='cart_controller/showCartPopupData';
+$route['getAndShowProduct']='cart_controller/getAndShowProduct';
 
 $route['update-cart-product-quantity']='cart_controller/update_cart_product_quantity';
 $route['checkout']='cart_controller/checkout';

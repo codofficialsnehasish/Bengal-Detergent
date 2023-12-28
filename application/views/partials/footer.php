@@ -107,45 +107,8 @@
                         </div>
                         <div class="minicart-body">
                             <div id="drawer-minicart" class="block block-cart">
-                                <ul class="mini-products-list">
-                                    <?php
-                                        foreach($crtitm as $item):
-                                            $product = $this->product_model->get_product_by_id($item->product_id);
-                                            $appended_variations = $this->cart_model->get_selected_variations($product->id)->str;
-                                            if(!empty($item->variations) || $item->variations!='' || $item->variations!=null){
-                                                $cartvariations=explode(',',$item->variations);
-                                            }else{
-                                                $cartvariations[]="";
-                                            }
-                                            array_filter($cartvariations);
-                                            //print_r(array_filter($cartvariations));
-                                            $object=$this->cart_model->get_product_price_and_stock($product,$cartvariations,$item->quantity);
-                                    ?>
-                                    <li class="item">
-                                        <a class="product-image" href="<?= base_url('/cart'); ?>"><img src="<?= get_product_main_image($product);?>" alt="<?= $product->title; ?>" title=""></a>
-                                        <div class="product-details">
-                                            <a href="#" class="remove" data-id="1"  onclick="remove_from_cart('<?= $item->id; ?>','cart');" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"><i class="an an-times" aria-hidden="true"></i></a>
-                                            <a href="#" class="edit-i remove" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="an an-edit" aria-hidden="true"></i></a>
-                                            <a class="pName" href="<?= base_url('/cart'); ?>"><?= $product->title; ?></a>
-                                            <!-- <div class="variant-cart">Red / XL</div> -->
-                                            <div class="d-flex justify-content-between">
-                                                <div class="wrapQtyBtn clearfix">
-                                                    <span class="label">Qty:</span>
-                                                    <div class="qtyField clearfix">
-                                                        <a class="qtyBtn minus" href="javascript:void(0);" onclick="updateCart(<?= $item->id;?>,<?= $item->product_id;?>,<?= $item->quantity;?>,'-')"><i class="an an-minus" aria-hidden="true"></i></a>
-                                                        <input type="text" name="quantity" value="<?= $item->quantity; ?>" class="product-form__input qty">
-                                                        <a class="qtyBtn plus" href="javascript:void(0);" onclick="updateCart(<?= $item->id;?>,<?= $item->product_id;?>,<?= $item->quantity;?>,'+')"><i class="an an-plus" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                                <div class="priceRow clearfix">
-                                                    <div class="product-price">
-                                                        <span class="money"><?= select_value_by_id('currencies','id',$product->currency_code,'hex');?> <?= $object->price_calculated;?></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <?php endforeach; ?>
+                                <ul class="mini-products-list" id="listproduicttoggle">
+                                    
 
                                 </ul>
                             </div>

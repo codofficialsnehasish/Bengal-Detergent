@@ -250,6 +250,48 @@
         });
     }
 
+    function cart_popup_data(){
+        $.ajax({
+            url: base_url + "showCartPopupData",
+            type: "get",
+            data: '',
+            // dataType: "json",
+            beforeSend: function() {
+            },
+            success: function (response) {
+                // alert(response);
+                // console.log(response);
+                // alert(response);
+                $('#listproduicttoggle').html(response);
+                // $.each(response, function(index, value){
+                //     console.log(value);
+                //     console.log(value.id);
+                //     getAndShowProduct(value.product_id);
+                // });
+                get_cart();
+            }
+        });
+    }
+    function getAndShowProduct(id){
+        $.ajax({
+            url: base_url + "getAndShowProduct",
+            type: "post",
+            data: '',
+            data:{product_id : id,csrf_modesy_token:getCookie('csrf_modesy_token')},
+            dataType: "json",
+            beforeSend: function() {
+            },
+            success: function (response) {
+                // alert(response);
+                $.each(response, function(index, value){
+                    console.log(value);
+                    // console.log(value.id);
+                    
+                });
+            }
+        });
+    }
+
     function pageRedirect() {
             window.location.replace(base_url + "dashboard");
     }  

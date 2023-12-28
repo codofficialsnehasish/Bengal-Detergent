@@ -38,6 +38,51 @@ class Cart_controller extends Core_Controller
         $this->load->view('partials/footer');
     }
 
+    public function showCartPopupData(){
+        $cartitems=$this->cart_model->get_cart_by_buyer();
+        $html = '';
+        foreach($cartitems as $cart){
+            $product = $this->product_model->get_product_by_id($cart->product_id);
+            $appended_variations = $this->cart_model->get_selected_variations($product->id)->str;
+            if(!empty($cart->variations) || $cart->variations!='' || $cart->variations!=null){
+                $cartvariations=explode(',',$cart->variations);
+            }else{
+                $cartvariations[]="";
+            }
+            array_filter($cartvariations);
+            $object=$this->cart_model->get_product_price_and_stock($product,$cartvariations,$cart->quantity);
+            $html .= '<li class="item">';
+            $html .= '<a class="product-image" href='. base_url("/cart") .'><img src='. get_product_main_image($product).' alt='. $product->title.' title=""></a>';
+            $html .= '<div class="product-details">';
+            $html .= '<a href="#" class="remove" data-id="1"  onclick="remove_from_cart('. $cart->id.',"cart");" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"><i class="an an-times" aria-hidden="true"></i></a>';
+            $html .= '<a href="#" class="edit-i remove" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="an an-edit" aria-hidden="true"></i></a>';
+            $html .= '<a class="pName" href='. base_url("/cart").'>'. $product->title .'</a>';
+            $html .= '<div class="d-flex justify-content-between">';
+            $html .= '<div class="wrapQtyBtn clearfix">';
+            $html .= '<span class="label">Qty:</span>';
+            $html .= '<div class="qtyField clearfix">';
+            $html .= '<a class="qtyBtn minus" href="javascript:void(0);" onclick="updateCart('. $cart->id.','. $cart->product_id.','. $cart->quantity.',"-")"><i class="an an-minus" aria-hidden="true"></i></a>';
+            $html .= '<input type="text" name="quantity" value="'. $cart->quantity.'" class="product-form__input qty">';
+            $html .= '<a class="qtyBtn plus" href="javascript:void(0);" onclick="updateCart('. $cart->id.','. $cart->product_id.','. $cart->quantity.',"+");"><i class="an an-plus" aria-hidden="true"></i></a>';
+            $html .= '</div>';
+            $html .= '</div>';
+            $html .= '<div class="priceRow clearfix">';
+            $html .= '<div class="product-price">';
+            $html .= '<span class="money">'. select_value_by_id("currencies","id",$product->currency_code,"hex").' '. $object->price_calculated.'</span>';
+            $html .= '</div>';
+            $html .= '</div>';
+            $html .= '</div>';
+            $html .= '</div>';
+            $html .= '</li>';
+        }
+        echo $html;
+    }
+    public function getAndShowProduct(){
+        $product_id = $this->input->post('product_id', true);
+        $product = $this->product_model->get_product_by_id($product_id);
+        echo json_encode($product); 
+    }
+
     
     public function fetchCartCount()
     {
