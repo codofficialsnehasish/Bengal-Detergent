@@ -78,7 +78,7 @@
                         <div class="container">
                             <div class="row">
                                 <!-- Footer Copyright -->
-                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 copyright text-center"><span>&copy; 2023 <?= $this->settings->application_name?> .</span> All Rights Reserved.</div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 copyright text-center"><span>&copy; <script>document.write(new Date().getFullYear())</script> <?= $this->settings->application_name?> -</span> Crafted with <i class="mdi mdi-heart text-danger"></i> by <a style="font-weight:500;" href="https://codeofdolphins.com/">Code of Dolphins. </a></span>All Rights Reserved.</div>
                                 <!-- End Footer Copyright -->
                             </div>
                         </div>

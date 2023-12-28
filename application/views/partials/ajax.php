@@ -240,9 +240,9 @@
             },
             success: function (response) {
                 if (response.status == 1) {
-                 $('#CartCount').html(response.qty);
-                 $('#subtol').html(response.cartTotal);
-                 $('#tot').html(response.cartTotal);
+                    $('#CartCount').html(response.qty);
+                    $('#subtol').html(response.cartTotal);
+                    $('#tot').html(response.cartTotal);
                 }else{
               
                 }
