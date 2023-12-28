@@ -98,25 +98,22 @@
                         <div class="minicart-header">
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><i class="an an-times" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="left" title="Close"></i></button>
                             <?php 
-                                $crtitm = $this->cart_model->get_cart_by_buyer();
-                                if(!empty($crtitm)):
-                                    $total =0;
-                                    $totalshippinhg= 0;			
+                                // $crtitm = $this->cart_model->get_cart_by_buyer();
+                                // if(!empty($crtitm)):
+                                //     $total =0;
+                                //     $totalshippinhg= 0;			
 							?>
                             <h4 class="modal-title" id="myModalLabel2">Shopping Cart <strong><?= !empty($crtitm)?count($crtitm):0;?></strong> items</h4>
                         </div>
                         <div class="minicart-body">
                             <div id="drawer-minicart" class="block block-cart">
-                                <ul class="mini-products-list" id="listproduicttoggle">
-                                    
-
-                                </ul>
+                                <ul class="mini-products-list" id="listproduicttoggle"></ul>
                             </div>
-                            <?php else: ?>
+                            <?php //else: ?>
                             <div class="empty-cart">
                                 <p>You have no items in your shopping cart.</p>
                             </div>
-                            <?php endif; ?>
+                            <?php //endif; ?>
                         </div>
                         <div class="minicart-footer minicart-action">
                             <div class="total-in">
