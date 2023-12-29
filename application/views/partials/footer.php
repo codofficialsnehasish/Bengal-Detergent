@@ -103,7 +103,7 @@
                                 //     $total =0;
                                 //     $totalshippinhg= 0;			
 							?>
-                            <h4 class="modal-title" id="myModalLabel2">Shopping Cart <strong><?= !empty($crtitm)?count($crtitm):0;?></strong> items</h4>
+                            <h4 class="modal-title" id="myModalLabel2">Shopping Cart items</h4>
                         </div>
                         <div class="minicart-body">
                             <div id="drawer-minicart" class="block block-cart">
