@@ -210,6 +210,7 @@
         <!-- Photoswipe Gallery -->
         <script src="<?= base_url('assets/site/js/vendor/photoswipe.min.js') ?>"></script>
         <script src="<?= base_url('assets/site/js/vendor/photoswipe-ui-default.min.js') ?>"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.js" integrity="sha512-gY25nC63ddE0LcLPhxUJGFxa2GoIyA5FLym4UJqHDEMHjp8RET6Zn/SHo1sltt3WuVtqfyxECP38/daUc/WVEA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
             $(function () {
                 var $pswp = $('.pswp')[0],
@@ -251,6 +252,25 @@
                 });
             });
             </script>
+            <script>
+        $('.owl-carousel').owlCarousel({
+            items:1,
+            merge:true,
+            loop:true,
+            margin:10,
+            video:true,
+            lazyLoad:true,
+            center:true,
+            responsive:{
+                480:{
+                    items:2
+                },
+                600:{
+                    items:4
+                }
+            }
+        });
+    </script>
 
 
         <!-- toast message -->
@@ -267,7 +287,6 @@
                                     
         <!-- Sweet alert init js-->
         <script src="<?= base_url('assets/admin/js/pages/sweet-alerts.init.js');?>"></script>
-        
         
         <?php $this->load->view('partials/ajax');?>
         <?php $this->load->view('partials/_messages');?>

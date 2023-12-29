@@ -461,6 +461,25 @@
    <!--End Testimonial Slider-->
    <?php //endif; ?>
 
+
+   <?php if(!empty($videoslider)): ?>
+   <!-- Testimonial Slider -->
+   <div class="section testimonial-bg-style testimonial-slider">
+      <div class="container-fluid px-0">
+         <div class="quote-wraper">
+            <div class="quotes-slider">
+               <?php foreach($videoslider as $t): ?>  
+                  <div class="quotes-slide">
+                     <iframe width="90%" height="600" src="<?= $t->video_link; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe>
+                  </div>
+               <?php endforeach ?>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!--End Testimonial Slider-->
+   <?php endif; ?>
+
    <!-- Latest Blog -->
    <!-- <div class="latest-blog section">
       <div class="container">

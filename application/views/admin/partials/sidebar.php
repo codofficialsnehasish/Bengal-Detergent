@@ -118,10 +118,16 @@
                         <span>Slider</span>
                     </a>
                 </li> 
-                <li class="<?= active_menu('testimonial');?>">
+                <!-- <li class="<?= active_menu('testimonial');?>">
                     <a href="<?= base_url('admin/testimonial/')?>" class="waves-effect <?= active_link('testimonial');?>">
                          <i class="ti-image"></i>
                         <span>Testimonial</span>
+                    </a>
+                </li> -->
+                <li class="<?= active_menu('video_slider');?>">
+                    <a href="<?= base_url('admin/video_slider/')?>" class="waves-effect <?= active_link('video_slider');?>">
+                         <i class="ti-image"></i>
+                        <span>Video Slider</span>
                     </a>
                 </li>
                

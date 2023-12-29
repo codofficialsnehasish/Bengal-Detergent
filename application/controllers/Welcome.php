@@ -63,6 +63,12 @@ public function __construct()
 		);
 		$data['testimonial'] = $this->select->getResult($testimonial);
 
+		$videoslider = array(
+			'tblName' =>'video_slider',
+			'where' => array('is_visible'=>1)
+		);
+		$data['videoslider'] = $this->select->getResult($videoslider);
+
 		// /////////////////////////new products/////////////////////////
 		$pconditions['start'] = 0;
 		$pconditions['limit'] = 8;
