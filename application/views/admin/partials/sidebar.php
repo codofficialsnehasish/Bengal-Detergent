@@ -75,9 +75,15 @@
 
                 <li class="<?= active_menu('products');?>">
                     <a href="<?= base_url('admin/products/')?>" class="waves-effect <?= active_link('products');?>">
-                         <i class="ti-support"></i>
+                         <i class="fas fa-cubes"></i>
                         
                         <span>Manage Products</span>
+                    </a>
+                </li>
+                <li class="<?= active_menu('stocks');?>">
+                    <a href="<?= base_url('admin/stocks/')?>" class="waves-effect <?= active_link('stocks');?>">
+                         <i class="fas fa-sort-amount-up-alt"></i>
+                        <span>Manage Stocks</span>
                     </a>
                 </li>
                 <?php 

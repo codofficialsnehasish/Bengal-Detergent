@@ -104,7 +104,8 @@
                                                             <label for="example-text-input" class="col-sm-4 col-form-label">User Name</label>
                                                             <div class="col-sm-8">
                                                             <strong class="font-right">
-                                                            <?php echo html_escape($buyer->username); ?>
+                                                            <?php //echo html_escape($buyer->username); ?>
+                                                            <?php echo html_escape($buyer->full_name); ?>
                                                             </strong>
                                                             </div>
                                                     </div>
