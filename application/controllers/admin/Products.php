@@ -305,6 +305,7 @@ class Products extends Core_Controller {
 				'is_stock_manage'=>$this->input->post('is_stock_manage', true),
 				'sku'=>$this->input->post('sku', true),
 				'stock'=>$this->input->post('qty', true),
+				'actual_stock'=>$this->input->post('qty', true),
 				'stock_status'=>$this->input->post('stockstatus', true)
 			);
 
@@ -338,6 +339,7 @@ class Products extends Core_Controller {
 				'is_stock_manage'=>$this->input->post('is_stock_manage', true),
 				'sku'=>$this->input->post('sku', true),
 				'stock'=>$this->input->post('qty', true),
+				'actual_stock'=>$this->input->post('qty', true),
 				'stock_status'=>$this->input->post('stockstatus', true)
 			);
 

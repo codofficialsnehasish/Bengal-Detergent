@@ -32,7 +32,7 @@
                               <div class="row">
                                  <div class="col-4 col-md-4 col-lg-4 filters-toolbar__item collection-view-as d-flex justify-content-Start align-items-center">
                                     <!-- <button type="button" class="btn-filter d-block d-md-block d-lg-block icon an an-sliders-h" data-bs-toggle="tooltip" data-bs-placement="top" title="Filters"></button> -->
-                                    <a href="shop-left-sidebar.html" class="change-view change-view--active" data-bs-toggle="tooltip" data-bs-placement="top" title="Grid View">
+                                    <a href="#" class="change-view change-view--active" data-bs-toggle="tooltip" data-bs-placement="top" title="Grid View">
                                           <i class="icon an an-table"></i>
                                     </a>
                                     <!-- <a href="shop-listview.html" class="change-view" data-bs-toggle="tooltip" data-bs-placement="top" title="List View">
@@ -44,17 +44,19 @@
                                  </div>
                                  <div class="col-4 col-md-4 col-lg-4 d-flex justify-content-end align-items-center text-end">
                                     <div class="filters-toolbar__item">
+                                       <?= form_open('products/all_products/', 'class="needs-validation"  novalidate '); ?>
                                           <label for="SortBy" class="hidden">Sort</label>
-                                          <select name="SortBy" id="SortBy" class="filters-toolbar__input filters-toolbar__input--sort">
+                                          <select id="SortBy" class="filters-toolbar__input filters-toolbar__input--sort" name="sort_by" onchange="this.form.submit()">
                                              <option value="title-ascending" selected="selected">Sort</option>
-                                             <option>Best Selling</option>
-                                             <option>Alphabetically, A-Z</option>
-                                             <option>Alphabetically, Z-A</option>
-                                             <option>Price, low to high</option>
-                                             <option>Price, high to low</option>
-                                             <option>Date, new to old</option>
-                                             <option>Date, old to new</option>
+                                             <option <?php if($sort_by != '' && $sort_by== "rating_high_to_low") echo "selected"; ?> >Best Selling</option>
+                                             <option <?php if($sort_by != '' && $sort_by== "a_to_z") echo "selected"; ?> value="a_to_z">Alphabetically, A-Z</option>
+                                             <option <?php if($sort_by != '' && $sort_by== "z_to_a") echo "selected"; ?> value="z_to_a">Alphabetically, Z-A</option>
+                                             <option <?php if($sort_by != '' && $sort_by== "cost_low_to_high") echo "selected"; ?> value="cost_low_to_high" >Price, low to high</option>
+                                             <option <?php if($sort_by != '' && $sort_by== "cost_high_to_low") echo "selected"; ?> value="cost_high_to_low" >Price, high to low</option>
+                                             <option <?php if($sort_by != '' && $sort_by== "rating_high_to_low") echo "selected"; ?> >Date, new to old</option>
+                                             <option <?php if($sort_by != '' && $sort_by== "rating_high_to_low") echo "selected"; ?> >Date, old to new</option>
                                           </select>
+                                          <?= form_close(); ?>
                                           <input class="collection-header__default-sort" type="hidden" value="manual">
                                     </div>
                                  </div>
@@ -150,7 +152,7 @@
                   <hr class="clear">
 
                   <!-- Number Pagination -->
-                  <div class="pagination">
+                  <!-- <div class="pagination">
                      <ul>
                         <li class="prev"><a href="#"><i class="icon an an-caret-left" aria-hidden="true"></i></a></li>
                         <li class="active"><a href="#">1</a></li>
@@ -160,7 +162,7 @@
                         <li><a href="#">6</a></li>
                         <li class="next"><a href="#"><i class="icon an an-caret-right" aria-hidden="true"></i></a></li>
                      </ul>
-                  </div>
+                  </div> -->
                   <!-- End Number Pagination -->
             </div>
             <!-- End Main Content -->

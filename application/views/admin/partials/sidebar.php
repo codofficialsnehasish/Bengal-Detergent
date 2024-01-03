@@ -103,6 +103,23 @@
                         <li class="<?= tab_active('team-lead');?>"><a href="<?= base_url('admin/team-lead/')?>" class="<?= active_link('team-lead');?>">Team Lead</a></li>                    
                     </ul>
                 </li>
+
+                <?php 
+               $usegment='';
+               if($this->uri->segment(2)=='sales-target'){$usegment='sales-target';}
+               if($this->uri->segment(2)=='sales-report'){$usegment='sales-report';}
+
+               ?>
+                <li class="<?= active_menu($usegment);?>">
+                    <a href="javascript: void(0);" class="has-arrow waves-effect <?= active_menu($usegment);?>">
+                        <i class="ti-user"></i>
+                        <span>Sales</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li class="<?= tab_active('sales-target');?>"><a href="<?= base_url('admin/sales-target/')?>" class="<?= active_link('sales-target');?>">Target</a></li>                  
+                        <li class="<?= tab_active('sales-report');?>"><a href="<?= base_url('admin/sales-report/')?>" class="<?= active_link('sales-report');?>">Sales Report</a></li>                  
+                    </ul>
+                </li>
                
                 <li class="<?= active_menu('team_lead_req');?>">
                     <a href="<?= base_url('admin/team_lead/request')?>" class="waves-effect <?= active_link('team_lead_req');?>">

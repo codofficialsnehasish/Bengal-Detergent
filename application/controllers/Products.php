@@ -20,7 +20,6 @@ class Products extends Core_Controller {
         $conditions1['limit'] = $pagination['per_page'];
 
         $data['sort_by']= '';
-
         if($this->input->post('sort_by')!=''){
             if($this->input->post('sort_by')=='cost_low_to_high'){
                 $conditions1['order_by'] = 'price';
@@ -30,8 +29,12 @@ class Products extends Core_Controller {
                 $conditions1['order_by'] = 'price';
                 $conditions1['order'] = 'DESC';
             }
-            if($this->input->get('sort_by')=='rating_high_to_low'){
-                $conditions1['order_by'] = 'rating';
+            if($this->input->get('sort_by')=='a_to_z'){
+                $conditions1['order_by'] = 'title';
+                $conditions1['order'] = 'ASC';
+            }
+            if($this->input->get('sort_by')=='z_to_a'){
+                $conditions1['order_by'] = 'title';
                 $conditions1['order'] = 'DESC';
             }
             $data['sort_by'] = $this->input->post('sort_by');
@@ -85,8 +88,12 @@ class Products extends Core_Controller {
                 $conditions1['order_by'] = 'price';
                 $conditions1['order'] = 'DESC';
             }
-            if($this->input->get('sort_by')=='latest'){
-                $conditions1['order_by'] = 'id';
+            if($this->input->get('sort_by')=='a_to_z'){
+                $conditions1['order_by'] = 'title';
+                $conditions1['order'] = 'ASC';
+            }
+            if($this->input->get('sort_by')=='z_to_a'){
+                $conditions1['order_by'] = 'title';
                 $conditions1['order'] = 'DESC';
             }
         }else{

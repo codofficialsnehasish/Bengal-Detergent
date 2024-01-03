@@ -1,160 +1,110 @@
-<section class="breadscrumb-section pt-0">
-    <div class="container-fluid-lg">
-        <div class="row">
-            <div class="col-12">
-                <div class="breadscrumb-contain">
-                    <h2>Contact Us</h2>
-                    <nav>
-                        <ol class="breadcrumb mb-0">
-                            <li class="breadcrumb-item">
-                                <a href="/">
-                                    <i class="fa fa-home"></i>
-                                </a>
-                            </li>
-                            <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
-                        </ol>
-                    </nav>
-                </div>
-            </div>
+<div id="page-content">
+    <!-- Page Title -->
+    <div class="page section-header text-center mb-0">
+    <div class="page-title">
+        <div class="wrapper">
+            <h1 class="page-width">Contact Us</h1>
         </div>
     </div>
-</section>
-<section class="contact-box-section">
-    <div class="container-fluid-lg">
-        <div class="row g-lg-5 g-3">
-            <div class="col-lg-6">
-                <div class="left-sidebar-box">
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <div class="contact-title">
-                                <h3>Get In Touch</h3>
-                            </div>
-                            <div class="contact-detail">
-                                <div class="row g-4">
-                                    <div class="col-xxl-6 col-lg-12 col-sm-6">
-                                        <div class="contact-detail-box">
-                                            <div class="contact-icon">
-                                                <i class="fa fa-phone"></i>
-                                            </div>
-                                            <div class="contact-detail-title">
-                                                <h4>Phone</h4>
-                                            </div>
-                                            <div class="contact-detail-contain">
-                                                <p>(+1) 618 111 111</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xxl-6 col-lg-12 col-sm-6">
-                                        <div class="contact-detail-box">
-                                            <div class="contact-icon">
-                                                <i class="fa fa-envelope"></i>
-                                            </div>
-                                            <div class="contact-detail-title">
-                                                <h4>Email</h4>
-                                            </div>
-                                            <div class="contact-detail-contain">
-                                                <p>info@filthygainz.com</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xxl-6 col-lg-12 col-sm-6">
-                                        <div class="contact-detail-box">
-                                            <div class="contact-icon">
-                                                <i class="fa fa-location-arrow"></i>
-                                            </div>
-                                            <div class="contact-detail-title">
-                                                <h4>Office</h4>
-                                            </div>
-                                            <div class="contact-detail-contain">
-                                                <p>Cruce Casa de Postas 29</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+    </div>
+    <!-- End Page Title -->
+    <!-- Breadcrumbs -->
+    <div class="bredcrumbWrap bredcrumbWrapPage bredcrumb-style2 text-center mb-0">
+    <div class="container breadcrumbs">
+        <a href="<?= base_url(' ') ?>" title="Back to the home page">Home</a><span aria-hidden="true">|</span><span class="title-bold">Contact Us</span>
+    </div>
+    </div>
+    <!-- End Breadcrumbs -->
+    <div class="container-fluid px-0">
+    <div class="row g-0">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6 p-0">
+            <div class="map-section map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3685.21026282452!2d88.3836701!3d22.533795!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0276c1d1944a59%3A0x41dc48c8e0794de2!2z8J2QkfCdkIog8J2QjvCdkJXwnZCE8J2QkfCdkJLwnZCE8J2QgPCdkJIgKCDwnZCF8J2QmvCdkJzwnZCt8J2QqPCdkKvwnZCyICk!5e0!3m2!1sen!2sin!4v1702370793569!5m2!1sen!2sin" allowfullscreen="" height="650"></iframe>
+            </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6 justify-content-center align-items-center flex-wrap px-3 px-sm-5 pt-4 pb-2 mb-md-5 mb-lg-0 mb-sm-5 mb-5">
+            <h2 class="text-center">DROP US A LINE</h2>
+            <p class="text-center">Lorem Ipsum é um texto modelo da indústria tipográfica e de impressão. O Lorem Ipsum tem vindo a ser o texto padrão usado por estas indústrias desde o ano de 1500 </p>
+            <!-- Contact Form -->
+            <?php $this->load->view('admin/partials/_messages');?>
+            <div class="formFeilds contact-form form-vertical">
+            <?= form_open_multipart('contact-us/process', 'class="custom-validation contact-form"');?>
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-group">
+                        <input type="text" id="ContactFormName" name="c_name" class="form-control" placeholder="Name">
+                        <span class="error_msg" id="name_error"></span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-group">
+                        <input type="email" id="ContactFormEmail" name="c_email" class="form-control" placeholder="Email">
+                        <span class="error_msg" id="email_error"></span>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="title d-xxl-none d-block">
-                    <h2>Contact Us</h2>
-                </div>
-                <div class="right-sidebar-box">
-                    <div class="row">
-                        <div class="col-xxl-6 col-lg-12 col-sm-6">
-                            <div class="mb-md-4 mb-3 custom-form">
-                                <label for="exampleFormControlInput" class="form-label">First Name</label>
-                                <div class="custom-input">
-                                    <input type="text" class="form-control" id="exampleFormControlInput" placeholder="Enter First Name" />
-                                    <i class="fa fa-user"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xxl-6 col-lg-12 col-sm-6">
-                            <div class="mb-md-4 mb-3 custom-form">
-                                <label for="exampleFormControlInput1" class="form-label">Last Name</label>
-                                <div class="custom-input">
-                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Last Name" />
-                                    <i class="fa fa-user"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xxl-6 col-lg-12 col-sm-6">
-                            <div class="mb-md-4 mb-3 custom-form">
-                                <label for="exampleFormControlInput2" class="form-label">Email Address</label>
-                                <div class="custom-input">
-                                    <input type="email" class="form-control" id="exampleFormControlInput2" placeholder="Enter Email Address" />
-                                    <i class="fa fa-envelope"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xxl-6 col-lg-12 col-sm-6">
-                            <div class="mb-md-4 mb-3 custom-form">
-                                <label for="exampleFormControlInput3" class="form-label">Phone Number</label>
-                                <div class="custom-input">
-                                    <input
-                                        type="tel"
-                                        class="form-control"
-                                        id="exampleFormControlInput3"
-                                        placeholder="Enter Your Phone Number"
-                                        maxlength="10"
-                                        oninput="javascript: if (this.value.length > this.maxLength) this.value =
-this.value.slice(0, this.maxLength);"
-                                    />
-                                    <i class="fa fa-mobile-phone"></i>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-12">
-                            <div class="mb-md-4 mb-3 custom-form">
-                                <label for="exampleFormControlTextarea" class="form-label">Message</label>
-                                <div class="custom-textarea">
-                                    <textarea class="form-control" id="exampleFormControlTextarea" placeholder="Enter Your Message" rows="6"></textarea>
-                                    <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                                </div>
-                            </div>
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-group">
+                        <input class="form-control" type="tel" id="ContactFormPhone" name="c_phone" pattern="[0-9\-]*" placeholder="Phone Number">
                         </div>
                     </div>
-                    <button class="btn btn-animation btn-md fw-bold ms-auto">Send Message</button>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-group">
+                        <input type="text" id="ContactSubject" name="c_subj" class="form-control" placeholder="Subject">
+                        <span class="error_msg" id="subject_error"></span>
+                        </div>
+                    </div>
                 </div>
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group">
+                        <textarea id="ContactFormMessage" name="c_msg" class="form-control" rows="4" placeholder="Your Message..."></textarea>
+                        <span class="error_msg" id="message_error"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group mailsendbtn mb-0">
+                        <input class="btn btn-primary" type="submit" name="contactus" value="Send Message">
+                        <div class="loading"><img class="img-fluid" src="assets/images/ajax-loader.gif" alt="loading"></div>
+                        </div>
+                    </div>
+                </div>
+            <?= form_close();?>
+            <div class="response-msg"></div>
+            </div>
+            <!-- End Contact Form -->
+            <div class="contact-details">
+            <hr>
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                    <ul class="addressFooter">
+                        <li>
+                        <i class="icon an an-map-marker"></i>
+                        <p><?= $this->settings->contact_address; ?></p>
+                        </li>
+                        <li class="phone">
+                        <i class="icon an an-phone"></i>
+                        <p><?= $this->settings->contact_phone; ?></p>
+                        </li>
+                        <li class="email">
+                        <i class="icon an an-envelope"></i>
+                        <p><?= $this->settings->contact_email; ?> / <?= $this->settings->contact_email_opt; ?></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <ul class="list--inline site-footer__social-icons social-icons mt-lg-0 mt-md-0 mt-3">
+                <li><a class="social-icons__link d-inline-block" href="<?= $this->settings->twitter_url;?>" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Twitter"><i class="icon an an-twitter"></i> <span class="icon__fallback-text">Twitter</span></a></li>
+                <li><a class="social-icons__link d-inline-block" href="<?= $this->settings->linkedin_url;?>" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Linkedin"><i class="icon an an-linkedin"></i> <span class="icon__fallback-text">Linkedin</span></a></li>
+                <li><a class="social-icons__link d-inline-block" href="<?= $this->settings->instagram_url;?>" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Instagram"><i class="icon an an-instagram"></i> <span class="icon__fallback-text">Instagram</span></a></li>
+                <li><a class="social-icons__link d-inline-block" href="<?= $this->settings->youtube_url;?>" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="YouTube"><i class="icon an an-youtube"></i> <span class="icon__fallback-text">YouTube</span></a></li>
+            </ul>
             </div>
         </div>
     </div>
-</section>
-<section class="map-section">
-    <div class="container-fluid p-0">
-        <div class="map-box">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d179908.8979021816!2d-105.12150009503478!3d37.72404136888334!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x871400dc43c5ce01%3A0xd34a3d5b575033db!2sFarisita%2C%20CO%2081040%2C%20USA!5e0!3m2!1sen!2sin!4v1688422685891!5m2!1sen!2sin"
-                width="100%"
-                height="450"
-                style="border: 0;"
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-            ></iframe>
-        </div>
     </div>
-</section>
+    </div>
+    <!-- End Body Content -->

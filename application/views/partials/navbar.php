@@ -209,7 +209,7 @@ $categoriesMenu=$this->select->get_parent_categories();
                                             </li> -->
 
                                              <li class="lvl1 parent dropdown">
-                                                <a href="#">Contact Us <i class="an an-angle-down"></i></a>
+                                                <a href="<?= base_url('/contact_us'); ?>">Contact Us <i class="an an-angle-down"></i></a>
                                             </li>
                                             
                                         </ul>
