@@ -17,7 +17,7 @@ class Sales_report extends Core_Controller {
 		$header['pagecss']="contentCss";
 		$header['title']='Sales Report';
 		$this->load->view('admin/partials/header',$header);
-		$data['allitems']=$this->select->select_teamlead($this->table_name,'role','dristributor','is_approved',1);
+		$data['allitems']=$this->select->select_single_data($this->table_name,'is_approved',1);
 		$this->load->view($this->view_path.'content',$data);
 		$script['pagescript']='contentScript';
 		$this->load->view('admin/partials/footer',$script);

@@ -5,16 +5,16 @@
                         <div class="page-title-box">
                             <div class="row align-items-center">
                                 <div class="col-md-8">
-                                    <h6 class="page-title">Sales Target</h6>
+                                    <h6 class="page-title">Gifts</h6>
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="<?= admin_url();?>">Home</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Sales Report</li>
+                                        <li class="breadcrumb-item active" aria-current="page">Gifts</li>
                                     </ol>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="float-end d-none d-md-block">
                                         <div class="dropdown">
-                                        <a href="<?= admin_url('sales-target/add-new')?>" class="btn btn-primary  dropdown-toggle" aria-expanded="false">
+                                        <a href="<?= admin_url('gift/add-new')?>" class="btn btn-primary  dropdown-toggle" aria-expanded="false">
                                         <i class="fas fa-plus me-2"></i> Add New
                                         </a>
                                         </div>
@@ -32,14 +32,11 @@
                                             <thead>
                                                 <tr>
                                                     <th>Sl No.</th>
-                                                    <th>Month</th>
-                                                    <th>Duration</th>
-                                                    <th>Salesman Name</th>
-                                                    <th>Designation</th>
-													<th>Target</th>
-                                                    <th>Product</th>
                                                     <th>Gift</th>
-                                                    <th>Visibility</th>
+                                                    <th>Amount</th>
+                                                    <th>After Complete Amount</th>
+													<th>Visiblity</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
 
@@ -47,19 +44,12 @@
                                             <tbody>
                                                 <?php $i=1;
                                                 foreach($allitems as $item):
-                                                    $saman = $this->select->select_single_data("users","id",$item->salesman_id);
-                                                    $saman = $saman[0];
                                                 ?>
-
                                                 <tr>
                                                     <td><?= $i++;?></td>
-                                                    <td><?= $item->month;?></td>
-                                                    <td><?= $item->start_date;?> - <?= $item->end_date;?></td>
-                                                    <td><?= $saman->full_name;?></td>
-                                                    <td><?= $saman->role;?></td>
-                                                    <td><?= $item->terget_amount; ?></td>
-                                                    <td><?= $item->perticilar_product; ?></td>
-                                                    <td><?= $item->gift; ?></td>
+                                                    <td><?= $item->gift_title;?></td>
+                                                    <td><?= $item->gift_amount;?></td>
+                                                    <td><?= $item->fetch_amount; ?></td>
                                                     <td><?= check_visibility($item->is_visible); ?></td>
                                                 </tr>
                                                 <?php endforeach;?>

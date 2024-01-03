@@ -11,3 +11,5 @@
 <!-- Toast message -->
 <link href="<?= base_url('assets/admin/libs/toast/toastr.css');?>" rel="stylesheet" type="text/css" />
 <!-- Toast message -->
+<link href="<?= base_url('assets/admin/libs/select2/css/select2.min.css');?>" rel="stylesheet" type="text/css">
+<link href="<?= base_url('assets/admin/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css');?>" rel="stylesheet">

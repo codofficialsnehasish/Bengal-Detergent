@@ -4,17 +4,17 @@
       <div class="page-title-box">
          <div class="row align-items-center">
             <div class="col-md-8">
-               <h6 class="page-title">Target</h6>
+               <h6 class="page-title">Gifts</h6>
                <ol class="breadcrumb m-0">
                   <li class="breadcrumb-item"><a href="<?= admin_url('')?>">Home</a></li>
-                  <li class="breadcrumb-item"><a href="<?= admin_url('slider')?>">Target</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Add new Target</li>
+                  <li class="breadcrumb-item"><a href="<?= admin_url('gift')?>">Gifts</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Add new Gifts</li>
                </ol>
             </div>
             <div class="col-md-4">
                <div class="float-end d-none d-md-block">
                   <div class="dropdown">
-                     <a href="<?= admin_url('sales-target/')?>" class="btn btn-primary  dropdown-toggle" aria-expanded="false">
+                     <a href="<?= admin_url('gift/')?>" class="btn btn-primary  dropdown-toggle" aria-expanded="false">
                      <i class="fas fa-arrow-left me-2"></i> Back
                      </a>
                   </div>
@@ -32,7 +32,7 @@
             <div class="col-lg-9">
                <div class="card">
                   <div class="card-header bg-primary text-light">
-                    Add Target
+                    Add Gifts
                   </div>
                   <div class="card-body">
                     <div class="row mb-3">
@@ -101,6 +101,7 @@
             </div>
             <!-- end col -->
             <div class="col-lg-3">
+            <?php $this->load->view('admin/partials/_input-image');?>
                <div class="card">
                   <div class="card-header bg-primary text-light">
                      Publish

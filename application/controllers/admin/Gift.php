@@ -1,28 +1,28 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Sales_target extends Core_Controller {
+class Gift extends Core_Controller {
 
 	public function __construct()
     {
         parent::__construct();
 		$this->is_not_logged_in();
-		$this->table_name='sales_target';
-		$this->view_path='admin/sales_terget/';
+		$this->table_name='gift';
+		$this->view_path='admin/gifts/';
 		//$this->output->enable_profiler(TRUE);
 		
 	}
     public function index()
 	{
 		$header['pagecss']="contentCss";
-		$header['title']='Sales Target';
+		$header['title']='Sales Report';
 		$this->load->view('admin/partials/header',$header);
 		$data['allitems']=$this->select->select_single_data($this->table_name,'is_visible',1);
 		$this->load->view($this->view_path.'content',$data);
 		$script['pagescript']='contentScript';
 		$this->load->view('admin/partials/footer',$script);
 	}
-	public function add_new()
+    public function add_new()
 	{
 		$header['pagecss']="";
 		$header['title']='Add New Target';

@@ -287,9 +287,6 @@
                                     
         <!-- Sweet alert init js-->
         <script src="<?= base_url('assets/admin/js/pages/sweet-alerts.init.js');?>"></script>
-        <script src="<?= base_url('assets/admin/libs/select2/js/select2.full.min.js');?>"></script>
-        <script src="<?= base_url('assets/admin/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js');?>"></script>
-        <script src="<?= base_url('assets/admin/js/pages/form-advanced.init.js');?>"></script>
         <!-- end -->
         
         <?php $this->load->view('partials/ajax');?>

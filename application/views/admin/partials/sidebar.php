@@ -107,6 +107,7 @@
                 <?php 
                $usegment='';
                if($this->uri->segment(2)=='sales-target'){$usegment='sales-target';}
+               if($this->uri->segment(2)=='gift'){$usegment='gift';}
                if($this->uri->segment(2)=='sales-report'){$usegment='sales-report';}
 
                ?>
@@ -117,6 +118,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li class="<?= tab_active('sales-target');?>"><a href="<?= base_url('admin/sales-target/')?>" class="<?= active_link('sales-target');?>">Target</a></li>                  
+                        <li class="<?= tab_active('gift');?>"><a href="<?= base_url('admin/gift/')?>" class="<?= active_link('gift');?>">Gifts</a></li>                  
                         <li class="<?= tab_active('sales-report');?>"><a href="<?= base_url('admin/sales-report/')?>" class="<?= active_link('sales-report');?>">Sales Report</a></li>                  
                     </ul>
                 </li>

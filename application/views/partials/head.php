@@ -6,8 +6,6 @@
 <!-- <link rel="stylesheet" href="<= base_url('assets/site/css/animate-css/animate.css');?>"> -->
 <link href="<?= base_url('assets/admin/css/icons.min.css');?>" rel="stylesheet" type="text/css">
 <link href="<?= base_url('assets/admin/libs/sweetalert2/sweetalert2.min.css');?>" rel="stylesheet" type="text/css" />
-<link href="<?= base_url('assets/admin/libs/select2/css/select2.min.css');?>" rel="stylesheet" type="text/css">
-<link href="<?= base_url('assets/admin/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css');?>" rel="stylesheet">
 
 <!-- Plugins CSS -->
 <link rel="stylesheet" href="<?= base_url('assets/site/css/plugins.css'); ?>" />

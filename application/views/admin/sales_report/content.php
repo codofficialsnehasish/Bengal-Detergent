@@ -42,15 +42,19 @@
 
                                             <tbody>
                                                 <?php $i=1;
-                                                foreach($allitems as $item):?>
+                                                foreach($allitems as $item):
+                                                    $saman = $this->select->select_single_data("sales_target","salesman_id",$item->id);
+                                                    if(count($saman) > 0):
+                                                        $saman = $saman[0];
+                                                ?>
                                                 <tr>
                                                     <td><?= $i++;?></td>
                                                     <td><?= $item->full_name;?></td>
                                                     <td><?= $item->role;?></td>
-                                                    <td></td>
+                                                    <td><?= $saman->terget_amount; ?></td>
                                                     <td></td>
                                                 </tr>
-                                                <?php endforeach;?>
+                                                <?php endif; endforeach;?>
                                             </tbody>
                                         </table>
 
