@@ -47,10 +47,18 @@
                                                 ?>
                                                 <tr>
                                                     <td><?= $i++;?></td>
-                                                    <td><?= $item->gift_title;?></td>
+                                                    <td><img src="<?= get_image($item->media_id);?>" width="50" />&nbsp;&nbsp;<?= $item->title;?></td>
                                                     <td><?= $item->gift_amount;?></td>
                                                     <td><?= $item->fetch_amount; ?></td>
                                                     <td><?= check_visibility($item->is_visible); ?></td>
+                                                    <td>
+                                                        <a href="<?= admin_url('gift/edit/'.$item->id);?>" class="btn btn-primary btn-sm edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit this Item">
+                                                            <i class="fas fa-pencil-alt" title="Edit"></i>
+                                                        </a>
+                                                        <a class="btn btn-danger btn-sm edit" onclick="confirmDelete(this.id,'gift');" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove this Item" id="<?= $item->id;?>">
+                                                            <i class="fas fa-trash-alt" title="Remove"></i>
+                                                        </a>
+                                                    </td>
                                                 </tr>
                                                 <?php endforeach;?>
                                             </tbody>

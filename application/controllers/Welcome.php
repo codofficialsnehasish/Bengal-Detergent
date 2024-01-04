@@ -26,6 +26,16 @@ public function __construct()
 	}
 	public function index()
 	{
+		$data = array(
+			'ip_address'=> $_SERVER['REMOTE_ADDR'],
+			'user_agent'=> $_SERVER['HTTP_USER_AGENT']
+		);
+		$insert=$this->insert_model->insert_data($data,'visitors');
+		
+		// $ip = $_SERVER['REMOTE_ADDR'];
+		//     // $timestamp = date('Y-m-d H:i:s');
+		//     $user_agent = $_SERVER['HTTP_USER_AGENT'];
+
 		$this->load->view('partials/header');
 		
     	$sliderconditions = array(

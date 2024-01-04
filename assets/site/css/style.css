@@ -2684,7 +2684,7 @@ body.home9-simple, .home9-simple .h1, .home9-simple .h2, .home9-simple .h3, .hom
 .footer-links ul, .contact-box ul { margin-bottom:0; }
 .footer-top, .footer-links a, .footer-top p, .footer-bottom { color:#232323; }
 .addressFooter .icon { color:#232323; float:left; font-size:19px; margin-top:4px; }
-.addressFooter li { position: relative; padding-bottom:8px; }
+.addressFooter li { position: relative; padding-bottom:8px;list-style: none; }
 .addressFooter li p { padding-left:25px; }
 .addressFooter li p a { color: inherit; }
 .site-footer hr { margin:0; border-color:#454545; }

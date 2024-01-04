@@ -19,7 +19,7 @@
     <div class="row g-0">
         <div class="col-12 col-sm-12 col-md-12 col-lg-6 p-0">
             <div class="map-section map">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3685.21026282452!2d88.3836701!3d22.533795!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0276c1d1944a59%3A0x41dc48c8e0794de2!2z8J2QkfCdkIog8J2QjvCdkJXwnZCE8J2QkfCdkJLwnZCE8J2QgPCdkJIgKCDwnZCF8J2QmvCdkJzwnZCt8J2QqPCdkKvwnZCyICk!5e0!3m2!1sen!2sin!4v1702370793569!5m2!1sen!2sin" allowfullscreen="" height="650"></iframe>
+            <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3685.21026282452!2d88.3836701!3d22.533795!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0276c1d1944a59%3A0x41dc48c8e0794de2!2z8J2QkfCdkIog8J2QjvCdkJXwnZCE8J2QkfCdkJLwnZCE8J2QgPCdkJIgKCDwnZCF8J2QmvCdkJzwnZCt8J2QqPCdkKvwnZCyICk!5e0!3m2!1sen!2sin!4v1702370793569!5m2!1sen!2sin" allowfullscreen="" height="650"></iframe> -->
             </div>
         </div>
         <div class="col-12 col-sm-12 col-md-12 col-lg-6 justify-content-center align-items-center flex-wrap px-3 px-sm-5 pt-4 pb-2 mb-md-5 mb-lg-0 mb-sm-5 mb-5">
@@ -91,7 +91,7 @@
                         </li>
                         <li class="email">
                         <i class="icon an an-envelope"></i>
-                        <p><?= $this->settings->contact_email; ?> / <?= $this->settings->contact_email_opt; ?></p>
+                        <p><?= $this->settings->contact_email; ?> <?php if(!empty($this->settings->contact_email_opt)){ echo "/".$this->settings->contact_email_opt;}else{ echo""; }; ?></p>
                         </li>
                     </ul>
                 </div>

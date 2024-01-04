@@ -16,9 +16,12 @@ class Dashboard extends Core_Controller {
 		$header['pagecss']="dashboardCss";
 		$header['title']='Dashboard';
 		$this->load->view('admin/partials/header',$header);
-	//	$data['allitems']=$this->select->select_table('payment_details','id','desc',0,10);
-	//	print_r($data['allitems']);die;
-	$data[]="";
+		//	$data['allitems']=$this->select->select_table('payment_details','id','desc',0,10);
+		//	print_r($data['allitems']);die;
+		$date = date('Y-m-d');
+		$data['today_visitor'] = get_visitor_count($date);
+		$date = date('Y-m-d', strtotime('-1 day', strtotime(date("Y-m-d"))));
+		$data['previous_visitor'] = get_visitor_count($date);
 		$this->load->view('admin/dashboard',$data);
 		$script['pagescript']='dashboardScript';
 		$this->load->view('admin/partials/footer',$script);
@@ -41,9 +44,14 @@ class Dashboard extends Core_Controller {
         if (!$this->auth_check) {
             redirect(admin_url());
         }
-        $this->auth_model->logout();
-        //   redirect('/mdm');
-		redirect('');
+		if($this->auth_user->role == "admin"){
+			$this->auth_model->logout();
+          	redirect('/mdm');
+		}else{
+			$this->auth_model->logout();
+			//   redirect('/mdm');
+			redirect('');
+		}
     }
 
 	public function copytbl(){

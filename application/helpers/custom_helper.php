@@ -2147,6 +2147,33 @@ if (!function_exists('numberTowords')) {
             return $result[0]->desc;
         }
     }
+    
+    if (!function_exists('get_title')) {
+        function get_title($id,$table){
+            $ci =& get_instance();
+            $conditions['tblName']=$table;
+            $conditions['where']=array('id'=>$id,'is_visible'=>1);
+            $conditions['limit'] = 1;
+            $result=$ci->select->getResult($conditions);
+            if(!empty($result)){
+                return $result[0]->title;
+            }else{
+                return false;
+            }
+        }
+    }
+
+    if(!function_exists('get_visitor_count')){
+        function get_visitor_count($date){
+            $ci =& get_instance();
+            $ci->db->select('COUNT(DISTINCT ip_address) AS unique_visitors');
+            $ci->db->from('visitors');
+            $ci->db->where("DATE_FORMAT(timestamp, '%Y-%m-%d') = ", $date);
+            $query = $ci->db->get();
+            $result = $query->row();
+            return $result->unique_visitors;
+        }
+    }
 
 
 

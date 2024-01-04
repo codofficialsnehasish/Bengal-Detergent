@@ -40,6 +40,7 @@
                                                     <th>Product</th>
                                                     <th>Gift</th>
                                                     <th>Visibility</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
 
@@ -58,9 +59,25 @@
                                                     <td><?= $saman->full_name;?></td>
                                                     <td><?= $saman->role;?></td>
                                                     <td><?= $item->terget_amount; ?></td>
-                                                    <td><?= $item->perticilar_product; ?></td>
-                                                    <td><?= $item->gift; ?></td>
+                                                    <td>
+                                                        <?php 
+                                                            $pdct_id = explode(",",$item->perticilar_product); 
+                                                            foreach($pdct_id as $d){
+                                                                echo get_title($d,"products");
+                                                                ?>&nbsp;&nbsp;&nbsp;&nbsp;<?php
+                                                            }
+                                                        ?>
+                                                    </td>
+                                                    <td><?= get_title($item->gift,"gift") ? get_title($item->gift,"gift") : ""; ?></td>
                                                     <td><?= check_visibility($item->is_visible); ?></td>
+                                                    <td>
+                                                        <a href="<?= admin_url('sales-target/edit/'.$item->id);?>" class="btn btn-primary btn-sm edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit this Item">
+                                                            <i class="fas fa-pencil-alt" title="Edit"></i>
+                                                        </a>
+                                                        <a class="btn btn-danger btn-sm edit" onclick="confirmDelete(this.id,'sales-target');" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove this Item" id="<?= $item->id;?>">
+                                                            <i class="fas fa-trash-alt" title="Remove"></i>
+                                                        </a>
+                                                    </td>
                                                 </tr>
                                                 <?php endforeach;?>
                                             </tbody>

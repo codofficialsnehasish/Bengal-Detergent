@@ -201,7 +201,7 @@ $categoriesMenu=$this->select->get_parent_categories();
                                             </li> -->
 
                                             <li class="lvl1 parent dropdown">
-                                                <a href="#">About Us <i class="an an-angle-down"></i></a>
+                                                <a href="<?= base_url('/about_us'); ?>">About Us <i class="an an-angle-down"></i></a>
                                             </li>
 
                                             <!-- <li class="lvl1 parent dropdown">
@@ -277,13 +277,13 @@ $categoriesMenu=$this->select->get_parent_categories();
                         <a href="#">Category <i class="an an-plus"></i></a>
                     </li> -->
                    <li class="lvl1 parent megamenu">
-                        <a href="#">About Us <i class="an an-plus"></i></a>
+                        <a href="<?= base_url('/about_us'); ?>">About Us <i class="an an-plus"></i></a>
                     </li>
                   <!-- <li class="lvl1 parent megamenu">
                         <a href="#">Blog <i class="an an-plus"></i></a>
                     </li> -->
                    <li class="lvl1 parent megamenu">
-                        <a href="#">Contact Us <i class="an an-plus"></i></a>
+                        <a href="<?= base_url('/contact_us'); ?>">Contact Us <i class="an an-plus"></i></a>
                     </li>
                 </ul>
             </div>

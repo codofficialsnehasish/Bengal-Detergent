@@ -593,5 +593,18 @@ public function getAllcategories(){
 		);
 		return $this->getResult($questioncon);
 	}
+	public function get_about_images()
+	{
+		// $this->db->where('parent_id', 0);
+		// $this->db->where('visibility', 1);
+		$query = $this->db->get('about_images');
+		return $query->result();
+	}
+	public function get_about_images_w(){
+		// $this->db->where('parent_id', 0);
+		$this->db->where('visibility', 1);
+		$query = $this->db->get('about_images');
+		return $query->result();
+	}
 }  
 ?>

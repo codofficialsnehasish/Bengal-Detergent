@@ -50,11 +50,12 @@
                                                     <td><?= check_visibility($item->is_visible);?> </td>
                                                     <td>
                                                         <a href="<?= admin_url('slider/edit/'.$item->id);?>" class="btn btn-primary btn-sm edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit this Item">
-                                                                <i class="fas fa-pencil-alt" title="Edit"></i>
-                                                            </a>
-                                                            <a class="btn btn-danger btn-sm edit" onclick="confirmDelete(this.id,'slider');" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove this Item" id="<?= $item->id;?>">
-                                                                <i class="fas fa-trash-alt" title="Remove"></i>
-                                                            </a></td>
+                                                            <i class="fas fa-pencil-alt" title="Edit"></i>
+                                                        </a>
+                                                        <a class="btn btn-danger btn-sm edit" onclick="confirmDelete(this.id,'slider');" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove this Item" id="<?= $item->id;?>">
+                                                            <i class="fas fa-trash-alt" title="Remove"></i>
+                                                        </a>
+                                                    </td>
                                                 </tr>
                                                 <?php endforeach;?>
                                                

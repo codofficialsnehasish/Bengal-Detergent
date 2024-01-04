@@ -49,12 +49,12 @@ class Contact_us extends Core_Controller {
 			);
 			$insert=$this->insert_model->insert_data($data,'contact');
 			if($insert){
-			//	$this->session->set_flashdata('success', 'Message has been sent successfully');
-				//redirect($this->agent->referrer());
-				$status = 1;
-				$msg = 'Message has been sent successfully';
-				$this->email_template->contact($data);
-				$this->email_template->thankyou($this->input->post('c_name', true),$this->input->post('c_email', true));
+				$this->session->set_flashdata('success', 'Message has been sent successfully');
+				redirect($this->agent->referrer());
+				// $status = 1;
+				// $msg = 'Message has been sent successfully';
+				// $this->email_template->contact($data);
+				// $this->email_template->thankyou($this->input->post('c_name', true),$this->input->post('c_email', true));
 			}else{
 				$status = 0;
 				$msg = 'Something went wrong :(';

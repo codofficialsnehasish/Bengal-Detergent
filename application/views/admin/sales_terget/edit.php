@@ -8,7 +8,7 @@
                <ol class="breadcrumb m-0">
                   <li class="breadcrumb-item"><a href="<?= admin_url('')?>">Home</a></li>
                   <li class="breadcrumb-item"><a href="<?= admin_url('sales-target')?>">Target</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Add new Target</li>
+                  <li class="breadcrumb-item active" aria-current="page">Edit Target</li>
                </ol>
             </div>
             <div class="col-md-4">
@@ -26,39 +26,39 @@
       <?php $this->load->view('admin/partials/_messages');?>
       </div>
       <!-- end page title -->
-      <?= form_open_multipart('admin/sales-target/process', 'class="custom-validation"');?>
+      <?= form_open_multipart('admin/sales-target/update-process/'.$item->id, 'class="custom-validation"');?>
       
          <div class="row">
             <div class="col-lg-9">
                <div class="card">
                   <div class="card-header bg-primary text-light">
-                    Add Target
+                     Edit Target
                   </div>
                   <div class="card-body">
-                     <div class="row mb-3">
+                  <div class="row mb-3">
                         <label for="example-month-input" class="col-sm-2 col-form-label">Month</label>
                         <div class="col-sm-10">
-                            <input class="form-control" type="month" name="month" id="example-month-input">
+                            <input class="form-control" type="month" name="month" value="<?= $item->month; ?>" id="example-month-input">
                         </div>
                      </div>
                      <div class="mb-3">
                         <label class="form-label">Date Range</label>
                         <div class="input-daterange input-group" id="datepicker6" data-date-format="dd M, yyyy" data-date-autoclose="true" data-provide="datepicker" data-date-container='#datepicker6'>
-                            <input type="text" class="form-control" name="start_date" placeholder="Start Date" />
-                            <input type="text" class="form-control" name="end_date" placeholder="End Date" />
+                           <input type="text" class="form-control" name="start_date" value="<?= $item->start_date; ?>" placeholder="Start Date" />
+                           <input type="text" class="form-control" name="end_date" value="<?= $item->end_date; ?>" placeholder="End Date" />
                         </div>
                      </div>
                      <div  class="mb-3">
                         <label class="form-label">Choose Salesman</label>
-                        <select class="select2 form-control select2-multiple" multiple="multiple" multiple data-placeholder="Choose ..." name="salesman[]">
+                        <select class="form-control select2" name="salesman">
                             <optgroup label="Distributer">
                               <?php foreach($dristributer as $d){ ?>
-                                <option value="<?= $d->id ?>"><?= $d->full_name ?></option>
+                                <option value="<?= $d->id ?>" <?= $item->salesman_id==$d->id?'selected':'';?>><?= $d->full_name ?></option>
                               <?php } ?>
                             </optgroup>
                             <optgroup label="Teamleader">
                             <?php foreach($teamleader as $t){ ?>
-                                <option value="<?= $t->id ?>"><?= $t->full_name ?></option>
+                                <option value="<?= $t->id ?>" <?= $item->salesman_id==$d->id?'selected':'';?>><?= $t->full_name ?></option>
                               <?php } ?>
                             </optgroup>
                         </select>
@@ -66,30 +66,33 @@
                      <div class="mb-3">
                         <label class="form-label" id="tamo">Target Amount</label>
                         <div>
-                           <input data-parsley-type="number" type="number" class="form-control" required placeholder="Enter Amount" name="terget_amount" id="tamo">
+                           <input data-parsley-type="number" type="number" value="<?= $item->terget_amount; ?>" class="form-control" required placeholder="Enter Amount" name="terget_amount" id="tamo">
                         </div>
                      </div>
+                     <?php
+                        $ppduct = explode(",",$item->perticilar_product);
+                     ?>
                      <div  class="mb-3">
                         <label class="form-label">Perticular Product</label>
-                        <select class="select2 form-control select2-multiple" multiple="multiple" multiple data-placeholder="Choose ..." name="perticilar_product[]">
+                        <select class="select2 form-control select2-multiple" multiple="multiple" multiple data-placeholder="Choose ..." name="perticilar_product">
                            <?php foreach($products as $p){ ?>
-                              <option value="<?= $p->id ?>"><?= $p->title ?></option>
+                              <option value="<?= $p->id ?>" <?= in_array($p->id,$ppduct)?'selected':'';?>><?= $p->title ?></option>
                            <?php } ?>
                         </select>
                      </div>
                      <div  class="mb-3">
                         <label class="form-label">Gift</label>
                         <select class="form-control select2" name="gift">
-                           <option desabled selected>Choose .....</option>
+                           <option value="" desabled selected>Choose .....</option>
                            <?php foreach($gift as $g){ ?>
-                              <option value="<?= $g->id ?>"><?= $g->title ?></option>
+                              <option value="<?= $g->id ?>" <?= $item->gift==$g->id?'selected':'';?>><?= $g->title ?></option>
                            <?php } ?>
                         </select>
                      </div>  
                      <div class="mb-3">
                         <label class="form-label">Remarks</label>
                         <div>
-                           <textarea name="massage" class="form-control editor" rows="5"></textarea>
+                           <textarea name="massage" class="form-control editor" rows="5"><?= $item->massage; ?></textarea>
                         </div>
                      </div>
                   </div>
@@ -105,19 +108,18 @@
                      <div class="mb-3">
                         <label class="form-label mb-3 d-flex">Visiblity</label>
                         <div class="form-check form-check-inline">
-                           <input type="radio" id="customRadioInline1" name="is_visible" class="form-check-input" value="1" checked>
+                           <input type="radio" id="customRadioInline1" name="is_visible" class="form-check-input" value="1" <?= check_uncheck($item->is_visible,1);?>>
                            <label class="form-check-label" for="customRadioInline1">Show</label>
                         </div>
                         <div class="form-check form-check-inline">
-                           <input type="radio" id="customRadioInline2" name="is_visible" class="form-check-input" value="0">
+                           <input type="radio" id="customRadioInline2" name="is_visible" class="form-check-input" value="0" <?= check_uncheck($item->is_visible,0);?>>
                            <label class="form-check-label" for="customRadioInline2">Hide</label>
                         </div>
                      </div>
-
                      <div class="mb-0">
                         <div>
                            <button type="submit" class="btn btn-primary waves-effect waves-light me-1">
-                           Save & Publish
+                           Save Changes
                            </button>
                         </div>
                      </div>

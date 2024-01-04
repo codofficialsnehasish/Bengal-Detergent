@@ -29,86 +29,66 @@
                             </div>
                         </div>
                         <!-- end page title -->
-                        
+                        <?php if($this->auth_user->role=='admin'){?>
                         <div class="row">
                             <div class="col-xl-3 col-md-6">
                                 <div class="card mini-stat bg-primary text-white">
-                                 
+                                    <div class="card-body">
+                                        <div class="mb-4">
+                                            <div class="float-start mini-stat-img me-4">
+                                                <img src="<?= base_url('assets/admin/images/services-icon/04.png') ?>" alt="">
+                                            </div>
+                                            <h5 class="font-size-16 text-uppercase text-white-50">Visitors</h5>
+                                            <h4 class="fw-medium font-size-24"><?= $today_visitor; ?> <i class="mdi mdi-arrow-up text-success ms-2"></i></h4>
+                                            <?php 
+                                                $percentageChange = (($today_visitor - $previous_visitor) / abs($previous_visitor + $today_visitor)) * 100;
+                                                if($percentageChange > 0){
+                                            ?>
+                                            <div class="mini-stat-label bg-success">
+                                                <p class="mb-0"><?= round($percentageChange, 2) . "%" ?></p>
+                                            </div>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card mini-stat bg-primary text-white">
-                                   
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card mini-stat bg-primary text-white">
-                                    
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card mini-stat bg-primary text-white">
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end row -->
+                            <!-- <div class="col-xl-3">
+                               <div class="card">
+                                   <div class="card-body">
+                                       <h4 class="card-title mb-4">Sales Report</h4>
 
-                        <div class="row">
-                            <div class="col-xl-9">
-                                <div class="card">
-                                    
-                                </div>
-                                <!-- end card -->
-                            </div>
+                                       <div class="cleafix">
+                                           <p class="float-start"><i class="mdi mdi-calendar me-1 text-primary"></i> Jan 01
+                                               - Jan 31</p>
+                                           <h5 class="font-18 text-end">$4230</h5>
+                                       </div>
 
-                            <div class="col-xl-3">
-                                <div class="card">
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end row -->
+                                       <div id="ct-donut" class="ct-chart wid"></div>
 
-                        <!--<div class="row">-->
-                        <!--    <div class="col-xl-3">-->
-                        <!--        <div class="card">-->
-                        <!--            <div class="card-body">-->
-                        <!--                <h4 class="card-title mb-4">Sales Report</h4>-->
-
-                        <!--                <div class="cleafix">-->
-                        <!--                    <p class="float-start"><i class="mdi mdi-calendar me-1 text-primary"></i> Jan 01-->
-                        <!--                        - Jan 31</p>-->
-                        <!--                    <h5 class="font-18 text-end">$4230</h5>-->
-                        <!--                </div>-->
-
-                        <!--                <div id="ct-donut" class="ct-chart wid"></div>-->
-
-                        <!--                <div class="mt-4">-->
-                        <!--                    <table class="table mb-0">-->
-                        <!--                        <tbody>-->
-                        <!--                            <tr>-->
-                        <!--                                <td><span class="badge bg-primary">Desk</span></td>-->
-                        <!--                                <td>Desktop</td>-->
-                        <!--                                <td class="text-end">54.5%</td>-->
-                        <!--                            </tr>-->
-                        <!--                            <tr>-->
-                        <!--                                <td><span class="badge bg-success">Mob</span></td>-->
-                        <!--                                <td>Mobile</td>-->
-                        <!--                                <td class="text-end">28.0%</td>-->
-                        <!--                            </tr>-->
-                        <!--                            <tr>-->
-                        <!--                                <td><span class="badge bg-warning">Tab</span></td>-->
-                        <!--                                <td>Tablets</td>-->
-                        <!--                                <td class="text-end">17.5%</td>-->
-                        <!--                            </tr>-->
-                        <!--                        </tbody>-->
-                        <!--                    </table>-->
-                        <!--                </div>-->
-                        <!--            </div>-->
-                        <!--        </div>-->
-
-                        <!--    </div>-->
+                                       <div class="mt-4">
+                                           <table class="table mb-0">
+                                               <tbody>
+                                                   <tr>
+                                                       <td><span class="badge bg-primary">Desk</span></td>
+                                                       <td>Desktop</td>
+                                                       <td class="text-end">54.5%</td>
+                                                   </tr>
+                                                   <tr>
+                                                       <td><span class="badge bg-success">Mob</span></td>
+                                                       <td>Mobile</td>
+                                                       <td class="text-end">28.0%</td>
+                                                   </tr>
+                                                   <tr>
+                                                       <td><span class="badge bg-warning">Tab</span></td>
+                                                       <td>Tablets</td>
+                                                       <td class="text-end">17.5%</td>
+                                                   </tr>
+                                               </tbody>
+                                           </table>
+                                       </div>
+                                   </div>
+                               </div>
+                            </div> -->
                         <!--    <div class="col-xl-4">-->
                         <!--        <div class="card">-->
                         <!--            <div class="card-body">-->
@@ -438,9 +418,10 @@
                         <!--                </div>-->
                         <!--            </div>-->
                         <!--        </div>-->
-                        <!--    </div>-->
-                        <!--</div>-->
+                           </div>
+                        </div>
                         <!-- end row -->
+                        <?php } ?>
 
 
 

@@ -113,7 +113,7 @@
                ?>
                 <li class="<?= active_menu($usegment);?>">
                     <a href="javascript: void(0);" class="has-arrow waves-effect <?= active_menu($usegment);?>">
-                        <i class="ti-user"></i>
+                        <i class="fas fa-money-bill-alt"></i>
                         <span>Sales</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
@@ -131,6 +131,13 @@
                     </a>
                 </li>
 
+                <li class="<?= active_menu('about');?>">
+                    <a href="<?= base_url('admin/about/')?>" class="waves-effect <?= active_link('about');?>">
+                         <i class="fas fa-snowman"></i>
+                        
+                        <span>About Us</span>
+                    </a>
+                </li>
                 <li class="<?= active_menu('contact');?>">
                     <a href="<?= base_url('admin/contact/')?>" class="waves-effect <?= active_link('contact');?>">
                          <i class="ti-email"></i>
@@ -157,14 +164,38 @@
                 </li>
                
                 <?php }?>
+                <?php if($this->auth_user->role == "dristributor"){ ?>
+                    <li>
+                        <a href="<?= base_url('admin/dashboard/')?>" class="waves-effect <?= active_link('dashboard');?>">
+                            <i class="ti-home"></i><!--<span class="badge rounded-pill bg-primary float-end">2</span> -->
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?= base_url('admin/orders/')?>" class="waves-effect <?= active_link('dashboard');?>">
+                            <i class="ti-shopping-cart-full"></i><!--<span class="badge rounded-pill bg-primary float-end">2</span> -->
+                            <span>Orders</span>
+                        </a>
+                    </li>
 
-         
-               
-
-
-                
-               
-                  
+                <?php 
+                    $usegment='';
+                    if($this->uri->segment(2)=='sales-target'){$usegment='sales-target';}
+                    // if($this->uri->segment(2)=='gift'){$usegment='gift';}
+                    if($this->uri->segment(2)=='sales-report'){$usegment='sales-report';}
+                ?>
+                <li class="<?= active_menu($usegment);?>">
+                    <a href="javascript: void(0);" class="has-arrow waves-effect <?= active_menu($usegment);?>">
+                        <i class="fas fa-money-bill-alt"></i>
+                        <span>Sales</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li class="<?= tab_active('sales-target');?>"><a href="<?= base_url('admin/sales-target/')?>" class="<?= active_link('sales-target');?>">Target</a></li>                  
+                        <!-- <li class="<?= tab_active('gift');?>"><a href="<?= base_url('admin/gift/')?>" class="<?= active_link('gift');?>">Gifts</a></li>                   -->
+                        <li class="<?= tab_active('sales-report');?>"><a href="<?= base_url('admin/sales-report/')?>" class="<?= active_link('sales-report');?>">Sales Report</a></li>                  
+                    </ul>
+                </li>
+                <?php } ?>
             </ul>
         </div>
         <!-- Sidebar -->
