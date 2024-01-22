@@ -86,6 +86,12 @@
                         <span>Manage Stocks</span>
                     </a>
                 </li>
+                <li class="<?= active_menu('offer');?>">
+                    <a href="<?= base_url('admin/offer/')?>" class="waves-effect <?= active_link('offer');?>">
+                         <i class="mdi mdi-av-timer"></i>
+                        <span>Offer</span>
+                    </a>
+                </li>
                 <?php 
                $usegment='';
                if($this->uri->segment(2)=='buyer'){$usegment='buyer';}
@@ -150,12 +156,6 @@
                         <span>Slider</span>
                     </a>
                 </li> 
-                <!-- <li class="<?= active_menu('testimonial');?>">
-                    <a href="<?= base_url('admin/testimonial/')?>" class="waves-effect <?= active_link('testimonial');?>">
-                         <i class="ti-image"></i>
-                        <span>Testimonial</span>
-                    </a>
-                </li> -->
                 <li class="<?= active_menu('video_slider');?>">
                     <a href="<?= base_url('admin/video_slider/')?>" class="waves-effect <?= active_link('video_slider');?>">
                          <i class="ti-image"></i>

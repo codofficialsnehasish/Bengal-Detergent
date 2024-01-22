@@ -557,7 +557,7 @@ function loginConfirm(loginStatus) {
 
 function cancelOrder(val, orderId) {
         const getUrl = window.location;
-        const baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
+        const baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1] + "/";
         Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",

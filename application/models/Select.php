@@ -606,5 +606,13 @@ public function getAllcategories(){
 		$query = $this->db->get('about_images');
 		return $query->result();
 	}
+	public function get_sub_categories_by_id($p_id,$name)
+	{
+		$this->db->where('parent_id =', $p_id);
+		$this->db->where($name, 1);
+		$this->db->where('is_visible', 1);
+		$query = $this->db->get('categories');
+		return $query->result();
+	}
 }  
 ?>

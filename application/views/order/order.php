@@ -277,12 +277,12 @@
                                 <div class="table-responsive">
                                     <table class="table table-orders table-bordered">
                                         <thead>
-                                        <tr>
-                                            <th scope="col">Product</th>
-                                            <th scope="col">Status</th>
-                                            <th scope="col">Updated</th>
-                                            <th scope="col">Options</th>
-                                        </tr>
+                                            <tr>
+                                                <th scope="col">Product</th>
+                                                <th scope="col">Status</th>
+                                                <th scope="col">Updated</th>
+                                                <th scope="col">Options</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
                                         <?php foreach ($order_products as $item):

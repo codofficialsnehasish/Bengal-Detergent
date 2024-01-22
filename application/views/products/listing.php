@@ -81,7 +81,7 @@
                                        <img class="primary blur-up lazyload" data-src="<?= get_product_main_image($product); ?>" src="<?= get_product_main_image($product); ?>" alt="image" title="product" />
                                        <!-- End Image -->
                                        <!-- Hover image -->
-                                       <img class="hover blur-up lazyload" data-src="<?= get_product_main_image($product); ?>" src="<?= get_product_main_image($product); ?>" alt="image" title="product" />
+                                       <img class="hover blur-up lazyload" data-src="<?= get_product_image_by_hovar($product); ?>" src="<?= get_product_image_by_hovar($product); ?>" alt="image" title="product" />
                                        <!-- End Hover Image -->
                                        <!-- Product Label -->
                                        <div class="product-labels rectangular"><span class="lbl on-sale">Exclusive</span></div>

@@ -58,7 +58,7 @@
                                             <li><a class="social-icons__link d-inline-block" href="<?= $this->settings->youtube_url;?>" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="YouTube"><i class="icon an an-youtube"></i> <span class="icon__fallback-text">YouTube</span></a></li>
                                         </ul>
                                     </div>
-                                    <div class="item">
+                                    <!-- <div class="item">
                                         <h4 class="h4 mt-lg-4">Payment Options</h4>
                                         <ul class="payment-icons list--inline">
                                             <li><i class="icon an an-cc-visa" aria-hidden="true"></i></li>
@@ -67,7 +67,7 @@
                                             <li><i class="icon an an-cc-paypal" aria-hidden="true"></i></li>
                                             <li><i class="icon an an-cc-discover" aria-hidden="true"></i></li>
                                         </ul>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <!-- End Footer Links -->

@@ -63,7 +63,7 @@
                      </div>
                   </div>
                </div>
-               <div class="card">
+               <!-- <div class="card">
                   <div class="card-header bg-primary text-light">
                      Meta Options
                   </div>
@@ -93,7 +93,7 @@
                         </div>
                      </div>
                   </div>
-               </div>
+               </div> -->
             </div>
             <!-- end col -->
             <div class="col-lg-3">
@@ -114,7 +114,7 @@
                            <label class="form-check-label" for="customRadioInline2">Hide</label>
                         </div>
                      </div>
-                     <div class="mb-3">
+                     <!-- <div class="mb-3">
                         <label class="form-label mb-3 d-flex">Show on Home Page</label>
                         <div class="form-check form-check-inline">
                            <input type="radio" id="customRadioInline11" name="is_home" class="form-check-input" value="1" <?= check_uncheck($item->is_home,1);?>>
@@ -124,8 +124,8 @@
                            <input type="radio" id="customRadioInline22" name="is_home" class="form-check-input" value="0"  <?= check_uncheck($item->is_home,0);?>>
                            <label class="form-check-label" for="customRadioInline22">No</label>
                         </div>
-                     </div>
-                     <div class="mb-3">
+                     </div> -->
+                     <!-- <div class="mb-3">
                         <label class="form-label mb-3 d-flex">Popular Category</label>
                         <div class="form-check form-check-inline">
                            <input type="radio" id="pcy" name="is_popular" class="form-check-input" value="1" <?= check_uncheck($item->is_popular,1);?>>
@@ -135,7 +135,7 @@
                            <input type="radio" id="pcn" name="is_popular" class="form-check-input" value="0"  <?= check_uncheck($item->is_popular,0);?>>
                            <label class="form-check-label" for="pcn">No</label>
                         </div>
-                     </div>
+                     </div> -->
                            
                       <div class="mb-3">
                         <label class="form-label mb-3 d-flex">Show on Menu</label>
@@ -150,7 +150,7 @@
                      </div>
                            
                            
-                      <div class="mb-3">
+                      <!-- <div class="mb-3">
                         <label class="form-label mb-3 d-flex">Special Category</label>
                         <div class="form-check form-check-inline">
                            <input type="radio" id="isspecial" name="is_special" class="form-check-input" value="1" <?= check_uncheck($item->is_special,1);?>>
@@ -160,7 +160,7 @@
                            <input type="radio" id="isspecial1" name="is_special" class="form-check-input" value="0"  <?= check_uncheck($item->is_special,0);?>>
                            <label class="form-check-label" for="isspecial1">No</label>
                         </div>
-                     </div>
+                     </div> -->
                            
                      <div class="mb-0">
                         <div>

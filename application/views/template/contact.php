@@ -20,6 +20,7 @@
         <div class="col-12 col-sm-12 col-md-12 col-lg-6 p-0">
             <div class="map-section map">
             <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3685.21026282452!2d88.3836701!3d22.533795!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0276c1d1944a59%3A0x41dc48c8e0794de2!2z8J2QkfCdkIog8J2QjvCdkJXwnZCE8J2QkfCdkJLwnZCE8J2QgPCdkJIgKCDwnZCF8J2QmvCdkJzwnZCt8J2QqPCdkKvwnZCyICk!5e0!3m2!1sen!2sin!4v1702370793569!5m2!1sen!2sin" allowfullscreen="" height="650"></iframe> -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3686.4744379101658!2d88.3610410744181!3d22.48637597955327!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0271f0725f8fcf%3A0xed95b7cf9717a5e8!2sBengal%20Detergent%20Product%20Pvt.%20Ltd.!5e0!3m2!1sen!2sin!4v1705651808614!5m2!1sen!2sin" height="650" style="border:0;" allowfullscreen=""></iframe>
             </div>
         </div>
         <div class="col-12 col-sm-12 col-md-12 col-lg-6 justify-content-center align-items-center flex-wrap px-3 px-sm-5 pt-4 pb-2 mb-md-5 mb-lg-0 mb-sm-5 mb-5">

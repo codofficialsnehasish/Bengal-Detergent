@@ -35,7 +35,7 @@
                                                     <th>Category Name</th>
                                                     <th>Parent Category</th>
                                                     <th>Visibility</th>
-                                                    <th>Popular Category</th>
+                                                    <th>Menu Category</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -49,7 +49,7 @@
                                                     <td><a href="<?= admin_url('category/edit/'.$item->cat_id);?>"><?= $item->cat_name;?></a></td>
                                                     <td><?= select_value_by_id('categories','cat_id',$item->parent_id,'cat_name');?></td>
                                                     <td><?= check_visibility($item->is_visible);?> </td>
-                                                    <td><?= check_popular($item->is_popular);?> </td>
+                                                    <td><?= check_popular($item->is_menu);?> </td>
                                                     <td>
                                                         <a href="<?= admin_url('category/edit/'.$item->cat_id);?>" class="btn btn-primary btn-sm edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit this Item">
                                                                 <i class="fas fa-pencil-alt" title="Edit"></i>

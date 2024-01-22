@@ -10,7 +10,7 @@ class Insert_model extends CI_Model{
 //    } 
 
 
- function insert_data($data,$table){
+    function insert_data($data,$table){
        $this->db->insert($table, $data);
 	   return $this->db->insert_id();  
     } 

@@ -3,170 +3,33 @@ $categoriesMenu=$this->select->get_parent_categories();
 
 		$menucon['where']['is_visible'] = 1;
         $menucon['where']['is_menu'] = 1;
+        $menucon['where']['parent_id'] = 0;
 		$menucon['tblName'] = 'categories';
         $menucategories = $this->select->getResult($menucon);
 ?>
 
-
 <?php $this->load->view('partials/topbar');?>
-
-
-<!-- <div class="header_btm_area">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-3"> 
-                <a class="logo" href="<= base_url(''); ?>"> <img alt="" src="<= get_logo(); ?>"></a> 
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-9 text-right">
-                <div class="menu_wrap">
-                    <div class="main-menu">
-                        <nav>
-                            <ul>
-                                <li><a href="<= base_url(''); ?>">home</a></li>
-                                <li><a href="#">About Us</a></li>
-                                <li>
-                                    <a href="<= base_url('/products/all_products'); ?>">Products </a>
-                                </li>
-                                <li><a href="<= base_url('/contact_us'); ?>">Contact</a></li>
-                                <li><a href="<= base_url('/contact_us'); ?>">Faq</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-              				
-                  <div class="mobile-menu text-right ">
-                     <nav>
-                        <ul>
-                           <li><a href="<= base_url(''); ?>">home</a></li>
-                           <li>
-                               <a href="<= base_url('/products/all_products'); ?>">Menu </a>
-                           </li>
-                           <li><a href="#">About Us</a></li>
-                           <li><a href="<= base_url('/contact_us'); ?>">Contact</a></li>
-                        </ul>
-                     </nav>
-                  </div>
-         
-                <div class="right_menu">
-                   <ul class="nav justify-content-end">
-                      <li>
-                         <div class="offer"><a href="<= base_url('/products/all_offer_products') ?>"><img alt="" src="<?= base_url('assets/site/img/offer.png'); ?>"></a></div>
-                      </li>
-                      <li>
-                         <div class="search_icon"><a class="btn btn-outline-warning" style="padding: 1px 5px; font-size: 14px !important;" href="<?= base_url('login-distributer') ?>">Register as Distributer</a></div>
-                      </li>
-                      <li>
-                         <div class="search_icon"><a href="<= base_url('/login'); ?>"><i class="fa fa-user" aria-hidden="true"></i></a></div>
-                      </li>
-
-                      <li>
-                         <div class="cart_menu_area">
-                           <?php 
-                              // $c = $this->cart_model->get_cart_by_buyer();
-                              // $val = 0;
-                              // if($c == false){
-                              //    $val = 0;
-                              // }elseif(count($c) > 0){
-                              //    $val = count($c);
-                              // }
-                           ?>                            
-                           <div class="cart_icon">
-                               <a href="<= base_url('/cart'); ?>"><i class="fa fa-shopping-bag " aria-hidden="true"></i></a>
-                               <span class="cart_number cartcount"><= $val; ?></span>
-                            </div>
-                         </div>
-                      </li>
-                   </ul>
-                </div>
-             </div>
-          </div>									
-       </div>
-    </div>
- </div>
-</header> -->
-
-
-  
-
-
-
-
 
 <body class="template-product template-index diva home2-default">
         <!-- Page Wrapper -->
         <div class="pageWrapper">
-            <!-- Promotion Bar -->
-            <div class="notification-bar mobilehide">
-                <a href="<?= base_url('/products/all_products'); ?>" class="notification-bar__message">20% off your very first purchase, use promo code: bengal detergent</a>
-                <span class="close-announcement icon an an-times"></span>
-            </div>
-            <!-- End Promotion Bar -->
-
             <!-- Search Form Drawer -->
             <div class="search">
                 <div class="search__form">
-                    <form class="search-bar__form" action="#">
-                        <button class="go-btn search__button" type="submit"><i class="icon an an-search"></i></button>
-                        <input class="search__input" type="search" name="search" value="" id="input_search" placeholder="Search entire store..." aria-label="Search" autocomplete="off" />
-                    </form>
+                    <!-- <form class="search-bar__form" action="#"> -->
+                        <form class="search-bar__form" id="frid" action="<?= base_url('search/') ?>" method="get">
+                            <button id="sbtnid" class="go-btn search__button" type="submit"><i class="icon an an-search"></i></button>
+                            <input class="search__input" id="sbtnidinp" name="name" type="text" name="q" value="" placeholder="Search entire store..." aria-label="Search" autocomplete="off" />
+                        </form>
+                    <!-- </form> -->
                     <button type="button" class="search-trigger close-btn" data-bs-toggle="tooltip" data-bs-placement="left" title="Close"><i class="icon an an-times"></i></button>
                 </div>
             </div>
             <!-- End Search Form Drawer -->
-
             <!-- Main Header -->
             <div class="header-section clearfix animated hdr-sticky">
                 <!-- Desktop Header -->
                 <div class="header-1">
-                    <!-- Top Header -->
-                    <div class="top-header">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-10 col-sm-8 col-md-7 col-lg-4">
-                                    <p class="phone-no float-start"><i class="icon an an-phone me-1"></i><a href="tel:+91<?= $this->settings->contact_phone;?>"><?= $this->settings->contact_phone;?></a></p>
-                                </div>
-                                <div class="col-sm-4 col-md-4 col-lg-4 d-none d-md-none d-lg-block">
-                                    <div class="text-center">
-                                        <p class="top-header_middle-text">Free express shipping & import fees included</p>
-                                    </div>
-                                </div>
-                                <div class="col-2 col-sm-4 col-md-5 col-lg-4 text-end d-none d-sm-block d-md-block d-lg-block">
-                                    <div class="header-social">
-                                        <ul class="justify-content-end list--inline social-icons">
-                                            <li><a class="social-icons__link" href="<?= $this->settings->facebook_url;?>" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Facebook"><i class="icon an an-facebook"></i> <span class="icon__fallback-text">Facebook</span></a></li>
-                                            <li><a class="social-icons__link" href="<?= $this->settings->twitter_url;?>" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Twitter"><i class="icon an an-twitter"></i> <span class="icon__fallback-text">Twitter</span></a></li>
-                                            <li><a class="social-icons__link" href="<?= $this->settings->pinterest_url;?>" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Pinterest"><i class="icon an an-pinterest-p"></i> <span class="icon__fallback-text">Pinterest</span></a></li>
-                                            <li><a class="social-icons__link" href="<?= $this->settings->instagram_url;?>" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Instagram"><i class="icon an an-instagram"></i> <span class="icon__fallback-text">Instagram</span></a></li>
-                                            <li><a class="social-icons__link" href="<?= $this->settings->youtube_url;?>" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" title="YouTube"><i class="icon icon an an-youtube"></i> <span class="icon__fallback-text">YouTube</span></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-2 col-sm-4 col-md-5 col-lg-4 text-end d-block d-sm-none d-md-none d-lg-none">
-                                    <!-- Mobile User Links -->
-                                    <div class="user-menu-dropdown">
-                                        <span class="user-menu"><i class="an an-user-alt"></i></span>
-                                        <!-- <ul class="customer-links list-inline" style="display:none;">
-                                            <li class="item"><a href="#">Login</a></li>
-                                            <li class="item"><a href="#">Register</a></li>
-                                            <li class="item"><a href="#">Orders</a></li>
-                                        </ul> -->
-                                        <ul class="customer-links list-inline" style="display:none;">
-                                            <?php if($this->auth_check){ ?>
-                                                <li class="item"><a href="<?= base_url('/logout'); ?>">Logout</a></li>
-                                            <?php }else{ ?>
-                                                <li class="item"><a href="<?= base_url('/login'); ?>">Login</a></li>
-                                                <li class="item"><a href="#" data-bs-toggle="modal" data-bs-target="#register-modal">Register</a></li>
-                                                <!-- <li class="item"><a href="#">Orders</a></li> -->
-                                            <?php } ?>
-                                            <!-- <li class="item"><a href="#">Compare</a></li> -->
-                                        </ul>
-                                    </div>
-                                    <!-- End Mobile User Links -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Top Header -->
-
                     <!-- Header -->
                     <div class="header-wrap d-flex">
                         <div class="container-fluid">
@@ -195,10 +58,28 @@ $categoriesMenu=$this->select->get_parent_categories();
                                             <li class="lvl1 parent dropdown">
                                                 <a href="<?= base_url('/products/all_products'); ?>">Shop <i class="an an-angle-down"></i></a>
                                             </li>
-
-                                            <!-- <li class="lvl1 parent dropdown">
-                                                <a href="#">Category <i class="an an-angle-down"></i></a>
-                                            </li> -->
+                                            <li class="lvl1 parent dropdown">
+                                                <a href="javascript:void(0)">Category <i class="an an-angle-down"></i></a>
+                                                  <ul class="dropdown">
+                                                    <?php if($menucategories){ foreach ($menucategories as $catagory) { ?>
+                                                    <li>
+                                                        <?php $sub_catagory = $this->select->get_sub_categories_by_id($catagory->cat_id,"is_menu") ?>
+                                                        <a href="<?= base_url('products/'.$catagory->cat_slug); ?>" class="site-nav"><?= $catagory->cat_name ?> <?php if($sub_catagory){ ?><i class="an an-angle-down"></i><?php }else{echo '';} ?></a>
+                                                        <?php if($sub_catagory){ ?>
+                                                        <ul class="dropdown">
+                                                            <?php foreach($sub_catagory as $sub){ ?>
+                                                            <li><a href="<?= base_url('products/'.$sub->cat_slug); ?>" class="site-nav"><?= $sub->cat_name; ?></a></li>
+                                                            <?php } ?>
+                                                        </ul>
+                                                        <?php } ?>
+                                                    </li>
+                                                    <?php } }?>
+                                                    <!-- <li><a href="lookbook-3columns.html" class="site-nav">3 Columns</a></li>
+                                                    <li><a href="lookbook-4columns.html" class="site-nav">4 Columns</a></li>
+                                                    <li><a href="lookbook-5columns.html" class="site-nav">5 Columns + Fullwidth</a></li>
+                                                    <li><a href="lookbook-shop.html" class="site-nav last">Lookbook Shop</a></li> -->
+                                                </ul>
+                                            </li>
 
                                             <li class="lvl1 parent dropdown">
                                                 <a href="<?= base_url('/about_us'); ?>">About Us <i class="an an-angle-down"></i></a>

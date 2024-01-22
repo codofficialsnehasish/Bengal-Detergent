@@ -2174,6 +2174,27 @@ if (!function_exists('numberTowords')) {
             return $result->unique_visitors;
         }
     }
+    if (!function_exists('get_product_image_by_hovar')) {
+        function get_product_image_by_hovar($product)
+        {
+             $ci =& get_instance();
+             $conditions=array(
+                    'tblName'=>'product_images',
+                    'where'=>array(
+                        'product_id'=>$product->id,
+                        'status'=>1,
+                        'is_main'=>0
+                    )
+            );
+                $result=$ci->select->getResult($conditions);
+    
+             if (!empty($result)) {
+                return base_url($result[0]->file_path.$result[0]->file_name);
+             }else{
+                return base_url('assets/images/no-image.jpg');
+             }
+        }
+    }
 
 
 

@@ -66,6 +66,12 @@ public function __construct()
 			'where' => array('is_visible'=>1,'is_popular'=>1)
 		);
 		$data['popularcategories'] = $this->select->getResult($conditions1);
+
+		$offer1 = array(
+			'tblName' =>'offer',
+			'where' => array('is_visiable'=>1)
+		);
+		$data['offeralldata'] = $this->select->getResult($offer1);
 		
 		$testimonial = array(
 			'tblName' =>'testimonial',

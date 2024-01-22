@@ -77,10 +77,6 @@
    <!-- End Home Banner slider -->
 
 
-
-
-
-
 <?php endif; ?>
 
 <?php 
@@ -113,7 +109,7 @@
                               <a href="<?= base_url('product/'.$topproduct->slug);?>">
                                     <!-- Image -->
                                     <img class="primary blur-up lazyload" data-src="<?= get_product_main_image($topproduct); ?>" src="<?= get_product_main_image($topproduct); ?>" alt="image" title="product" />
-                                    <img class="hover blur-up lazyload" data-src="<?= get_product_main_image($topproduct); ?>" src="<?= get_product_main_image($topproduct); ?>" alt="image" title="product" />
+                                    <img class="hover blur-up lazyload" data-src="<?= get_product_image_by_hovar($topproduct); ?>" src="<?= get_product_image_by_hovar($topproduct); ?>" alt="image" title="product" />
                                     <!-- End Hover Image -->
                                     <!-- Product Label -->
                                     <div class="product-labels rectangular">
@@ -241,10 +237,6 @@
 <!-- End Product slider -->
 
 
-
-
-
-
 <div class="product-rows section">
    <div class="container">
       <div class="row">
@@ -259,11 +251,11 @@
                            if(!empty($featuredproducts)): 
                               foreach($featuredproducts as $featurproducts):
                         ?>
-                        <div class="col-3 item">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-3 item">
                            <div class="product-image">
                               <a href="<?= base_url('product/'.$topproduct->slug);?>">
                                  <img class="primary blur-up lazyload" data-src="<?= get_product_main_image($featurproducts); ?>" src="<?= get_product_main_image($featurproducts); ?>" alt="image" title="product" />
-                                 <img class="hover blur-up lazyload" data-src="<?= get_product_main_image($featurproducts); ?>" src="<?= get_product_main_image($featurproducts); ?>" alt="image" title="product" />
+                                 <img class="hover blur-up lazyload" data-src="<?= get_product_image_by_hovar($featurproducts); ?>" src="<?= get_product_image_by_hovar($featurproducts); ?>" alt="image" title="product" />
                                  <!-- <div class="product-labels rectangular"><span class="lbl on-sale">-16%</span> <span class="lbl pr-label1">new</span></div> -->
                               </a>
                               <!-- <div class="saleTime desktop" data-countdown="2022/03/01"></div> -->
@@ -311,9 +303,6 @@
       </div>
    </div>
 </div>
-
-
-
 
 
 <?php //if(!empty($testimonial)): ?>
@@ -371,21 +360,23 @@
          </div>
          <!-- Collection Box -->
          <div class="row collection-grids">
+            <?php if(!empty($offeralldata)){ foreach($offeralldata as $offer){ ?>
                <div class="col-12 col-sm-6 col-md-4 item">
                   <div class="collection-grid-item">
-                     <img class="blur-up lazyload" data-src="<?= base_url('assets/site/images/collection/home2-collection1.jpg') ?>" src="<?= base_url('assets/site/images/collection/home2-collection1.jpg') ?>" alt="collection" title="" />
-                     <a href="<?= base_url('/products/all_products'); ?>" class="collection-grid-item__title-wrapper">
-                           <div class="title-wrapper">
-                              <h3 class="collection-grid-item__title fw-bold">Bengal Detergent Product <span>6 days of Deals !</span></h3>
-                              <span class="btn btn--secondary border-btn-1">Shop All</span>
-                           </div>
+                     <img class="blur-up lazyload" data-src="<?= get_image($offer->media_id); ?>" src="<?= get_image($offer->media_id); ?>" alt="collection" title="" />
+                     <a href="<?= $offer->link_url ?>" class="collection-grid-item__title-wrapper">
+                        <div class="title-wrapper">
+                           <h3 class="collection-grid-item__title fw-bold"><?= $offer->title; ?> <span><?= $offer->description; ?></span></h3>
+                           <span class="btn btn--secondary border-btn-1"><?= $offer->link_title; ?></span>
+                        </div>
                      </a>
                   </div>
                </div>
-               <div class="col-12 col-sm-6 col-md-4 item">
+               <?php } } ?>
+               <!-- <div class="col-12 col-sm-6 col-md-4 item">
                   <div class="collection-grid-item">
-                     <img class="blur-up lazyload" data-src="<?= base_url('assets/site/images/collection/home2-collection2.jpg') ?>" src="<?= base_url('assets/site/images/collection/home2-collection2.jpg') ?>" alt="collection" title="" />
-                     <a href="<?= base_url('/products/all_products'); ?>" class="collection-grid-item__title-wrapper">
+                     <img class="blur-up lazyload" data-src="<= base_url('assets/site/images/collection/home2-collection2.jpg') ?>" src="<= base_url('assets/site/images/collection/home2-collection2.jpg') ?>" alt="collection" title="" />
+                     <a href="<= base_url('/products/all_products'); ?>" class="collection-grid-item__title-wrapper">
                            <div class="title-wrapper">
                               <h3 class="collection-grid-item__title fw-bold">Lemon Shakti <span>Under ₹ 50 </span></h3>
                               <span class="btn btn--secondary border-btn-1">Shop Now</span>
@@ -395,15 +386,15 @@
                </div>
                <div class="col-12 col-sm-6 col-md-4 item">
                   <div class="collection-grid-item">
-                     <img class="blur-up lazyload" data-src="<?= base_url('assets/site/images/collection/home2-collection3.jpg') ?>" src="<?= base_url('assets/site/images/collection/home2-collection3.jpg') ?>" alt="collection" title="" />
-                     <a href="<?= base_url('/products/all_products'); ?>" class="collection-grid-item__title-wrapper">
+                     <img class="blur-up lazyload" data-src="<= base_url('assets/site/images/collection/home2-collection3.jpg') ?>" src="<= base_url('assets/site/images/collection/home2-collection3.jpg') ?>" alt="collection" title="" />
+                     <a href="<= base_url('/products/all_products'); ?>" class="collection-grid-item__title-wrapper">
                            <div class="title-wrapper">
                               <h3 class="collection-grid-item__title fw-bold">Dish Wash <span>Under ₹ 100 </span></h3>
                               <span class="btn btn--secondary border-btn-1">Shop This</span>
                            </div>
                      </a>
                   </div>
-               </div>
+               </div> -->
          </div>
          <!-- End Collection Box -->
       </div>

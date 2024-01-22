@@ -81,13 +81,16 @@ foreach($result as $r){
 */
 if($this->uri->segment(2)=='all_products'){
   $route['all_product']='products/all_products';
-}
-if($this->uri->segment(3)==''){
-  // $route['products/(:any)']='products/products/$1';
 }else{
-  $route['products/(:any)/(:any)']='products/products/$1';
+    $route['products/(:any)']='products/products/$1';
 }
+// if($this->uri->segment(3)==''){
+//   // $route['products/(:any)']='products/products/$1';
+// }else{
+//   $route['products/(:any)/(:any)']='products/products/$1';
+// }
 $route['product/(:any)']='products/details/$1';
+$route['search']='products/search';
 /*
 */
 
