@@ -30,7 +30,7 @@
     </li>
     <li class="nav-item">
         <a class="nav-link <?= tab_active('specifications')?>"  href="<?= admin_url('products/specifications/'.$queryString);?>" role="tab">
-            <span class="d-none d-md-block">Product Specifications</span><span class="d-block d-md-none"><i class="mdi mdi-email h5"></i></span>
+            <span class="d-none d-md-block">Specifications</span><span class="d-block d-md-none"><i class="mdi mdi-email h5"></i></span>
         </a>
     </li>
     <li class="nav-item">

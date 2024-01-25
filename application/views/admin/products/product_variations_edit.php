@@ -44,7 +44,7 @@
             </div>
          </div>
          <div class="col-lg-3">
-         <?= form_open_multipart('admin/products/add-images/'.$this->uri->segment(4), 'class="custom-validation"');?>
+         <?= form_open_multipart('admin/products/specifications/'.$this->uri->segment(4), 'class="custom-validation"');?>
             <div class="card">
                <div class="card-header bg-primary text-light">
                   Publish
