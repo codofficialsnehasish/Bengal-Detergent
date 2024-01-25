@@ -67,9 +67,8 @@ class Core_Controller extends CI_Controller
 
     public function is_not_logged_in(){
         if (!$this->auth_check) {
-
-            redirect(admin_url('/login'));
-
+            // redirect(admin_url('mdm'));
+            redirect('mdm');
         }
     }
 

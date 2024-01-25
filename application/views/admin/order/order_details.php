@@ -15,9 +15,9 @@
                                 <div class="col-md-4">
                                     <div class="float-end d-none d-md-block">
                                         <div class="dropdown">
-                                        <!-- <a href="<?= admin_url('contact/add-new')?>" class="btn btn-primary  dropdown-toggle" aria-expanded="false">
-                                        <i class="fas fa-plus me-2"></i> Add New
-                                        </a> -->
+                                            <a href="javascript:void(0)" onclick="javascript:popupCenter({url: '<?= base_url(); ?>invoice/<?= $order->order_number.'/'.$order_id.'/'.$buyer_id; ?>', title: 'Invoise', w: 1000, h: 600});" class="btn btn-info  dropdown-toggle" aria-expanded="false">
+                                                <i class="mdi mdi-cloud-download me-2"></i> Download Invoice
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -350,3 +350,27 @@
      </div>
 
 <?php endforeach; ?>
+
+<script>
+	const popupCenter = ({url, title, w, h}) => {
+    // Fixes dual-screen position                             Most browsers      Firefox
+    const dualScreenLeft = window.screenLeft !==  undefined ? window.screenLeft : window.screenX;
+    const dualScreenTop = window.screenTop !==  undefined   ? window.screenTop  : window.screenY;
+    const width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+    const height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+    const systemZoom = width / window.screen.availWidth;
+    const left = (width - w) / 2 / systemZoom + dualScreenLeft
+    const top = (height - h) / 2 / systemZoom + dualScreenTop
+    const newWindow = window.open(url, title, 
+      `
+      scrollbars=yes,
+      width=${w / systemZoom}, 
+      height=${h / systemZoom}, 
+      top=${top}, 
+      left=${left}
+      `
+    )
+    if (window.focus) newWindow.focus();
+    newWindow.print();
+}
+</script>

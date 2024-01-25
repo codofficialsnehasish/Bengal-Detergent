@@ -308,6 +308,21 @@ if (!function_exists('check_visibility')) {
     }
 }
 
+
+//check visibility
+if (!function_exists('check_status')) {
+    function check_status($val)
+    {
+        if($val==1){
+            $str='<span class="badge bg-success" style="font-size:15px;">Active</span>';
+        }else{
+            $str='<span class="badge bg-danger" style="font-size:15px;">Inactive</span>';
+        }
+        return $str;
+    }
+}
+
+
 //check visibility
 if (!function_exists('check_TrueFlase')) {
     function check_TrueFlase($val)
@@ -2195,31 +2210,3 @@ if (!function_exists('numberTowords')) {
              }
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

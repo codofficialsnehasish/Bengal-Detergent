@@ -39,20 +39,86 @@
                                                 <img src="<?= base_url('assets/admin/images/services-icon/04.png') ?>" alt="">
                                             </div>
                                             <h5 class="font-size-16 text-uppercase text-white-50">Visitors</h5>
-                                            <h4 class="fw-medium font-size-24"><?= $today_visitor; ?> <i class="mdi mdi-arrow-up text-success ms-2"></i></h4>
                                             <?php 
                                                 $percentageChange = (($today_visitor - $previous_visitor) / abs($previous_visitor + $today_visitor)) * 100;
-                                                if($percentageChange > 0){
                                             ?>
+                                            <h4 class="fw-medium font-size-24">
+                                                <?= $today_visitor; ?> 
+                                                <?php if($percentageChange > 0){ ?>
+                                                    <i class="mdi mdi-arrow-up text-success ms-2"></i>
+                                                <?php }else{ ?>
+                                                    <i class="mdi mdi-arrow-down text-danger ms-2"></i> 
+                                                <?php } ?>
+                                            </h4>
+                                            <?php if($percentageChange > 0){ ?>
                                             <div class="mini-stat-label bg-success">
-                                                <p class="mb-0"><?= round($percentageChange, 2) . "%" ?></p>
+                                                <p class="mb-0">+<?= round($percentageChange) . "%" ?></p>
+                                            </div>
+                                            <?php }else{ ?>
+                                            <div class="mini-stat-label bg-danger">
+                                                <p class="mb-0">+<?= round($percentageChange) . "%" ?></p>
                                             </div>
                                             <?php } ?>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- <div class="col-xl-3">
+
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card mini-stat bg-primary text-white">
+                                    <a href="<?= base_url('admin/products/')?>">
+                                        <div class="card-body">
+                                            <div class="mb-4">
+                                                <div class="float-start mini-stat-img me-4">
+                                                    <img src="<?= base_url('assets/admin/images/services-icon/01.png') ?>" alt="">
+                                                </div>
+                                                <h5 class="font-size-16 text-uppercase text-white-50">Products</h5>
+                                                <h4 class="fw-medium font-size-24" style="color:white;"><?= $total_product ?> <!--<i class="mdi mdi-arrow-up text-success ms-2"></i>--> </h4>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card mini-stat bg-primary text-white">
+                                    <a href="<?= base_url('admin/dristributor/')?>">
+                                        <div class="card-body">
+                                            <div class="mb-4">
+                                                <div class="float-start mini-stat-img me-4">
+                                                    <img src="<?= base_url('assets/admin/images/services-icon/06.png') ?>" alt="">
+                                                </div>
+                                                <h5 class="font-size-16 text-uppercase text-white-50">Distributer</h5>
+                                                <h4 class="fw-medium font-size-24" style="color:white;">
+                                                    <span class="badge rounded-pill bg-success"><?= $active_total_distributer ?></span>
+                                                    <span class="badge rounded-pill bg-danger"><?= $inactive_total_distributer ?></span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card mini-stat bg-primary text-white">
+                                    <a href="<?= base_url('admin/team-lead/')?>">
+                                        <div class="card-body">
+                                            <div class="mb-4">
+                                                <div class="float-start mini-stat-img me-4">
+                                                    <img src="<?= base_url('assets/admin/images/services-icon/05.jpg') ?>" alt="">
+                                                </div>
+                                                <h5 class="font-size-16 text-uppercase text-white-50">Team Leader</h5>
+                                                <h4 class="fw-medium font-size-24" style="color:white;">
+                                                    <span class="badge rounded-pill bg-success"><?= $active_total_team_leader ?></span>
+                                                    <span class="badge rounded-pill bg-danger"><?= $inactive_total_team_leader ?></span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-3">
                                <div class="card">
                                    <div class="card-body">
                                        <h4 class="card-title mb-4">Sales Report</h4>
@@ -60,7 +126,7 @@
                                        <div class="cleafix">
                                            <p class="float-start"><i class="mdi mdi-calendar me-1 text-primary"></i> Jan 01
                                                - Jan 31</p>
-                                           <h5 class="font-18 text-end">$4230</h5>
+                                           <h5 class="font-18 text-end">₹ 4230</h5>
                                        </div>
 
                                        <div id="ct-donut" class="ct-chart wid"></div>
@@ -88,55 +154,53 @@
                                        </div>
                                    </div>
                                </div>
-                            </div> -->
-                        <!--    <div class="col-xl-4">-->
-                        <!--        <div class="card">-->
-                        <!--            <div class="card-body">-->
-                        <!--                <h4 class="card-title mb-4">Activity</h4>-->
-                        <!--                <ol class="activity-feed">-->
-                        <!--                    <li class="feed-item">-->
-                        <!--                        <div class="feed-item-list">-->
-                        <!--                            <span class="date">Jan 22</span>-->
-                        <!--                            <span class="activity-text">Responded to need “Volunteer-->
-                        <!--                                Activities”</span>-->
-                        <!--                        </div>-->
-                        <!--                    </li>-->
-                        <!--                    <li class="feed-item">-->
-                        <!--                        <div class="feed-item-list">-->
-                        <!--                            <span class="date">Jan 20</span>-->
-                        <!--                            <span class="activity-text">At vero eos et accusamus et iusto odio-->
-                        <!--                                dignissimos ducimus qui deleniti atque...<a href="#"-->
-                        <!--                                    class="text-success">Read more</a></span>-->
-                        <!--                        </div>-->
-                        <!--                    </li>-->
-                        <!--                    <li class="feed-item">-->
-                        <!--                        <div class="feed-item-list">-->
-                        <!--                            <span class="date">Jan 19</span>-->
-                        <!--                            <span class="activity-text">Joined the group “Boardsmanship-->
-                        <!--                                Forum”</span>-->
-                        <!--                        </div>-->
-                        <!--                    </li>-->
-                        <!--                    <li class="feed-item">-->
-                        <!--                        <div class="feed-item-list">-->
-                        <!--                            <span class="date">Jan 17</span>-->
-                        <!--                            <span class="activity-text">Responded to need “In-Kind-->
-                        <!--                                Opportunity”</span>-->
-                        <!--                        </div>-->
-                        <!--                    </li>-->
-                        <!--                    <li class="feed-item">-->
-                        <!--                        <div class="feed-item-list">-->
-                        <!--                            <span class="date">Jan 16</span>-->
-                        <!--                            <span class="activity-text">Sed ut perspiciatis unde omnis iste natus-->
-                        <!--                                error sit rem.</span>-->
-                        <!--                        </div>-->
-                        <!--                    </li>-->
-                        <!--                </ol>-->
-                        <!--                <div class="text-center">-->
-                        <!--                    <a href="#" class="btn btn-primary">Load More</a>-->
-                        <!--                </div>-->
-                        <!--            </div>-->
-                        <!--        </div>-->
-                        <!--    </div>-->
+                            </div>
+                            <!-- <div class="row"> -->
+                            <div class="col-xl-9">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title mb-4">Monthly Earning</h4>
+                                        <div class="row">
+                                            <div class="col-lg-7">
+                                                <div>
+                                                    <div id="chart-with-area" class="ct-chart earning ct-golden-section">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-5">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="text-center">
+                                                            <p class="text-muted mb-4">This month</p>
+                                                            <h3>₹ 34,252</h3>
+                                                            <p class="text-muted mb-5">It will be as simple as in fact it
+                                                                will be occidental.</p>
+                                                            <span class="peity-donut"
+                                                                data-peity='{ "fill": ["#02a499", "#f2f2f2"], "innerRadius": 28, "radius": 32 }'
+                                                                data-width="72" data-height="72">4/5</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="text-center">
+                                                            <p class="text-muted mb-4">Last month</p>
+                                                            <h3>₹ 36,253</h3>
+                                                            <p class="text-muted mb-5">It will be as simple as in fact it
+                                                                will be occidental.</p>
+                                                            <span class="peity-donut"
+                                                                data-peity='{ "fill": ["#02a499", "#f2f2f2"], "innerRadius": 28, "radius": 32 }'
+                                                                data-width="72" data-height="72">3/5</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end row -->
+                                    </div>
+                                </div>
+                                <!-- end card -->
+                            </div>
+                        <!-- </div> -->
+                        <!-- end row -->
 
                         <!--    <div class="col-xl-5">-->
                         <!--        <div class="row">-->

@@ -10,7 +10,7 @@
                 <input type="file" name="file" class="filestyle" id="imgInp" data-input="false" data-buttonname="btn-secondary">
                 <input type="hidden" name="media_id" id="media_id" />
                 <input type="hidden" name="hdn_media_id" id="media_id" value="<?= $item->media_id;?>" />
-                <a href="javascript:;" id="openLibrary">or Choose From Library</a>
+                <!-- <a href="javascript:;" id="openLibrary">or Choose From Library</a> -->
                 </div> 
         </div>
     </div>

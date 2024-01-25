@@ -115,7 +115,7 @@ class Authentication extends Core_Controller {
 		//validate inputs
 		$this->form_validation->set_rules('first_name', 'eMail', 'required|xss_clean|max_length[200]');
 		$this->form_validation->set_rules('last_name', 'Password', 'required|xss_clean|max_length[30]');
-		$this->form_validation->set_rules('phone_number', 'Password', 'required|xss_clean|max_length[30]');
+		$this->form_validation->set_rules('phone_number', 'Phone Number', 'required|xss_clean|max_length[30]');
 		$this->form_validation->set_rules('email', 'eMail', 'required|xss_clean|max_length[200]');
 		$this->form_validation->set_rules('password', 'Password', 'required|xss_clean|max_length[30]');
 		if ($this->form_validation->run() == false) {

@@ -140,19 +140,26 @@ class Team_lead extends Core_Controller {
 				'status'=>$this->input->post('status', true),
 				'phone_number'=>$this->input->post('phone_number', true),
 				'address'=>$this->input->post('address', true),
-				'shop_name'=>$this->input->post('shop_name', true),
+				// 'shop_name'=>$this->input->post('shop_name', true),
 				'pan_no'=>$this->input->post('pan_no', true),
-				'gst_no'=>$this->input->post('gst_no', true),
+				'aadhar_no'=>$this->input->post('aadhar_no', true),
+				'zip_code'=>$this->input->post('zip_code', true),
 
 			);
 
 			if(is_uploaded_file($_FILES['pan_proof']['tmp_name'])) 
 			{  
-				$data['pan_proof']=$this->mediaupload->doUploadAny('pan_proof');
+				$data['pan_proof']=$this->mediaupload->doUpload('pan_proof');
 			}
-			if(is_uploaded_file($_FILES['gst_proof']['tmp_name'])) 
+
+			if(is_uploaded_file($_FILES['aadhar_proof']['tmp_name'])) 
 			{  
-				$data['gst_proof']=$this->mediaupload->doUploadAny('gst_proof');
+				$data['aadhar_proof']=$this->mediaupload->doUpload('aadhar_proof');
+			}
+
+			if(is_uploaded_file($_FILES['file']['tmp_name'])) 
+			{  
+				$data['user_image']=$this->mediaupload->doUpload('file');
 			}
 
 
@@ -195,23 +202,39 @@ class Team_lead extends Core_Controller {
 				'status'=>$this->input->post('status', true),
 				'phone_number'=>$this->input->post('phone_number', true),
 				'address'=>$this->input->post('address', true),
-				'shop_name'=>$this->input->post('shop_name', true),
+				// 'shop_name'=>$this->input->post('shop_name', true),
 				'pan_no'=>$this->input->post('pan_no', true),
-				'gst_no'=>$this->input->post('gst_no', true),
+				'aadhar_no'=>$this->input->post('aadhar_no', true),
+				'zip_code'=>$this->input->post('zip_code', true),
 				'role'=>'teamlead',
 				'is_approved'=>1,
-
+				'password'=>$this->input->post('password', true)
 			);
+			
+			$this->load->library('bcrypt');
+			$user_name = remove_special_characters(strtolower($data['first_name']));
+			$data["username"] = $user_name;
+			$data['password'] = $this->bcrypt->hash_password($data['password']);
+        	$data['role'] = $data['role'];
+        	$data['user_type'] = 'admin_register';
+        	$data["slug"] = $this->slug->create_unique_slug($data["username"], 'users','slug');
+        	$data['created_at'] = date('Y-m-d H:i:s');
+        	$data['token'] = generate_token();
 
-			// if(is_uploaded_file($_FILES['pan_proof']['tmp_name'])) 
-			// {  
-			// 	$data['pan_proof']=$this->mediaupload->doUploadAny('pan_proof');
-			// }
-			// if(is_uploaded_file($_FILES['gst_proof']['tmp_name'])) 
-			// {  
-			// 	$data['gst_proof']=$this->mediaupload->doUploadAny('gst_proof');
-			// }
+			if(is_uploaded_file($_FILES['pan_proof']['tmp_name'])) 
+			{  
+				$data['pan_proof']=$this->mediaupload->doUpload('pan_proof');
+			}
 
+			if(is_uploaded_file($_FILES['aadhar_proof']['tmp_name'])) 
+			{  
+				$data['aadhar_proof']=$this->mediaupload->doUpload('aadhar_proof');
+			}
+
+			if(is_uploaded_file($_FILES['file']['tmp_name'])) 
+			{  
+				$data['user_image']=$this->mediaupload->doUpload('file');
+			}
 
 			// $update=$this->edit_model->edit($data,$id,'id',$this->table_name);
 			$insert=$this->insert_model->insert_data($data,$this->table_name);

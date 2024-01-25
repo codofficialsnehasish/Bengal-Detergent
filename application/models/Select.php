@@ -13,7 +13,44 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		$this->db->where('status',1);
 		$this->db->from('post');
 		return $this->db->count_all_results();	
-		}
+	}
+
+	public function product_count() {
+		$this->db->where('is_visible ',1);
+		$this->db->from('products');
+		return $this->db->count_all_results();	
+	}
+
+	public function active_distributer_count() {
+		$this->db->where('role','dristributor');
+		$this->db->where('is_approved',1);
+		$this->db->where('status',1);
+		$this->db->from('users');
+		return $this->db->count_all_results();	
+	}
+	public function inactive_distributer_count() {
+		$this->db->where('role','dristributor');
+		$this->db->where('is_approved',1);
+		$this->db->where('status',0);
+		$this->db->from('users');
+		return $this->db->count_all_results();	
+	}
+
+	public function active_team_leader_count() {
+		$this->db->where('role','teamlead');
+		$this->db->where('is_approved',1);
+		$this->db->where('status',1);
+		$this->db->from('users');
+		return $this->db->count_all_results();	
+	}
+
+	public function inactive_team_leader_count() {
+		$this->db->where('role','teamlead');
+		$this->db->where('is_approved',1);
+		$this->db->where('status',0);
+		$this->db->from('users');
+		return $this->db->count_all_results();	
+	}
 
 	public function record_count_category($id) {
 		$this->db->where('status',1);

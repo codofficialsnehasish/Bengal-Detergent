@@ -34,19 +34,22 @@ class Orders extends Core_Controller
 	 */
 	public function order_details($id)
 	{
-
 		$data['order'] = $this->order_model->get_order($id);
 		if (empty($data['order'])) {
 			redirect(admin_url() . "orders");
 		}
 		$data['order_products'] = $this->order_model->get_order_products($id);
+		$datatitm = $this->order_model->get_order_products($id);
+		$data['order_id'] = $id;
+		$data['buyer_id'] = $datatitm[0]->buyer_id;
 
 		$header['pagecss']="contentCss";
 		$header['title']='Order';
 		$this->load->view('admin/partials/header',$header);
 		$this->load->view($this->view_path.'order_details', $data);
 		$script['pagescript']='contentScript';
-		$this->load->view('admin/partials/footer',$script);	}
+		$this->load->view('admin/partials/footer',$script);	
+	}
 
 	/**
 	 * Order Options Post

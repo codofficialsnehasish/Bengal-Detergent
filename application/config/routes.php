@@ -108,6 +108,7 @@ $route['order/completed-orders'] = 'order_controller/completed_orders';
 
 $route['orders'] = 'order_controller/orders';
 $route['invoice/(:any)/(:any)/(:any)/(:any)'] = 'order_controller/invoice/$1/$2/$3/$4';
+$route['invoice/(:any)/(:any)/(:any)'] = 'order_controller/order_invoise/$1/$2/$3';
 
 $route['square-payment-post']='cart_controller/square_payment_post';
 $route['payment']='cart_controller/payment';

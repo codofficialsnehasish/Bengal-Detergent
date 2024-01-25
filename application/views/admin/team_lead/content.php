@@ -33,8 +33,6 @@
                                                 <tr>
                                                     <th>Sl No.</th>
                                                     <th>Name</th>
-                                                    <!-- <th>Shop Name</th> -->
-                                                    <!-- <th>Designation</th> -->
                                                     <th>Contact No</th>
                                                     <th>E-Mail</th>
                                                     <th>Pin Code</th>
@@ -50,14 +48,12 @@
                                                 foreach($allitems as $item):?>
                                                 <tr>
                                                     <td><?= $i++;?></td>
-                                                    <td><a href="<?= admin_url('team-lead/details/'.$item->id);?>"><?= $item->full_name;?></a></td>
-                                                    <!-- <td><a href="<= admin_url('seller/details/'.$item->id);?>"><= $item->shop_name;?></a></td> -->
-                                                    <!-- <td><a href="<= admin_url('seller/details/'.$item->id);?>"><= $item->designation;?></a></td> -->
+                                                    <td><img src="<?= get_image($item->user_image);?>" width="50" />&nbsp;&nbsp;&nbsp;&nbsp;<a href="<?= admin_url('team-lead/details/'.$item->id);?>"><?= $item->full_name;?></a></td>
                                                     <td><a href="<?= admin_url('team-lead/details/'.$item->id);?>"><?= $item->phone_number;?></a></td>
                                                     <td><a href="<?= admin_url('team-lead/details/'.$item->id);?>"><?= $item->email;?></a></td>
                                                     <td><a href="<?= admin_url('team-lead/details/'.$item->id);?>"><?= $item->zip_code;?></a></td>
                                                     <td><a href="<?= admin_url('team-lead/details/'.$item->id);?>"><?= $item->prefarable_zip_code;?></a></td>
-                                                    <td><?= check_visibility($item->status);?> </td>
+                                                    <td class="text text-center"><?= check_status($item->status);?> </td>
                                                     
                                                     <td>
                                                         <a href="<?= admin_url('team-lead/edit/'.$item->id);?>" class="btn btn-primary btn-sm edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit this Item">

@@ -131,45 +131,6 @@
                 </div>
             </div>
 
-
-            <!-- Sticky Cart -->
-            <!-- <div class="stickyCart">
-                <div class="container">
-                    <form method="post" action="#" id="sticky-cart">
-                        <div class="left">
-                            <div class="img"><img src="assets/images/product-detail-page/cape-dress-1.jpg" class="product-featured-img" alt="product" /></div>
-                            <div class="sticky-title ms-2">Women's Maxi Cape Dress</div>
-                        </div>
-                        <div class="right">
-                            <div class="stickyOption float-start">
-                                <select name="id" id="variantOptions1" class="product-form__variants selectbox no-js">
-                                    <option selected="selected">Red / S - Rs. 35,643.51</option>
-                                    <option disabled="disabled">Blue / S - Sold out</option>
-                                    <option>Black / S - Rs. 35,643.51</option>
-                                    <option>Pink / S - Rs. 35,643.51</option>
-                                    <option>Red / M - Rs. 35,643.51</option>
-                                    <option>Blue / M - Rs. 35,643.51</option>
-                                    <option>Pink / M - Rs. 35,643.51</option>
-                                    <option>Red / L - Rs. 35,643.51</option>
-                                    <option>Blue / L - Rs. 35,643.51</option>
-                                    <option>Black / L - Rs. 35,643.51</option>
-                                </select>
-                            </div>
-                            <div class="wrapQtyBtn" title="Quantity">
-                                <div class="qtyField">
-                                    <a class="qtyBtn minus" href="javascript:void(0);"><i class="icon an an-minus" aria-hidden="true"></i></a>
-                                    <input type="text" id="quantity1" name="quantity" value="1" class="product-form__input qty" />
-                                    <a class="qtyBtn plus" href="javascript:void(0);"><i class="icon an an-plus" aria-hidden="true"></i></a>
-                                </div>
-                            </div>
-                            <button type="submit" name="add" class="btn product-form__cart-submit"><span>Add to cart</span></button>
-                        </div>
-                    </form>
-                </div>
-            </div> -->
-            <!-- End Sticky Cart -->
-
-
             <div class="modal fade" id="register-modal" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">

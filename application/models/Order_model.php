@@ -975,6 +975,34 @@ public function add_invoice($order_id)
         return $query->row();
     }
 
+
+
+
+    //////////////////////
+
+
+    public function get_invoice_by_order_number_def($order_number)
+    {
+       // $this->db->where('order_number', clean_number($order_number));
+    $this->db->where('id', $order_number);
+        $query = $this->db->get('invoices');
+        return $query->result();
+    }
+
+    public function get_invoice_by_order_id_buyer_id_def($order_id,$buyer_id)
+    {
+       $this->db->where('order_id', clean_number($order_id));
+    //    $this->db->where('product_id', clean_number($product_id));
+       $this->db->where('buyer_id', clean_number($buyer_id));
+        $query = $this->db->get('invoices');
+        return $query->result();
+    }
+
+
+    //////////////////
+    
+
+
     /////////05/08/2022
        //add order
        public function add_membership_plan_order($data_transaction)

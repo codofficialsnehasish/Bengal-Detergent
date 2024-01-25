@@ -66,11 +66,11 @@ tr:nth-child(even) {
 </table>
 
  <?php $show_all_products = true;
-                                    $prefix = "";
-                                    if ($this->auth_user->role != "admin" && $order->buyer_id != $this->auth_user->id) {
-                                        $show_all_products = false;
-                                        $prefix = "VN";
-                                    } ?>
+  $prefix = "";
+  if ($this->auth_user->role != "admin" && $order->buyer_id != $this->auth_user->id) {
+      $show_all_products = false;
+      $prefix = "VN";
+  } ?>
 
 <table style="width: 800; border-collapse: collapse;font-family: arial, sans-serif;">
  <tr style="height: 18px;">

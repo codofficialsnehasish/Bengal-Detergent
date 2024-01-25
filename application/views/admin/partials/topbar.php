@@ -29,7 +29,7 @@
                 <i class="mdi mdi-menu"></i>
             </button>
 
-            <div class="d-none d-sm-block">
+            <!-- <div class="d-none d-sm-block">
                 <div class="dropdown pt-3 d-inline-block">
                     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Create <i class="mdi mdi-chevron-down"></i>
@@ -43,14 +43,19 @@
                         <a class="dropdown-item" href="#">Separated link</a>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
 
         <div class="d-flex">
-        <button type="button" onclick="javascript:window.location.href='<?= base_url();?>'" class="btn header-item noti-icon waves-effect" id="page-header-search-dropdown"
-                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="mdi mdi-eye"></i>
-        </button>
+            <div class="d-none d-sm-block">
+                <div class="dropdown pt-3 d-inline-block text text-center">
+                    <a class="btn btn-success text text-center dropdown-toggle" href="<?= base_url('employee-management/dashboard') ?>">Go to Employee Management <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <button type="button" onclick="javascript:window.location.href='<?= base_url();?>'" class="btn header-item noti-icon waves-effect" id="page-header-search-dropdown"
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="mdi mdi-eye"></i>
+            </button>
               <!-- App Search-->
               <!-- <form class="app-search d-none d-lg-block">
                 <div class="position-relative">
@@ -108,7 +113,7 @@
                     </a>
 
                      
-                     <!-- <a href="javascript:void(0);" class="dropdown-item notify-item">
+                      <a href="javascript:void(0);" class="dropdown-item notify-item">
                         <img src="<?= base_url('assets/admin/images/flags/russia_flag.jpg');?>" alt="user-image" class="me-1" height="12"> <span class="align-middle"> Russian </span>
                     </a>
                 </div>

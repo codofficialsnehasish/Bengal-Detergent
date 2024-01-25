@@ -9,7 +9,7 @@
             <div class="mb-0">
                 <input type="file" name="file" class="filestyle" id="imgInp" data-input="false" data-buttonname="btn-secondary">
                 <input type="hidden" name="media_id" id="media_id" />
-                <a href="javascript:;" id="openLibrary">or Choose From Library</a>
+                <!-- <a href="javascript:;" id="openLibrary">or Choose From Library</a> -->
             </div> 
         </div>
     </div>

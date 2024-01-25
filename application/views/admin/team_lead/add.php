@@ -32,7 +32,7 @@
             <div class="col-lg-9">
                <div class="card">
                   <div class="card-header bg-primary text-light">
-                     Edit Team Lead Details
+                     Add Team Lead Details
                   </div>
                   <div class="card-body">
                      <div class="mb-3">
@@ -75,23 +75,31 @@
                               placeholder="Enter Address" name="address">
                         </div>
                      </div>
+                     <div class="mb-3">
+                        <label class="form-label">Pin Code</label>
+                        <div>
+                           <input data-parsley-type="number" type="number"
+                              class="form-control" 
+                              placeholder="Enter pin code" name="zip_code">
+                        </div>
+                     </div>
                   </div>
                </div>
                <div class="card">
                   <div class="card-header bg-primary text-light">
-                     Edit Shop Details
+                     Add Identity & Citizenship Proof
                   </div>
                   <div class="card-body">
-                     <div class="mb-3">
+                     <!-- <div class="mb-3">
                         <label class="form-label">Shop Name</label>
                         <div>
                            <input data-parsley-type="text" type="text"
                               class="form-control" required
                               placeholder="Shop Name" name="shop_name">
                         </div>
-                     </div>
+                     </div> -->
                      <div class="mb-3">
-                        <label class="form-label">Pan Card</label>
+                        <label class="form-label">Pan Card Number</label>
                         <div>
                            <input data-parsley-type="text" type="text"
                               class="form-control" 
@@ -108,20 +116,43 @@
                      </div>
 
                      <div class="mb-3">
-                        <label class="form-label">GST</label>
+                        <label class="form-label">Aadhar Card Number</label>
                         <div>
                            <input data-parsley-type="text" type="text"
                               class="form-control" 
-                              placeholder="Enter GST" name="gst_no">
+                              placeholder="Enter Aadhar" name="aadhar_no">
                         </div>
                      </div>
 
                      <div class="mb-3">
-                        <label class="form-label">GST Document Proof</label>
+                        <label class="form-label">Aadhar Card Proof</label>
                         <div>
                            <input data-parsley-type="file" type="file"
                               class="form-control" required
-                              placeholder="Pan" name="gst_proof" >
+                              placeholder="Aadhar" name="aadhar_proof" >
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="card">
+                  <div class="card-header bg-primary text-light">
+                     Add Login Details
+                  </div>
+                  <div class="card-body">
+                     <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <div>
+                           <input data-parsley-type="password" type="password"
+                              class="form-control" required
+                              placeholder="Password" name="password">
+                        </div>
+                     </div>
+                     <div class="mb-3">
+                        <label class="form-label">Confirm Password</label>
+                        <div>
+                           <input data-parsley-type="password" type="password"
+                              class="form-control" 
+                              placeholder="Confirm Password" name="confirm_password">
                         </div>
                      </div>
                   </div>
@@ -130,13 +161,14 @@
             </div>
             <!-- end col -->
             <div class="col-lg-3">
+            <?php $this->load->view('admin/partials/_input-image');?>
                <div class="card">
                   <div class="card-header bg-primary text-light">
                      Publish
                   </div>
                   <div class="card-body">
                      <div class="mb-3">
-                        <label class="form-label mb-3 d-flex">Visiblity</label>
+                        <label class="form-label mb-3 d-flex">Status</label>
                         <div class="form-check form-check-inline">
                            <input type="radio" id="customRadioInline1" name="status" class="form-check-input" value="1" checked>
                            <label class="form-check-label" for="customRadioInline1">Active</label>

@@ -78,7 +78,8 @@ class Order_controller extends Core_Controller
        // $data['index_settings'] = $this->settings_model->get_index_settings();
 
         $this->load->view('partials/header', $data);
-        $this->load->view('order/order', $data);
+        // $this->load->view('order/order', $data);
+        $this->load->view('order/ordersconfirm', $data);
         $this->load->view('partials/footer');
     }
 
@@ -166,12 +167,13 @@ class Order_controller extends Core_Controller
     /**
      * Invoice
      */
-   public function invoice()
+    public function invoice()
     {
    		$order_number= $this->uri->segment(2);
         $order_id= $this->uri->segment(3);
-        $product_id= $this->uri->segment(4);
         $buyer_id= $this->uri->segment(5);
+
+        $product_id= $this->uri->segment(4);
         $data['title'] = "Invoice";
         $data['description'] = "Invoice";
         $data['keywords'] = "Invoice";
@@ -213,6 +215,56 @@ class Order_controller extends Core_Controller
 
 
         $this->load->view('order/invoice', $data);
+    }
+
+    public function order_invoise()
+    {
+   		$order_number= $this->uri->segment(2);
+        $order_id= $this->uri->segment(3);
+        $buyer_id= $this->uri->segment(4);
+
+        $data['title'] = "Invoice";
+        $data['description'] = "Invoice";
+        $data['keywords'] = "Invoice";
+	
+        $data["order"] = $this->order_model->get_order_by_order_number($order_number);
+        if (empty($data["order"])) {
+            redirect(base_url());
+        }
+   		// if($buyer_id=='' || $product_id=='' || $order_id==''){
+   		// redirect(base_url());
+   		// }
+        // $data["invoice"] = $this->order_model->get_invoice_by_order_number_def($order_number);
+        $data["invoice"] = $this->order_model->get_invoice_by_order_id_buyer_id_def($order_id,$buyer_id);
+        // print_r($data['invoice']);
+        if (empty($data["invoice"])) {
+            $this->order_model->add_invoice($data["order"]->id);
+        }
+        if (empty($data["invoice"])) {
+            redirect(base_url());
+        }
+       // $data["invoice_items"] = unserialize($data["invoice"]->invoice_items);
+        $data["order_products"] = $this->order_model->get_order_products($data["order"]->id);
+       // $data['index_settings'] = $this->settings_model->get_index_settings();
+
+        // check permission
+        if ($this->auth_user->role != "admin") {
+            $is_seller = false;
+            if (!empty($data["order_products"])) {
+                foreach ($data["order_products"] as $item) {
+                    if ($item->seller_id == $this->auth_user->id) {
+                        $is_seller = true;
+                    }
+                }
+            }
+            if ($this->auth_user->id != $data["order"]->buyer_id && $is_seller == false) {
+                redirect(base_url());
+                exit();
+            }
+        }
+
+
+        $this->load->view('order/total_invoice', $data);
     }
 
 

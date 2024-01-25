@@ -31,7 +31,7 @@
          <div class="row">
            
             <!-- end col -->
-            <div class="col-lg-8">
+            <div class="col-lg-9">
                <div class="card">
                   <div class="card-header bg-primary text-light">
                   Team Lead Details
@@ -41,7 +41,7 @@
                   <div class="row mb-3">
                      <label for="example-text-input" class="col-sm-3 col-form-label">Status</label>
                      <div class="col-sm-9">
-                        <?= check_visibility($item->status);?>
+                        <?= check_status($item->status);?>
                      </div>
                   </div>
                   <!-- <div class="row mb-3">
@@ -98,24 +98,24 @@
                </div>
                <div class="card">
                   <div class="card-header bg-primary text-light">
-                  Shop Details
+                  Identity & Citizenship Details
                     
                   </div>
                   <div class="card-body">
-                  <div class="row mb-3">
+                  <!-- <div class="row mb-3">
                      <label  for="example-text-input" class="col-sm-3 col-form-label">Shop Name</label>
                      <div  class="col-sm-9">
                      <?= $item->shop_name;?>
                      </div>
-                  </div> 
-                  <div class="row mb-3">
+                  </div>  -->
+                  <!-- <div class="row mb-3">
                      <label  for="example-text-input" class="col-sm-3 col-form-label">Trade Licence No.</label>
                      <div  class="col-sm-9">
                      <a href="javascript:void(0)" onclick="javascript:popupCenter({url: '<?= get_image($item->trade_licence_proof);?>', title: 'Login With Google Account', w: 500, h: 600});" >
                      <?= $item->trade_licence_no;?>
                       </a>
                      </div>
-                  </div>
+                  </div> -->
                      
                   <div class="row mb-3">
                      <label  for="example-text-input" class="col-sm-3 col-form-label">Pan No.</label>
@@ -134,35 +134,35 @@
                       </a>
                      </div>
                   </div>
-                      <div class="row mb-3">
+                      <!-- <div class="row mb-3">
                      <label  for="example-text-input" class="col-sm-3 col-form-label">Voter Id No.</label>
                      <div  class="col-sm-9">
                      <a href="javascript:void(0)" onclick="javascript:popupCenter({url: '<?= get_image($item->voter_proof);?>', title: 'Login With Google Account', w: 500, h: 600});" >
                      <?= $item->voter_no;?>
                       </a>
                      </div>
-                  </div>
-                  <div class="row mb-3">
+                  </div> -->
+                  <!-- <div class="row mb-3">
                      <label  for="example-text-input" class="col-sm-3 col-form-label">Gst No.</label>
                      <div  class="col-sm-9">
                      <a href="javascript:void(0)" onclick="javascript:popupCenter({url: '<?= get_image($item->gst_proof);?>', title: 'Login With Google Account', w: 500, h: 600});" >
                      <?= $item->gst_no;?>
                      </a>
                      </div>
-                  </div>
+                  </div> -->
                   
-                  <div class="row mb-3">
+                  <!-- <div class="row mb-3">
                      <label  for="example-text-input" class="col-sm-3 col-form-label">MOA & AOA Proof.</label>
                      <div  class="col-sm-9">
                      <a href="javascript:void(0)" onclick="javascript:popupCenter({url: '<?= get_image($item->moa_aoa_proof);?>', title: 'Login With Google Account', w: 500, h: 600});" >
                      View
                      </a>
                      </div>
-                  </div>
+                  </div> -->
                   </div>
                </div>
                      
-                 <div class="card">
+                 <!-- <div class="card">
                   <div class="card-header bg-primary text-light">
                   Bank Details
                     
@@ -207,14 +207,22 @@
                      </div>
                   </div>
                   </div>
-               </div>
+               </div> -->
                      
                      
             </div>
             <!-- end col -->
-            <div class="col-lg-4">
+            <div class="col-lg-3">
                <div class="card">
-                  <div class="card-header bg-primary text-light">Status</div>
+                  <div class="card-header bg-primary text-light">Profile Picture</div>
+                  <div class="card-body">
+                     <div class="mb-3">
+                        <img class="img-thumbnail rounded me-2" width="200" src="<?= get_image($item->user_image);?>" alt="">
+                     </div>
+                  </div>
+               </div>
+               <div class="card">
+                  <div class="card-header bg-primary text-light">Publish</div>
                   <div class="card-body">
                      <!-- <div class="mb-3">
                         <label  for="example-text-input" class="col-sm-6 col-form-label">Set Commission Rate</label>
@@ -226,7 +234,7 @@
                         </div>
                      </div>  -->
                      <div class="mb-3">
-                        <label class="form-label mb-3 d-flex">Visiblity</label>
+                        <label class="form-label mb-3 d-flex">Status</label>
                         <div class="form-check form-check-inline">
                            <input type="radio" id="customRadioInline1" name="status" class="form-check-input" value="1" <?= check_uncheck($item->status,1);?>>
                            <label class="form-check-label" for="customRadioInline1">Active</label>

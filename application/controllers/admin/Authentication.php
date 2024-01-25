@@ -7,7 +7,6 @@ class Authentication extends Core_Controller {
         parent::__construct();
 		$this->is_logged_in();
 		//$this->output->enable_profiler(TRUE);
-		
 	}
 	
 	public function index()

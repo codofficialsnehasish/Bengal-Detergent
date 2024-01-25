@@ -26,7 +26,7 @@
       <?php $this->load->view('admin/partials/_messages');?>
       </div>
       <!-- end page title -->
-      <?= form_open_multipart('admin/seller/updateProcess', 'class="custom-validation"');?>
+      <?= form_open_multipart('admin/team-lead/updateProcess', 'class="custom-validation"');?>
       <input type="hidden" name="id" value="<?= $item->id?>" />
       
          <div class="row">
@@ -101,6 +101,9 @@
                      </div>
                      <div class="mb-3">
                         <label class="form-label">Pan Card Document Proof</label>
+                        <div class="mb-3">
+                           <img class="img-thumbnail rounded me-2" alt="" width="200" src="<?= get_image($item->pan_proof);?>" data-holder-rendered="true" style="display:<?= $item->pan_proof!=0?'block':'none';?>">
+                        </div>
                         <div>
                            <input data-parsley-type="file" type="file"
                               class="form-control" 
@@ -109,20 +112,23 @@
                      </div>
 
                      <div class="mb-3">
-                        <label class="form-label">GST</label>
+                        <label class="form-label">Aadhar Card Number</label>
                         <div>
                            <input data-parsley-type="text" type="text"
                               class="form-control" 
-                              placeholder="Enter GST" name="gst_no" value="<?= $item->gst_no;?>">
+                              placeholder="Enter Aadhar" name="aadhar_no" value="<?= $item->aadhar_no;?>">
                         </div>
                      </div>
 
                      <div class="mb-3">
-                        <label class="form-label">GST Document Proof</label>
+                        <label class="form-label">Aadhar Card Proof</label>
+                        <div class="mb-3">
+                           <img class="img-thumbnail rounded me-2" alt="" width="200" src="<?= get_image($item->aadhar_proof);?>" data-holder-rendered="true" style="display:<?= $item->aadhar_proof!=0?'block':'none';?>">
+                        </div>
                         <div>
                            <input data-parsley-type="file" type="file"
                               class="form-control" required
-                              placeholder="Pan" name="gst_proof" >
+                              placeholder="Aadhar" name="aadhar_proof" >
                         </div>
                      </div>
                   </div>
@@ -131,6 +137,22 @@
             </div>
             <!-- end col -->
             <div class="col-lg-3">
+               <div class="card">
+                  <div class="card-header bg-primary text-light">
+                        Image
+                  </div>
+                  <div class="card-body text-center">
+                        <div class="mb-0">
+                           <img class="img-thumbnail rounded me-2" id="blah" alt="" width="200" src="<?= get_image($item->user_image);?>" data-holder-rendered="true" style="display:<?= $item->user_image!=0?'block':'none';?>">
+                        </div>
+                        <div class="mb-0">
+                           <input type="file" name="file" class="filestyle" id="imgInp" data-input="false" data-buttonname="btn-secondary">
+                           <input type="hidden" name="media_id" id="media_id" />
+                           <input type="hidden" name="hdn_media_id" id="media_id" value="<?= $item->user_image;?>" />
+                           <!-- <a href="javascript:;" id="openLibrary">or Choose From Library</a> -->
+                           </div> 
+                  </div>
+               </div>
                <div class="card">
                   <div class="card-header bg-primary text-light">
                      Publish

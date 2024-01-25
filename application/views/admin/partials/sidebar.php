@@ -57,13 +57,13 @@
                     </ul>
                 </li>
 
-                <li class="<?= active_menu('media');?>">
+                <!-- <li class="<?= active_menu('media');?>">
                     <a href="<?= base_url('admin/media/')?>" class="waves-effect <?= active_link('media');?>">
                          <i class="ti-image"></i>
                         
                         <span>Media</span>
                     </a>
-                </li>
+                </li> -->
 
                 <li class="<?= active_menu('category');?>">
                     <a href="<?= base_url('admin/category/')?>" class="waves-effect <?= active_link('category');?>">
@@ -95,7 +95,7 @@
                 <?php 
                $usegment='';
                if($this->uri->segment(2)=='buyer'){$usegment='buyer';}
-               if($this->uri->segment(2)=='seller'){$usegment='seller';}
+               if($this->uri->segment(2)=='dristributor'){$usegment='dristributor';}
                if($this->uri->segment(2)=='team-lead'){$usegment='team-lead';}
                ?>
                 <li class="<?= active_menu($usegment);?>">
@@ -105,7 +105,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li class="<?= tab_active('buyer');?>"><a href="<?= base_url('admin/buyer/')?>" class="<?= active_link('buyer');?>">Retailer</a></li>
-                        <li class="<?= tab_active('seller');?>"><a href="<?= base_url('admin/seller/')?>" class="<?= active_link('seller');?>">Dristributor</a></li>                    
+                        <li class="<?= tab_active('dristributor');?>"><a href="<?= base_url('admin/dristributor/')?>" class="<?= active_link('dristributor');?>">Dristributor</a></li>                    
                         <li class="<?= tab_active('team-lead');?>"><a href="<?= base_url('admin/team-lead/')?>" class="<?= active_link('team-lead');?>">Team Lead</a></li>                    
                     </ul>
                 </li>

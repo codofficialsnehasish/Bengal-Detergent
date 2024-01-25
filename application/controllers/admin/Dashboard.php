@@ -22,6 +22,11 @@ class Dashboard extends Core_Controller {
 		$data['today_visitor'] = get_visitor_count($date);
 		$date = date('Y-m-d', strtotime('-1 day', strtotime(date("Y-m-d"))));
 		$data['previous_visitor'] = get_visitor_count($date);
+		$data['total_product'] = $this->select->product_count();
+		$data['active_total_distributer'] = $this->select->active_distributer_count();
+		$data['inactive_total_distributer'] = $this->select->inactive_distributer_count();
+		$data['active_total_team_leader'] = $this->select->active_team_leader_count();
+		$data['inactive_total_team_leader'] = $this->select->inactive_team_leader_count();
 		$this->load->view('admin/dashboard',$data);
 		$script['pagescript']='dashboardScript';
 		$this->load->view('admin/partials/footer',$script);
