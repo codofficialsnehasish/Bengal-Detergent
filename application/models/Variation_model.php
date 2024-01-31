@@ -22,9 +22,11 @@ class Variation_model extends CI_Model
             'user_id' => $this->auth_user->id,
           //  'parent_id' => $this->input->post('parent_id', true),
         //    'label_names' => $array_names,
-            'variation_type' => $this->input->post('variation_type', true),
+            // 'variation_type' => $this->input->post('variation_type', true),
+            'variation_type' => 'radio_button',
             'insert_type' => 'new',
-            'option_display_type' => $this->input->post('option_display_type', true),
+            // 'option_display_type' => $this->input->post('option_display_type', true),
+            'option_display_type' => 'text',
             'show_images_on_slider' => $this->input->post('show_images_on_slider', true),
             'use_different_price' => $this->input->post('use_different_price', true),
             'is_visible' => $this->input->post('is_visible', true)

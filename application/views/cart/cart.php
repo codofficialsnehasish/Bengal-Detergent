@@ -32,6 +32,7 @@
 									$totalshippinhg= 0;			
 									foreach($cartitems as $item):
 									$product = $this->product_model->get_product_by_id($item->product_id);
+									// echo "product_id = ".$product->id;
 									$appended_variations = $this->cart_model->get_selected_variations($product->id)->str;
 									if(!empty($item->variations) || $item->variations!='' || $item->variations!=null){
 										$cartvariations=explode(',',$item->variations);
@@ -44,11 +45,11 @@
 							?>
 							<tr class="cart__row border-bottom line1 cart-flex border-top">
 								<td class="cart__image-wrapper cart-flex-item">
-									<a href="<?= base_url('product/'.$product->slug);?>"><img class="cart__image blur-up lazyloaded" data-src="<?= get_product_main_image($product);?>" src="<?= get_product_main_image($product);?>" alt="Elastic Waist Dress - Navy / Small"></a>
+									<a href="<?= base_url('product/'.$product->slug);?>"><img class="cart__image blur-up lazyloaded" data-src="<?= get_product_main_image($product);?>" src="<?= get_product_main_image($product);?>"></a>
 								</td>
 								<td class="cart__meta small--text-left cart-flex-item">
 									<div class="list-view-item__title">
-										<a href="<?= base_url('product/'.$product->slug);?>"><?= $product->title;?></a>
+										<a href="<?= base_url('product/'.$product->slug);?>"><?= $product->title;?> <?= $appended_variations; ?></a>
 									</div>
 									<!-- <div class="cart__meta-text">
 										Color: Navy<br>Size: Small<br>
@@ -134,7 +135,7 @@
 								<label for="1532947863384-0">I agree with the terms and conditions</label>
 							</div> -->
 							<a href="#" id="cartCheckout" class="btn btn--small-wide checkout goCheckout">Proceed To Checkout</a>
-							<!-- <div class="paymnet-img"><img src="<?= base_url('assets/site/images/payment-img.jpg') ?>" alt="Payment"></div>
+							<!-- <div class="paymnet-img"><img src="<= base_url('assets/site/images/payment-img.jpg') ?>" alt="Payment"></div>
 							<p class="mt-2"><a href="#">Checkout with Multiple Addresses</a></p> -->
 						</div>
 					</div>

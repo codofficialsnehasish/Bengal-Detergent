@@ -29,6 +29,7 @@ $route['set-main-product-image']='admin/products/set_main_product_image';
 $route['select-variation-option']='ajax/select_product_variation_option';
 
 $route['add-to-cart']='cart_controller/add_to_cart';
+$route['buy-now']='cart_controller/buy_now';
 $route['cart']='cart_controller/cart';
 $route['fetchCartCount']='cart_controller/fetchCartCount';
 $route['showCartPopupData']='cart_controller/showCartPopupData';
@@ -36,6 +37,7 @@ $route['getAndShowProduct']='cart_controller/getAndShowProduct';
 
 $route['update-cart-product-quantity']='cart_controller/update_cart_product_quantity';
 $route['checkout']='cart_controller/checkout';
+$route['buy-now-checkout']='cart_controller/buy_now_checkout';
 
 $route['payment-method-post']='cart_controller/payment_method_post';
 // $route['razorpay-payment-post']='cart_controller/razorpay_payment_post';

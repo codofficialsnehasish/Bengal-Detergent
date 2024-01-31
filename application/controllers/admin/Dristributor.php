@@ -85,7 +85,7 @@ class Dristributor extends Core_Controller {
 		$id =	$this->input->post('id');
 		$this->form_validation->set_rules('first_name', 'Title', 'required|xss_clean|max_length[200]');
 		if ($this->form_validation->run() == false) {
-			$this->session->set_flashdata('errors', validation_errors());
+			$this->session->set_flashdata('error', validation_errors());
 			//$this->session->set_flashdata('form_data', $this->auth_model->input_values());
 			redirect($this->agent->referrer());
 		}else{
@@ -96,10 +96,18 @@ class Dristributor extends Core_Controller {
 				'email'=>$this->input->post('email', true),
 				'status'=>$this->input->post('status', true),
 				'phone_number'=>$this->input->post('phone_number', true),
+				'alt_phone_number'=>$this->input->post('alt_phone_number', true),
 				'address'=>$this->input->post('address', true),
+				'zip_code'=>$this->input->post('zip_code', true),
+				'police_station'=>$this->input->post('police_station', true),
 				'shop_name'=>$this->input->post('shop_name', true),
+				'shop_address'=>$this->input->post('shop_address', true),
+				'shop_pin_code'=>$this->input->post('shop_pin_code', true),
+				'shop_police_station'=>$this->input->post('shop_police_station', true),
 				'pan_no'=>$this->input->post('pan_no', true),
 				'gst_no'=>$this->input->post('gst_no', true),
+				'trade_licence_no'=>$this->input->post('trade_license', true),
+				'prefarable_zip_code'=>$this->input->post('prefer_pin', true)
 
 			);
 
@@ -118,13 +126,18 @@ class Dristributor extends Core_Controller {
 				$data['gst_proof']=$this->mediaupload->doUpload('gst_proof');
 			}
 
+			if(is_uploaded_file($_FILES['trade_license_proof']['tmp_name'])) 
+			{  
+				$data['trade_licence_proof']=$this->mediaupload->doUpload('trade_license_proof');
+			}
+
 
 			$update=$this->edit_model->edit($data,$id,'id',$this->table_name);
 			if($update){
 				$this->session->set_flashdata('success', 'Data has been updated successfully');
 				redirect($this->agent->referrer());
 			}else{
-				$this->session->set_flashdata('errors', 'Query error');
+				$this->session->set_flashdata('error', 'Query error');
 		     	redirect($this->agent->referrer());
 			}
 		}
@@ -148,17 +161,17 @@ class Dristributor extends Core_Controller {
 		$this->form_validation->set_rules('password', 'Password', 'required|xss_clean|max_length[30]');
 		$this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required|xss_clean|max_length[30]');
 		if ($this->form_validation->run() == false) {
-			$this->session->set_flashdata('errors', validation_errors());
+			$this->session->set_flashdata('error', validation_errors());
 			//$this->session->set_flashdata('form_data', $this->auth_model->input_values());
 			redirect($this->agent->referrer());
 		}else if($this->input->post('password', true) != $this->input->post('confirm_password', true)){
-			$this->session->set_flashdata('errors', 'Confirm Password Not Matched');
+			$this->session->set_flashdata('error', 'Confirm Password Not Matched');
 			redirect($this->agent->referrer());
 		}else if (!$this->auth_model->is_unique_email($this->input->post('email', true))) {
-			$this->session->set_flashdata('errors', 'E-Mail is Already Taken. Please Try with Different E-Mail');
+			$this->session->set_flashdata('error', 'E-Mail is Already Taken. Please Try with Different E-Mail');
 			redirect($this->agent->referrer());
 		}else if(!$this->auth_model->is_unique_phone_no($this->input->post('phone_number', true))){
-			$this->session->set_flashdata('errors', 'Phone No. Already Exists!');
+			$this->session->set_flashdata('error', 'Phone No. Already Exists!');
 			redirect($this->agent->referrer());
 		}
 		else{
@@ -169,10 +182,18 @@ class Dristributor extends Core_Controller {
 				'email'=>$this->input->post('email', true),
 				'status'=>$this->input->post('status', true),
 				'phone_number'=>$this->input->post('phone_number', true),
+				'alt_phone_number'=>$this->input->post('alt_phone_number', true),
 				'address'=>$this->input->post('address', true),
+				'zip_code'=>$this->input->post('zip_code', true),
+				'police_station'=>$this->input->post('police_station', true),
 				'shop_name'=>$this->input->post('shop_name', true),
+				'shop_address'=>$this->input->post('shop_address', true),
+				'shop_pin_code'=>$this->input->post('shop_pin_code', true),
+				'shop_police_station'=>$this->input->post('shop_police_station', true),
 				'pan_no'=>$this->input->post('pan_no', true),
 				'gst_no'=>$this->input->post('gst_no', true),
+				'trade_licence_no'=>$this->input->post('trade_license', true),
+				'prefarable_zip_code'=>$this->input->post('prefer_pin', true),
 				'role'=>'dristributor',
 				'is_approved'=>1,
 				'password'=>$this->input->post('password', true)
@@ -202,14 +223,23 @@ class Dristributor extends Core_Controller {
 				$data['gst_proof']=$this->mediaupload->doUpload('gst_proof');
 			}
 
+			if(is_uploaded_file($_FILES['trade_license_proof']['tmp_name'])) 
+			{  
+				$data['trade_licence_proof']=$this->mediaupload->doUpload('trade_license_proof');
+			}
+
 
 			// $update=$this->edit_model->edit($data,$id,'id',$this->table_name);
-			$insert=$this->insert_model->insert_data($data,$this->table_name);
-			if($insert){
+			$user_id=$this->insert_model->insert_data($data,$this->table_name);
+			if($user_id){
+				$datas=array(
+					'user_id'=>'dist/'.strtolower(remove_special_characters($this->input->post('first_name', true))).'/00'.$user_id
+				);
+				$update=$this->edit_model->edit($datas,$user_id,'id',$this->table_name);
 				$this->session->set_flashdata('success', 'Data Inserted successfully');
 				redirect($this->agent->referrer());
 			}else{
-				$this->session->set_flashdata('errors', 'Query error');
+				$this->session->set_flashdata('error', 'Query error');
 		     	redirect($this->agent->referrer());
 			}
 		}

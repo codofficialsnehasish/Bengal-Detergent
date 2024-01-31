@@ -33,11 +33,14 @@
             <!-- end col -->
             <div class="col-lg-9">
                <div class="card">
-                  <div class="card-header bg-primary text-light">
-                  Dristributor Details
-                    
-                  </div>
+                  <div class="card-header bg-primary text-light">Dristributor Details</div>
                   <div class="card-body">
+                  <div class="row mb-3">
+                     <label  for="example-text-input" class="col-sm-3 col-form-label">ID</label>
+                     <div class="col-sm-9">
+                     <?= $item->user_id;?>
+                     </div>
+                  </div> 
                   <div class="row mb-3">
                      <label for="example-text-input" class="col-sm-3 col-form-label">Status</label>
                      <div class="col-sm-9">
@@ -51,7 +54,7 @@
                      </div>
                   </div> -->
                   <div class="row mb-3">
-                     <label  for="example-text-input" class="col-sm-3 col-form-label">User Type</label>
+                     <label  for="example-text-input" class="col-sm-3 col-form-label">Registered By</label>
                      <div  class="col-sm-9">
                         <?php $registeredType=explode('_',$item->user_type);?>
                         <?= ucfirst($registeredType[0]);?>
@@ -87,6 +90,18 @@
                      <?= $item->email;?>
                      </div>
                   </div>
+                  <div class="row mb-3">
+                     <label  for="example-text-input" class="col-sm-3 col-form-label">Pin Code</label>
+                     <div  class="col-sm-9">
+                     <?= formatted_pin($item->zip_code); ?>
+                     </div>
+                  </div>
+                  <div class="row mb-3">
+                     <label  for="example-text-input" class="col-sm-3 col-form-label">Police Station</label>
+                     <div  class="col-sm-9">
+                     <?= $item->police_station;?>
+                     </div>
+                  </div>
                  
                   <div class="row row mb-3">
                         <label  for="example-text-input" for="excol-sm-3 col-form-labelch-input" class="col-sm-3 col-form-label">Created on</label>
@@ -98,16 +113,34 @@
                </div>
                <div class="card">
                   <div class="card-header bg-primary text-light">
-                  Shop Details
+                  Business Details
                     
                   </div>
                   <div class="card-body">
                   <div class="row mb-3">
-                     <label  for="example-text-input" class="col-sm-3 col-form-label">Shop Name</label>
+                     <label  for="example-text-input" class="col-sm-3 col-form-label">Business Name</label>
                      <div  class="col-sm-9">
                      <?= $item->shop_name;?>
                      </div>
                   </div> 
+                  <div class="row mb-3">
+                     <label  for="example-text-input" class="col-sm-3 col-form-label">Business Address</label>
+                     <div  class="col-sm-9">
+                     <?= $item->shop_address;?>
+                     </div>
+                  </div>
+                  <div class="row mb-3">
+                     <label  for="example-text-input" class="col-sm-3 col-form-label">Business Pin Code</label>
+                     <div  class="col-sm-9">
+                     <?= formatted_pin($item->shop_pin_code); ?>
+                     </div>
+                  </div>
+                  <div class="row mb-3">
+                     <label  for="example-text-input" class="col-sm-3 col-form-label">Business Police Station</label>
+                     <div  class="col-sm-9">
+                     <?= $item->shop_police_station;?>
+                     </div>
+                  </div>
                   <div class="row mb-3">
                      <label  for="example-text-input" class="col-sm-3 col-form-label">Trade Licence No.</label>
                      <div  class="col-sm-9">
@@ -126,22 +159,22 @@
                      </div>
                   </div>
                      
-                   <div class="row mb-3">
+                   <!-- <div class="row mb-3">
                      <label  for="example-text-input" class="col-sm-3 col-form-label">Aadhar No.</label>
                      <div  class="col-sm-9">
-                     <a href="javascript:void(0)" onclick="javascript:popupCenter({url: '<?= get_image($item->aadhar_proof);?>', title: 'Login With Google Account', w: 500, h: 600});" >
-                     <?= $item->aadhar_no;?>
-                      </a>
+                        <a href="javascript:void(0)" onclick="javascript:popupCenter({url: '<= get_image($item->aadhar_proof);?>', title: 'Login With Google Account', w: 500, h: 600});" >
+                           <= $item->aadhar_no;?>
+                        </a>
                      </div>
-                  </div>
-                      <div class="row mb-3">
+                     </div>
+                     <div class="row mb-3">
                      <label  for="example-text-input" class="col-sm-3 col-form-label">Voter Id No.</label>
                      <div  class="col-sm-9">
-                     <a href="javascript:void(0)" onclick="javascript:popupCenter({url: '<?= get_image($item->voter_proof);?>', title: 'Login With Google Account', w: 500, h: 600});" >
-                     <?= $item->voter_no;?>
+                     <a href="javascript:void(0)" onclick="javascript:popupCenter({url: '<= get_image($item->voter_proof);?>', title: 'Login With Google Account', w: 500, h: 600});" >
+                     <= $item->voter_no;?>
                       </a>
                      </div>
-                  </div>
+                  </div> -->
                   <div class="row mb-3">
                      <label  for="example-text-input" class="col-sm-3 col-form-label">Gst No.</label>
                      <div  class="col-sm-9">
@@ -159,6 +192,23 @@
                      </a>
                      </div>
                   </div> -->
+                  </div>
+               </div>
+
+               <div class="card">
+                  <div class="card-header bg-primary text-light">Work Details</div>
+                  <div class="card-body">
+                     <div class="row mb-3">
+                        <label  for="example-text-input" class="col-sm-3 col-form-label">Preferable Pin Code</label>
+                        <div  class="col-sm-9">
+                           <?php 
+                              $prepin = explode(',',$item->prefarable_zip_code);
+                              foreach($prepin as $pin){
+                                 echo formatted_pin($pin).'&nbsp;&nbsp;,&nbsp;&nbsp;';
+                              }
+                           ?>
+                        </div>
+                     </div> 
                   </div>
                </div>
                      

@@ -238,7 +238,11 @@
         <script src="<?= base_url('assets/admin/libs/toast/toastr.js');?>"></script>
         <script src="<?= base_url('assets/admin/js/pages/toastr.init.js');?>"></script>
         <!-- toast message -->
-                                    
+
+        <!-- My-zoom.js -->
+        <script src="<?= base_url('assets/admin/libs/zoom/js/my-zoom.js');?>"></script> 
+        <!-- My-zoom.js -->
+
         <!-- Bootstrap rating js -->
         <script src="<?= base_url('assets/admin/libs/bootstrap-rating/bootstrap-rating.min.js');?>"></script>
                                     

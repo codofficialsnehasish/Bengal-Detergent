@@ -444,11 +444,54 @@ function isMobile(mobile){
         var serializedData = form.serializeArray();
         // console.log(serializedData);
         serializedData.push({
-            name: "csrf_modesy_token", value: getCookie('csrf_modesy_token'),
+            // name: "csrf_modesy_token", value: getCookie('csrf_modesy_token'),
             product_id : id, product_quantity : 1
         });
         $.ajax({
             url: base_url + "add-to-cart",
+            type: "post",
+            data: serializedData,
+            dataType: "json",
+            beforeSend: function() {
+                $('.adcartbtn').addClass('eventbtn'); 
+            },
+            success: function (response) {
+                clearTost();
+                //var obj = JSON.parse(response);
+                // console.log(response);
+                // alert("ok");
+                if (response.status == 1) {
+                    // alert("ok");
+                        showToast('success','',response.msg); 
+                        // setTimeout(window.location.replace(base_url), 3000);
+                        //form[0].reset();  
+                        $('.adcartbtn').removeClass('eventbtn'); 
+                        
+                        fetchCart();
+                        // location.reload(true);
+                }else{
+                    $('.adcartbtn').removeClass('eventbtn'); 
+                    let numbersArray = response.msg.split('\n');
+                    $.each(numbersArray, function(index, value) { 
+                    // console.log(index + ': ' + value);
+                    showToast('error','',value);
+                    });
+                }
+            }
+        });
+        // event.preventDefault();
+    }
+
+    function buynow(id){
+        var form = $("#form_add_cart");
+        // var form = $("#form_add_cart_go");
+        var serializedData = form.serializeArray();
+        serializedData.push({
+            name: "csrf_modesy_token", value: getCookie('csrf_modesy_token'),
+            product_id : id, product_quantity : 1
+        });
+        $.ajax({
+            url: base_url + "buy-now",
             type: "post",
             data: serializedData,
             dataType: "json",

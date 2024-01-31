@@ -28,7 +28,7 @@
                   </div>
                   <div class="col-8 col-sm-8 col-md-8 col-lg-8">
                      <p><strong><?= $this->settings->contact_address; ?></strong></p>
-                     <p><strong>Phone</strong> : <?= $this->settings->contact_phone; ?> <br><strong>Email</strong>: <?= $this->settings->contact_email; ?> / <?= $this->settings->contact_email_opt; ?></p>
+                     <p><strong>Phone</strong> : <?= $this->settings->contact_phone; ?> <br><strong>Email</strong>: <?= $this->settings->contact_email; ?> <?php if(!empty($this->settings->contact_email_opt)) echo'/'.$this->settings->contact_email_opt; ?></p>
                   </div>
                </div>
             </div>

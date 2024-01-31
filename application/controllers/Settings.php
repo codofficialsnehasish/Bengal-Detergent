@@ -16,6 +16,8 @@ class Settings extends Core_Controller {
 		if ($this->auth_check) {
 			if($this->auth_user->role=='buyer'){
 				$this->buyer_settings();
+			}elseif($this->auth_user->role == 'retailer'){
+				$this->retailer_settings();
 			}elseif($this->auth_user->role=='seller'){
 				$this->seller_settings();
 			}elseif($this->auth_user->role=='admin'){
@@ -59,6 +61,39 @@ class Settings extends Core_Controller {
     }
 
 	public function seller_settings(){
+		$this->load->view('partials/header');
+		// if($this->isActive()==true){
+		$data['countries']=$this->select->select_single_data('location_countries','is_visible',1,'name','asc');
+		
+		////////states
+		$conditions = array(
+			'tblName' =>'location_states',
+			'where' => array(
+				'is_visible'=>1,
+				'country_id'=> $this->auth_user->country_id
+				)
+		);
+		$data['states'] = $this->select->getResult($conditions);
+		////////Cities
+		$conditions1 = array(
+			'tblName' =>'location_cities',
+			'where' => array(
+				'is_visible'=>1,
+				'state_id'=> $this->auth_user->state_id
+				)
+		);
+		$data['cities'] = $this->select->getResult($conditions1);
+
+		//$data['states']=$this->select->select_single_data('location_states','is_visible',1,'name','asc');
+		$this->load->view('auth/seller/edit_profile',$data);
+		// }else{
+		// 	$this->load->view('template/seller_dashboard/inactive',$data);
+		// }
+		$this->load->view('partials/footer');
+    }
+
+
+	public function retailer_settings(){
 		$this->load->view('partials/header');
 		// if($this->isActive()==true){
 		$data['countries']=$this->select->select_single_data('location_countries','is_visible',1,'name','asc');

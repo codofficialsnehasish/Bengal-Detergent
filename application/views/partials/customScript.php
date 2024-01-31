@@ -89,6 +89,8 @@ $(document).on("click", ".viewpassreg", function (event) {
 //         $(".shippinField").attr("required", true);
 //     }
 // });
+
+
 /////redirect checkout
 $(document).on("click", ".goCheckout", function () {
     const getUrl = window.location;
@@ -201,54 +203,49 @@ $(document).on("click", ".fav", function () {
 
 ///////////
 $(document).on("click", "#review-submit-button", function () {
-  $('#review-submit-button').addClass('eventbtn');
+    $('#review-submit-button').addClass('eventbtn');
     const getUrl = window.location;
     // const base_url = getUrl.protocol + "//" + getUrl.host + "/" ;
     const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1]+"/";
 
-    <?php
-    if(!auth_check()){
-    ?>
-    $('#loginModal').modal('show');
-     <?php 
-    }else{
-    ?>
-    var productId = $(".fav").attr("id");
-    var rating = $('.rating').val();
-    var review = $('#review').val();
-    var reviewTitle = $('#review_title').val();
-    var a = { product_id: productId,rating_count:rating,review_title:reviewTitle,comment:review,csrf_modesy_token:getCookie('csrf_modesy_token')};
-    console.log(rating);
-   // alert(rating);
-    if(rating==null || rating=='' || rating==0 || rating=='undefined'){
-         showToast('error','','Star Rating Can not be null');
-         $('#review-submit-button').removeClass('eventbtn');
-    }else{
-    $.ajax({
-        type: "POST",
-        url: base_url + "saveReview",
-        data: a,
-    	//dataType:'json',
-        success: function (e) {
-           // var d = JSON.parse(e);
-		   var d =$.parseJSON(e);
-             if (d.status == 0) {
-                showToast('error','',d.msg);
-                $('#review-submit-button').removeClass('eventbtn');
-             }else{
-                 $('#review').val('');
-                 $('#review_title').val('');
-                 $('.rating').val('');
-            	     //getReviewForm(); 
-                 showToast('success','',d.msg); 
-                 $('#review-submit-button').removeClass('eventbtn');
-             }
-        },
-    });
-    }
-    <?php 
-    }
-    ?>
+    <?php if(!auth_check()){ ?>
+    // $('#loginModal').modal('show');
+    <?php //redirect('/login'); ?>
+    <?php }else{ ?>
+        // var productId = $(".fav").attr("id");
+        var productId = <?= !empty($product) ? $product->id : 0; ?>;
+        var rating = $('.rating').val();
+        var review = $('#review').val();
+        var reviewTitle = $('#review_title').val();
+        var a = { product_id:productId,rating_count:rating,review_title:reviewTitle,comment:review,csrf_modesy_token:getCookie('csrf_modesy_token') };
+
+        if(rating==null || rating=='' || rating==0 || rating=='undefined'){
+            showToast('error','','Star Rating Can not be null');
+            $('#review-submit-button').removeClass('eventbtn');
+        }else{
+            $.ajax({
+                type: "POST",
+                url: base_url + "saveReview",
+                data: a,
+                // dataType:'json',
+                success: function (e) {
+                    // var d = JSON.parse(e);
+                    var d =$.parseJSON(e);
+                    if (d.status == 0) {
+                        showToast('error','',d.msg);
+                        $('#review-submit-button').removeClass('eventbtn');
+                    }else{
+                        $('#review').val('');
+                        $('#review_title').val('');
+                        $('.rating').val('');
+                            //getReviewForm(); 
+                        showToast('success','',d.msg); 
+                        $('#review-submit-button').removeClass('eventbtn');
+                    }
+                },
+            });
+        }
+    <?php } ?>
 });
 
 

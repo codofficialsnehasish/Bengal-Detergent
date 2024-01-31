@@ -1,4 +1,6 @@
 <!---------------------main section---------------------->
+<?= form_open_multipart('authentication/seller-profile-update', 'class="needs-validation" name="myform"  novalidate ');?>
+
 	<section class="profile-page mt-5 mb-5">
 		<div class="container ">
 		    <div class="row">
@@ -9,9 +11,14 @@
 		        <div class="col-xl-8">
 		            <!-- Account details card-->
 		            <div class="card mb-4">
-		                <div class="card-header">Account Details</div>
+		                <!-- <div class="card-header">Account Details</div> -->
+						<div class="card-header">
+							<div class="d-flex justify-content-between align-items-center">
+								<span>Account Details</span>
+								<span><a href="<?= base_url('retailer/dashboard')?>" class="btn btn-info text-white">Back to Profile</a></span>
+							</div>
+						</div>
 		                <div class="card-body">
-						<?= form_open_multipart('authentication/seller-profile-update', 'class="needs-validation" name="myform"  novalidate ');?>
 		                        <!-- Form Row-->
 		                        <div class="row gx-3 mb-3">
 		                            <!-- Form Group (first name)-->
@@ -35,7 +42,7 @@
 		                            <!-- Form Group (birthday)-->
 		                            <div class="col-md-6">
 		                                <label class="small mb-1" for="inputEmailAddress">Email address</label>
-		                            	<input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address" value="<?= $this->auth_user->email;?>" disabled>
+		                            	<input class="form-control" id="inputEmailAddress" type="email" name="email" placeholder="Enter your email address" value="<?= $this->auth_user->email;?>">
 		                            </div>
 		                        </div>
 								<div class="row gx-3 mb-3">
@@ -105,13 +112,13 @@
 		                        </div>
 		                        <!-- Save changes button-->
 		                        <button class="btn go-checkout" type="submit">Save changes</button>
-								<?= form_close();?>
-		                </div>
-		            </div>
-		        </div>
-		    </div>
-		</div>
-	</section>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<?= form_close();?>
 <script>
     $(document).ready(function() {
         <?php if ($this->session->flashdata('success')): ?>

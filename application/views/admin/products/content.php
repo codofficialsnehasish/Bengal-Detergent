@@ -54,7 +54,7 @@
                                                     <td>
                                                         <?= select_value_by_id('categories','cat_id',$item->category_id,'cat_name');?>
                                                         <?php if($item->subcategory_id!='' && $item->subcategory_id!=NULL && $item->subcategory_id!=0){?>
-                                                        /<br> <?= $item->subcategory_id. select_value_by_id('categories','cat_id',$item->subcategory_id,'cat_name');?>
+                                                        /<br> <?= select_value_by_id('categories','cat_id',$item->subcategory_id,'cat_name');?>
                                                         <?PHP }?>
                                                     </td>
                                                     <td><a href="<?= admin_url('seller/details/'.$item->user_id);?>" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="View Seller Profile"><?= select_value_by_id('users','id',$item->user_id,'shop_name');;?> </a></td> 

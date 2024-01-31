@@ -70,29 +70,29 @@ class Order_model extends CI_Model
                 $this->cart_model->clear_cart();
 				
             	/////////send sms to buyer///////////////
-				$order = $this->get_order($order_id);
-				$buyer_id = $order->buyer_id ;
-				$buyer = $this->auth_model->get_user_by_id($buyer_id);
-				$mobile = $buyer->phone_number;
-            	$senderId = 'MAGXRT';
-            	$templateID = '1707167106257901278';
-            	$str = 'Dear '.$buyer->first_name.', Your order ID is '.$order->order_number.', Will be delivered Soon - Magxmart India.';
-            	send_sms($mobile,$senderId,$templateID,$str);
+				// $order = $this->get_order($order_id);
+				// $buyer_id = $order->buyer_id ;
+				// $buyer = $this->auth_model->get_user_by_id($buyer_id);
+				// $mobile = $buyer->phone_number;
+            	// $senderId = 'MAGXRT';
+            	// $templateID = '1707167106257901278';
+            	// $str = 'Dear '.$buyer->first_name.', Your order ID is '.$order->order_number.', Will be delivered Soon - Magxmart India.';
+            	// send_sms($mobile,$senderId,$templateID,$str);
             	/////////send sms to buyer///////////////
 						
 				/////////send sms to seller///////////////
-				$sellerorder = $this->get_order_products($order_id);
-				if(!empty($sellerorder)){
-					foreach($sellerorder as $sorder){
-						$seller_id = $sorder->seller_id;
-						$seller = $this->auth_model->get_user_by_id($seller_id);
-						$mobiles = $seller->phone_number;
-						$senderIds = 'MAGXMT';
-						$templateIDs = '1707167113291643585';
-						$strs = 'Dear '.$seller->first_name.', You got an order having this Order ID '.$order->order_number.', Trackin ID Not Generated. - Magxmart india.';
-						send_sms($mobiles,$senderIds,$templateIDs,$strs);
-					}
-				}
+				// $sellerorder = $this->get_order_products($order_id);
+				// if(!empty($sellerorder)){
+				// 	foreach($sellerorder as $sorder){
+				// 		$seller_id = $sorder->seller_id;
+				// 		$seller = $this->auth_model->get_user_by_id($seller_id);
+				// 		$mobiles = $seller->phone_number;
+				// 		$senderIds = 'MAGXMT';
+				// 		$templateIDs = '1707167113291643585';
+				// 		$strs = 'Dear '.$seller->first_name.', You got an order having this Order ID '.$order->order_number.', Trackin ID Not Generated. - Magxmart india.';
+				// 		send_sms($mobiles,$senderIds,$templateIDs,$strs);
+				// 	}
+				// }
             	/////////send sms to seller///////////////
 	
             
@@ -159,7 +159,7 @@ class Order_model extends CI_Model
                 $this->add_invoice($order_id);
 
                 //clear cart
-                $this->cart_model->clear_cart();                
+                $this->cart_model->clear_cart();             
 
                 return $order_id;
             }

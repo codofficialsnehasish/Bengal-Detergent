@@ -145,7 +145,9 @@ if (!function_exists('get_product_form_data')) {
                 if ($product->listing_type == 'sell_on_site') {
                     if ($product->is_free_product != 1) {
                         $data->add_to_cart_url = base_url() . 'add-to-cart';
-                        $data->button = '<button type="submit" class="btn btn-md bg-dark cart-button text-white w-50 btn-product-cart adcartbtn"' . $disabled .$display. '><i class="zmdi zmdi-shopping-basket"></i>Add to Cart</button>';
+                        $data->button = '<button type="submit" class="btn product-form__cart-submit btn-product-cart adcartbtn"' . $disabled .$display. '><i class="zmdi zmdi-shopping-basket"></i>Add to Cart</button>';
+                        // <button type="submit" class="btn product-form__cart-submit"><span>Add to cart</span></button>
+
                     }
                 }
             // }

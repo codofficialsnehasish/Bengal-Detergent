@@ -120,12 +120,13 @@ public function select_product_variation_option()
 		$rating=$this->input->post('rating_count');
 		$review=$this->input->post('comment');
 		$review_title=$this->input->post('review_title');
-		
+		// echo $rating;
 		//$id=$this->input->post('product_id');
 		$product = $this->product_model->get_product_by_id($product_id);
 		if(check_review($this->auth_user->id,$product_id)==true){
 			$msg= 'You Have Already Posted Your Comment on '.$product->title;
 			$status=0;
+			echo $msg;
 		}else{
 			$data = array(
 				'product_id' => $product_id,

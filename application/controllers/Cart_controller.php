@@ -103,9 +103,7 @@ class Cart_controller extends Core_Controller
     public function add_to_cart()
     {
         $product_id = $this->input->post('product_id', true);
-        // echo $product_id;
         $product = $this->product_model->get_product_by_id($product_id);
-      //  echo 
         if (!empty($product)) {
             if ($product->is_visible != 1) {
                 $this->session->set_flashdata('product_details_error', "msg_error_cart_unapproved_products");
@@ -122,6 +120,57 @@ class Cart_controller extends Core_Controller
         reset_flash_data();
 		echo json_encode(array('status'=>$status,'msg'=>$msg));
         //redirect($this->agent->referrer());
+    }
+
+    public function buy_now()
+    {
+        if(!$this->auth_user->id){
+            redirect('/login');
+        }
+        $product_id = $this->input->post('product_id', true);
+        $product = $this->product_model->get_product_by_id($product_id);
+        if (!empty($product)) {
+            if ($product->is_visible != 1) {
+                $this->session->set_flashdata('product_details_error', "msg_error_cart_unapproved_products");
+                $msg='Error!';
+				$status=0;
+            } else {
+                $result=$this->cart_model->add_to_cart($product);
+                $cart_id=$this->cart_model->buy_now_cart($product);
+                // $this->session->set_flashdata('success', $result);   
+                // $status=1;
+				// $msg=$cart_id;
+            }
+        }
+        redirect('/buy-now-checkout');
+        // $this->buy_now_checkout();
+        // reset_flash_data();
+		// echo json_encode(array('status'=>$status,'msg'=>$msg));
+        //redirect($this->agent->referrer());
+    }
+
+    public function buy_now_checkout(){
+        $con=array(
+            'tblName' => 'address_book',
+            'where' => array(
+                'user_id' =>$this->auth_user->id
+            )
+        );
+        $result=$this->select->getResult($con);
+        if(!empty($result)){
+            $billing = $result;
+        }else{
+            $billing="";
+        }
+        $data["shipping_address"] = $billing;
+        $data['countries']=$this->select->select_single_data('location_countries','is_visible',1,'name','asc');
+
+        $data['cart_total'] = $this->cart_model->calculate_cart_total_buy_now();
+        $data['cartitems']=$this->cart_model->get_cart_by_buyer_buy_now();
+
+        $this->load->view('partials/header');
+        $this->load->view('cart/checkout', $data);
+        $this->load->view('partials/footer');
     }
 
         /**
@@ -157,6 +206,10 @@ class Cart_controller extends Core_Controller
         if(!$this->auth_user->id){
             redirect('/login');
         }
+        if(empty($this->cart_model->get_cart_by_buyer())){
+            echo json_encode(array('status'=>0,'msg'=>'No Items In Cart'));
+            redirect($this->agent->referrer());
+        }
         $con=array(
             'tblName' => 'address_book',
             'where' => array(
@@ -174,7 +227,7 @@ class Cart_controller extends Core_Controller
         $data['cartitems']=$this->cart_model->get_cart_by_buyer();
 
         $data["shipping_address"] = $billing;
-        $data['cart_total'] = $this->cart_model->calculate_cart_total();
+        // $data['cart_total'] = $this->cart_model->calculate_cart_total();
         // $data["shipping_address"] = $this->cart_model->get_sess_cart_shipping_address();
         $data['countries']=$this->select->select_single_data('location_countries','is_visible',1,'name','asc');
         $this->load->view('partials/header');
@@ -459,17 +512,18 @@ class Cart_controller extends Core_Controller
         //add order
         $order_id = $this->order_model->add_order_offline_payment("Cash On Delivery");
         $order = $this->order_model->get_order($order_id);
+        print_r($order);
         if (!empty($order)) {
             //decrease product quantity after sale
             $this->order_model->decrease_product_stock_after_sale($order->id);
             //send email
-            if ($this->general_settings->send_email_buyer_purchase == 1) {
-                $email_data = array(
-                    'email_type' => 'new_order',
-                    'order_id' => $order_id
-                );
-                $this->session->set_userdata('mds_send_email_data', json_encode($email_data));
-            }
+            // if ($this->general_settings->send_email_buyer_purchase == 1) {
+            //     $email_data = array(
+            //         'email_type' => 'new_order',
+            //         'order_id' => $order_id
+            //     );
+            //     $this->session->set_userdata('mds_send_email_data', json_encode($email_data));
+            // }
 
             if ($order->buyer_id == 0) {
                 // $this->session->set_userdata('mds_show_order_completed_page', 1);

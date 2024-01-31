@@ -27,10 +27,14 @@
                      <div class="slideshow__text-content mt-0 left te_lef">
                            <div class="container">
                               <div class="wrap-caption left">
-                                 <?php $array = preg_split("/\r\n|\n|\r/", get_desc($slide->id)); ?>
+                                 <?php 
+                                 if(!empty(get_desc($slide->id))):
+                                 $array = preg_split("/\r\n|\n|\r/", get_desc($slide->id)); 
+                                 ?>
                                  <h2 class="h1 mega-title slideshow__title"><?= strip_tags($array[0]); ?></h2>
                                  <span class="mega-subtitle slideshow__subtitle"><?= strip_tags($array[1]); ?></span>
                                  <a href="<?= base_url('/products/all_products'); ?>" class="btn btn--large">Purchase Now</a>
+                                 <?php endif; ?>
                               </div>
                            </div>
                      </div>
@@ -108,8 +112,8 @@
                               <!-- product Image -->
                               <a href="<?= base_url('product/'.$topproduct->slug);?>">
                                     <!-- Image -->
-                                    <img class="primary blur-up lazyload" data-src="<?= get_product_main_image($topproduct); ?>" src="<?= get_product_main_image($topproduct); ?>" alt="image" title="product" />
-                                    <img class="hover blur-up lazyload" data-src="<?= get_product_image_by_hovar($topproduct); ?>" src="<?= get_product_image_by_hovar($topproduct); ?>" alt="image" title="product" />
+                                    <img class="primary blur-up lazyload" data-src="<?= get_product_main_image($topproduct); ?>" src="<?= get_product_main_image($topproduct); ?>" alt="image" title="<?= $topproduct->title; ?>" />
+                                    <img class="hover blur-up lazyload" data-src="<?= get_product_image_by_hovar($topproduct); ?>" src="<?= get_product_image_by_hovar($topproduct); ?>" alt="image" title="<?= $topproduct->title; ?>" />
                                     <!-- End Hover Image -->
                                     <!-- Product Label -->
                                     <div class="product-labels rectangular">
@@ -153,11 +157,20 @@
                               <!-- End Product Price -->
                               <!-- Product Review -->
                               <div class="product-review">
-                                    <i class="an an-star"></i>
-                                    <i class="an an-star"></i>
-                                    <i class="an an-star"></i>
-                                    <i class="an an-star"></i>
-                                    <i class="an an-star-half-alt"></i>
+                                 <?php
+                                    $averageRating = get_avg_rationg_count($topproduct->id);
+                                    $fullStars = floor($averageRating);
+                                    $hasHalfStar = ($averageRating - $fullStars) >= 0.5;
+                                    for ($i = 0; $i < $fullStars; $i++) { // Print full stars ?>
+                                       <img src="<?= base_url("assets/site/images/icon/full-star.png");?>" width="20px" alt="">
+                                    <?php }
+                                    if ($hasHalfStar) { // Print half star ?>
+                                       <img src="<?= base_url("assets/site/images/icon/half-star.png");?>" width="20px" alt="">
+                                    <?php }
+                                    for ($i = 0; $i < (5 - ceil($averageRating)); $i++) { // Print empty stars if necessary ?>
+                                       <img src="<?= base_url("assets/site/images/icon/empty-star.png");?>" width="20px" alt="">
+                                    <?php }
+                                 ?>
                               </div>
                            </div>
                            <!-- End Product Details -->
@@ -166,67 +179,7 @@
                         <?php 
                            endforeach;
                            endif; 
-                        ?>
-
-                        <!-- <div class="col-12 item">
-           
-                           <div class="product-image">
-                 
-                              <a href="product-layout2.html">
-                   
-                                    <img class="primary blur-up lazyload" data-src="assets/images/product-images/product-image2.jpg" src="assets/images/product-images/product-image2.jpg" alt="image" title="product" />
-                        
-                                    <img class="hover blur-up lazyload" data-src="assets/images/product-images/product-image2-1.jpg" src="assets/images/product-images/product-image2-1.jpg" alt="image" title="product" />
-                  
-                                    <div class="product-labels rectangular"><span class="lbl on-sale">Exclusive</span></div>
-                               
-                              </a>
-                      
-                              <div class="button-set style2">
-                                    <div class="quickview-btn" data-bs-toggle="tooltip" data-bs-placement="right" title="quick view">
-                                       <a href="#open-quickview-popup" class="btn quick-view-popup quick-view"><i class="icon an an-search"></i></a>
-                                    </div>
-                                    <div class="variants add" data-bs-toggle="tooltip" data-bs-placement="right" title="add to cart">
-                                       <form class="addtocart" action="#" method="post">
-                                          <a href="#open-addtocart-popup" class="btn cartIcon btn-addto-cart open-addtocart-popup"><i class="icon an an-shopping-bag"></i></a>
-                                       </form>
-                                    </div>
-                                    <div class="wishlist-btn" data-bs-toggle="tooltip" data-bs-placement="right" title="add to wishlist">
-                                       <a href="#open-wishlist-popup" class="open-wishlist-popup wishlist add-to-wishlist"><i class="icon an an-heart"></i></a>
-                                    </div>
-                                    <div class="compare-btn" data-bs-toggle="tooltip" data-bs-placement="right" title="add to compare">
-                                       <a href="compare.html" class="compare add-to-compare"><i class="icon an an-random"></i></a>
-                                    </div>
-                              </div>
-                             
-                           </div>
-                    
-                           <div class="product-details text-center">
-                      
-                              <div class="product-name">
-                                    <a href="product-layout2.html">Fit & Flare Trim Dress</a>
-                              </div>
-               
-                              <div class="product-price">
-                                    <span class="price">$30.00</span>
-                              </div>
-             
-                              <div class="product-review">
-                                    <i class="an an-star"></i>
-                                    <i class="an an-star"></i>
-                                    <i class="an an-star"></i>
-                                    <i class="an an-star"></i>
-                                    <i class="an an-star"></i>
-                              </div>
-                    
-                              <ul class="swatches">
-                              </ul>
-                  
-                           </div>
-                          
-                        </div> -->
-
-                        
+                        ?> 
                   </div>
                </div>
                <!-- End Product List -->
@@ -254,8 +207,8 @@
                         <div class="col-12 col-sm-12 col-md-12 col-lg-3 item">
                            <div class="product-image">
                               <a href="<?= base_url('product/'.$topproduct->slug);?>">
-                                 <img class="primary blur-up lazyload" data-src="<?= get_product_main_image($featurproducts); ?>" src="<?= get_product_main_image($featurproducts); ?>" alt="image" title="product" />
-                                 <img class="hover blur-up lazyload" data-src="<?= get_product_image_by_hovar($featurproducts); ?>" src="<?= get_product_image_by_hovar($featurproducts); ?>" alt="image" title="product" />
+                                 <img class="primary blur-up lazyload" data-src="<?= get_product_main_image($featurproducts); ?>" src="<?= get_product_main_image($featurproducts); ?>" alt="image" title="<?= $featurproducts->title; ?>" />
+                                 <img class="hover blur-up lazyload" data-src="<?= get_product_image_by_hovar($featurproducts); ?>" src="<?= get_product_image_by_hovar($featurproducts); ?>" alt="image" title="<?= $featurproducts->title; ?>" />
                                  <!-- <div class="product-labels rectangular"><span class="lbl on-sale">-16%</span> <span class="lbl pr-label1">new</span></div> -->
                               </a>
                               <!-- <div class="saleTime desktop" data-countdown="2022/03/01"></div> -->
@@ -284,11 +237,20 @@
                                  <span class="price"><?= select_value_by_id('currencies','id',$featurproducts->currency_code,'hex');?><?php if(!empty($this->auth_user) && $this->auth_user->role == 'dristributor'){echo $featurproducts->dis_discounted_price;}else{echo $featurproducts->discounted_price;}?></span>
                               </div>
                               <div class="product-review">
-                                 <i class="an an-star"></i>
-                                 <i class="an an-star"></i>
-                                 <i class="an an-star"></i>
-                                 <i class="an an-star"></i>
-                                 <i class="an an-star-half-alt"></i>
+                                 <?php
+                                    $averageRating = get_avg_rationg_count($featurproducts->id);
+                                    $fullStars = floor($averageRating);
+                                    $hasHalfStar = ($averageRating - $fullStars) >= 0.5;
+                                    for ($i = 0; $i < $fullStars; $i++) { // Print full stars ?>
+                                       <img src="<?= base_url("assets/site/images/icon/full-star.png");?>" width="20px" alt="">
+                                    <?php }
+                                    if ($hasHalfStar) { // Print half star ?>
+                                       <img src="<?= base_url("assets/site/images/icon/half-star.png");?>" width="20px" alt="">
+                                    <?php }
+                                    for ($i = 0; $i < (5 - ceil($averageRating)); $i++) { // Print empty stars if necessary ?>
+                                       <img src="<?= base_url("assets/site/images/icon/empty-star.png");?>" width="20px" alt="">
+                                    <?php }
+                                 ?>
                               </div>
                            </div>
                         </div>
@@ -304,55 +266,8 @@
    </div>
 </div>
 
-
-<?php //if(!empty($testimonial)): ?>
-<!-- Testimonials Area -->
-<!-- <section class="process_area section_padding gradient_section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div id="testimonial-slider" class="owl-carousel">
-                    <?php //foreach($testimonial as $t): ?>  
-                    <div class="testimonial">
-                        <div class="pic">
-                            <img src="<= get_image($t->media_id);?>" alt="">
-                        </div>
-                        <div class="testimonial-content">
-                            <p class="description"><= $t->description ?></p>
-                            <h3 class="testimonial-title"><= $t->name; ?></h3>
-                            <small class="post"> - <= $t->profession; ?></small>
-                            <div class="p_rating">
-                               
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                
-                                <?php 
-                                    // for($i=0;$i<$t->rating;$i++):
-                                    //     echo '<i class="fa fa-star" style="color:#fa6100"></i>';
-                                    // endfor ;
-                                    
-                                    // for($j=$i;$j<5;$j++):
-                                    //     echo '<i class="fa fa-star"></i>';
-                                    // endfor ;
-                                ?>
-                            </div>
-                        </div>
-                    </div>
-                    <?php //endforeach ?>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> -->
-<!-- End STestimonials Area -->
-<?php //endif; ?>
-
-
-
-
-
    <!-- Collection -->
+   <?php if(!empty($offeralldata)){ ?>
    <div class="collection-box tle-bold section">
       <div class="container">
          <div class="section-header text-center">
@@ -360,7 +275,7 @@
          </div>
          <!-- Collection Box -->
          <div class="row collection-grids">
-            <?php if(!empty($offeralldata)){ foreach($offeralldata as $offer){ ?>
+            <?php foreach($offeralldata as $offer){ ?>
                <div class="col-12 col-sm-6 col-md-4 item">
                   <div class="collection-grid-item">
                      <img class="blur-up lazyload" data-src="<?= get_image($offer->media_id); ?>" src="<?= get_image($offer->media_id); ?>" alt="collection" title="" />
@@ -372,34 +287,13 @@
                      </a>
                   </div>
                </div>
-               <?php } } ?>
-               <!-- <div class="col-12 col-sm-6 col-md-4 item">
-                  <div class="collection-grid-item">
-                     <img class="blur-up lazyload" data-src="<= base_url('assets/site/images/collection/home2-collection2.jpg') ?>" src="<= base_url('assets/site/images/collection/home2-collection2.jpg') ?>" alt="collection" title="" />
-                     <a href="<= base_url('/products/all_products'); ?>" class="collection-grid-item__title-wrapper">
-                           <div class="title-wrapper">
-                              <h3 class="collection-grid-item__title fw-bold">Lemon Shakti <span>Under ₹ 50 </span></h3>
-                              <span class="btn btn--secondary border-btn-1">Shop Now</span>
-                           </div>
-                     </a>
-                  </div>
-               </div>
-               <div class="col-12 col-sm-6 col-md-4 item">
-                  <div class="collection-grid-item">
-                     <img class="blur-up lazyload" data-src="<= base_url('assets/site/images/collection/home2-collection3.jpg') ?>" src="<= base_url('assets/site/images/collection/home2-collection3.jpg') ?>" alt="collection" title="" />
-                     <a href="<= base_url('/products/all_products'); ?>" class="collection-grid-item__title-wrapper">
-                           <div class="title-wrapper">
-                              <h3 class="collection-grid-item__title fw-bold">Dish Wash <span>Under ₹ 100 </span></h3>
-                              <span class="btn btn--secondary border-btn-1">Shop This</span>
-                           </div>
-                     </a>
-                  </div>
-               </div> -->
+               <?php } ?>
          </div>
          <!-- End Collection Box -->
       </div>
    </div>
    <!-- End Collection -->
+   <?php } ?>
 
    <!-- Logo Slider -->
    <!-- <div class="section logo-section">

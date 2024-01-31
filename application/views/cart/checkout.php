@@ -203,8 +203,8 @@
                   <div class="your-payment">
                      <h2 class="payment-title mb-3">Payment Method</h2>
                      <div class="payment-method">
-                           <div class="payment-accordion">
-                              <?php //if ($this->payment_settings->square_enabled): ?>
+                        <div class="payment-accordion">
+                           <?php //if ($this->payment_settings->square_enabled): ?>
                               <!-- <li style="list-style:none;">
                                  <div class="option-payment">
                                     <div class="list-left">
@@ -226,7 +226,7 @@
                                     
                                  </div>
                               </li> -->
-                              <?php //$check_option = false; endif; ?>
+                           <?php //$check_option = false; endif; ?>
 								
 									<?php if ($this->auth_check == 1 && $this->payment_settings->cash_on_delivery_enabled): ?>
 										<li style="list-style:none;">
@@ -241,12 +241,13 @@
                                         </div>
 							            </div>
 						            </li>
-						            <?php endif; ?>
-                           </div>
+						         <?php endif; ?>
+                        </div>
+                        <h2 class="payment-title mb-3 mt-3">Distributer</h2>
 
-                           <div class="order-button-payment">
-                              <button type="submit" class="btn">Place order</button>
-                           </div>
+                        <div class="order-button-payment">
+                           <button type="submit" class="btn">Place order</button>
+                        </div>
                      </div>
                   </div>
                </div>

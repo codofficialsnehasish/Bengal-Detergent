@@ -458,7 +458,7 @@ public function price_update_process()
 				'is_visible'=>$this->input->post('is_visible', true),
           	    'is_featured'=>$this->input->post('is_featured', true),
 				'title'=>$this->input->post('name', true),
-				'sku'=>$this->input->post('sku', true),
+				// 'sku'=>$this->input->post('sku', true),
 				// 'sale_price'=>$this->input->post('sale_price', true),
 				// 'offer_price'=>$this->input->post('offer_price', true),
 				//'currency_code'=>$this->input->post('currency_code', true),
@@ -480,7 +480,8 @@ public function price_update_process()
 			$update=$this->edit_model->edit($data,$id,'id',$this->table_name);
 			if($update){
 				$this->session->set_flashdata('success', 'Data has been updated successfully');
-				redirect($this->agent->referrer());
+				// redirect($this->agent->referrer());
+				redirect('admin/products/price-details-edit/'.$id);
 			}else{
 				$this->session->set_flashdata('errors', 'Query error');
 		     	redirect($this->agent->referrer());

@@ -41,7 +41,7 @@
    b, strong {
    font-weight: bold;
    }
-   p {
+   ._2sc7ZR {
    font-size: 16px;
    line-height: 1.63;
    font-weight: 500;
@@ -262,7 +262,7 @@ $totalReviews = array_sum($starRatings);
 ?>
 <div class="row">
    <div class="col-lg-12 mb-3">
-   <a class="btn bg-dark text-white float-end" href="#review_section">Rate This Product</a>
+   <a class="btn bg-dark text-white float-end" href="#review_section"><i class="an-1x an an-pencil-alt me-1"></i> Write a review</a>
    </div>
 
 </div>
@@ -278,10 +278,10 @@ $totalReviews = array_sum($starRatings);
                             <div class="rating-number"><?= get_avg_rationg_count($product->id);?></div>
                             <div class="rating">
                                 <?php
-                                for ($i = 1; $i <= 5; $i++) {
-                                    $starCount = isset($starRatings[$i]) ? $starRatings[$i] : 0;
-                                    echo '<i class="fa fa-star" aria-hidden="true"></i> ';
-                                }
+                                 for ($i = 1; $i <= 5; $i++) {
+                                       $starCount = isset($starRatings[$i]) ? $starRatings[$i] : 0;
+                                       echo '<i class="fa fa-star" aria-hidden="true"></i> ';
+                                 }
                                 ?>
                             </div>
                             <span>(<?php echo $totalReviews; ?> Reviews)</span>
@@ -364,19 +364,20 @@ $totalReviews = array_sum($starRatings);
             <div class="row" id="reviewForm">
                <div class="rating-star">
                   <input type="hidden" name="rating" class="rating" data-filled="mdi mdi-star text-primary" data-empty="mdi mdi-star-outline text-primary"/> <!-- data-fractions="2" -->
+                  <!-- <input type="hidden" class="rating" data-filled="mdi mdi-heart text-danger" data-empty="mdi mdi-heart-outline text-danger"/> -->
                </div>
                <div class="_2sxtk-">
-                  <input type="text"  placeholder="Review Title...(optional)" id="review_title" class="form-control _3kRe7w mt-3 mb-3" />
+                  <input type="text"  placeholder="Review Title..." id="review_title" class="form-control _3kRe7w mt-3 mb-3" />
                </div>
                <div class="_2sxtk-">
-                  <textarea placeholder="Comments...(optional)" id="review" class="form-control _3kRe7w"></textarea>
+                  <textarea placeholder="Comments..." id="review" class="form-control _3kRe7w"></textarea>
                </div>
             </div>
             <div class="col-md-12"><button type="button" class="btn btn-md bg-dark text-white  mt-2" id="review-submit-button">Submit</button></div>
             <!-- <div id="reviewResponse"></div> -->
          </div>
       </div>
-   </form>
+   </form> 
    <div class="SFueOp">
    </div>
 </section>

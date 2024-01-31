@@ -1,9 +1,8 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <div class="modal-header">
-      <h5 class="modal-title">Options &nbsp;(<?php echo $variation->label_names;//echo html_escape(get_variation_label($variation->label_names, $this->selected_lang->id)); ?>)</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="modal"
-         aria-label="Close"></button>
-   </div>
+    <h5 class="modal-title">Options &nbsp;(<?php echo $variation->label_names;//echo html_escape(get_variation_label($variation->label_names, $this->selected_lang->id)); ?>)</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
 <div class="modal-body">
     <div class="row">
         <div class="col-12">
@@ -23,9 +22,8 @@
                                     <?php endif; ?>
                                 </td>
                                 <td align="right">
-                                <!-- <button type="button" class="btn btn-sm btn-primary btn-variation-table" onclick='edit_product_variation_option("<?php echo $variation->id; ?>","<?php echo $option->id; ?>");'><i class="fas fa-pencil-alt"></i> Edit</button> -->
+                                    <button type="button" class="btn btn-sm btn-primary btn-variation-table" onclick='edit_product_variation_option("<?php echo $variation->id; ?>","<?php echo $option->id; ?>");'><i class="fas fa-pencil-alt"></i> Edit</button>
                                     <button type="button" class="btn btn-sm btn-danger btn-variation-table" onclick='delete_product_variation_option("<?php echo $variation->id; ?>","<?php echo $option->id; ?>");'><i class="fas fa-trash-alt"></i> Delete</button>
-  
                                 </td>
                             </tr>
                            

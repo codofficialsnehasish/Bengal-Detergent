@@ -19,9 +19,7 @@
         <?php if($this->auth_user->user_type!='facebook' || $this->auth_user->user_type!='google'){?>
         <div class="images-upload-posito">
             <span class="go-checkout" type="button" style="line-height: 32px; padding:0 15px;">Upload image</span>
-            <?= form_open_multipart('', 'class="custom-validation" id ="profileForm"');?>
             <input type="file" id="profileImage" name="profile_image" class="image-input-u">
-            <?= form_close();?>
         </div>
         <?php }?>
     </div>

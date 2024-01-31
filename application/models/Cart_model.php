@@ -71,6 +71,38 @@ class Cart_model extends CI_Model
     }
 
 
+    public function buy_now_cart($product)
+    {
+        $deliveryCharge = null;
+        $quantity = $this->input->post('product_quantity', true);
+    	$deliveryCharge = $quantity*$this->input->post('delivery_charge');
+        if ($product->product_type == "digital") {
+            $quantity = 1;
+        }
+        $appended_variations = $this->get_selected_variations($product->id)->str;
+        $options_array = $this->get_selected_variations($product->id)->options_array;
+        if(!empty($this->input->cookie('user_id',true))){
+            $buyerId=$this->input->cookie('user_id',true);;
+        }else{
+            $buyerId=$this->auth_user->id;
+        }
+        $item =  array(
+            'product_id' => $product->id,
+            'product_type' => $product->product_type,
+            'product_title' => $product->title . " " . $appended_variations,
+            'variations' => implode(',',$options_array),
+            'quantity' => $quantity,
+            'delivery_charge' => $this->input->post('delivery_charge'),
+        	'total_delevery_charge' => $deliveryCharge,
+            'buyer_id' => $buyerId
+        );
+        if ($this->db->insert('buy_now_cart', $item)) {
+            $last_id = $this->db->insert_id();
+        }
+        return $last_id;
+    }
+
+
     public function check_cart_exists($product_id,$buyerId){
         $options_array = $this->get_selected_variations($product_id)->options_array;
         $con = array(
@@ -112,6 +144,42 @@ class Cart_model extends CI_Model
                 );
                 $this->db->select('*');
                 $this->db->from('cart');    
+                $this->db->where($con);
+                $query = $this->db->get();
+                $check = $query->num_rows();
+                if($check > 0){
+                    return $query->result();
+                }else{
+                    return false;
+                }
+            }else{
+                return false;
+            }
+        }
+    }
+
+    public function get_cart_by_buyer_buy_now(){
+        if ($this->auth_check) {
+            $con = array(
+                'buyer_id' => $this->auth_user->id
+            );
+            $this->db->select('*');
+            $this->db->from('buy_now_cart');    
+            $this->db->where($con);
+            $query = $this->db->get();
+            $check = $query->num_rows();
+            if($check > 0){
+                return $query->result();
+            }else{
+                return false;
+            }
+        }else{
+            if($this->input->cookie('user_id',true)){
+                $con = array(
+                    'buyer_id' => $this->input->cookie('user_id',true)
+                );
+                $this->db->select('*');
+                $this->db->from('buy_now_cart');    
                 $this->db->where($con);
                 $query = $this->db->get();
                 $check = $query->num_rows();
@@ -293,6 +361,49 @@ class Cart_model extends CI_Model
     //calculate cart total
     public function calculate_cart_total(){
         $cartitems = $this->get_cart_by_buyer();
+        $cart_total = new stdClass();
+        $cart_total->subtotal = 0;
+        $cart_total->gst = 0;
+        $cart_total->shipping_cost = 0;
+        $cart_total->total = 0;
+        $cart_total->no_of_items = !empty($cartitems)?count($cartitems):0;
+        $cart_total->currency_code = $this->payment_settings->default_product_currency;
+        $cart_total->currency ='';
+         
+        if(!empty($cartitems)){
+            $total =0;
+            foreach($cartitems as $item){
+                $product = $this->product_model->get_product_by_id($item->product_id);
+                if(!empty($product->id)){
+                    $appended_variations = $this->get_selected_variations($product->id)->str;
+                    if(!empty($item->variations) || $item->variations!='' || $item->variations!=null){
+                        $cartvariations=explode(',',$item->variations);
+                    }else{
+                        $cartvariations[]="";
+                    }
+                    array_filter($cartvariations);
+                }
+                //print_r(array_filter($cartvariations));
+                $object=$this->get_product_price_and_stock($product,$cartvariations,$item->quantity);
+                // echo $object->price_calculated;die;
+                unset($cartvariations);
+                $cart_total->subtotal += (int)$object->price_calculated * (int)$item->quantity;
+                //  $cart_total->gst += (int)calculate_product_gst($product) * (int)$item->quantity;
+                // $cart_total->shipping_cost += $item->shipping_cost;
+                $cart_total->shipping_cost+= round($item->total_delevery_charge);
+                // $total+=$price;
+                $currency=select_value_by_id('currencies','id',$product->currency_code,'hex');
+            }
+            $cart_total->currency=$currency;  
+        }
+        // $cart_total->gst=($cart_total->subtotal*12)/100;
+       
+        $cart_total->total = $cart_total->subtotal + $cart_total->gst + $cart_total->shipping_cost;
+        return $cart_total;
+    }
+
+    public function calculate_cart_total_buy_now(){
+        $cartitems = $this->get_cart_by_buyer_buy_now();
         $cart_total = new stdClass();
         $cart_total->subtotal = 0;
         $cart_total->gst = 0;

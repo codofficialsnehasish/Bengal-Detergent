@@ -38,13 +38,13 @@
                                 	<table class="table table-bordered table-hover align-middle text-center mb-3">
                                         <thead class="alt-font">
                                             <tr>
-                                                <th>Shop nameName</th>
+                                                <!-- <th>Shop nameName</th> -->
                                                 <th>Address</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td><?= $this->auth_user->shop_name;?></td>
+                                                <!-- <td><= $this->auth_user->shop_name;?></td> -->
                                                 <td><?= $this->auth_user->address;?></td>
                                             </tr>
                                         </tbody>

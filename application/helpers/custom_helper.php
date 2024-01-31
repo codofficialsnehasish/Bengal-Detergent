@@ -425,6 +425,18 @@ if (!function_exists('formatted_date')) {
     }
 }
 
+//print date
+if (!function_exists('formatted_pin')) {
+    function formatted_pin($pin)
+    {
+		if(strlen($pin) != 6) {
+            return $pin;
+        }
+        $_pin = substr($pin, 0, 3) . ' ' . substr($pin, 3, 3);
+        return $_pin;
+    }
+}
+
 //get image by media id
 if (!function_exists('get_custom_field_value')) {
     function get_custom_field_value($page_id,$field_name){
@@ -2040,6 +2052,7 @@ function get_expiryDate($date,$pacaage){
         function check_review($user_id,$id)
         {
            $ci =& get_instance();
+        //    $result = $ci->select->custom_qry("select * from product_review ");
            $result = $ci->select->custom_qry("select * from product_review where user_id=".$user_id." and product_id=".$id);
            if(!empty($result)){
            // $ci->delete_model->delete_multiple_clause('favorite_products','product_id',$id,'user_id',$user_id);

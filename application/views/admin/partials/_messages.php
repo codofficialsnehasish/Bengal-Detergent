@@ -1,50 +1,50 @@
 <?php if ($this->session->flashdata('errors')): 
- $arr = explode('<p>',$this->session->flashdata('errors'));
- $i=1;
-foreach($arr as $er){
+   $arr = explode('<p>',$this->session->flashdata('errors'));
+   $i=1;
+   foreach($arr as $er){
       if($i>1){
-   $msg = rtrim(str_replace("</p>","",$er));
- ?>
-      <script>
-         $(document).ready(function(){
-            showToast('error','Error','<?= $msg;?>');
-         });
+         $msg = rtrim(str_replace("</p>","",$er)); ?>
+         <script>
+            $(document).ready(function(){
+               showToast('error','Error','<?= $msg;?>');
+            });
          </script>
-<?php      }
-   $i++;}
-   endif; 
- ?>
+<?php }
+      $i++;
+   }
+endif; 
+?>
 
 <?php if ($this->session->flashdata('error')): ?>
    <script>
       $(document).ready(function(){
          showToast('error','Error','<?= $this->session->flashdata('error'); ?>');
       });
-      </script>    
+   </script>    
 <?php endif; ?>
 
 <?php if ($this->session->flashdata('success')): ?>
-     <script>
+   <script>
       $(document).ready(function(){
          showToast('success','Success','<?= $this->session->flashdata('success'); ?>');
       });
-      </script>
+   </script>
 <?php endif; ?>
 
 
 <?php if ($this->session->flashdata('info')): ?>
-     <script>
+   <script>
       $(document).ready(function(){
          showToast('info','Info','<?= $this->session->flashdata('info'); ?>');
       });
-      </script>
+   </script>
 <?php endif; ?>
 
 
 <?php if ($this->session->flashdata('warning')): ?>
-     <script>
+   <script>
       $(document).ready(function(){
          showToast('warning','Warning','<?= $this->session->flashdata('warning'); ?>');
       });
-      </script>
+   </script>
 <?php endif; ?>

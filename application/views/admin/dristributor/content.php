@@ -31,12 +31,12 @@
                                         <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                             <thead>
                                                 <tr>
-                                                    <th>Sl No.</th>
+                                                    <th>ID</th>
                                                     <th>Name</th>
-                                                    <th>Shop Name</th>
-                                                    <th>Team Lead Name</th>
-                                                    <th>Contact No</th>
-                                                    <th>eMail</th>
+                                                    <th>Business Name</th>
+                                                    <th>Team Lead</th>
+                                                    <th>Contact</th>
+                                                    <th>E-Mail</th>
                                                     <th>Status</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -47,7 +47,7 @@
                                                 <?php $i=1;
                                                 foreach($allitems as $item):?>
                                                 <tr>
-                                                    <td><?= $i++;?></td>
+                                                    <td><?= $item->user_id;?></td>
                                                     <td><img src="<?= get_image($item->user_image);?>" width="50" />&nbsp;&nbsp;&nbsp;&nbsp;<a href="<?= admin_url('dristributor/details/'.$item->id);?>"><?= $item->full_name;?></a></td>
                                                     <td><a href="<?= admin_url('dristributor/details/'.$item->id);?>"><?= $item->shop_name;?></a></td>
                                                     <td><a href="<?= admin_url('dristributor/details/'.$item->id);?>"><?= get_tl_name($item->tl_id); ?></a></td>

@@ -181,6 +181,12 @@ class Auth_model extends CI_Model
         return $slug;
     }
 
+    public function createName($username) {
+        $username = str_replace(' ', '-', $username);
+        $username = trim($username, '-_');
+        return $username;
+    }
+
     //get user by slug
     public function get_user_by_slug($slug)
     {
@@ -451,7 +457,8 @@ class Auth_model extends CI_Model
         $data = $this->auth_model->input_values();
         // $data['username'] = remove_special_characters($data['username']);
         $user_name = remove_special_characters(strtolower($data['first_name']));
-       // $data['username'] = $this->generate_uniqe_username($user_name);
+        // $data['username'] = $this->generate_uniqe_username($user_name);
+        $data['username'] = $this->generate_uniqe_username($user_name);
         //secure password
         $data['password'] = $this->bcrypt->hash_password($data['password']);
         // $data['role'] = 'retailer';

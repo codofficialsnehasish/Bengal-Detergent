@@ -136,7 +136,7 @@ class Products extends Core_Controller {
                 'is_visible' => 1,
             	'is_draft' => 0
             )
-            );
+        );
         $allproducts = $this->select->getResult($conditions);
         $data['product']= $allproducts[0];
 		$data['product_images']=$this->select->select_single_data('product_images','product_id',$product_id);

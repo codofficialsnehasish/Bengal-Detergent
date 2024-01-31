@@ -35,105 +35,150 @@
                   <div class="card-header bg-primary text-light">
                      Edit Personal Details
                   </div>
-                  <div class="card-body">
-                     <div class="mb-3">
+                  <div class="card-body row">
+                     <div class="mb-3 col-md-6">
                         <label class="form-label">First Name</label>
                         <div>
-                           <input data-parsley-type="text" type="text"
-                              class="form-control" required
-                              placeholder="Enter Name" name="first_name" value="<?= $item->first_name;?>">
+                           <input data-parsley-type="text" type="text" class="form-control" placeholder="Enter Name" name="first_name" value="<?= $item->first_name;?>" required>
                         </div>
                      </div>
-                     <div class="mb-3">
+                     <div class="mb-3 col-md-6">
                         <label class="form-label">Last Name</label>
                         <div>
-                           <input data-parsley-type="text" type="text"
-                              class="form-control" required
-                              placeholder="Enter Name" name="last_name" value="<?= $item->last_name;?>">
+                           <input data-parsley-type="text" type="text" class="form-control" placeholder="Enter Name" name="last_name" value="<?= $item->last_name;?>" required>
                         </div>
                      </div>
-                     <div class="mb-3">
+                     <div class="mb-3 col-md-4">
                         <label class="form-label">eMail</label>
                         <div>
-                           <input data-parsley-type="text" type="text"
-                              class="form-control" 
-                              placeholder="Enter eMail" name="email" value="<?= $item->email;?>">
+                           <input data-parsley-type="text" type="text" class="form-control" placeholder="Enter eMail" name="email" value="<?= $item->email;?>">
                         </div>
                      </div>
-                     <div class="mb-3">
+                     <div class="mb-3 col-md-4">
                         <label class="form-label">Phone Number</label>
                         <div>
-                           <input data-parsley-type="text" type="text"
-                              class="form-control" 
-                              placeholder="Enter Phone Number" name="phone_number" value="<?= $item->phone_number;?>">
+                           <input data-parsley-type="text" type="text" class="form-control" placeholder="Enter Phone Number" name="phone_number" value="<?= $item->phone_number;?>" required>
+                        </div>
+                     </div>
+                     <div class="mb-3 col-md-4">
+                        <label class="form-label">Optional Phone Number</label>
+                        <div>
+                           <input data-parsley-type="number" type="number" class="form-control" placeholder="Enter Optional Phone Number" value="<?= $item->alt_phone_number;?>" name="alt_phone_number" required>
                         </div>
                      </div>
                      <div class="mb-3">
                         <label class="form-label">Address</label>
                         <div>
-                           <input data-parsley-type="text" type="text"
-                              class="form-control" 
-                              placeholder="Enter Address" name="address" value="<?= $item->address;?>">
+                           <textarea class="form-control" rows="3" name="address" required><?= $item->address;?></textarea>
+                        </div>
+                     </div>
+                     <div class="mb-3 col-md-6">
+                        <label class="form-label">Pin Code</label>
+                        <div>
+                           <input data-parsley-type="number" type="number" value="<?= $item->zip_code;?>" class="form-control" placeholder="Enter pin code" name="zip_code" required>
+                        </div>
+                     </div>
+                     <div class="mb-3 col-md-6">
+                        <label class="form-label">Police Station</label>
+                        <div>
+                           <input data-parsley-type="text" type="text" value="<?= $item->police_station;?>" class="form-control"  placeholder="Enter Police Station" name="police_station" required>
                         </div>
                      </div>
                   </div>
                </div>
                <div class="card">
                   <div class="card-header bg-primary text-light">
-                     Edit Shop Details
+                     Edit Business Details
                   </div>
-                  <div class="card-body">
+                  <div class="card-body row">
                      <div class="mb-3">
-                        <label class="form-label">Shop Name</label>
+                        <label class="form-label">Business Name</label>
                         <div>
-                           <input data-parsley-type="text" type="text"
-                              class="form-control" required
-                              placeholder="Shop Name" name="shop_name" value="<?= $item->shop_name;?>">
+                           <input data-parsley-type="text" type="text" class="form-control" placeholder="Shop Name" name="shop_name" value="<?= $item->shop_name;?>" required>
                         </div>
                      </div>
                      <div class="mb-3">
-                        <label class="form-label">Pan Card</label>
+                        <label class="form-label">Business Address</label>
                         <div>
-                           <input data-parsley-type="text" type="text"
-                              class="form-control" 
-                              placeholder="Pan" name="pan_no" value="<?= $item->pan_no;?>">
+                           <textarea class="form-control" rows="3" name="shop_address" required><?= $item->shop_address;?></textarea>
                         </div>
                      </div>
-                     <div class="mb-3">
+                     <div class="mb-3 col-md-6">
+                        <label class="form-label">Business Pin Code</label>
+                        <div>
+                           <input data-parsley-type="number" type="number" class="form-control" value="<?= $item->shop_pin_code;?>" placeholder="Enter Business Pin Code" name="shop_pin_code" required>
+                        </div>
+                     </div>
+                     <div class="mb-3 col-md-6">
+                        <label class="form-label">Police Station</label>
+                        <div>
+                           <input data-parsley-type="text" type="text" class="form-control" value="<?= $item->shop_police_station;?>" placeholder="Enter Police Station" name="shop_police_station" required>
+                        </div>
+                     </div>
+                     <div class="mb-3 col-md-6">
+                        <label class="form-label">Pan Card Number</label>
+                        <div>
+                           <input data-parsley-type="text" type="text" class="form-control" placeholder="Pan" name="pan_no" value="<?= $item->pan_no;?>">
+                        </div>
+                     </div>
+                     <div class="mb-3 col-md-6">
                         <label class="form-label">Pan Card Document Proof</label>
                         <div class="mb-3">
                         <img class="img-thumbnail rounded me-2" alt="" width="200" src="<?= get_image($item->pan_proof);?>" data-holder-rendered="true" style="display:<?= $item->pan_proof!=0?'block':'none';?>">
                         </div>
                         <div>
-                           <input data-parsley-type="file" type="file"
-                              class="form-control" 
-                              placeholder="Pan" name="pan_proof">
+                           <input data-parsley-type="file" type="file" class="form-control" placeholder="Pan" name="pan_proof">
                         </div>
                      </div>
 
-                     <div class="mb-3">
-                        <label class="form-label">GST</label>
+                     <div class="mb-3 col-md-6">
+                        <label class="form-label">GST Number</label>
                         <div>
-                           <input data-parsley-type="text" type="text"
-                              class="form-control" 
-                              placeholder="Enter GST" name="gst_no" value="<?= $item->gst_no;?>">
+                           <input data-parsley-type="text" type="text" class="form-control" placeholder="Enter GST" name="gst_no" value="<?= $item->gst_no;?>">
                         </div>
                      </div>
 
-                     <div class="mb-3">
+                     <div class="mb-3 col-md-6">
                         <label class="form-label">GST Document Proof</label>
                         <div class="mb-3">
                            <img class="img-thumbnail rounded me-2" alt="" width="200" src="<?= get_image($item->gst_proof);?>" data-holder-rendered="true" style="display:<?= $item->gst_proof!=0?'block':'none';?>">
                         </div>
                         <div>
-                           <input data-parsley-type="file" type="file"
-                              class="form-control" required
-                              placeholder="Pan" name="gst_proof" >
+                           <input data-parsley-type="file" type="file" class="form-control" placeholder="Pan" name="gst_proof" required>
+                        </div>
+                     </div>
+
+                     <div class="mb-3 col-md-6">
+                        <label class="form-label">Trade License</label>
+                        <div>
+                           <input data-parsley-type="text" type="text" class="form-control" placeholder="Enter Trade License" name="trade_license" value="<?= $item->trade_licence_no;?>">
+                        </div>
+                     </div>
+
+                     <div class="mb-3 col-md-6">
+                        <label class="form-label">Trade License Proof</label>
+                        <div class="mb-3">
+                           <img class="img-thumbnail rounded me-2" alt="" width="200" src="<?= get_image($item->trade_licence_proof);?>" data-holder-rendered="true" style="display:<?= $item->trade_licence_proof!=0?'block':'none';?>">
+                        </div>
+                        <div>
+                           <input data-parsley-type="file" type="file" class="form-control" placeholder="Pan" name="trade_license_proof" >
                         </div>
                      </div>
                   </div>
                </div>
-
+               <div class="card">
+                  <div class="card-header bg-primary text-light">
+                     Edit Work Details
+                  </div>
+                  <div class="card-body row">
+                     <div class="mb-3">
+                        <label class="form-label">Preferable Pin Code <b style="color: red;">Coma(,) Separated</b></label>
+                        <div>
+                           <input data-parsley-type="text" type="text" class="form-control" placeholder="Ex. 700003,582365,712406" value="<?= $item->prefarable_zip_code;?>" name="prefer_pin" required>
+                        </div>
+                     </div>
+                  </div>
+               </div>
             </div>
             <!-- end col -->
             <div class="col-lg-3">

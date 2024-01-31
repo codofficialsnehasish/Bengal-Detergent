@@ -686,5 +686,36 @@ public function otpUnlock($date){
 }
 
 
+public function seller_profile_update(){
+	$data=array(
+		'first_name'=>$this->input->post('first_name', true),
+		'last_name'=>$this->input->post('last_name', true),
+		'full_name'=>$this->input->post('first_name', true).' '.$this->input->post('last_name', true),
+		'email'=>$this->input->post('email', true),
+		'phone_number'=>$this->input->post('phone_number', true),
+		'address'=>$this->input->post('address', true),
+		'country_id'=>$this->input->post('country_id', true),
+		'state_id'=>$this->input->post('state_id', true),
+		'city_id'=>$this->input->post('city_id', true),
+		'zip_code'=>$this->input->post('zip_code', true),
+	);
+
+	if(is_uploaded_file($_FILES['profile_image']['tmp_name'])) 
+	{  
+		$data['user_image']=$this->mediaupload->doUpload('profile_image');
+	}
+
+
+	$update=$this->edit_model->edit($data,$this->auth_user->id,'id','users');
+	if($update){
+		$this->session->set_flashdata('success', 'Data has been updated successfully');
+		redirect($this->agent->referrer());
+	}else{
+		$this->session->set_flashdata('errors', 'Query error');
+		 redirect($this->agent->referrer());
+	}
+}
+
+
 
 }

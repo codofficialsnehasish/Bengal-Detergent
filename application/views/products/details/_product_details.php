@@ -53,8 +53,22 @@
                         <div class="prInfoRow d-flex flex-wrap">
                            <div class="product-review">
                               <a class="reviewLink d-flex flex-wrap align-items-center" href="#tab2">
-                                    <i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-half-alt"></i>
-                                    <span class="spr-badge-caption">6 reviews</span>
+                              <?php
+                                 $averageRating = get_avg_rationg_count($product->id);
+                                 $fullStars = floor($averageRating);
+                                 $hasHalfStar = ($averageRating - $fullStars) >= 0.5;
+                                 for ($i = 0; $i < $fullStars; $i++) { // Print full stars ?>
+                                    <img src="<?= base_url("assets/site/images/icon/full-star.png");?>" width="20px" alt="">
+                                 <?php }
+                                 if ($hasHalfStar) { // Print half star ?>
+                                    <img src="<?= base_url("assets/site/images/icon/half-star.png");?>" width="20px" alt="">
+                                 <?php }
+                                 for ($i = 0; $i < (5 - ceil($averageRating)); $i++) { // Print empty stars if necessary ?>
+                                    <img src="<?= base_url("assets/site/images/icon/empty-star.png");?>" width="20px" alt="">
+                                 <?php }
+                              ?>
+                                 <!-- <i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-half-alt"></i> -->
+                                 <span class="spr-badge-caption"><?= $product->rating;?> reviews</span>
                               </a>
                            </div>
                         </div>
@@ -88,7 +102,21 @@
                         <!-- Form -->
                         <?= form_open('/add-to-cart', 'class="needs-validation product-form product-form-product-template product-form-border hidedropdown" id="form_add_cart"  novalidate '); ?>
 					            <input type="hidden" name="product_id" id="product_id" value="<?= $product->id;?>">
-                           <!-- <form method="post" action="/cart/add" id="product_form_10508262282" accept-charset="UTF-8" class="product-form product-form-product-template product-form-border hidedropdown" enctype="multipart/form-data"> -->
+                           
+                           <!-- Size Swatch -->
+                           <?php if (!empty($full_width_product_variations)):
+                              foreach ($full_width_product_variations as $variation):
+                                 $this->load->view('products/details/_product_variations', ['variation' => $variation]);
+                              endforeach;
+                              endif;
+                              if (!empty($half_width_product_variations)):
+                              foreach ($half_width_product_variations as $variation):
+                                 $this->load->view('products/details/_product_variations', ['variation' => $variation]);
+                              endforeach;
+                              endif; 
+                           ?>
+                           <!-- End Size Swatch -->
+
                            <!-- Product Action -->
                            <div class="product-action clearfix">
                               <div class="product-form__item--quantity">
@@ -100,16 +128,16 @@
                                        </div>
                                     </div>
                               </div>                                
-                              <!-- <div class="product-form__item--submit">
-                                    <button type="button" name="add" class="btn product-form__cart-submit"><span>Add to cart</span></button>
-                              </div> -->
-                              <?php $buttton = get_product_form_data($product)->button;
-                                 if (!empty($buttton)):?>
-                              <?php echo $buttton; ?> 
-                              <?php endif; ?>
-                              <!-- <div class="payment-button" data-shopify="payment-button">
-                                    <button type="button" class="payment-button__button payment-button__button--unbranded">Buy it now</button>
-                              </div> -->
+                              <div class="product-form__item--submit">
+                                    <!-- <button type="button" name="add" class="btn product-form__cart-submit"><span>Add to cart</span></button> -->
+                                 <?php $buttton = get_product_form_data($product)->button;
+                                    if (!empty($buttton)):?>
+                                       <?php echo $buttton; ?> 
+                                 <?php endif; ?>
+                              </div>
+                              <div class="payment-button" data-shopify="payment-button">
+                                 <button type="button" id="<?= $product->id; ?>" onclick="buynow(this.id)" class="payment-button__button payment-button__button--unbranded">Buy it now</button>
+                              </div>
                            </div>
                            <!-- End Product Action -->
                            <!-- </form> -->
@@ -137,15 +165,16 @@
                         </div>
                         <!-- End Product Feature -->
 
-                        <!-- <div id="freeShipMsg" class="freeShipMsg rte mb-1" data-price="199"><i class="icon an an-truck" aria-hidden="true"></i> GETTING CLOSER! ONLY <b class="freeShip"><span class="money" data-currency-usd="$199.00" data-currency="USD">$199.00</span></b> AWAY FROM <b>FREE SHIPPING!</b></div> -->
-                        <!-- <div class="shippingMsg rte mb-1"><i class="icon an an-clock-o an-2x" aria-hidden="true"></i> ESTIMATED DELIVERY BETWEEN <b id="fromDate">Wed. May 1</b> and <b id="toDate">Tue. May 7</b>.</div> -->
-                        <!-- <div class="userViewMsg rte" data-user="50" data-time="5000"><i class="icon an an-users" aria-hidden="true"></i> <strong class="uersView">25</strong> People are looking at this product right now</div> -->
-
                         <!-- Product Intro -->
-                        <!-- <div class="product-info">
-                           <p class="product-stock">Availability: <span class="instock">In Stock</span><span class="outstock hide">Unavailable</span></p> 
-                           <p class="product-sku">SKU: <span class="variant-sku">3435DT-1</span></p>
-                        </div> -->
+                        <div class="product-info">
+                           <p class="product-stock">
+                              Availability: 
+                              <span class="<?php if($product->stock_status == 1){echo 'instock';}else{echo 'outstock';} ?>">
+                                 <?php if($product->stock_status == 1){echo "In Stock";}else{echo "Unavailable";} ?>
+                              </span>
+                           </p> 
+                           <p class="product-sku">SKU: <span class="variant-sku"><?= $product->sku;?></span></p>
+                        </div>
                         <!-- End Product Intro -->
                   </div>
                   <!-- End Product Info -->
@@ -158,8 +187,9 @@
                <!-- Tabs -->
                <ul class="product-tabs d-none d-md-block">
                   <li class="active" rel="tab1"><a class="tablink">Product Details</a></li>
+                  <li rel="tab3"><a class="tablink">Product Specification</a></li>
                   <li rel="tab2"><a class="tablink">Product Reviews</a></li>
-                  <li rel="tab4"><a class="tablink">Shipping &amp; Returns</a></li>
+                  <!-- <li rel="tab4"><a class="tablink">Shipping &amp; Returns</a></li> -->
                </ul>
                <!-- End Tabs -->
                <!-- Tabs Container -->
@@ -172,10 +202,17 @@
                      </div>
                   </div>
                   <!-- End Tabs Content One -->
+                  <h3 class="acor-ttl active d-block d-md-none" rel="tab3">Product Specification</h3>
+                  <div id="tab3" class="tab-content py-3 py-md-0" style="display:block;">
+                     <div class="product-description rte">
+                        <?= $product->product_specification;?> 
+                     </div>
+                  </div>
                   <!-- Tabs Content Two -->
                   <h3 class="acor-ttl d-block d-md-none" rel="tab2">Product Reviews</h3>
                   <div id="tab2" class="tab-content py-3 py-md-0">
-                        <div id="shopify-product-reviews">
+                     <?php $this->load->view('products/details/_reviews');?>
+                        <!-- <div id="shopify-product-reviews">
                            <div class="spr-container">
                               <div class="spr-header clearfix">
                                     <div class="spr-summary text-center d-flex justify-content-start justify-content-sm-between flex-column flex-sm-row">
@@ -249,18 +286,18 @@
                                     </div>
                               </div>
                            </div>
-                        </div>
+                        </div> -->
                   </div>
                   <!-- End Tabs Content Two -->
                   <!-- Tabs Content Four -->
-                  <h3 class="acor-ttl d-block d-md-none" rel="tab4">Shipping &amp; Returns</h3>
+                  <!-- <h3 class="acor-ttl d-block d-md-none" rel="tab4">Shipping &amp; Returns</h3>
                   <div id="tab4" class="tab-content py-3 py-md-0">
                         <h4>Returns Policy</h4>
                         <p class="mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eros justo, accumsan non dui sit amet. Phasellus semper volutpat mi sed imperdiet. Ut odio lectus, vulputate non ex non, mattis sollicitudin purus. Mauris consequat justo a enim interdum, in consequat dolor accumsan. Nulla iaculis diam purus, ut vehicula leo efficitur at.</p>
                         <p>Interdum et malesuada fames ac ante ipsum primis in faucibus. In blandit nunc enim, sit amet pharetra erat aliquet ac.</p>
                         <h4>Shipping</h4>
                         <p>Pellentesque ultrices ut sem sit amet lacinia. Sed nisi dui, ultrices ut turpis pulvinar. Sed fringilla ex eget lorem consectetur, consectetur blandit lacus varius. Duis vel scelerisque elit, et vestibulum metus.  Integer sit amet tincidunt tortor. Ut lacinia ullamcorper massa, a fermentum arcu vehicula ut. Ut efficitur faucibus dui Nullam tristique dolor eget turpis consequat varius. Quisque a interdum augue. Nam ut nibh mauris.</p>
-                  </div>
+                  </div> -->
                   <!-- End Tabs Content Four -->
                </div>
                <!-- End Tabs Container -->
@@ -284,10 +321,10 @@
                            <!-- Product Image -->
                            <a href="<?= base_url('product/'.$sproduct->slug);?>">
                               <!-- Image -->
-                              <img class="primary blur-up lazyload" data-src="<?= get_product_main_image($sproduct); ?>" src="<?= get_product_main_image($sproduct); ?>" alt="image" title="product" />
+                              <img class="primary blur-up lazyload" data-src="<?= get_product_main_image($sproduct); ?>" src="<?= get_product_main_image($sproduct); ?>" alt="image" title="<?= $sproduct->title; ?>" />
                               <!-- End Image -->
                               <!-- Hover Image -->
-                              <img class="hover blur-up lazyload" data-src="<?= get_product_image_by_hovar($sproduct); ?>" src="<?= get_product_image_by_hovar($sproduct); ?>" alt="image" title="product" />
+                              <img class="hover blur-up lazyload" data-src="<?= get_product_image_by_hovar($sproduct); ?>" src="<?= get_product_image_by_hovar($sproduct); ?>" alt="image" title="<?= $sproduct->title; ?>" />
                               <!-- End Hover Image -->
                               <!-- Product Label -->
                               <div class="product-labels rectangular"><span class="lbl on-sale">Exclusive</span></div>
@@ -329,11 +366,20 @@
                            <!-- End Product Price -->
                            <!-- Product Review -->
                            <div class="product-review">
-                              <i class="an an-star"></i>
-                              <i class="an an-star"></i>
-                              <i class="an an-star"></i>
-                              <i class="an an-star"></i>
-                              <i class="an an-star-half-alt"></i>
+                              <?php
+                                 $averageRating = get_avg_rationg_count($sproduct->id);
+                                 $fullStars = floor($averageRating);
+                                 $hasHalfStar = ($averageRating - $fullStars) >= 0.5;
+                                 for ($i = 0; $i < $fullStars; $i++) { // Print full stars ?>
+                                    <img src="<?= base_url("assets/site/images/icon/full-star.png");?>" width="20px" alt="">
+                                 <?php }
+                                 if ($hasHalfStar) { // Print half star ?>
+                                    <img src="<?= base_url("assets/site/images/icon/half-star.png");?>" width="20px" alt="">
+                                 <?php }
+                                 for ($i = 0; $i < (5 - ceil($averageRating)); $i++) { // Print empty stars if necessary ?>
+                                    <img src="<?= base_url("assets/site/images/icon/empty-star.png");?>" width="20px" alt="">
+                                 <?php }
+                              ?>
                            </div>
                            <!-- End Product Review -->
                            <!-- Variant -->

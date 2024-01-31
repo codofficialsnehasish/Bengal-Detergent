@@ -78,10 +78,10 @@
                                  <!-- Product Image -->
                                  <a href="<?= base_url('product/'.$product->slug);?>">
                                        <!-- Image -->
-                                       <img class="primary blur-up lazyload" data-src="<?= get_product_main_image($product); ?>" src="<?= get_product_main_image($product); ?>" alt="image" title="product" />
+                                       <img class="primary blur-up lazyload" data-src="<?= get_product_main_image($product); ?>" src="<?= get_product_main_image($product); ?>" alt="image" title="<?= $product->title; ?>" />
                                        <!-- End Image -->
                                        <!-- Hover image -->
-                                       <img class="hover blur-up lazyload" data-src="<?= get_product_image_by_hovar($product); ?>" src="<?= get_product_image_by_hovar($product); ?>" alt="image" title="product" />
+                                       <img class="hover blur-up lazyload" data-src="<?= get_product_image_by_hovar($product); ?>" src="<?= get_product_image_by_hovar($product); ?>" alt="image" title="<?= $product->title; ?>" />
                                        <!-- End Hover Image -->
                                        <!-- Product Label -->
                                        <div class="product-labels rectangular"><span class="lbl on-sale">Exclusive</span></div>
@@ -111,7 +111,7 @@
                               <div class="product-details text-center">
                                  <!-- Product Name -->
                                  <div class="product-name">
-                                       <a href="<?= base_url('product/'.$product->slug); ?>"><?= $product->title; ?></a>
+                                    <a href="<?= base_url('product/'.$product->slug); ?>"><?= $product->title; ?></a>
                                  </div>
                                  <!-- End Product Name -->
                                  <!-- Product Price -->
@@ -124,11 +124,20 @@
                                  <!-- End Product Price -->
                                  <!-- Product Review -->
                                  <div class="product-review">
-                                       <i class="an an-star"></i>
-                                       <i class="an an-star"></i>
-                                       <i class="an an-star"></i>
-                                       <i class="an an-star"></i>
-                                       <i class="an an-star-half-alt"></i>
+                                    <?php
+                                       $averageRating = get_avg_rationg_count($product->id);
+                                       $fullStars = floor($averageRating);
+                                       $hasHalfStar = ($averageRating - $fullStars) >= 0.5;
+                                       for ($i = 0; $i < $fullStars; $i++) { // Print full stars ?>
+                                          <img src="<?= base_url("assets/site/images/icon/full-star.png");?>" width="20px" alt="">
+                                       <?php }
+                                       if ($hasHalfStar) { // Print half star ?>
+                                          <img src="<?= base_url("assets/site/images/icon/half-star.png");?>" width="20px" alt="">
+                                       <?php }
+                                       for ($i = 0; $i < (5 - ceil($averageRating)); $i++) { // Print empty stars if necessary ?>
+                                          <img src="<?= base_url("assets/site/images/icon/empty-star.png");?>" width="20px" alt="">
+                                       <?php }
+                                    ?>
                                  </div>
                                  <!-- End Product Review -->
 

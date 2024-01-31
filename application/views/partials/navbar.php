@@ -114,6 +114,7 @@ $categoriesMenu=$this->select->get_parent_categories();
                                                     <?php if($this->auth_user->role == 'teamlead'){ ?>
                                                         <li class="item"><a href="<?= base_url('authentication/add_distributor'); ?>">Add Dristributor</a></li>
                                                     <?php } ?>
+                                                    <li class="item"><a href="<?= base_url('/my-dashboard'); ?>">Profile</a></li>
                                                     <li class="item"><a href="<?= base_url('/logout'); ?>">Logout</a></li>
                                                 <?php }else{ ?>
                                                     <li class="item"><a href="<?= base_url('/login'); ?>">Login</a></li>
