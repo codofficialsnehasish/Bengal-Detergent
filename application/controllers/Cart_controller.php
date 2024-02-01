@@ -364,19 +364,17 @@ class Cart_controller extends Core_Controller
     /**
      * Payment Method Post
      */
-    public function payment_method_post()
-    {
+    public function payment_method_post(){
         $this->cart_model->set_sess_cart_payment_method();
         if($this->input->post('addrradio')=='fornewaddr'){
-            // echo 'hello';die;
             $this->saveaddress();
         }
         
        
         $mds_payment_type = $this->input->post('payment_option', true);
-         if (!empty($mds_payment_type) && $mds_payment_type == 'cash_on_delivery') {
+        if (!empty($mds_payment_type) && $mds_payment_type == 'cash_on_delivery') {
             $this->cash_on_delivery_payment_post();
-         } else {
+        } else {
             redirect("payment");
         }
     }
@@ -384,8 +382,7 @@ class Cart_controller extends Core_Controller
     /**
      * Payment
      */
-    public function payment()
-    {
+    public function payment(){
         //check is set cart payment method
         $data['cart_payment_method'] =$this->cart_model->get_sess_cart_payment_method();
         if (empty($data['cart_payment_method'])) {
@@ -411,8 +408,7 @@ class Cart_controller extends Core_Controller
     /**
      * Payment with Razorpay
      */
-    public function square_payment_post()
-    {
+    public function square_payment_post(){
         $this->load->library('squarepayment');
 
         $input = json_decode(file_get_contents('php://input'), true);
@@ -426,15 +422,15 @@ class Cart_controller extends Core_Controller
             'desc' => 'online products',
         );
        $result = $this->squarepayment->create_order($array);
-    //    echo $result['amount'].'<br>';
-    //    echo $result['created_at'].'<br>';
-    //    echo $result['currency'].'<br>';
-    //    echo $result['receipt_number'].'<br>';
-    //    echo $result['receipt_url'].'<br>';
-    //    echo $result['status'].'<br>';
-    //    echo $result['receipt_url'].'<br>';
+        //    echo $result['amount'].'<br>';
+        //    echo $result['created_at'].'<br>';
+        //    echo $result['currency'].'<br>';
+        //    echo $result['receipt_number'].'<br>';
+        //    echo $result['receipt_url'].'<br>';
+        //    echo $result['status'].'<br>';
+        //    echo $result['receipt_url'].'<br>';
         //echo $result['txn_id'].'<br>';
-      // print_r($result);die;
+        // print_r($result);die;
         $data_transaction = array(
             'payment_method' => "Square",
             'payment_id' => $result['txn_id'],
@@ -457,15 +453,10 @@ class Cart_controller extends Core_Controller
     }
 
 
-
-
-
-
     /**
      * Payment with Razorpay
      */
-    public function razorpay_payment_post()
-    {
+    public function razorpay_payment_post(){
         $this->load->library('razorpay');
 
         $data_transaction = array(
@@ -507,10 +498,15 @@ class Cart_controller extends Core_Controller
     /**
      * Cash on Delivery
      */
-    public function cash_on_delivery_payment_post()
-    {
+    public function cash_on_delivery_payment_post(){
+        $distributer = $this->input->post('distributer_option',true);
+        if(!empty($distributer)){
+            $dist_id = $this->input->post('dist_id',true);
+            $order_id = $this->order_model->add_order_offline_payment("Cash On Delivery",'',$distributer,$dist_id);
+        }else{
+            $order_id = $this->order_model->add_order_offline_payment("Cash On Delivery");
+        }
         //add order
-        $order_id = $this->order_model->add_order_offline_payment("Cash On Delivery");
         $order = $this->order_model->get_order($order_id);
         print_r($order);
         if (!empty($order)) {
@@ -544,8 +540,7 @@ class Cart_controller extends Core_Controller
     /**
      * Execute Sale Payment
      */
-    public function execute_sale_payment($data_transaction, $redirect_type = 'json_encode')
-    {
+    public function execute_sale_payment($data_transaction, $redirect_type = 'json_encode'){
         //add order
        
         $order_id = $this->order_model->add_order($data_transaction);
@@ -603,8 +598,7 @@ class Cart_controller extends Core_Controller
     /**
      * Execute Promote Payment
      */
-    public function execute_promote_payment($data_transaction, $redirect_type = 'json_encode')
-    {
+    public function execute_promote_payment($data_transaction, $redirect_type = 'json_encode'){
         $promoted_plan = $this->session->userdata('modesy_selected_promoted_plan');
         if (!empty($promoted_plan)) {
             //execute payment
@@ -669,8 +663,7 @@ class Cart_controller extends Core_Controller
     /**
      * Promote Payment Completed
      */
-    public function promote_payment_completed()
-    {
+    public function promote_payment_completed(){
         $data['title'] = trans("msg_payment_completed");
         $data['description'] = trans("msg_payment_completed") . " - " . $this->app_name;
         $data['keywords'] = trans("payment") . "," . $this->app_name;
@@ -687,7 +680,7 @@ class Cart_controller extends Core_Controller
         $this->load->view('partials/_footer');
     }
 
-///////save address
+    ///////save address
 
 
     public function subscription_payment_method(){
@@ -701,11 +694,11 @@ class Cart_controller extends Core_Controller
         $currency= select_value_by_id('currencies','id',$plan[0]->currency_code,'hex');
         $cart_total=$plan[0]->subscription_amount;
         $data = array(
-         'total_amount' => $total_amount,
-         'currency' => $currency,
-         'cart_total' => $cart_total,
-         'plan_id' => $plan_id,
-         'token' => $token
+            'total_amount' => $total_amount,
+            'currency' => $currency,
+            'cart_total' => $cart_total,
+            'plan_id' => $plan_id,
+            'token' => $token
         );
         $insertArray=array(
             'plan_id' => $plan_id,
@@ -716,12 +709,10 @@ class Cart_controller extends Core_Controller
         $this->load->view('partials/header', $data);
         $this->load->view('auth/payment', $data);
         $this->load->view('partials/footer');
-    
-     }
+    }
     
 
-     public function subscription_payment_processing()
-     {
+    public function subscription_payment_processing(){
         $plan_id=$this->input->post('plan_id');
         $token=$this->input->post('token');
         if($plan_id=='' && $token==''){
@@ -729,30 +720,30 @@ class Cart_controller extends Core_Controller
         }
         $plan=$this->select->select_single_data('membership_plan','id',$plan_id);
         $total_amount=$plan[0]->subscription_amount;
-       // $currency= select_value_by_id('currencies','id',$plan[0]->currency_code,'hex');
+        // $currency= select_value_by_id('currencies','id',$plan[0]->currency_code,'hex');
         $cart_total=$plan[0]->subscription_amount;
         $data = array(
-         'cart_total' => $cart_total,
-         'plan_id' => $plan_id,
-         'token' => $token
+            'cart_total' => $cart_total,
+            'plan_id' => $plan_id,
+            'token' => $token
         );
-      //  $data['cart_payment_method']=$this->input->post('payment_option', true);
-      //  $data['payment_option']=$this->input->post('payment_option', true);
+        //  $data['cart_payment_method']=$this->input->post('payment_option', true);
+        //  $data['payment_option']=$this->input->post('payment_option', true);
         
-         $data['total_amount'] = (int)$plan[0]->subscription_amount*100;
+        $data['total_amount'] = (int)$plan[0]->subscription_amount*100;
         // $data['total_amount'] = 100;
-         $data['cart_payment_method'] =$this->cart_model->set_cart_payment_method();
-    // print_r($this->cart_model->set_cart_payment_method());die;
-         $data['currency'] = $this->payment_settings->default_product_currency;
-         $data['mds_payment_type'] = 'plan';
-         $this->load->view('partials/header', $data);
-         $this->load->view('cart/payment', $data);
-         $this->load->view('partials/footer');
-     }
+        $data['cart_payment_method'] =$this->cart_model->set_cart_payment_method();
+        // print_r($this->cart_model->set_cart_payment_method());die;
+        $data['currency'] = $this->payment_settings->default_product_currency;
+        $data['mds_payment_type'] = 'plan';
+        $this->load->view('partials/header', $data);
+        $this->load->view('cart/payment', $data);
+        $this->load->view('partials/footer');
+    }
 
 
 
-     public function execute_plan_purchase($data_transaction, $redirect_type = 'json_encode'){
+    public function execute_plan_purchase($data_transaction, $redirect_type = 'json_encode'){
         $order_id = $this->order_model->add_membership_plan_order($data_transaction); 
         $order = $this->order_model->get_order($order_id);
         if ($redirect_type == 'json_encode') {
@@ -777,67 +768,76 @@ class Cart_controller extends Core_Controller
                 redirect("seller/profile/complete");
             }
         }
-     }
-
-
-
+    }
 
      
-     public function saveaddress(){
-        $billingdata=array(
-            'user_id ' => $this->auth_user->id,
-            'billing_first_name' => $this->input->post('billing_first_name',true),
-            'address_type' => $this->input->post('address_type',true),
-            'billing_last_name' => $this->input->post('billing_last_name',true),
-            'billing_email' => $this->input->post('billing_email',true),
-            'billing_phone_number' => $this->input->post('billing_phone_number',true),
-            'billing_address_1' => $this->input->post('billing_address_1',true),
-            'billing_address_2' => $this->input->post('billing_address_2',true),
-            'billing_landmark' => $this->input->post('billing_landmark',true),
-            'billing_country' => $this->input->post('billing_country',true),
-            'billing_state' => $this->input->post('billing_state',true),
-            'billing_city' => $this->input->post('billing_city',true),
-            'billing_zip_code' => $this->input->post('billing_zip_code',true),
-            'shipping_first_name' => $this->input->post('billing_first_name',true),
-            'shipping_last_name' => $this->input->post('billing_last_name',true),
-            'shipping_email' => $this->input->post('billing_email',true),
-            'shipping_phone_number' => $this->input->post('billing_email',true),
-            'shipping_address_1' => $this->input->post('billing_address_1',true),
-            'shipping_address_2' => $this->input->post('billing_address_2',true),
-            'shipping_landmark' => $this->input->post('billing_landmark',true),
-            'shipping_country' => $this->input->post('billing_country',true),
-            'shipping_state' => $this->input->post('billing_state',true),
-            'shipping_city' => $this->input->post('billing_city',true),
-            'shipping_zip_code' => $this->input->post('billing_zip_code',true),
-            'addl_info' => $this->input->post('addl_info',true),
-            'is_default'=> 1
-        );
+    public function saveaddress(){
+        $this->form_validation->set_rules('billing_first_name', 'First Name', 'required|xss_clean|max_length[200]');
+        $this->form_validation->set_rules('billing_last_name', 'Last Name', 'required|xss_clean|max_length[200]');
+        $this->form_validation->set_rules('billing_phone_number', 'Phone Number', 'required|xss_clean|max_length[200]');
+        $this->form_validation->set_rules('billing_address_1', 'Address', 'required|xss_clean|max_length[200]');
+        $this->form_validation->set_rules('billing_country', 'Country', 'required|xss_clean|max_length[200]');
+        $this->form_validation->set_rules('billing_state', 'State', 'required|xss_clean|max_length[200]');
+        $this->form_validation->set_rules('billing_city', 'City', 'required|xss_clean|max_length[200]');
+        $this->form_validation->set_rules('billing_zip_code', 'Pin Code', 'required|xss_clean|max_length[200]');
+		if ($this->form_validation->run() == false) {
+			$this->session->set_flashdata('errors', validation_errors());
+			redirect($this->agent->referrer());
+		}else{
+            $billingdata=array(
+                'user_id ' => $this->auth_user->id,
+                'billing_first_name' => $this->input->post('billing_first_name',true),
+                'address_type' => $this->input->post('address_type',true),
+                'billing_last_name' => $this->input->post('billing_last_name',true),
+                'billing_email' => $this->input->post('billing_email',true),
+                'billing_phone_number' => $this->input->post('billing_phone_number',true),
+                'billing_address_1' => $this->input->post('billing_address_1',true),
+                'billing_address_2' => $this->input->post('billing_address_2',true),
+                'billing_landmark' => $this->input->post('billing_landmark',true),
+                'billing_country' => $this->input->post('billing_country',true),
+                'billing_state' => $this->input->post('billing_state',true),
+                'billing_city' => $this->input->post('billing_city',true),
+                'billing_zip_code' => $this->input->post('billing_zip_code',true),
+                'shipping_first_name' => $this->input->post('billing_first_name',true),
+                'shipping_last_name' => $this->input->post('billing_last_name',true),
+                'shipping_email' => $this->input->post('billing_email',true),
+                'shipping_phone_number' => $this->input->post('billing_email',true),
+                'shipping_address_1' => $this->input->post('billing_address_1',true),
+                'shipping_address_2' => $this->input->post('billing_address_2',true),
+                'shipping_landmark' => $this->input->post('billing_landmark',true),
+                'shipping_country' => $this->input->post('billing_country',true),
+                'shipping_state' => $this->input->post('billing_state',true),
+                'shipping_city' => $this->input->post('billing_city',true),
+                'shipping_zip_code' => $this->input->post('billing_zip_code',true),
+                'addl_info' => $this->input->post('addl_info',true),
+                'is_default'=> 1
+            );
     
-        $shippingdata=array(
-            'shipping_first_name' => $this->input->post('billing_first_name',true),
-            'shipping_last_name' => $this->input->post('billing_last_name',true),
-            'shipping_email' => $this->input->post('billing_email',true),
-            'shipping_phone_number' => $this->input->post('billing_email',true),
-            'shipping_address_1' => $this->input->post('billing_address_1',true),
-            'shipping_address_2' => $this->input->post('billing_address_2',true),
-            'shipping_landmark' => $this->input->post('billing_landmark',true),
-            'shipping_country' => $this->input->post('billing_country',true),
-            'shipping_state' => $this->input->post('billing_state',true),
-            'shipping_city' => $this->input->post('billing_city',true),
-            'shipping_zip_code' => $this->input->post('billing_zip_code',true),
-        );
+            $shippingdata=array(
+                'shipping_first_name' => $this->input->post('billing_first_name',true),
+                'shipping_last_name' => $this->input->post('billing_last_name',true),
+                'shipping_email' => $this->input->post('billing_email',true),
+                'shipping_phone_number' => $this->input->post('billing_email',true),
+                'shipping_address_1' => $this->input->post('billing_address_1',true),
+                'shipping_address_2' => $this->input->post('billing_address_2',true),
+                'shipping_landmark' => $this->input->post('billing_landmark',true),
+                'shipping_country' => $this->input->post('billing_country',true),
+                'shipping_state' => $this->input->post('billing_state',true),
+                'shipping_city' => $this->input->post('billing_city',true),
+                'shipping_zip_code' => $this->input->post('billing_zip_code',true),
+            );
     
-           $this->clearDefaultAddress();
-           $insert= $this->insert_model->insert_data($billingdata,'address_book');
-           if($insert){
-            $this->edit_model->edit($shippingdata,$this->auth_user->id,'id','users'); 
-           // $this->session->set_flashdata('success', 'Address has been inserted successfully');
-           // redirect($this->agent->referrer());
-           return true;
-           }
-    
-        
+            $this->clearDefaultAddress();
+            $insert= $this->insert_model->insert_data($billingdata,'address_book');
+            if($insert){
+                $this->edit_model->edit($shippingdata,$this->auth_user->id,'id','users'); 
+                // $this->session->set_flashdata('success', 'Address has been inserted successfully');
+                // redirect($this->agent->referrer());
+                return true;
+            }
+        }  
     }
+
     public function clearDefaultAddress(){
         $result=$this->select->select_single_data('address_book','user_id', $this->auth_user->id);
         if(!empty($result)){

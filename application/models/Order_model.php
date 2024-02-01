@@ -104,7 +104,7 @@ class Order_model extends CI_Model
     }
 
     //add order offline payment
-    public function add_order_offline_payment($payment_method,$userId="")
+    public function add_order_offline_payment($payment_method,$userId="",$is_for_distributer=0,$dist_id=0)
     {
         $order_status = "awaiting_payment";
         $payment_status = "awaiting_payment";
@@ -126,6 +126,8 @@ class Order_model extends CI_Model
                 'status' => 0,
                 'payment_method' => $payment_method,
                 'payment_status' => $payment_status,
+                'is_for_distributer' => $is_for_distributer,
+                'distributer_id'=> $dist_id,
                 'updated_at' => date('Y-m-d H:i:s'),
                 'created_at' => date('Y-m-d H:i:s')
             );

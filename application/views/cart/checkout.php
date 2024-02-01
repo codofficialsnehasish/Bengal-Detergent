@@ -19,7 +19,8 @@
                   <!-- <form method="post" action="#"> -->
                      <fieldset>
                         <h2 class="login-title mb-3">Billing details</h2>
-                        <?php if(!empty($shipping_address)):
+                        <?php 
+                        if(!empty($shipping_address)):
                            foreach($shipping_address as $addr):  
                         ?>
                         <div class="">
@@ -35,19 +36,21 @@
                         <?php endforeach;endif;?>
                         <div class="">
                            <label>
-                              <input type="radio" name="addrradio" required value="fornewaddr">
+                              <input type="radio" name="addrradio" required value="fornewaddr" required <?php if(empty($shipping_address)) echo 'checked'; ?>>
                               <p class="name">Add New</p><div class="invalid-tooltip" style="width:23%;">Address is Required</div>
                            </label>
                         </div>
-                        <div id="orderdiv" style='display:none;'>
+                        <div id="orderdiv" style='display:<?php if(empty($shipping_address)){ echo '';}else{ echo 'none';} ?>;'>
                            <div class="row">
                               <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                  <label for="input-firstname">First Name <span class="required-f">*</span></label>
-                                 <input name="billing_first_name" value="" id="input-firstname" type="text">
+                                 <input name="billing_first_name" value="" id="input-firstname" type="text" required>
+                                 <div class="invalid-feedback">This is Required</div>
                               </div>
                               <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                  <label for="input-lastname">Last Name <span class="required-f">*</span></label>
-                                 <input name="billing_last_name" value="" id="input-lastname" type="text">
+                                 <input name="billing_last_name" value="" id="input-lastname" type="text" required>
+                                 <div class="invalid-feedback">This is Required</div>
                               </div>
                            </div>
                            <div class="row">
@@ -57,33 +60,38 @@
                               </div>
                               <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                  <label for="input-telephone">Telephone <span class="required-f">*</span></label>
-                                 <input name="billing_phone_number" value="" id="input-telephone" type="tel">
+                                 <input name="billing_phone_number" value="" id="input-telephone" type="tel" required>
+                                 <div class="invalid-feedback">This is Required</div>
                               </div>
                            </div>
                            <div class="row">
                               <div class="form-group col-md-6 col-lg-6 col-xl-6">
                                  <label for="input-company">Address</label>
-                                 <input name="billing_address_1" value="" id="input-company" type="text">
+                                 <input name="billing_address_1" value="" id="input-company" type="text" required>
+                                 <div class="invalid-feedback">This is Required</div>
                               </div>
                               <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                  <label for="input-address-1">Street <span class="required-f">*</span></label>
-                                 <input name="billing_address_2" value="" id="input-address-1" type="text">
+                                 <input name="billing_address_2" value="" id="input-address-1" type="text" required>
+                                 <div class="invalid-feedback">This is Required</div>
                               </div>
                            </div>
                            <div class="row">
                               <div class="form-group col-md-6 col-lg-6 col-xl-6">
                                  <label for="input-address-2">Landmark <span class="required-f">*</span></label>
-                                 <input name="billing_landmark" value="" id="input-address-2" type="text">
+                                 <input name="billing_landmark" value="" id="input-address-2" type="text" required>
+                                 <div class="invalid-feedback">This is Required</div>
                               </div>
                               <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                 <label for="input-postcode">Post Code <span class="required-f">*</span></label>
-                                 <input name="billing_zip_code" value="" id="input-postcode" type="text">
+                                 <label for="input-postcode">Pin Code <span class="required-f">*</span></label>
+                                 <input name="billing_zip_code" value="" id="input-postcode" type="text" required>
+                                 <div class="invalid-feedback">This is Required</div>
                               </div>
                            </div>
                            <div class="row">
                               <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                  <label for="country_id">Country <span class="required-f">*</span></label>
-                                 <select name="country_id" id="country_id" name="billing_country">
+                                 <select name="country_id" id="country_id" name="billing_country" required>
                                  <option value="">Choose....</option>
                                     <?php 
                                        if(!empty($countries)):
@@ -94,11 +102,13 @@
                                        endif;
                                     ?>
                                  </select>
+                                 <div class="invalid-feedback">This is Required</div>
                               </div>
                               <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                  <label for="states_id">Region / State <span class="required-f">*</span></label>
-                                 <select name="billing_state" id="states_id" required>
+                                 <select name="billing_state" id="states_id" required >
                                  </select>
+                                 <div class="invalid-feedback">This is Required</div>
                               </div>
                            </div>
                            <div class="row">
@@ -106,11 +116,12 @@
                                  <label for="citys_id">City <span class="required-f">*</span></label>
                                  <select name="billing_city" id="citys_id" required>
                                  </select>
+                                 <div class="invalid-feedback">This is Required</div>
                               </div>
                               <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                  <label for="adtype">Address Type:<span class="req"> *</span></label>
                                  <select class="form-control form-select validate" name="address_type">
-                                    <option value="1">Home</option>
+                                    <option value="1" selected>Home</option>
                                     <option value="2">Office</option>
                                  </select>
                                  <div class="invalid-tooltip">This field is required</div>
@@ -233,18 +244,34 @@
 											<div class="option-payment">
 												<div class="list-left">
 													<input type="radio" id="option_cash_on_delivery" name="payment_option" value="cash_on_delivery" required <?php echo ($check_option == true) ? 'checked' : ''; ?>>
-                                   <label class="ps-4" for="option_cash_on_delivery">
-                                      <div class="payment-way-hd">Cash On Delivery/Pay on Delivery</div>
-                                      <div class="payment-way-text">We only collect the amount printed on the invoice.</div>
-                                     
-													</label>
-                                        </div>
+                                       <label class="ps-4" for="option_cash_on_delivery">
+                                          <div class="payment-way-hd">Cash On Delivery/Pay on Delivery</div>
+                                          <div class="payment-way-text">We only collect the amount printed on the invoice.</div>
+                                       </label>
+                                    </div>
 							            </div>
 						            </li>
 						         <?php endif; ?>
                         </div>
+                        <?php if($this->auth_user->role == 'retailer'){ ?>
                         <h2 class="payment-title mb-3 mt-3">Distributer</h2>
-
+                        <?php $dist = get_dristributer_data($this->auth_user->zip_code); $check_this = true; ?>
+                        <li style="list-style:none;">
+                           <div class="option-payment">
+                              <?php foreach($dist as $destributer){ ?>
+                              <div class="list-left">
+                                 <input type="radio" id="option_cdistributer<?= $destributer->id; ?>" name="distributer_option" value="1" required <?php echo ($check_this == true) ? 'checked' : ''; ?>>
+                                 <input type="hidden" name="dist_id" value="<?= $destributer->id; ?>">
+                                 <label class="ps-4" for="option_cdistributer<?= $destributer->id; ?>">
+                                    <div class="payment-way-hd"><?= $destributer->full_name; ?></div>
+                                    <div class="payment-way-hd">Address - <?= $destributer->address; ?></div>
+                                 </label>
+                              </div>
+                              <hr>
+                              <?php $check_this = false; } ?>
+                           </div>
+                        </li>
+                        <?php } ?>
                         <div class="order-button-payment">
                            <button type="submit" class="btn">Place order</button>
                         </div>

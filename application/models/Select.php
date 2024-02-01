@@ -651,5 +651,14 @@ public function getAllcategories(){
 		$query = $this->db->get('categories');
 		return $query->result();
 	}
+
+	public function get_distributer_by_pin($pin){
+		$this->db->where('role', 'dristributor');
+		$this->db->where('status', 1);
+		$this->db->where('is_approved', 1);
+		$this->db->where("FIND_IN_SET($pin, prefarable_zip_code)");
+		$query = $this->db->get('users');
+		return $query->result();
+	}
 }  
 ?>
