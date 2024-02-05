@@ -11,7 +11,7 @@
    }
    audio, canvas, video {
    display: inline-block;
-   }
+   }   
    audio:not([controls]) {
    display: none;
    height: 0;

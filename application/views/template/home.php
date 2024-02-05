@@ -285,7 +285,7 @@
                            <span class="btn btn--secondary border-btn-1"><?= $offer->link_title; ?></span>
                         </div>
                      </a>
-                  </div>
+                  </div> 
                </div>
                <?php } ?>
          </div>

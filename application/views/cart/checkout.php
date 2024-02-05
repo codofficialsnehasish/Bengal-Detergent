@@ -44,54 +44,54 @@
                            <div class="row">
                               <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                  <label for="input-firstname">First Name <span class="required-f">*</span></label>
-                                 <input name="billing_first_name" value="" id="input-firstname" type="text" required>
+                                 <input class="form-control validate"  name="billing_first_name" value="" id="input-firstname" type="text" required>
                                  <div class="invalid-feedback">This is Required</div>
                               </div>
                               <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                  <label for="input-lastname">Last Name <span class="required-f">*</span></label>
-                                 <input name="billing_last_name" value="" id="input-lastname" type="text" required>
+                                 <input class="form-control validate"  name="billing_last_name" value="" id="input-lastname" type="text" required>
                                  <div class="invalid-feedback">This is Required</div>
                               </div>
                            </div>
                            <div class="row">
                               <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                  <label for="input-email">E-Mail <span class="required-f">*</span></label>
-                                 <input name="billing_email" value="" id="input-email" type="email">
+                                 <input class="form-control validate"  name="billing_email" value="" id="input-email" type="email">
                               </div>
                               <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                  <label for="input-telephone">Telephone <span class="required-f">*</span></label>
-                                 <input name="billing_phone_number" value="" id="input-telephone" type="tel" required>
+                                 <input class="form-control validate"  name="billing_phone_number" value="" id="input-telephone" type="tel" required>
                                  <div class="invalid-feedback">This is Required</div>
                               </div>
                            </div>
                            <div class="row">
                               <div class="form-group col-md-6 col-lg-6 col-xl-6">
                                  <label for="input-company">Address</label>
-                                 <input name="billing_address_1" value="" id="input-company" type="text" required>
+                                 <input class="form-control validate"  name="billing_address_1" value="" id="input-company" type="text" required>
                                  <div class="invalid-feedback">This is Required</div>
                               </div>
                               <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                  <label for="input-address-1">Street <span class="required-f">*</span></label>
-                                 <input name="billing_address_2" value="" id="input-address-1" type="text" required>
+                                 <input class="form-control validate"  name="billing_address_2" value="" id="input-address-1" type="text" required>
                                  <div class="invalid-feedback">This is Required</div>
                               </div>
                            </div>
                            <div class="row">
                               <div class="form-group col-md-6 col-lg-6 col-xl-6">
                                  <label for="input-address-2">Landmark <span class="required-f">*</span></label>
-                                 <input name="billing_landmark" value="" id="input-address-2" type="text" required>
+                                 <input class="form-control validate"  name="billing_landmark" value="" id="input-address-2" type="text" required>
                                  <div class="invalid-feedback">This is Required</div>
                               </div>
                               <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                  <label for="input-postcode">Pin Code <span class="required-f">*</span></label>
-                                 <input name="billing_zip_code" value="" id="input-postcode" type="text" required>
+                                 <input class="form-control validate" name="billing_zip_code" value="" id="input-postcode" type="text" required>
                                  <div class="invalid-feedback">This is Required</div>
                               </div>
                            </div>
                            <div class="row">
                               <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                  <label for="country_id">Country <span class="required-f">*</span></label>
-                                 <select name="country_id" id="country_id" name="billing_country" required>
+                                 <select class="form-control form-select validate" id="country_id" name="billing_country" required>
                                  <option value="">Choose....</option>
                                     <?php 
                                        if(!empty($countries)):
@@ -106,7 +106,7 @@
                               </div>
                               <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                  <label for="states_id">Region / State <span class="required-f">*</span></label>
-                                 <select name="billing_state" id="states_id" required >
+                                 <select class="form-control form-select validate" name="billing_state" id="states_id" required >
                                  </select>
                                  <div class="invalid-feedback">This is Required</div>
                               </div>
@@ -114,7 +114,7 @@
                            <div class="row">
                               <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                  <label for="citys_id">City <span class="required-f">*</span></label>
-                                 <select name="billing_city" id="citys_id" required>
+                                 <select class="form-control form-select validate" name="billing_city" id="citys_id" required>
                                  </select>
                                  <div class="invalid-feedback">This is Required</div>
                               </div>
@@ -138,7 +138,7 @@
                            <div class="row">
                               <div class="form-group col-md-12 col-lg-12 col-xl-12 mb-0">
                                  <label for="input-company">Order Notes <span class="required-f">*</span></label>
-                                 <textarea class="form-control resize-both" name="addl_info" rows="3">Optional</textarea>
+                                 <textarea class="form-control resize-both" name="addl_info" rows="3"></textarea>
                               </div>
                            </div>
                         </div>

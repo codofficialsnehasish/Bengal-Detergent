@@ -22,7 +22,12 @@ class Orders extends Core_Controller
 		$header['pagecss']="contentCss";
 		$header['title']='Orders';
 		$this->load->view('admin/partials/header',$header);
-		$data['orders']=$this->select->select_table($this->table_name,'id','asc');
+		// $data['orders']=$this->select->select_table($this->table_name,'id','asc');
+		if($this->auth_user->role == "dristributor"){
+			$data['orders']=$this->select->select_double_data($this->table_name,'is_for_distributer',1,'distributer_id',$this->auth_user->id);
+		}else if($this->auth_user->role == "admin"){
+			$data['orders']=$this->select->select_table($this->table_name,'id','asc');
+		}
 		$this->load->view($this->view_path.'orders',$data);
 		$script['pagescript']='contentScript';
 		$this->load->view('admin/partials/footer',$script);

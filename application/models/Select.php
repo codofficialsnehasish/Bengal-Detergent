@@ -115,6 +115,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		 return $query->result();
 	  }
 
+	  function select_double_data($table,$t1,$t2,$t3,$t4,$limit="", $offset="10000000")
+	  {
+         $this->db->select('*');
+		 $this->db->from($table);
+		 $this->db->limit($offset, $limit);
+		 $this->db->where($t1,$t2);   
+		 $this->db->where($t3,$t4);  
+		 $query = $this->db->get();
+		 return $query->result();
+	  }
+
 	   function select_single_data_order($table,$field_id,$id,$orderby="",$order="",$limit="", $offset="10000000")
 	  {
          $this->db->select('*');

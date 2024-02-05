@@ -6,7 +6,7 @@
 				<div class="col-md-12">
 					<div class="history-txt">
 						<div class="heading">
-							<h2><?= $page->page_name;?></h2>
+							<h2><?= $page->page_name;?></h2> 
 							<h3 class="yeseva"><?= $page->page_title;?></h3>
 						</div>
 						<?= $page->page_content;?>

@@ -11,7 +11,7 @@
                      <li class="user-logout"><a href="logout"><i class="fa fa-sign-out-alt"></i>Logout</a></li>
                   </ul>
                </div>
-               <div class="col-md-9">
+               <div class="col-md-9"> 
                   <div class="panel panel-default">
                      <div class="panel-heading">
                         <h4>Order History</h4>
