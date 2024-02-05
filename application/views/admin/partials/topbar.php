@@ -47,14 +47,8 @@
         </div>
 
         <div class="d-flex">
-            <div class="d-none d-sm-block">
-                <div class="dropdown pt-3 d-inline-block text text-center">
-                    <a class="btn btn-success text text-center dropdown-toggle" href="<?= base_url('employee-management/dashboard') ?>">Go to Employee Management <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-            <button type="button" onclick="javascript:window.location.href='<?= base_url();?>'" class="btn header-item noti-icon waves-effect" id="page-header-search-dropdown"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="mdi mdi-eye"></i>
+            <button type="button" onclick="javascript:window.location.href='<?= base_url();?>'" class="btn header-item noti-icon waves-effect" id="page-header-search-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="mdi mdi-eye"></i>
             </button>
               <!-- App Search-->
               <!-- <form class="app-search d-none d-lg-block">

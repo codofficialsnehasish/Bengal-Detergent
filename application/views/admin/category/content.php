@@ -35,7 +35,7 @@
                                                     <th>Category Name</th>
                                                     <th>Parent Category</th>
                                                     <th>Visibility</th>
-                                                    <th>Menu Category</th>
+                                                    <th>Show on Home</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -46,10 +46,10 @@
                                                 foreach($allitems as $item):?>
                                                 <tr>
                                                     <td><?= $i++;?></td>
-                                                    <td><a href="<?= admin_url('category/edit/'.$item->cat_id);?>"><?= $item->cat_name;?></a></td>
+                                                    <td><a href="<?= admin_url('category/edit/'.$item->cat_id);?>"><img src="<?= get_image($item->media_id);?>" width="50" />&nbsp;&nbsp;&nbsp;&nbsp;<?= $item->cat_name;?></a></td>
                                                     <td><?= select_value_by_id('categories','cat_id',$item->parent_id,'cat_name');?></td>
                                                     <td><?= check_visibility($item->is_visible);?> </td>
-                                                    <td><?= check_popular($item->is_menu);?> </td>
+                                                    <td><?= check_popular($item->is_home);?> </td>
                                                     <td>
                                                         <a href="<?= admin_url('category/edit/'.$item->cat_id);?>" class="btn btn-primary btn-sm edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit this Item">
                                                                 <i class="fas fa-pencil-alt" title="Edit"></i>

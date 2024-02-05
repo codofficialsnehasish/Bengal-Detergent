@@ -1,0 +1,156 @@
+
+footer{
+    display: flex;
+    align-items: center;
+    background: #050424;
+    h4{
+        background: -webkit-linear-gradient(45deg,#c2871e, #efcc7f);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 25px;
+    }
+}
+.social-network{
+    h2{
+        font-weight: 600;
+        color: $golden;
+        span{
+            font-weight: 400;
+            color: white;
+            display: block;
+            font-size: 40px;
+
+            @include tab-landscape{
+                font-size: 30px;
+            }
+            @include mobile-lg{
+                font-size: 25px;
+            }
+        }
+    }
+    ul{
+        li{
+            a{
+                background: -webkit-linear-gradient(#c2871e, #efcc7f);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                border-left: 1px solid #c2871e;
+                border-top: 1px solid #efcc7f;
+                width: 55px;
+                height: 55px;
+                font-size: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 15px;
+            }
+        }
+    }
+}
+.copyright{
+    @include mobile-lg{
+        text-align: center;
+    }
+    p{
+        margin: 0;
+        color: white;
+        a{
+            color: white;
+        }
+    }
+}
+
+.footer-contact, .footer-link{
+    max-width: 450px;
+    padding: 25px;
+    border: 1px solid $golden;
+    border-radius: 20px;
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#040229+0,05033b+100 */
+    background: linear-gradient(45deg,  rgba(4,2,41,1) 0%,rgba(5,3,59,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    @include windows-laptop{
+        max-width: 350px;
+    }
+
+    ul{
+        li{
+            color: $golden;
+            a{
+                color: $golden;
+                &:hover{
+                    color: white;
+                }
+            }
+        }
+    }
+}
+
+.footer-contact{
+    ul{
+        li{
+            display: flex;
+            column-gap: 20px;
+        }
+    }
+
+    @include tab-landscape{
+        margin-bottom: 50px;
+        max-width: 705px;
+    }
+    @include tab-portrait{
+        max-width: 100%;
+        margin-top: 50px;
+    }
+}
+
+.footer-link{
+    @include tab-landscape{
+        width: 47%;
+    }
+    @include tab-portrait{
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 50px;
+    }
+}
+
+.footer-content{
+    @include tab-landscape{
+        flex-wrap: wrap;
+    }
+}
+
+.footer-bottom{
+    border-top: 1px solid white;
+    background: #050424;
+    height: 100px;
+    display: flex;
+    align-items: center;
+
+    ul{
+        li{
+            a{
+                width: 40px;
+                height: 40px;
+                /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ffce6b+0,c1851c+50,ffce6b+100 */
+                background: linear-gradient(135deg,  rgba(255,206,107,1) 0%,rgba(193,133,28,1) 50%,rgba(255,206,107,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: $default-dark;
+
+                &:hover{
+                    color: white;
+                }
+            }
+        }
+    }
+}
+
+.footer-logo{
+    @include tab-portrait{
+        margin: 0 auto;
+    }
+}

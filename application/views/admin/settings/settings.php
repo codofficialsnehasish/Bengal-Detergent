@@ -97,7 +97,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-lg-6">
+                                                    <!-- <div class="col-lg-6">
                                                         <div class="card">
                                                         <?= form_open_multipart('admin/settings/logo-process/'.$item->id, 'class="custom-validation"');?>
                                                         <input type="hidden" name="id" value="<?= $item->id;?>" />
@@ -144,7 +144,7 @@
                                                             </div>
                                                             <?= form_close();?>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                                                </div>
                                             </div>
                                     </div>

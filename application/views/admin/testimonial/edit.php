@@ -4,11 +4,11 @@
       <div class="page-title-box">
          <div class="row align-items-center">
             <div class="col-md-8">
-               <h6 class="page-title">Slider</h6>
+               <h6 class="page-title">Testimonial</h6>
                <ol class="breadcrumb m-0">
                   <li class="breadcrumb-item"><a href="<?= admin_url('')?>">Home</a></li>
-                  <li class="breadcrumb-item"><a href="<?= admin_url('slider')?>">Slider</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Edit Slider</li>
+                  <li class="breadcrumb-item"><a href="<?= admin_url('testimonial')?>">Testimonial</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Edit Testimonial</li>
                </ol>
             </div>
             <div class="col-md-4">
@@ -45,11 +45,11 @@
                      </div>
 
                      <div class="mb-3">
-                        <label class="form-label">Profession</label>
+                        <label class="form-label">Title</label>
                         <div>
                            <input data-parsley-type="text" type="text"
                               class="form-control" required
-                              placeholder="Ex : Freelancer" value="<?= $item->profession;?>" name="profession" id="profession">
+                              placeholder="Ex : Freelancer" value="<?= $item->title;?>" name="title" id="title">
                         </div>
                      </div>
                              

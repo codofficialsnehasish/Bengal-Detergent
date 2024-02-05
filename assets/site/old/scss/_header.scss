@@ -1,0 +1,596 @@
+
+
+header{
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#05032c+0,06061b+100 */
+    background: linear-gradient(to bottom,  rgba(5,3,44,1) 0%,rgba(6,6,27,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    padding: 0 30px;
+    transition: 0.3s;
+    height: 125px;
+    display: flex;
+    align-items: center;
+
+    @include macbook{
+       padding: 0 35px;
+    }
+    @include windows-laptop{
+        padding: 0 35px;
+    }
+    @include tab-landscape{
+        padding: 0 35px;
+        height: 80px;
+    }
+    @include tab-portrait{ 
+        padding: 0 30px;
+    }
+    @include mobile-lg{
+        padding: 7px 10px;
+        height: auto;
+    }
+    
+    .navbar {
+        padding: 0;    
+        transition: 0.3s;
+        margin-top: 10px;
+        @include tab-landscape{
+            margin: 0 0 0 20px;
+        }
+        @include tab-portrait{
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        @include mobile-lg{
+            justify-content: flex-start;
+            margin: 0;
+        }
+    }
+    
+}
+
+.header-logo{
+    img{
+        height: 100px;
+        width: 100px;
+
+        @include tab-landscape{
+            height: 70px;
+            width: 70px;
+            margin-right: 20px
+        }
+
+        @include mobile-lg{
+            height: 50px;
+            width: 50px;
+            margin-right: 10px
+        }
+    }
+}
+
+// .navbar-brand{
+//     width: 200px;
+//     padding: 0;
+//     margin: 5px 0;
+    
+//     @include macbook{
+//         width: 140px;
+//     }
+//     @include windows-laptop{
+//         width: 140px;
+//     }
+//     @include tab-landscape{
+//         width: 160px;
+//     }
+//     @include tab-portrait{
+//         width: 165px;
+//     }
+//     @include mobile-lg{
+//         width: 130px;
+//         padding: 0;
+//         margin: 20px 0;
+//     }
+
+//     img{
+//         width: 100%;
+//     }
+// }
+
+
+// .navbar-nav{
+//     display: inline-block;
+//     @include tab-landscape{
+//         display: block;
+//     }
+    
+// }
+.navbar-expand-lg{
+    .navbar-nav {
+        display: flex;
+
+        li{
+            display: inline-block;   
+            transition: 0.3s; 
+
+            a.nav-link{
+                font-size: 16px;
+                font-weight: 400;
+                font-family: $primary-font;
+                color: white; 
+                display: block; 
+                text-align: center;
+                padding: 0 15px; 
+                text-transform: uppercase;
+
+                @include windows-laptop{
+                    font-size: 14px;
+                    padding: 0 7px;
+                }
+
+                &:hover{
+                    color: $golden;
+                }
+
+                
+                
+                &.nav-link.active, &.nav-link.show{           
+                    color: $golden;
+                    &:hover{
+                        color: $golden;
+                    }
+                }
+
+                &.nav-link{
+                    @include tab-landscape{
+                        text-align: left;
+                        padding: 0 15px;
+                    }
+
+                    @include tab-portrait{
+                        font-size: 18px;
+                        line-height: 40px;
+                    }
+
+                    @include mobile-lg{
+                        font-size: 16px;
+                        line-height: 30px;
+                    }
+                    
+                }
+
+            
+            }
+
+            
+            &.dropdown{
+                a{
+                    background: $primary-color;
+                    padding: 0 25px 0 15px;
+                    color: white;
+                    @include tab-landscape{
+                        text-align: left;
+                    }
+
+                    @include tab-portrait{
+                        font-size: 18px;
+                        line-height: 40px;
+                    }
+
+                    @include mobile-lg{
+                        font-size: 16px;
+                        line-height: 30px;
+                    }
+                }
+                a.dropdown-toggle{
+                    background: transparent;
+                    padding: 0 15px;
+                }
+            }
+
+        
+
+            @include tab-portrait{
+                display: block;
+
+                a{
+                    font-size: 24px;
+                    text-align: left;
+                    line-height: 50px;
+                    font-weight: 600;
+                }
+            }
+        }
+
+        @include tab-landscape{
+            flex-direction: column;
+            align-items: start;
+            width: 100%;
+        }
+
+        .dropdown-menu{
+            @include tab-landscape{
+                position: static;
+                padding: 0;
+                box-shadow: none;
+                margin: 0;
+                border: 0;
+                border-left: 3px solid white;
+            }
+            
+        }
+
+    }
+}
+.hamburger-menu{
+    display: none;
+
+    @include tab-landscape{
+        display: block;
+    }
+
+    @include mobile-lg{
+        position: relative;
+        top: 10px;
+    }
+
+
+    span{
+        background: white; 
+        height: 4px;
+        width: 31px;
+        display: block;
+        border-radius: 3px;
+        margin-bottom: 5px;
+        transition: 0.3s;
+        &:nth-child(2){
+            width: 23px;
+            margin-left: 8px;
+        }
+        &:nth-child(3){
+            margin-bottom: 0px;
+        }
+    }
+}
+
+.menu-overlay{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s;
+
+    &.collapse-overlay{       
+        opacity: 1;      
+        pointer-events: auto;
+        transition: 0.3s;
+    }
+    
+}
+
+.collapse-menu{
+
+    @include tab-landscape{
+        background: $primary-color;
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 1050;
+        transition: 0.3s;
+        transform: translateX(-100%);
+        width: 330px;
+        padding: 120px 50px; 
+
+        &.collapse-menu-open{
+            transform: translateX(0%);
+            transition: 0.3s;
+        }
+    }
+        @include tab-sm-portrait{
+            padding: 120px 60px;
+        }
+
+        @include mobile-lg{
+            width: 300px;
+            padding: 100px 40px;
+        }
+
+
+}
+.collapse:not(.show) {
+    display: flex !important;
+}
+.colapse-close{
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    display: none;
+    
+    @include tab-landscape{
+        display: block;
+    }
+    @include mobile-lg{
+        position: absolute;
+        right: 25px;
+        top: 30px;
+    }
+
+    span{
+        background: white;
+        height: 4px;
+        width: 31px;
+        display: block;
+        border-radius: 3px;
+        margin-bottom: 5px;
+        transition: 0.3s;
+       
+    }
+}
+
+.collapse-menu.collapse-menu-open {
+    .colapse-close span{
+        &:nth-child(1) {
+            -webkit-transform: rotate(45deg) translateX(6px);
+            -moz-transform: rotate(45deg) translateX(6px);
+            -o-transform: rotate(45deg) translateX(6px);
+            -ms-transform: rotate(45deg) translateX(6px);
+            transform: rotate(45deg) translateX(6px);
+            transition: 0.5s;
+        }
+        &:nth-child(2) {
+            -webkit-transform: rotate(-45deg) translateX(6px);
+            -moz-transform: rotate(-45deg translateX(6px));
+            -o-transform: rotate(-45deg) translateX(6px);
+            -ms-transform: rotate(-45deg) translateX(6px);
+            transform: rotate(-45deg) translateX(6px);
+            transition: 0.5s;
+        }
+    }
+}
+
+.top-content{
+    width: 100%;
+   
+    @include mobile-lg{
+        flex-wrap: wrap;
+        position: relative;
+        right: 10px;
+    }
+}
+
+.header-social{
+    li{
+        a{
+            color: $default-dark;
+            font-size: 24px;
+            display: block;
+            /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ffce6b+0,c1851c+50,ffce6b+100 */
+            background: linear-gradient(135deg,  rgba(255,206,107,1) 0%,rgba(193,133,28,1) 50%,rgba(255,206,107,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+
+            &:hover{
+                /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ffce6b+0,c1851c+50,ffce6b+100 */
+            background: linear-gradient(135deg,  rgba(193,133,28,1) 0%,rgba(255,206,107,1) 50%,rgba(193,133,28,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            }
+        }
+
+        &:nth-child(2){
+            margin: 0 10px 0 0;
+        }
+    }
+
+    @include tab-landscape{
+        margin: 0;
+    }
+}
+.bottom-content{
+    width: 100%;
+    @include tab-landscape{
+        width: auto;
+    }
+    @include mobile-lg{
+        width: 31px;
+    }
+}
+
+.header-support-dropdown{
+    
+    .header-support{
+        height: 48px;
+        width: 214px;
+        border-radius: 20px;
+        background: $golden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 20px;
+        color: white;
+        border-bottom-right-radius: 0;
+        border: 0;
+        margin: 0 20px;
+    
+        &::after{
+            content: "+";
+            border: 0;
+        }
+
+        @include tab-landscape{
+            width: auto;
+            margin: 0;
+        }
+    
+        @include mobile-lg{
+            padding: 0 15px;
+            font-size: 14px;
+            width: 105px;
+            height: 40px;
+        }
+        
+        @include mobile-lg{
+            display: none;
+        }
+    }
+    .dropdown-menu{
+        background: white;
+        width: 215px;
+        border-radius: 15px;
+
+        li{
+            a{
+                &:hover, &:focus{
+                    background: #e7e6e6;
+                    color: black;
+                }
+            }
+        }
+    }
+}
+
+
+.header-content{
+    width: calc(100% - 100px);
+    padding-left: 50px;
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+
+    @include tab-landscape{
+        padding-left: 0;
+        flex-direction: row;
+        align-items: center;
+        width: calc(100% - 90px);
+    }
+
+    @include mobile-lg{
+        align-items: flex-start;
+        padding: 0;
+        width: auto;
+    }
+}
+
+.logo-caption{
+    @include mobile-lg{
+        display: none;
+    }
+}
+
+.header-search{
+    position: relative;
+    width: 70%;
+    display: flex;
+
+    &.mobile-search{
+        display: none;
+        @include tab-portrait{
+            display: flex;
+            width: 100%;
+        }
+    }
+    @include tab-portrait{
+        display: none;
+    }
+
+    input[type="text"]{
+        width: 100%;
+        height: 40px;
+        border-radius: 25px;
+
+        @include windows-laptop{
+            width: 100%;
+        }
+        
+        @include tab-portrait{
+            width: 100%;
+            border-radius: 0;
+            height: 40px !important;
+        }
+    }
+
+    button{
+        position: absolute;
+        width: 33px;
+        padding: 0;
+        height: 33px;
+        color: white;
+        font-size: 14px;
+        border-radius: 50%;
+        top: 3px;
+        right: 4px;
+        line-height: 33px;
+
+        @include mobile-lg{
+            top: 2px;
+        }
+    }
+}
+
+/* ============ desktop view ============ */
+@media all and (min-width: 1024px) {
+	.dropdown-menu {
+        background: $primary-color;
+        border-radius: 0;
+        li{ 
+            position: relative; 	
+            width: 100%;
+            span{
+                position: absolute;
+                right: 10px;
+            }
+            a{
+                padding: 0 25px 0 15px;
+                &:hover, &:focus{
+                    background: $primary-color;
+                    color: $golden;
+                }
+                &.show{
+                    color: $golden;
+                }
+            }
+        }
+    }
+	.nav-item .submenu{ 
+		position: absolute;
+		left:100%; top:-7px;
+	}
+	.nav-item .submenu-left{ 
+		right:100%; 
+        left:auto;
+	}
+	// .dropdown-menu > li:hover{ background-color: #f1f1f1 }
+	.dropdown-menu > li:hover > .submenu{ 
+        display: block;
+
+        @include tab-landscape{
+            border-left: 3px solid $golden;
+            padding: 15px 0 5px 15px;
+            left: -3px;
+            position: relative;
+            display: block;
+        }
+        
+     }
+}	
+/* ============ desktop view .end// ============ */
+
+/* ============ small devices ============ */
+@media (max-width: 1023px) {
+  .dropdown-menu .dropdown-menu{
+      margin-left:0.7rem; 
+      margin-right:0.7rem; 
+      margin-bottom: .5rem;
+  }
+}	
+/* ============ small devices .end// ============ */

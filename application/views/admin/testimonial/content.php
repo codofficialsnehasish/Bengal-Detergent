@@ -31,7 +31,7 @@
                                 <tr>
                                     <th>Sl No.</th>
                                     <th>Name</th>
-                                    <th>Profession</th>
+                                    <th>Title</th>
                                     <th>Description</th>
                                     <th>Rating</th>
                                     <th>Image</th>
@@ -45,8 +45,8 @@
                                 <tr>
                                     <td><?= $itr++;?></td>
                                     <td><a href="<?= admin_url('testimonial/edit/'.$item->id);?>"><?= $item->name;?></a></td>
-                                    <td><?= $item->	profession;?></td>
-                                    <td><?= $item->	description;?></td>
+                                    <td><?= $item->title;?></td>
+                                    <td class="text-wrap"><?= $item->description;?></td>
                                     <td>
                                         <?php 
                                             for($i=0;$i<$item->	rating;$i++):

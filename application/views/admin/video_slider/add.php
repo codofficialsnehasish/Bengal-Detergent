@@ -27,7 +27,6 @@
       </div>
       <!-- end page title -->
       <?= form_open_multipart('admin/video_slider/process', 'class="custom-validation"');?>
-      
          <div class="row">
             <div class="col-lg-9">
                <div class="card">
@@ -40,7 +39,7 @@
                         <div>
                            <input data-parsley-type="text" type="text"
                               class="form-control" required
-                              placeholder="Ex : Jhon Doe" name="name" id="name">
+                              placeholder="" name="name" id="name">
                         </div>
                      </div>
                   </div>

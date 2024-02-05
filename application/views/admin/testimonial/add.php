@@ -45,11 +45,11 @@
                      </div>
 
                      <div class="mb-3">
-                        <label class="form-label">Profession</label>
+                        <label class="form-label" for="title">Title</label>
                         <div>
                            <input data-parsley-type="text" type="text"
                               class="form-control" required
-                              placeholder="Ex : Freelancer" name="profession" id="profession">
+                              placeholder="Ex : We Love it" name="title" id="title">
                         </div>
                      </div>
                              
@@ -71,8 +71,11 @@
                     </div>
                     <div class="card-body">
                         <div class="mb-3">
-                            <label class="form-label mb-3 d-flex">Rating</label>
-                            <div class="form-check form-check-inline" style="margin-right: 0!important;">
+                           <label class="form-label mb-3 d-flex">Rating</label>
+                           <div class="rating-star">
+                              <input type="hidden" class="rating" name="rating" data-filled="mdi mdi-star text-primary" data-empty="mdi mdi-star-outline text-muted" required/>
+                           </div>
+                            <!-- <div class="form-check form-check-inline" style="margin-right: 0!important;">
                                 <input type="radio" id="customRadioInline1" name="rating" value="1" class="form-check-input" required>
                                 <label class="form-check-label" for="customRadioInline1">1</label>
                             </div>
@@ -91,7 +94,7 @@
                             <div class="form-check form-check-inline" style="margin-right: 0!important;">
                                 <input type="radio" id="customRadioInline5" name="rating" value="5" class="form-check-input" required>
                                 <label class="form-check-label" for="customRadioInline5">5</label>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="mb-3">
                             <label class="form-label mb-3 d-flex">Visiblity</label>

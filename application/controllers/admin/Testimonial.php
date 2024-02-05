@@ -37,6 +37,7 @@ class Testimonial extends Core_Controller {
 	public function process()
 	{
 		$this->form_validation->set_rules('name', 'Title', 'required|xss_clean|max_length[200]');
+		$this->form_validation->set_rules('rating', 'Rating', 'required|xss_clean|max_length[200]');
 		if ($this->form_validation->run() == false) {
 			$this->session->set_flashdata('errors', validation_errors());
 			//$this->session->set_flashdata('form_data', $this->auth_model->input_values());
@@ -44,7 +45,7 @@ class Testimonial extends Core_Controller {
 		}else{
 			$data=array(
 				'name'=>$this->input->post('name', true),
-				'profession'=>$this->input->post('profession', true),
+				'title'=>$this->input->post('title', true),
 				// 'slug'=>generate_slug($this->input->post('name', true)),
 				'description'=>$this->input->post('desc', true),
 				'rating'=>$this->input->post('rating', true),
@@ -93,7 +94,7 @@ class Testimonial extends Core_Controller {
 			$data=array(
 				'name'=>$this->input->post('name', true),
 				// 'slug'=>generate_slug($this->input->post('name', true)),
-				'profession'=>$this->input->post('profession', true),
+				'title'=>$this->input->post('title', true),
 				'description'=>$this->input->post('desc', true),
 				'rating'=>$this->input->post('rating', true),
 				'is_visible'=>$this->input->post('is_visible', true)

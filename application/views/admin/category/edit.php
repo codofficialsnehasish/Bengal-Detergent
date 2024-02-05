@@ -114,7 +114,7 @@
                            <label class="form-check-label" for="customRadioInline2">Hide</label>
                         </div>
                      </div>
-                     <!-- <div class="mb-3">
+                     <div class="mb-3">
                         <label class="form-label mb-3 d-flex">Show on Home Page</label>
                         <div class="form-check form-check-inline">
                            <input type="radio" id="customRadioInline11" name="is_home" class="form-check-input" value="1" <?= check_uncheck($item->is_home,1);?>>
@@ -124,7 +124,7 @@
                            <input type="radio" id="customRadioInline22" name="is_home" class="form-check-input" value="0"  <?= check_uncheck($item->is_home,0);?>>
                            <label class="form-check-label" for="customRadioInline22">No</label>
                         </div>
-                     </div> -->
+                     </div>
                      <!-- <div class="mb-3">
                         <label class="form-label mb-3 d-flex">Popular Category</label>
                         <div class="form-check form-check-inline">
@@ -137,7 +137,7 @@
                         </div>
                      </div> -->
                            
-                      <div class="mb-3">
+                      <!-- <div class="mb-3">
                         <label class="form-label mb-3 d-flex">Show on Menu</label>
                         <div class="form-check form-check-inline">
                            <input type="radio" id="ismenu" name="is_menu" class="form-check-input" value="1" <?= check_uncheck($item->is_menu,1);?>>
@@ -147,7 +147,7 @@
                            <input type="radio" id="ismenu1" name="is_menu" class="form-check-input" value="0"  <?= check_uncheck($item->is_menu,0);?>>
                            <label class="form-check-label" for="ismenu1">No</label>
                         </div>
-                     </div>
+                     </div> -->
                            
                            
                       <!-- <div class="mb-3">

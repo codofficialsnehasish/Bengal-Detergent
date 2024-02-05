@@ -12,8 +12,12 @@
 <script src="<?= base_url('assets/admin/js/pages/toastr.init.js');?>"></script>
 <!-- toast message -->
 <script src="<?= base_url('assets/admin/libs/select2/js/select2.full.min.js');?>"></script>
-        <script src="<?= base_url('assets/admin/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js');?>"></script>
-        <script src="<?= base_url('assets/admin/js/pages/form-advanced.init.js');?>"></script>
+<script src="<?= base_url('assets/admin/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js');?>"></script>
+<script src="<?= base_url('assets/admin/js/pages/form-advanced.init.js');?>"></script>
+
+<!-- Bootstrap rating js -->
+<script src="<?= base_url('assets/admin/libs/bootstrap-rating/bootstrap-rating.min.js'); ?>"></script>
+<script src="<?= base_url('assets/admin/js/pages/rating-init.js'); ?>"></script>
 
  <?php PageSpecScript($pagescript);?>
 

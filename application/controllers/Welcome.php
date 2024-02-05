@@ -61,6 +61,11 @@ public function __construct()
 		$data['categories2'] = $this->select->getResult($conditionssss);
 		// // echo '<pre>';
 		// // print_r($data['categories']);
+		$conditions = array(
+			'tblName' =>'categories',
+			'where' => array('is_visible'=>1,'is_home'=>1),
+		);
+		$data['allcategories'] = $this->select->getResult($conditions);
 		$conditions1 = array(
 			'tblName' =>'categories',
 			'where' => array('is_visible'=>1,'is_popular'=>1)
@@ -99,7 +104,7 @@ public function __construct()
 
 		// /////////////////////////////////////////////////
 		$fconditions['start'] = 0;
-		$fconditions['limit'] = 8;
+		$fconditions['limit'] = 6;
 		$fconditions['filter']['is_visible'] = 1;
         $fconditions['filter']['is_draft'] = 0;
 		$fconditions['filter']['is_featured'] = 1;

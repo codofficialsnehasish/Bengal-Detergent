@@ -13,3 +13,6 @@
 <!-- Toast message -->
 <link href="<?= base_url('assets/admin/libs/select2/css/select2.min.css');?>" rel="stylesheet" type="text/css">
 <link href="<?= base_url('assets/admin/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css');?>" rel="stylesheet">
+
+<!-- Bootstrap Rating css -->
+<link href="<?= base_url('assets/admin/libs/bootstrap-rating/bootstrap-rating.css'); ?>" rel="stylesheet" type="text/css" />
