@@ -326,6 +326,7 @@
                         <div class="form-group">
                             <label class="control-label">Status</label>
                             <select name="order_status"class="form-select" aria-label="Default select example">
+                                <?php if($this->order_model->check_product_avalibility_for_distributer( $item->product_id,$item->seller_id) >= 1){ ?>
                                 <?php if ($item->product_type == 'physical'): ?>
                                     <option value="awaiting_payment" <?php echo ($item->order_status == 'awaiting_payment') ? 'selected' : ''; ?>>Awaiting Payment</option>
                                     <option value="payment_received" <?php echo ($item->order_status == 'payment_received') ? 'selected' : ''; ?>>Payment Received</option>
@@ -335,6 +336,7 @@
                                 <?php if ($item->buyer_id != 0 && $item->order_status != 'completed'): ?>
                                     <option value="completed" <?php echo ($item->order_status == 'completed') ? 'selected' : ''; ?>>Completed</option>
                                 <?php endif; ?>
+                                <?php } ?>
                                 <option value="cancelled" <?php echo ($item->order_status == 'cancelled') ? 'selected' : ''; ?>>Cancelled</option>
                             </select>
                         </div>
