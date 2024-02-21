@@ -11,8 +11,8 @@
                 $imgUrl = get_image($this->auth_user->user_image);
                 }
             ?>
-        <img class="img-account-profile rounded-circle mb-2" src="<?= $imgUrl;?>" alt="">
-        <h2 class="mt-3 mb-0"><?= $this->auth_user->full_name;?></h2>
+        <img class="img-account-profile rounded-circle mb-2" style="max-width: 26%;" src="<?= $imgUrl;?>" alt="">
+        <h2 class="mt-3 mb-0" style="font-size:20px;"><?= $this->auth_user->full_name;?></h2>
         <!-- <div class="small font-italic text-muted mb-4"><?= select_value_by_id('location_cities','id',$this->auth_user->city_id,'name');?>,<?= select_value_by_id('location_states','id',$this->auth_user->state_id,'name');?></a>,<?= select_value_by_id('location_countries','id',$this->auth_user->country_id,'name');?></div>		                     -->
     </div>
 </div>

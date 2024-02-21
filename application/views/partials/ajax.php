@@ -364,12 +364,58 @@ function select_product_variation_option(c, d, b) {
     });
 }
 
+function removefrompopupcart(cartID){
+    const getUrl = window.location;
+    //const baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
+    const baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1]+"/";
+    $.ajax({
+        url: baseUrl + "cart_controller/remove_from_cart/",
+        type: "POST",
+        data: {
+                csrf_modesy_token: getCookie('csrf_modesy_token'),
+                cart_item_id: cartID
+        },
+        dataType: "html",
+        success: function (resp) {
+            cart_popup_data();
+        },
+    });
+}
 
 function updateCart(cartId,productId,qty,sign){
-    console.log(cartId);
-    console.log(productId);
-    console.log(qty);
-    console.log(sign);
+    // console.log(cartId);
+    // console.log(productId);
+    // console.log(qty);
+    var Qty = document.getElementById("updatescartquantity"+cartId);
+    // console.log(Qty.value);
+    // console.log(sign);
+    if(sign == "+"){
+        var a = { product_id: productId, cart_item_id: cartId, quantity: Qty.value, status : 1, csrf_modesy_token:getCookie('csrf_modesy_token') };
+    }else{
+        var a = { product_id: productId, cart_item_id: cartId, quantity: Qty.value, status : 0, csrf_modesy_token:getCookie('csrf_modesy_token') };
+    }
+    $.ajax({
+        type: "POST",
+        url: base_url + "update-cart-product-quantity",
+        data: a,
+        success: function (resp) {
+            // console.log(resp);
+            var respObj = JSON.parse(resp);
+            // console.log(respObj);
+            // location.reload();
+            $("#updatescartquantity"+cartId).val(respObj.qty);
+            get_cart();
+        }
+    });  
+}
+
+function updateCartfromcart(cartId,productId,qty,sign){
+    // console.log(cartId);
+    // console.log(productId);
+    // console.log(qty);
+    var Qty = document.getElementById("updatescartquantity"+cartId);
+    // console.log(Qty.value);
+    // console.log(sign);
     if(sign == "+"){
         var a = { product_id: productId, cart_item_id: cartId, quantity: qty, status : 1, csrf_modesy_token:getCookie('csrf_modesy_token') };
     }else{
@@ -379,10 +425,14 @@ function updateCart(cartId,productId,qty,sign){
         type: "POST",
         url: base_url + "update-cart-product-quantity",
         data: a,
-        success: function (b) {
-            console.log(b);
+        success: function (resp) {
+            // console.log(resp);
+            // var respObj = JSON.parse(resp);
+            // console.log(respObj);
             location.reload();
-        },
+            // $("#updatescartquantity"+cartId).val(respObj.qty);
+            // get_cart();
+        }
     });  
 }
 

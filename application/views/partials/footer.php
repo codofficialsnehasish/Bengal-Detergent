@@ -117,10 +117,10 @@
                         </div>
                         <div class="minicart-footer minicart-action">
                             <div class="total-in">
-                                <p class="label"><b>Subtotal:</b><span class="item product-price"><span class="money" id="subtol">₹ </span></span></p>
-                                <p class="label"><b>Shipping:</b><span class="item product-price"><span class="shipping">₹ 0.00</span></span></p>
-                                <p class="label"><b>Tax:</b><span class="item product-price"><span class="tax">₹ 0.00</span></span></p>
-                                <p class="label"><b>Total:</b><span class="item product-price"><span class="totals" id="tot">₹ </span></span></p>
+                                <p class="label"><b>Subtotal:</b><span class="item product-price"><span class="money" id="subtol"></span></span></p>
+                                <p class="label"><b>Shipping:</b><span class="item product-price"><span class="shipping">0.00</span></span></p>
+                                <p class="label"><b>Tax:</b><span class="item product-price"><span class="tax">0.00</span></span></p>
+                                <p class="label"><b>Total:</b><span class="item product-price"><span class="totals" id="tot"></span></span></p>
                             </div>
                             <div class="buttonSet d-flex flex-row align-items-center text-center">
                                 <a href="<?= base_url('/cart'); ?>" class="btn btn-secondary w-50 me-3">View Cart</a>
@@ -233,7 +233,11 @@
         });
     </script>
 
-
+        <script src="<?= base_url('assets/admin/libs/jquery/jquery.min.js'); ?>"></script>
+        <script src="<?= base_url('assets/admin/libs/bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>
+        <script src="<?= base_url('assets/admin/libs/metismenu/metisMenu.min.js'); ?>"></script>
+        <script src="<?= base_url('assets/admin/libs/simplebar/simplebar.min.js'); ?>"></script>
+        <script src="<?= base_url('assets/admin/libs/node-waves/waves.min.js'); ?>"></script>
         <!-- toast message -->
         <script src="<?= base_url('assets/admin/libs/toast/toastr.js');?>"></script>
         <script src="<?= base_url('assets/admin/js/pages/toastr.init.js');?>"></script>

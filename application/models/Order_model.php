@@ -151,14 +151,14 @@ class Order_model extends CI_Model
                 // $this->add_order_shipping($order_id);
 
                 //add order products
-                $this->add_order_products($order_id, $order_status);
+                $this->add_order_products($order_id, $order_status, $dist_id);
 
                 //set bidding quotes as completed
                 // $this->load->model('bidding_model');
                 // $this->bidding_model->set_bidding_quotes_as_completed_after_purchase();
 
                 //add invoice
-                $this->add_invoice($order_id);
+                $this->add_invoice($order_id,$dist_id);
 
                 //clear cart
                 $this->cart_model->clear_cart();             
@@ -224,7 +224,7 @@ class Order_model extends CI_Model
     }
 
     //add order products
-    public function add_order_products($order_id, $order_status)
+    public function add_order_products($order_id, $order_status, $dist_id = 0)
     {
         $order_id = clean_number($order_id);
         //$cart_items = $this->cart_model->get_sess_cart_items();
@@ -248,7 +248,7 @@ class Order_model extends CI_Model
                 if (!empty($product)) {
                     $data = array(
                         'order_id' => $order_id,
-                        'seller_id' => $product->user_id,
+                        'seller_id' => $dist_id != 0 ? $dist_id : $product->user_id,
                         'buyer_id' => 0,
                         'buyer_type' => "guest",
                         'product_id' => $product->id,
@@ -288,9 +288,29 @@ class Order_model extends CI_Model
                   //  $data["product_total_price"] = $cart_item->total_price + $cart_item->product_gst + $cart_item->shipping_cost;
 
                     $this->db->insert('order_products', $data);
+                    $this->add_order_tracking_status($order_id);
                 }
             }
         }
+    }
+
+    public function add_order_tracking_status($order_id){
+        $data = array(
+            'order_id' => $order_id,
+            'is_awaiting_payment' => 1,
+            'is_awaiting_payment_update' => date('Y-m-d H:i:s'),
+            'is_payment_received' => 0,
+            'is_payment_received_update' => null,
+            'is_order_processing' => 1,
+            'is_order_processing_update' => date('Y-m-d H:i:s'),
+            'is_shipped' => 0,
+            'is_shipped_update' => null,
+            'is_completed' => 0,
+            'is_completed_update' => null,
+            'is_cancelled' => 0,
+            'is_cancelled_update' => null,
+        );
+        $this->db->insert('order_tracking_status', $data);
     }
 
     //add digital sales
@@ -474,6 +494,33 @@ class Order_model extends CI_Model
         return $query->num_rows();
     }
 
+    public function get_all_order_by_id($user_id){
+        $user_id = clean_number($user_id);
+        $this->db->where('buyer_id', $user_id);
+        $this->db->where('status', 0);
+        $this->db->order_by('orders.created_at', 'DESC');
+        $query = $this->db->get('orders');
+        return $query->result();
+    }
+
+    public function get_all_order_for_distributer($user_id){
+        $user_id = clean_number($user_id);
+        $this->db->where('buyer_id', $user_id);
+        // $this->db->where('status', 0);
+        $this->db->order_by('orders.created_at', 'DESC');
+        $query = $this->db->get('orders');
+        return $query->result();
+    }
+
+    public function check_order_retailer_to_distributer($order_id){
+        $order_id = clean_number($order_id);
+        $this->db->select('distributer_id');
+        $this->db->where('id', $order_id);
+        $this->db->where('is_for_distributer', 1);
+        $query = $this->db->get('orders');
+        return $query->row();
+    }
+
     //get paginated completed orders
     public function get_paginated_completed_orders($user_id, $per_page, $offset)
     {
@@ -609,7 +656,36 @@ class Order_model extends CI_Model
                 return $this->db->update('order_products', $data);
         }
 		return false;
-}
+    }
+
+    public function cancel_order($order_id){
+        $order_id = clean_number($order_id);
+        $order_products = $this->get_order_products($order_id);
+        if (!empty($order_products)) {
+            foreach($order_products as $order_product){
+                if ($order_product->order_status != 'completed') {
+                    $data['order_status'] = 'cancelled';
+                }
+                $this->db->where('id', $order_product->id);
+                $this->db->update('order_products', $data);
+            }
+        }
+        $data = array(
+            'is_canceled' => 1,
+        );
+        $this->db->where('id', $order_id);
+        $this->db->update('orders', $data);
+        $data1 = array(
+            'is_cancelled' => 1,
+            'is_cancelled_update' => date('Y-m-d H:i:s')
+        );
+        $this->db->where('order_id', $order_id);
+        $this->db->update('order_tracking_status', $data1);
+        return false;
+    }
+
+
+
     //add shipping tracking number
     public function add_shipping_tracking_number($order_product_id)
     {
@@ -780,18 +856,22 @@ class Order_model extends CI_Model
     }
 
     //decrease product stock after sale
-    public function decrease_product_stock_after_sale($order_id)
-    {
+    public function decrease_product_stock_after_sale($order_id){
         $order_products = $this->get_order_products($order_id);
+        return $order_products;
         if (!empty($order_products)) {
             foreach ($order_products as $order_product) {
-                $option_ids = explode(',',$order_product->variation_option_ids);
-               // $option_ids = @unserialize($order_product->variation_option_ids);
+
+                if($order_product->variation_option_ids == null){ $option_ids = [];
+                }else{ $option_ids = explode(',',$order_product->variation_option_ids); }
+                // $option_ids = @unserialize($order_product->variation_option_ids);
+
+                //for product veriation stock
                 if (!empty($option_ids)) {
                     foreach ($option_ids as $option_id) {
                         $option = $this->variation_model->get_variation_option($option_id);
-                        if (!empty($option)) {
-                            if ($option->is_default == 1) {
+                        if(!empty($option)) {
+                            if($option->is_default == 1){
                                 $product = $this->product_model->get_product_by_id($order_product->product_id);
                                 if (!empty($product)) {
                                     $stock = $product->stock - $order_product->product_quantity;
@@ -817,16 +897,23 @@ class Order_model extends CI_Model
                             }
                         }
                     }
-                } else {
+                } else {   //for product stock
                     $product = $this->product_model->get_product_by_id($order_product->product_id);
                     if (!empty($product)) {
                         $stock = $product->stock - $order_product->product_quantity;
                         if ($stock < 0) {
                             $stock = 0;
                         }
-                        $data = array(
-                            'stock' => $stock
-                        );
+                        if($stock == 0){
+                            $data = array(
+                                'stock' => $stock,
+                                'stock_status' => 0
+                            );    
+                        }else{
+                            $data = array(
+                                'stock' => $stock
+                            );
+                        }
                         $this->db->where('id', $product->id);
                         $this->db->update('products', $data);
                     }
@@ -874,7 +961,7 @@ class Order_model extends CI_Model
     // }
 
 //add invoice
-public function add_invoice($order_id)
+public function add_invoice($order_id,$dist_id = 0)
     {
         $order = $this->get_order($order_id);
         if (!empty($order)) {
@@ -900,27 +987,27 @@ public function add_invoice($order_id)
 
 
                             $data = array(
-                                            'order_id' =>$order->id,
-                                            'buyer_id' =>$client->id,
-                                            'seller_id' =>$seller->id,
-                                            'billing_name' =>$billing->billing_first_name.' '.$billing->billing_last_name,
-                                            'billing_addr' =>$billing->billing_address_1,
-                                            'billing_pin' =>$billing->billing_zip_code,
-                                            'billing_phone' =>$billing->billing_phone_number,
-                                            'shipping_name' =>$client->shipping_first_name.' '.$client->shipping_last_name,
-                                            'shipping_addr' =>$client->shipping_address_1,
-                                            'shipping_pin' =>$client->shipping_zip_code,
-                                            'shipping_phone' =>$client->phone_number,
-                                            'place_of_supply' =>$client->shipping_state,
-                                            //'invoice_number' =>,
-                                            'product_id' =>$order_product->product_id,
-                                            'product_title' =>$order_product->product_title,
-                                            'qty' =>$order_product->product_quantity,
-                                            'unit_price' =>$order_product->product_unit_price,
-                                            'net_amount' =>$order_product->product_total_price,
-                                            'gst_rate' =>$order_product->product_gst_rate,
-                                            'created_at' =>date('Y-m-d H:i:s')
-                                        );
+                                'order_id' =>$order->id,
+                                'buyer_id' =>$client->id,
+                                'seller_id' =>$dist_id != 0 ? $dist_id : $seller->id,
+                                'billing_name' =>$billing->billing_first_name.' '.$billing->billing_last_name,
+                                'billing_addr' =>$billing->billing_address_1,
+                                'billing_pin' =>$billing->billing_zip_code,
+                                'billing_phone' =>$billing->billing_phone_number,
+                                'shipping_name' =>$client->shipping_first_name.' '.$client->shipping_last_name,
+                                'shipping_addr' =>$client->shipping_address_1,
+                                'shipping_pin' =>$client->shipping_zip_code,
+                                'shipping_phone' =>$client->phone_number,
+                                'place_of_supply' =>$client->shipping_state,
+                                //'invoice_number' =>,
+                                'product_id' =>$order_product->product_id,
+                                'product_title' =>$order_product->product_title,
+                                'qty' =>$order_product->product_quantity,
+                                'unit_price' =>$order_product->product_unit_price,
+                                'net_amount' =>$order_product->product_total_price,
+                                'gst_rate' =>$order_product->product_gst_rate,
+                                'created_at' =>date('Y-m-d H:i:s')
+                            );
 
                             // $item = array(
                             //     'id' => $order_product->id,
@@ -1127,8 +1214,8 @@ public function add_invoice($order_id)
         $all_complated = true;
         $order_products = $this->get_order_products($order_id);
         if (!empty($order_products)) {
-            foreach ($order_products as $order_product) {
-                if ($order_product->order_status != "completed" && $order_product->order_status != "cancelled") {
+            foreach($order_products as $order_product){
+                if($order_product->order_status != "completed" && $order_product->order_status != "cancelled") {
                     $all_complated = false;
                 }
             }
@@ -1136,13 +1223,66 @@ public function add_invoice($order_id)
                 'status' => 0,
                 'updated_at' => date('Y-m-d H:i:s'),
             );
-            if ($all_complated == true) {
+            if ($all_complated == true){
                 $data["status"] = 1;
             }
             $this->db->where('id', $order_id);
             $this->db->update('orders', $data);
+
+            if ($all_complated == true){
+                $data1 = array(
+                    'is_completed' => 1,
+                    'is_completed_update' => date('Y-m-d H:i:s')
+                );
+                $this->db->where('id', $order_id);
+                $this->db->update('order_tracking_status', $data1);
+            }
+
+            $buyer_id = $this->get_userid_from_order($order_id);
+            if(get_user_by_id($buyer_id)->role == 'dristributor'){
+                $order_products = $this->get_order_products($order_id);
+                foreach ($order_products as $item){
+                    $data = array(
+                        'dristributor_id' => $buyer_id,
+                        'product_id' => $item->product_id,
+                        'stock' => $item->product_quantity,
+                        'updated_at' => date('Y-m-d H:i:s')
+                    );
+                    $stock_data = $this->check_product_avalibility_for_distributer( $item->product_id,$buyer_id);
+                    if(count($stock_data) > 0){
+                        $data['stock'] += $stock_data[0]->stock;
+                        $this->db->where('id', $stock_data[0]->id);
+                        $this->db->update('dristributor_stocks', $data);
+                    }else{
+                        $this->db->insert('dristributor_stocks', $data);
+                    }
+                }
+            }
+            
         }
     }
+
+    public function check_product_avalibility_for_distributer($product_id, $user_id){
+		$this->db->select('*');
+		$this->db->where('dristributor_id',$user_id);
+		$this->db->where('product_id',$product_id);
+		// $this->db->from('dristributor_stocks');
+		$query = $this->db->get('dristributor_stocks');
+		// return count($query->result());
+		return $query->result();
+        // return $this->db->count_all_results();	
+		// $res = $query->row();
+		// return $res->buyer_id;
+	}
+
+    public function get_userid_from_order($order_id){
+		$this->db->select('buyer_id');
+		$this->db->where('id',$order_id);
+		$query = $this->db->get('orders');
+		// return $query->result();
+		$res = $query->row();
+		return $res->buyer_id;
+	}
 
     //check order payment status / update if all payments received
     public function update_payment_status_if_all_received($order_id)
@@ -1165,6 +1305,17 @@ public function add_invoice($order_id)
             }
             $this->db->where('id', $order_id);
             $this->db->update('orders', $data);
+
+            if ($all_received == true) {
+                $data1 = array(
+                    'is_payment_received' => 1,
+                    'is_awaiting_payment' => 0,
+                    'is_awaiting_payment_update' => date('Y-m-d H:i:s'),
+                    'is_payment_received_update' => date('Y-m-d H:i:s')
+                );
+                $this->db->where('id', $order_id);
+                $this->db->update('order_tracking_status', $data1);
+            }
         }
     }
 
@@ -1216,15 +1367,36 @@ public function add_invoice($order_id)
             return $query->num_rows();
     }
 
+    public function get_retailer_orders_count($dist_id,$status=0)
+    {
+            $user_id = clean_number($dist_id);
+            $this->db->where('distributer_id', $user_id);
+            if($status!='all' && $status!='pending'){
+                $this->db->where('status', $status);
+            }
+            if($status=='pending'){
+                $this->db->where('status', 0);
+            }
+            $query = $this->db->get('orders');
+            return $query->num_rows();
+    }
 
-///////update shipping status
-	public function updateTrackingNo($order_product_id,$tracking_number){
-     $data = array(
-                'order_status' => $this->input->post('order_status', true),
-     			'shipping_tracking_number' => $tracking_number,
-                'updated_at' => date('Y-m-d H:i:s'),
-            );
-            $this->db->where('id', $order_product_id);
-            return $this->db->update('order_products', $data);
+
+    ///////update shipping status
+	public function updateTrackingNo($order_product_id,$tracking_number,$order_id){
+        $data1 = array(
+            'is_shipped' => 1,
+            'is_shipped_update' => date('Y-m-d H:i:s'),
+        );
+        $this->db->where('id', $order_id);
+        $this->db->update('order_tracking_status', $data1);
+        $data = array(
+            'order_status' => $this->input->post('order_status', true),
+            // 'shipping_tracking_number' => $tracking_number,
+            'updated_at' => date('Y-m-d H:i:s'),
+        );
+        $this->db->where('id', $order_product_id);
+        return $this->db->update('order_products', $data);
+
     }
 }

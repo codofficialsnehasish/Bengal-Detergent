@@ -1,11 +1,11 @@
 <div id="page-content">
     <!-- Page Title -->
     <div class="page section-header text-center mb-0">
-    <div class="page-title">
-        <div class="wrapper">
-            <h1 class="page-width">Contact Us</h1>
+        <div class="page-title">
+            <div class="wrapper">
+                <h1 class="page-width">Contact Us</h1>
+            </div>
         </div>
-    </div>
     </div>
     <!-- End Page Title --> 
     <!-- Breadcrumbs -->

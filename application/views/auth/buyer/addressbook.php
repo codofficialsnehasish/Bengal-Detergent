@@ -1,3 +1,19 @@
+<!-- Page Title -->
+<div class="page section-header text-center mb-0">
+    <div class="page-title">
+        <div class="wrapper">
+            <h1 class="page-width">Dashboard - <?= $this->auth_user->full_name; ?></h1>
+        </div>
+    </div>
+</div>
+<!-- End Page Title --> 
+<!-- Breadcrumbs -->
+<div class="bredcrumbWrap bredcrumbWrapPage bredcrumb-style2 text-center mb-0">
+    <div class="container breadcrumbs">
+        <a href="<?= base_url(' ') ?>" title="Back to the home page">Home</a><span aria-hidden="true">|</span><a href="<?= base_url('/retailer/dashboard') ?>" title="Back to the home page">Dashboard</a><span aria-hidden="true">|</span><span class="title-bold">Addresses</span>
+    </div>
+</div>
+<!-- End Breadcrumbs -->
 <section class="mt-5 mb-5 buy-dashboard">
 		<div class="container ">
 		    <div class="row">
@@ -12,7 +28,7 @@
                                 <li><a class="nav-link"  href="<?= base_url('my-dashboard')?>">Dashboard</a></li>
                                 <li><a class="nav-link"  href="<?= base_url("orders"); ?>">Orders</a></li>
                                 <li><a class="nav-link active" >Addresses</a></li>
-								<li><a class="nav-link" href="<?= base_url("wishlist"); ?>">Wishlist</a></li>
+								<!-- <li><a class="nav-link" href="<?= base_url("wishlist"); ?>">Wishlist</a></li> -->
                                 <li><a class="nav-link" href="<?= admin_url('dashboard/logout')?>">logout</a></li>
                             </ul>
 
@@ -95,28 +111,27 @@
 										<select class="form-select" name="billing_country" id="country_id" required>
 											<option value="">Select Country</option>
 											<?php 
-									if(!empty($countries)):
-										foreach($countries as $country):?>
-												<option value="<?= $country->id;?>">
-													<?= $country->name;?>
-												</option>
-												<?php 
-										endforeach;
-									endif;
-								?>
+												if(!empty($countries)):
+													foreach($countries as $country):?>
+															<option value="<?= $country->id;?>">
+																<?= $country->name;?>
+															</option>
+															<?php 
+													endforeach;
+												endif;
+											?>
 										</select>
 										<div class="invalid-feedback"> Please select a valid country. </div>
 									</div>
 									<div class="col-md-4">
-										<label for="state" class="form-label">State</label>
-										<select class="form-select" name="billing_state" id="state_id" required>
-											<option value="">Choose...</option>
+										<label for="states_id" class="form-label">State</label>
+										<select class="form-select" name="billing_state" id="states_id" required>
 										</select>
 										<div class="invalid-feedback"> Please provide a valid state. </div>
 									</div>
 									<div class="col-md-4">
-										<label for="state" class="form-label">City</label>
-										<select class="form-select" name="billing_city" id="city_id" required>
+										<label for="citys_id" class="form-label">City</label>
+										<select class="form-select" name="billing_city" id="citys_id" required>
 											<option value="">Choose...</option>
 										</select>
 										<div class="invalid-feedback"> Please provide a valid city. </div>
@@ -128,6 +143,8 @@
 								<button type="submit" class="btn go-checkout mt-1 billingButton"> <span>Add Address</span> </button>
 								<!-- Shipping Address -->
 						</div>
+
+						<?= form_close(); ?>
                                     </div>
                                 </div>
                             </div>

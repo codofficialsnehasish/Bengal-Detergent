@@ -76,13 +76,13 @@
                                         <div class="col-12 col-sm-12 col-md-6 col-lg-6">                                    
                                             <div class="form-group">
                                                 <label for="CustomerPassword">Password <span class="required">*</span></label>
-                                                <input id="CustomerPassword" type="password" name="password" placeholder="">
+                                                <input id="CustomerPassword" type="password" id="pass2" name="password" placeholder="">
                                             </div>
                                         </div>
                                         <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                                             <div class="form-group">
                                                 <label for="CustomerConfirmPassword">Confirm Password <span class="required">*</span></label>
-                                                <input id="CustomerConfirmPassword" type="Password" name="confirm_password" placeholder="">                            
+                                                <input id="CustomerConfirmPassword" type="Password" data-parsley-equalto="#pass2" name="confirm_password" placeholder="">                            
                                             </div>
                                         </div>
                                     </div>

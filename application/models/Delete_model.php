@@ -10,6 +10,17 @@ class Delete_model extends CI_Model{
         $this->db->where($field_id, $id);
         return $this->db->delete($table);
     }
+    public function emp_delete($params = array()){
+        if(array_key_exists("where",$params)){
+            foreach ($params['where'] as $key => $value){
+                $this->db->where($key,$value);
+            }
+        }
+
+        if(array_key_exists("tblName",$params)){
+            return $this->db->delete($params['tblName']);
+        }
+    }
 ///End 
  public function delete_multiple_clause($table,$field_id,$id,$field_id1,$id1)
     {

@@ -163,12 +163,12 @@ $(document).on('click', '#btn_add_variation_option', function () {
             $("#discount_input_container_variation").hide();
         }
     });
-    $(document).on('change', '#checkbox_price_variation', function () {
+    $(document).on('change', '#dis_checkbox_discount_rate_variation', function () {
         if (!this.checked) {
-            $("#price_input_container_variation").show();
+            $("#dis_discount_input_container_variation").show();
         } else {
-            $('#price_input_container_variation input').val("0");
-            $("#price_input_container_variation").hide();
+            $('#dis_input_discount_rate_variation').val("0");
+            $("#dis_discount_input_container_variation").hide();
         }
     });
     $(document).on('change', '#checkbox_price_variation', function () {
@@ -177,6 +177,14 @@ $(document).on('click', '#btn_add_variation_option', function () {
         } else {
             $('#price_input_container_variation input').val("0");
             $("#price_input_container_variation").hide();
+        }
+    });
+    $(document).on('change', '#dis_checkbox_price_variation', function () {
+        if (!this.checked) {
+            $("#dis_price_input_container_variation").show();
+        } else {
+            $('#dis_price_input_container_variation input').val("0");
+            $("#dis_price_input_container_variation").hide();
         }
     });
 

@@ -19,7 +19,7 @@
    <!-- Home Banner slider -->
    <div class="slideshow slideshow-wrapper pb-section">
       <div class="home-slideshow slideshow--large">
-      <?php foreach($slider as $slide): ?>
+         <?php foreach($slider as $slide): ?>
          <div class="slide slide1 d-block">
                <div class="slideimg blur-up lazyload">
                   <img class="blur-up lazyload" data-src="<?= get_image($slide->media_id);?>" src="<?= get_image($slide->media_id);?>" alt="Welcome to Diva" title="Welcome to Diva" />
@@ -42,51 +42,17 @@
                </div>
          </div>
          <?php endforeach; ?>
-
-         <!-- <div class="slide slide2 d-block">
-               <div class="slideimg blur-up lazyload">
-                  <img class="blur-up lazyload" data-src="assets/images/slideshow-banners/home2-banner2.jpg" src="assets/images/slideshow-banners/home2-banner2.jpg" alt="Beautiful Designs" title="Beautiful Designs" />
-                  <div class="slideshow__text-wrap slideshow__overlay">
-                     <div class="slideshow__text-content mt-0 right  te_lef">
-                           <div class="container">
-                              <div class="wrap-caption right">
-                                 <h2 class="h1 mega-title slideshow__title">Beautiful Designs</h2>
-                                 <span class="mega-subtitle slideshow__subtitle">Looks beautiful and sharp on every device</span>
-                                 <a href="collection-4columns.html" class="btn btn--large">Top Notch support</a>
-                              </div>
-                           </div>
-                     </div>
-                  </div>
-               </div>
-         </div> -->
-
-            <!-- <div class="slide slide3 d-block">
-               <div class="slideimg blur-up lazyload">
-                  <img class="blur-up lazyload" data-src="assets/images/slideshow-banners/home2-banner3.jpg" src="assets/images/slideshow-banners/home2-banner3.jpg" alt="Awesome Desing" title="Awesome Desing" />
-                  <div class="slideshow__text-wrap slideshow__overlay">
-                     <div class="slideshow__text-content mt-0 right  te_lef">
-                           <div class="container">
-                              <div class="wrap-caption right">
-                                 <h2 class="h1 mega-title slideshow__title">Beautiful Designs</h2>
-                                 <span class="mega-subtitle slideshow__subtitle">Looks beautiful and sharp on every device</span>
-                                 <a href="collection-4columns.html" class="btn btn--large">Top Notch support</a>
-                              </div>
-                           </div>
-                     </div>
-                  </div>
-               </div> -->
-         </div>
       </div>
    </div>
    <!-- End Home Banner slider -->
-
-
+</div>
 <?php endif; ?>
 
 <?php 
    //set_cookie('user_id',1,time() + (86400 * 30)); 
    //delete_cookie('user_id');
 ?>
+
 
 <!-- ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp <?php //echo $this->input->cookie('user_id',true) ? $this->input->cookie('user_id',true) : "NULL"; ?> -->
 

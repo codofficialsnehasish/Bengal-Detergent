@@ -8,7 +8,7 @@ $route['translate_uri_dashes'] = TRUE;
 
 $route['mdm']='admin/authentication/index';
 $route['admin/dashboard']='admin/dashboard/index';
-$route['retailer/dashboard']='my_dashboard/seller_dashboard';
+$route['retailer/dashboard']='my_dashboard/retailer_dashboard';
 $route['distributer/dashboard']='my_dashboard/distributer_dashboard';
 $route['my-dashboard']='my_dashboard/index';
 $route['login']='authentication/login';
@@ -106,6 +106,8 @@ $route['productQuickView']='ajax/productQuickView';
 $route['payment-method-post']='cart_controller/payment_method_post';
 
 $route['order-details/(:num)'] = 'order_controller/order/$1';
+$route['order-detailss/(:num)'] = 'order_controller/order_d/$1';
+$route['distributor-order-details/(:num)'] = 'order_controller/order_distri/$1';
 $route['order/completed-orders'] = 'order_controller/completed_orders';
 
 $route['orders'] = 'order_controller/orders';

@@ -23,7 +23,7 @@
                             </div>
                         </div>
                         <!-- end page title -->
-
+                        <?php if($this->auth_user->role=='admin'){ ?>
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
@@ -57,7 +57,7 @@
                                                         /<br> <?= select_value_by_id('categories','cat_id',$item->subcategory_id,'cat_name');?>
                                                         <?PHP }?>
                                                     </td>
-                                                    <td><?php echo date("d-m-Y",strtotime($item->created_at)) ?></td> 
+                                                    <td><?php echo formatted_date($item->updated_at) ?></td> 
                                                     <td><?= $item->actual_stock;?> </td>
                                                     <td><?= $item->stock;?> </td>
                                                     <td style="color:<?php if($item->stock_status == 1){echo 'green';}else{echo 'red';} ?>;font-weight:700;"><?php if($item->stock_status == 1){echo "In Stock";}else{echo "Out of Stock";} ?></td>
@@ -71,6 +71,55 @@
                                 </div>
                             </div> <!-- end col -->
                         </div> <!-- end row -->
+                        <?php }if($this->auth_user->role=='dristributor'){ ?>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                            <thead>
+                                                <tr>
+                                                    <th>Sl No.</th>
+                                                    <th>Products</th>
+                                                    <th>Category</th>
+													<th>Stock Date Added</th>
+                                                    <th>Stock</th>
+                                                    <!-- <th>Offer Price</th> -->
+                                                    <th>Status</th>
+                                                    <!-- <th>Visibility</th>
+                                                    <th>Action</th> -->
+                                                </tr>
+                                            </thead>
+
+
+                                            <tbody>
+                                                <?php $i=1;
+                                                foreach($allitems as $item):
+                                                    $product = get_product_by_id($item->product_id);
+                                                ?>
+                                                <tr>
+                                                    <td><?= $i++;?></td>
+                                                    <td><img src="<?= get_product_main_image($product);?>" width="50" />&nbsp;&nbsp;&nbsp;&nbsp;<?= word_limiter(strip_tags($product->title));?></td>
+                                                    <td>
+                                                        <?= select_value_by_id('categories','cat_id',$product->category_id,'cat_name');?>
+                                                        <?php if($product->subcategory_id!='' && $product->subcategory_id!=NULL && $product->subcategory_id!=0){?>
+                                                        /<br> <?= select_value_by_id('categories','cat_id',$product->subcategory_id,'cat_name');?>
+                                                        <?PHP }?>
+                                                    </td>
+                                                    <td><?php echo date("d-m-Y",strtotime($item->updated_at)) ?></td> 
+                                                    <td><?= $item->stock;?> </td>
+                                                    <td style="color:<?php if($item->stock >= 1){echo 'green';}else{echo 'red';} ?>;font-weight:700;"><?php if($item->stock >= 1){echo "In Stock";}else{echo "Out of Stock";} ?></td>
+                                                </tr>
+                                                <?php endforeach;?>
+                                               
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div> <!-- end col -->
+                        </div> <!-- end row -->
+                        <?php } ?>
 
                     </div> <!-- container-fluid -->
                 </div>

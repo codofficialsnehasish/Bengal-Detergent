@@ -57,15 +57,21 @@ class Cart_controller extends Core_Controller
                 $html .= '<li class="item">';
                 $html .= '<a class="product-image" href='. base_url("/cart") .'><img src='. get_product_main_image($product).' alt='. $product->title.' title=""></a>';
                 $html .= '<div class="product-details">';
-                $html .= '<a href="#" class="remove" data-id="1"  onclick="remove_from_cart('. $cart->id.','.$chdjc.');" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"><i class="an an-times" aria-hidden="true"></i></a>';
-                $html .= '<a href="#" class="edit-i remove" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="an an-edit" aria-hidden="true"></i></a>';
+                $html .= '<a href="#" class="remove" data-id="1"  onclick="removefrompopupcart('. $cart->id.');" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"><i class="an an-times" aria-hidden="true"></i></a>';
+                // $html .= '<a href="#" class="edit-i remove" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="an an-edit" aria-hidden="true"></i></a>';
                 $html .= '<a class="pName" href='. base_url("/cart").'>'. $product->title .'</a>';
+                if(!empty($cart->variations)){
+                    foreach($cartvariations as $cvariation){
+                        $variations = $this->variation_model->get_variation_option($cvariation);
+                        $html .= '<p class="mb-0">'. select_value_by_id("variations","id",$variations->variation_id,"label_names").':'.$variations->option_names.'</p>';
+                    }
+                }
                 $html .= '<div class="d-flex justify-content-between">';
                 $html .= '<div class="wrapQtyBtn clearfix">';
                 $html .= '<span class="label">Qty:</span>';
                 $html .= '<div class="qtyField clearfix">';
                 $html .= '<a class="qtyBtn minus" href="javascript:void(0);" onclick="updateCart('. $cart->id.','. $cart->product_id.','. $cart->quantity.','.$mm.')"><i class="an an-minus" aria-hidden="true"></i></a>';
-                $html .= '<input type="text" name="quantity" value="'. $cart->quantity.'" class="product-form__input qty">';
+                $html .= '<input type="text" name="quantity" id="updatescartquantity'.$cart->id.'" value="'. $cart->quantity.'" class="product-form__input qty">';
                 $html .= '<a class="qtyBtn plus" href="javascript:void(0);" onclick="updateCart('. $cart->id.','. $cart->product_id.','. $cart->quantity.','.$pp.');"><i class="an an-plus" aria-hidden="true"></i></a>';
                 $html .= '</div>';
                 $html .= '</div>';
@@ -264,10 +270,20 @@ class Cart_controller extends Core_Controller
         $quantity = $this->input->post('quantity', true);
         $status = $this->input->post('status', true);
         if($status == 1){
-            $this->cart_model->update_cart_product_quantity($product_id, $cart_item_id, $quantity + 1);
+            $res = $this->cart_model->update_cart_product_quantity($product_id, $cart_item_id, $quantity + 1);
         }else{
-            $this->cart_model->update_cart_product_quantity($product_id, $cart_item_id, $quantity - 1);
+            $res = $this->cart_model->update_cart_product_quantity($product_id, $cart_item_id, $quantity - 1);
         }
+        if($res){
+            if($status == 1){
+                $resultArray = array('qty'=>$quantity+1,'status'=>1);
+            }else{
+                $resultArray = array('qty'=>$quantity-1,'status'=>1);
+            }
+        }else{
+            $resultArray = array('qty'=>$quantity,'status'=>0);
+        }
+        echo json_encode($resultArray); 
     }
 
     /**
@@ -501,14 +517,13 @@ class Cart_controller extends Core_Controller
     public function cash_on_delivery_payment_post(){
         $distributer = $this->input->post('distributer_option',true);
         if(!empty($distributer)){
-            $dist_id = $this->input->post('dist_id',true);
-            $order_id = $this->order_model->add_order_offline_payment("Cash On Delivery",'',$distributer,$dist_id);
+            $order_id = $this->order_model->add_order_offline_payment("Cash On Delivery",'',1,$distributer);
         }else{
             $order_id = $this->order_model->add_order_offline_payment("Cash On Delivery");
         }
         //add order
         $order = $this->order_model->get_order($order_id);
-        print_r($order);
+        // print_r($order);
         if (!empty($order)) {
             //decrease product quantity after sale
             $this->order_model->decrease_product_stock_after_sale($order->id);

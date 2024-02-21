@@ -59,7 +59,7 @@
 		                            <!-- Form Group (birthday)-->
 		                            <div class="col-md-6">
 		                                <label class="small mb-1" for="inputEmailAddress">State</label>
-										<select name="state_id" id="state_id" required class="form-control">
+										<select name="state_id" id="states_id" required class="form-control">
 		                                <option value="">Select State</option>
 										<?php 
 										if(!empty($states)):
@@ -78,7 +78,7 @@
 		                            <!-- Form Group (phone number)-->
 		                            <div class="col-md-6">
 		                                <label class="small mb-1" for="inputPhone">City</label>
-										<select name="city_id" id="city_id" required class="form-control">
+										<select name="city_id" id="citys_id" required class="form-control">
 		                                <option value="">Select City</option>
 										<?php 
 										if(!empty($cities)):

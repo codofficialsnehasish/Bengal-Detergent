@@ -28,8 +28,8 @@
 						<tbody>
 							<?php 
 								if(!empty($cartitems)):
-									$total =0;
-									$totalshippinhg= 0;			
+									$total = 0;
+									$totalshippinhg = 0;			
 									foreach($cartitems as $item):
 									$product = $this->product_model->get_product_by_id($item->product_id);
 									// echo "product_id = ".$product->id;
@@ -49,7 +49,16 @@
 								</td>
 								<td class="cart__meta small--text-left cart-flex-item">
 									<div class="list-view-item__title">
-										<a href="<?= base_url('product/'.$product->slug);?>"><?= $product->title;?> <?= $appended_variations; ?></a>
+										<a href="<?= base_url('product/'.$product->slug);?>"><?= $product->title;?></a>
+										<?php if(!empty($item->variations)){
+											foreach($cartvariations as $cvariation){
+												$variations = $this->variation_model->get_variation_option($cvariation);
+												?>
+											<p class="mb-0"><?= select_value_by_id('variations','id',$variations->variation_id,'label_names');?>: <?= $variations->option_names;?></p>
+										<?php 
+											}
+										}
+										?>
 									</div>
 									<!-- <div class="cart__meta-text">
 										Color: Navy<br>Size: Small<br>
@@ -61,9 +70,9 @@
 								<td class="cart__update-wrapper cart-flex-item text-center">
 									<div class="cart__qty text-center">
 										<div class="qtyField">
-											<a class="qtyBtn minus" href="javascript:void(0);" onclick="updateCart(<?= $item->id;?>,<?= $item->product_id;?>,<?= $item->quantity;?>,'-')"><i class="icon an an-minus"></i></a>
-											<input class="cart__qty-input qty" type="text" name="product_quantity" id="cart<?= $item->id;?>" value="<?= $item->quantity;?>" pattern="[0-9]*">
-											<a class="qtyBtn plus" href="javascript:void(0);" onclick="updateCart(<?= $item->id;?>,<?= $item->product_id;?>,<?= $item->quantity;?>,'+')"><i class="icon an an-plus"></i></a>
+											<a class="qtyBtn minus" href="javascript:void(0);" onclick="updateCartfromcart(<?= $item->id;?>,<?= $item->product_id;?>,<?= $item->quantity;?>,'-')"><i class="icon an an-minus"></i></a>
+											<input class="cart__qty-input qty" type="text" id="updatescartquantity<?= $item->id ?>" name="product_quantity" id="cart<?= $item->id;?>" value="<?= $item->quantity;?>" pattern="[0-9]*">
+											<a class="qtyBtn plus" href="javascript:void(0);" onclick="updateCartfromcart(<?= $item->id;?>,<?= $item->product_id;?>,<?= $item->quantity;?>,'+')"><i class="icon an an-plus"></i></a>
 										</div>
 									</div>
 								</td>

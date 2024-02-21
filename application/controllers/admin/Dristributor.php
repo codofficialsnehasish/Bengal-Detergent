@@ -233,7 +233,7 @@ class Dristributor extends Core_Controller {
 			$user_id=$this->insert_model->insert_data($data,$this->table_name);
 			if($user_id){
 				$datas=array(
-					'user_id'=>'dist/'.strtolower(remove_special_characters($this->input->post('first_name', true))).'/00'.$user_id
+					'user_id'=>'DIST/'.strtoupper(remove_special_characters($this->input->post('first_name', true))).'/00'.$user_id
 				);
 				$update=$this->edit_model->edit($datas,$user_id,'id',$this->table_name);
 				$this->session->set_flashdata('success', 'Data Inserted successfully');

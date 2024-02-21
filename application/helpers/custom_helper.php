@@ -510,7 +510,7 @@ if (!function_exists('get_user_by_id')) {
        $ci =& get_instance();
        $user = $ci->auth_model->get_user_by_id($id);
         if(!empty($user)){
-        return $user; 
+            return $user; 
         }else{
             return '-';
         }
@@ -1420,6 +1420,7 @@ if (!function_exists('get_order_shipping')) {
 if (!function_exists('get_order_status')) {
     function get_order_status($status)
     {
+        $stat = '';
         switch($status){
             case "awaiting_payment" : $stat="Awaiting Payment"; break;
             case "payment_received" : $stat="Payment Received"; break;

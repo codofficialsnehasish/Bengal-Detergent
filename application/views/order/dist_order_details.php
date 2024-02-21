@@ -1,18 +1,25 @@
-<section class="mt-5 mb-5 buy-dashboard">
-		<div class="container ">
+<div class="page-content">
+<section class=" mb-5 buy-dashboard">
+		<div class="container-fluid">
+        <div class="page-title-box">
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <h6 class="page-title">Orders</h6>
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="<?= admin_url('/dashboard');?>">Home</a></li>
+                                        <li class="breadcrumb-item"><a href="<?= admin_url('/orders/dristibuter-order/');?>">Orders</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Order Details</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
 		    <div class="row">
 		        <div class="col-xl-3">
 		            <!-- Profile picture card-->
-                    <?php $this->load->view("order/_order_tabs"); ?>
 		        </div>
-		         <div class="col-xl-9">
+		         <div class="col-xl-12">
 		            <!-- Account details card-->
-		            <div class="card mb-4 ">
-		                <div class="card-header">
-		                	<div class="d-flex justify-content-between align-items-center">
-			                	<span><?= $title;?></span>
-			                </div>
-		                </div>
+		            <div class="card mb-4 mt-4 ">
 			            <div class="card-body tab-content dashboard-content">
 			            
                             <!-------------order------------->
@@ -302,7 +309,7 @@
                                                         	<div class="right p-2">
                                                             	<small>
                                             					<a href="<?= base_url('product/'.$item->product_slug); ?>" target="_blank" class="table-product-title">
-                                                                	<?= html_escape($item->product_title); ?>
+                                                                	<h5><?= html_escape($item->product_title); ?></h5>
                                                             	</a>
                                             					</small>
                                                         	</div>
@@ -360,14 +367,13 @@
                                                 <td style="width: 25%;">
                                                    
                                                      <?php if ($item->order_status != "completed" && $item->order_status != "cancelled"): ?>
-                                                    <a href="javascript:void(0);"  class="btn btn-sm btn-danger  text-white btn-view-invoice" onclick="cancelOrder(<?= $item->id;?>,<?= $order->order_number; ?>,'order-detailss');"><i class="icon-text-o"></i>&nbsp;Cancel</a>
+                                                    <a href="javascript:void(0);"  class="btn btn-sm btn-danger  text-white btn-view-invoice" onclick="cancelOrder(<?= $item->id;?>,<?= $order->order_number; ?>,'distributor-order-details');"><i class="icon-text-o"></i>&nbsp;Cancel</a>
                                                    <?php endif; ?>
                                                      <?php if ($item->order_status == "shipped"): ?>
                                                       <!--  <button type="submit" class="btn btn-sm btn-custom" onclick="approve_order_product('<?= $item->id; ?>','<?= "Are you sure you want to confirm this order?"; ?>');"><i class="icon-check"></i>Confirm Order Received</button>
                                                         <small class="text-confirm-order-table">Confirm if you have received your order.</small> -->
                                                     <?php elseif ($item->order_status == "completed"): ?>
                                                    <a href="<?= base_url(); ?>invoice/<?= $order->order_number.'/'.$item->order_id.'/'. $item->product_id.'/'. $item->buyer_id; ?>" target="_blank" class="btn btn-sm btn-info btn-sale-options text-white btn-view-invoice"><i class="icon-text-o"></i>&nbsp;View Invoice</a>
-
                                                         <?php if ($item->product_type == 'digital'):
                                                             $digital_sale = get_digital_sale_by_order_id($item->buyer_id, $item->product_id, $item->order_id);
                                                             if (!empty($digital_sale)):?>
@@ -490,27 +496,5 @@
 		    </div>
 		</div>
 </section>
-<script>
-	const popupCenter = ({url, title, w, h}) => {
-    // Fixes dual-screen position                             Most browsers      Firefox
-    const dualScreenLeft = window.screenLeft !==  undefined ? window.screenLeft : window.screenX;
-    const dualScreenTop = window.screenTop !==  undefined   ? window.screenTop  : window.screenY;
-    const width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
-    const height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
-    const systemZoom = width / window.screen.availWidth;
-    const left = (width - w) / 2 / systemZoom + dualScreenLeft
-    const top = (height - h) / 2 / systemZoom + dualScreenTop
-    const newWindow = window.open(url, title, 
-      `
-      scrollbars=yes,
-      width=${w / systemZoom}, 
-      height=${h / systemZoom}, 
-      top=${top}, 
-      left=${left}
-      `
-    )
-    if (window.focus) newWindow.focus();
-    newWindow.print();
-}
-</script>
+</div>
 

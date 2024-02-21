@@ -122,6 +122,38 @@ class Cart_model extends CI_Model
         }
     }
 
+    public function get_cart_by_buyer(){
+        if ($this->auth_check) {
+            $con = array(
+                'buyer_id' => $this->auth_user->id
+            );
+            }else{
+                if(!empty($this->input->cookie('user_id',true))){
+                    $con = array(
+                        'buyer_id' => $this->input->cookie('user_id',true)
+                    ); 
+                }
+                else{
+                    return false;
+                }
+        }
+        $this->db->select('*');
+        $this->db->from('cart');    
+        $this->db->where($con);
+        $query = $this->db->get();
+        $check = $query->num_rows();
+        if($check > 0){
+            return $query->result();
+        }else{
+            return false;
+        }
+    }
+
+
+
+
+
+    
     // public function get_cart_by_buyer(){
     //     if ($this->auth_check) {
     //         $con = array(
@@ -157,34 +189,6 @@ class Cart_model extends CI_Model
     //         }
     //     }
     // }
-
-
-    public function get_cart_by_buyer(){
-        if ($this->auth_check) {
-            $con = array(
-                'buyer_id' => $this->auth_user->id
-            );
-        }else{
-            if(!empty($this->input->cookie('user_id',true))){
-                $con = array(
-                    'buyer_id' => $this->input->cookie('user_id',true)
-                ); 
-            }
-            else{
-                return false;
-            }
-        }
-        $this->db->select('*');
-        $this->db->from('cart');    
-        $this->db->where($con);
-        $query = $this->db->get();
-        $check = $query->num_rows();
-        if($check > 0){
-            return $query->result();
-        }else{
-            return false;
-        }
-    }
 
     public function get_cart_by_buyer_buy_now(){
         if ($this->auth_check) {
@@ -318,10 +322,10 @@ class Cart_model extends CI_Model
                         $variation = $this->variation_model->get_variation($option->variation_id);
                         if ($variation->use_different_price == 1) {
                             if (isset($option->price)) {
-                                $object->price = $this->auth_check && $this->auth_user->role == 'dristributor' ?$option->dis_price : $option->price;
+                                $object->price = $option->price;
                             }
                             if (isset($option->discount_rate)) {
-                                $object->discount_rate = $this->auth_check && $this->auth_user->role == 'dristributor' ?$option->dis_discount_rate : $option->discount_rate;
+                                $object->discount_rate = $option->discount_rate;
                             }
                         }
                         if ($option->is_default != 1) {
@@ -332,8 +336,14 @@ class Cart_model extends CI_Model
             }
 
             if (empty($object->price)) {
+                if(auth_check()){
                 $object->price = $this->auth_user->role == 'dristributor' ? $product->dis_price : $product->price;
-                $object->discount_rate = $this->auth_user->role == 'dristributor' ? $product->dis_discount_rate : $product->discount_rate;
+                $object->discount_rate = $this->auth_user->role == 'dristributor' ? $product->dis_discount_rate : $product->discount_rate;   
+                }else{
+                $object->price =  $product->price;
+                $object->discount_rate =  $product->discount_rate;   
+                }
+
             }
             $object->price_calculated = calculate_product_price($object->price, $object->discount_rate);
 

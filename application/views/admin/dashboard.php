@@ -1,6 +1,6 @@
 <div class="page-content">
                     <div class="container-fluid">
-
+                    <?php if($this->auth_user->role=='admin'){?>
                         <!-- start page title -->
                         <div class="page-title-box">
                             <div class="row align-items-center">
@@ -29,7 +29,7 @@
                             </div>
                         </div>
                         <!-- end page title -->
-                        <?php if($this->auth_user->role=='admin'){?>
+                        
                         <div class="row">
                             <div class="col-xl-3 col-md-6">
                                 <div class="card mini-stat bg-primary text-white">
@@ -485,6 +485,130 @@
                            </div>
                         </div>
                         <!-- end row -->
+                        <?php } elseif($this->auth_user->role=='dristributor'){ ?>
+                        <div class="container mt-5">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <!-- Profile Card -->
+                                    <div class="card" style="background-color: #f8f8fa;border: none;">
+                                        <img src="<?= get_image($this->auth_user->user_image); ?>" class="card-img-top" alt="Profile Picture">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><?= $this->auth_user->full_name;?></h5>
+                                            <p class="card-text"><?= $this->auth_user->user_id;?></p>
+                                            <p><a href="" class="btn btn-outline-primary btn-block" style="width: 100%;">Edit Profile</a></p>
+                                            <!-- Add more profile details -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-md-9">
+                                    <div class="col-md-4">
+                                        <div class="card mini-stat bg-primary text-white">
+                                            <a href="<?= base_url('admin/products/')?>">
+                                                <div class="card-body">
+                                                    <div class="mb-4">
+                                                        <div class="float-start mini-stat-img me-4">
+                                                            <img src="<?= base_url('assets/admin/images/services-icon/01.png') ?>" alt="">
+                                                        </div>
+                                                        <h5 class="font-size-16 text-uppercase text-white-50">All Orders</h5>
+                                                        <h4 class="fw-medium font-size-24" style="color:white;"><?= get_any_orders_count($this->auth_user->id,'all');?> <!--<i class="mdi mdi-arrow-up text-success ms-2"></i>--> </h4>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card mini-stat bg-primary text-white">
+                                            <a href="<?= base_url('admin/products/')?>">
+                                                <div class="card-body">
+                                                    <div class="mb-4">
+                                                        <div class="float-start mini-stat-img me-4">
+                                                            <img src="<?= base_url('assets/admin/images/services-icon/12.png') ?>" alt="">
+                                                        </div>
+                                                        <h5 class="font-size-16 text-uppercase text-white-50">Completed Order</h5>
+                                                        <h4 class="fw-medium font-size-24" style="color:white;"><?= get_any_orders_count($this->auth_user->id,1);?> </h4>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card mini-stat bg-primary text-white">
+                                            <a href="<?= base_url('admin/products/')?>">
+                                                <div class="card-body">
+                                                    <div class="mb-4">
+                                                        <div class="float-start mini-stat-img me-4">
+                                                            <img src="<?= base_url('assets/admin/images/services-icon/11.png') ?>" alt="">
+                                                        </div>
+                                                        <h5 class="font-size-16 text-uppercase text-white-50">Cancelled Orders</h5>
+                                                        <h4 class="fw-medium font-size-24" style="color:white;"><?= get_any_orders_count($this->auth_user->id,2);?></h4>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card mini-stat bg-primary text-white">
+                                            <a href="<?= base_url('admin/products/')?>">
+                                                <div class="card-body">
+                                                    <div class="mb-4">
+                                                        <div class="float-start mini-stat-img me-4">
+                                                            <img src="<?= base_url('assets/admin/images/services-icon/10.png') ?>" alt="">
+                                                        </div>
+                                                        <h5 class="font-size-16 text-uppercase text-white-50">Active Orders</h5>
+                                                        <h4 class="fw-medium font-size-24" style="color:white;"><?= get_any_orders_count($this->auth_user->id,'pending');?></h4>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card mini-stat bg-primary text-white">
+                                            <a href="<?= base_url('admin/products/')?>">
+                                                <div class="card-body">
+                                                    <div class="mb-4">
+                                                        <div class="float-start mini-stat-img me-4">
+                                                            <img src="<?= base_url('assets/admin/images/services-icon/07.png') ?>" alt="">
+                                                        </div>
+                                                        <h5 class="font-size-16 text-uppercase text-white-50">Retailers Orders</h5>
+                                                        <h4 class="fw-medium font-size-24" style="color:white;"><?= get_retailer_orders_count($this->auth_user->id,'pending');?></h4>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card mini-stat bg-primary text-white">
+                                            <a href="<?= base_url('admin/products/')?>">
+                                                <div class="card-body">
+                                                    <div class="mb-4">
+                                                        <div class="float-start mini-stat-img me-4">
+                                                            <img src="<?= base_url('assets/admin/images/services-icon/08.png') ?>" alt="">
+                                                        </div>
+                                                        <h5 class="font-size-16 text-uppercase text-white-50"><?php echo date('F'); ?> Sales</h5>
+                                                        <h4 class="fw-medium font-size-24" style="color:white;">0 <!--<i class="mdi mdi-arrow-up text-success ms-2"></i>--> </h4>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card mini-stat bg-primary text-white">
+                                            <a href="<?= base_url('admin/products/')?>">
+                                                <div class="card-body">
+                                                    <div class="mb-4">
+                                                        <div class="float-start mini-stat-img me-4">
+                                                            <img src="<?= base_url('assets/admin/images/services-icon/13.png') ?>" alt="">
+                                                        </div>
+                                                        <h5 class="font-size-16 text-uppercase text-white-50"><?php echo date('F', strtotime('-1 month', strtotime(date('Y-m-d')))); ?> Sales</h5>
+                                                        <h4 class="fw-medium font-size-24" style="color:white;">0 <!--<i class="mdi mdi-arrow-up text-success ms-2"></i>--> </h4>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <?php } ?>
 
 

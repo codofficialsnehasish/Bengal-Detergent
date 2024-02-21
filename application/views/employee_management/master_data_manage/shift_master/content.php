@@ -7,7 +7,7 @@
                                 <div class="col-md-8">
                                     <h6 class="page-title">Shift Master</h6>
                                     <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item"><a href="<?= admin_url();?>">Home</a></li>
+                                        <li class="breadcrumb-item"><a href="<?= admin_url('dashboard/');?>">Home</a></li>
                                         <li class="breadcrumb-item active" aria-current="page">All Shifts</li>
                                     </ol>
                                 </div>

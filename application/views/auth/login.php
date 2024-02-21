@@ -37,7 +37,7 @@
 					<div class="mb-4">
 						<?= form_open('authentication/login-process', 'class="needs-validation" novalidate ', 'id="login_form"');?>					            	
 							<?php $this->load->view('admin/partials/_messages');
-							echo $this->session->flashdata('error');?>
+							//echo $this->session->flashdata('error');?>
 						<!-- <form method="post" action="#" id="CustomerRegisterForm" accept-charset="UTF-8" class="customer-form">   -->
 							<h3>Registered Customers</h3>
 							<p>If you have an account with us, please log in.</p>

@@ -115,7 +115,7 @@ class Shift_master extends Core_Controller {
 			'tblName' => $this->table_name,
 			'where' => array('id'=>$id)
 		);
-		$this->delete_model->delete($configs);
+		$this->delete_model->emp_delete($configs);
 		echo 'Deleted Successfully';
 	}
 

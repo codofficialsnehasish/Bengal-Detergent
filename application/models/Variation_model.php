@@ -218,9 +218,13 @@ class Variation_model extends CI_Model
             'color' => $this->input->post('option_color', true),
             'price' => $this->input->post('option_price', true),
             'discount_rate' => $this->input->post('option_discount_rate', true),
+            'dis_price' => $this->input->post('dis_option_price', true),
+            'dis_discount_rate' => $this->input->post('dis_option_discount_rate', true),
             'is_default' => $this->input->post('is_default', true),
             'use_default_price' => $this->input->post('use_default_price', true),
-            'no_discount' => $this->input->post('no_discount', true)
+            'no_discount' => $this->input->post('no_discount', true),
+            'dis_use_default_price' => $this->input->post('dis_use_default_price', true),
+            'dis_no_discount' => $this->input->post('dis_no_discount', true)
         );
 
         
@@ -229,21 +233,47 @@ class Variation_model extends CI_Model
         } else {
             $data["price"] = 0;
         }
+
+        if (!empty($data["dis_price"])) {
+            $data["dis_price"] = get_price($data["dis_price"], 'database');
+        } else {
+            $data["dis_price"] = 0;
+        }
+
         if (empty($data["color"])) {
             $data["color"] = "";
         }
+
         if (empty($data["discount_rate"])) {
             $data["discount_rate"] = 0;
         }
         if ($data["discount_rate"] > 99) {
             $data["discount_rate"] = 99;
         }
+
+        if (empty($data["dis_discount_rate"])) {
+            $data["dis_discount_rate"] = 0;
+        }
+        if ($data["dis_discount_rate"] > 99) {
+            $data["dis_discount_rate"] = 99;
+        }
+
+
         if (empty($data["use_default_price"])) {
             $data["use_default_price"] = 0;
         }
         if (empty($data["no_discount"])) {
             $data["no_discount"] = 0;
         }
+
+        if (empty($data["dis_use_default_price"])) {
+            $data["dis_use_default_price"] = 0;
+        }
+        if (empty($data["dis_no_discount"])) {
+            $data["dis_no_discount"] = 0;
+        }
+
+
         if (empty($data["parent_id"])) {
             $data["parent_id"] = 0;
         }
@@ -252,6 +282,8 @@ class Variation_model extends CI_Model
         } else {
             $data["price"] = 0;
             $data["discount_rate"] = 0;
+            $data["dis_price"] = 0;
+            $data["dis_discount_rate"] = 0;
         }
 
         if ($this->db->insert('variation_options', $data)) {

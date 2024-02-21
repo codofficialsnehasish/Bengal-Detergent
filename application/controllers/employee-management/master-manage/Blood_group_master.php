@@ -52,7 +52,7 @@ class Blood_group_master extends Core_Controller {
 				'tblName' => $this->table_name,
 				'data' => $data
 			);
-			$insert=$this->insert_model->insert_data($configs);
+			$insert=$this->insert_model->emp_insert_data($configs);
 			if($insert){
 				$this->session->set_flashdata('success', 'Data has been inserted successfully');
 				redirect($this->agent->referrer());
@@ -65,7 +65,7 @@ class Blood_group_master extends Core_Controller {
 
 	public function edit()
 	{
-		$id=$this->uri->segment(4);
+		$id=$this->uri->segment(5);
 		$header['pagecss']="";
 		$header['title']='Edit Gender';
 		$this->load->view('employee_management/partialss/header',$header);
@@ -79,7 +79,7 @@ class Blood_group_master extends Core_Controller {
 
 	public function update_process()
 	{
-		$id=$this->uri->segment(4);
+		$id=$this->uri->segment(5);
 		$this->form_validation->set_rules('name', 'Title', 'required|xss_clean|max_length[200]');
 		if ($this->form_validation->run() == false) {
 			$this->session->set_flashdata('errors', validation_errors());
@@ -96,7 +96,7 @@ class Blood_group_master extends Core_Controller {
 				'data' => $data,
 				'where' => array('id'=>$id)
 			);
-			$update=$this->edit_model->edit($configs);
+			$update=$this->edit_model->emp_edit($configs);
 			if($update){
 				$this->session->set_flashdata('success', 'Data has been updated successfully');
 				redirect($this->agent->referrer());
@@ -114,7 +114,7 @@ class Blood_group_master extends Core_Controller {
 			'tblName' => $this->table_name,
 			'where' => array('id'=>$id)
 		);
-		$this->delete_model->delete($configs);
+		$this->delete_model->emp_delete($configs);
 		echo 'Deleted Successfully';
 	}
 

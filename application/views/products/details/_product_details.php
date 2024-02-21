@@ -76,7 +76,7 @@
                         <!-- Product Price -->
                         <div class="product-single__price product-single__price-product-template">
                            <?php if($product->no_discount!=1){?>
-                              <s id="ComparePrice-product-template"><span class="money"><?= select_value_by_id('currencies','id',$product->currency_code,'hex');?> <?php if(!empty($this->auth_user) && $this->auth_user->role == 'dristributor'){echo $product->dis_price;}else{echo $product->price;}?></span></s>
+                              <span id="ComparePrice-product-template"><span class="money"><?= select_value_by_id('currencies','id',$product->currency_code,'hex');?> <?php if(!empty($this->auth_user) && $this->auth_user->role == 'dristributor'){echo $product->dis_price;}else{echo $product->price;}?></span></s>
                            <?php }?>
                            <span class="product-price__price product-price__price-product-template product-price__sale product-price__sale--single">
                               <span id="ProductPrice-product-template"><span class="money"><?= select_value_by_id('currencies','id',$product->currency_code,'hex');?><?php if(!empty($this->auth_user) && $this->auth_user->role == 'dristributor'){echo $product->dis_discounted_price;}else{echo $product->discounted_price;}?></span></span>

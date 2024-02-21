@@ -171,30 +171,46 @@
                             <span>Dashboard</span>
                         </a>
                     </li>
+                    <?php 
+                        $osegment='';
+                        if($this->uri->segment(3)=='dristibuter-order'){$osegment='dristibuter-order';}
+                        if($this->uri->segment(2)=='orders'){$osegment='orders';}
+                    ?>
                     <li>
-                        <a href="<?= base_url('admin/orders/')?>" class="waves-effect <?= active_link('dashboard');?>">
+                        <a href="javascript: void(0);" class="has-arrow waves-effect <?= active_menu($osegment);?>">
                             <i class="ti-shopping-cart-full"></i><!--<span class="badge rounded-pill bg-primary float-end">2</span> -->
                             <span>Orders</span>
                         </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li class="<?= tab_active('dristibuter-order');?>"><a href="<?= base_url('admin/orders/dristibuter-order')?>" class="<?= active_link('dristibuter-order');?>">Your Order</a></li>                  
+                            <li class="<?= tab_active('orders');?>"><a href="<?= base_url('admin/orders/')?>" class="<?= active_link('orders');?>">Order From Retailer</a></li>                  
+                        </ul>
+                    </li>
+                    
+                    <li class="<?= active_menu('stocks');?>">
+                        <a href="<?= base_url('admin/stocks/')?>" class="waves-effect <?= active_link('stocks');?>">
+                            <i class="fas fa-sort-amount-up-alt"></i>
+                            <span>Manage Stocks</span>
+                        </a>
                     </li>
 
-                <?php 
-                    $usegment='';
-                    if($this->uri->segment(2)=='sales-target'){$usegment='sales-target';}
-                    // if($this->uri->segment(2)=='gift'){$usegment='gift';}
-                    if($this->uri->segment(2)=='sales-report'){$usegment='sales-report';}
-                ?>
-                <li class="<?= active_menu($usegment);?>">
-                    <a href="javascript: void(0);" class="has-arrow waves-effect <?= active_menu($usegment);?>">
-                        <i class="fas fa-money-bill-alt"></i>
-                        <span>Sales</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li class="<?= tab_active('sales-target');?>"><a href="<?= base_url('admin/sales-target/')?>" class="<?= active_link('sales-target');?>">Target</a></li>                  
-                        <!-- <li class="<?= tab_active('gift');?>"><a href="<?= base_url('admin/gift/')?>" class="<?= active_link('gift');?>">Gifts</a></li>                   -->
-                        <li class="<?= tab_active('sales-report');?>"><a href="<?= base_url('admin/sales-report/')?>" class="<?= active_link('sales-report');?>">Sales Report</a></li>                  
-                    </ul>
-                </li>
+                    <?php 
+                        $usegment='';
+                        if($this->uri->segment(2)=='sales-target'){$usegment='sales-target';}
+                        // if($this->uri->segment(2)=='gift'){$usegment='gift';}
+                        if($this->uri->segment(2)=='sales-report'){$usegment='sales-report';}
+                    ?>
+                    <li class="<?= active_menu($usegment);?>">
+                        <a href="javascript: void(0);" class="has-arrow waves-effect <?= active_menu($usegment);?>">
+                            <i class="fas fa-money-bill-alt"></i>
+                            <span>Sales</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li class="<?= tab_active('sales-target');?>"><a href="<?= base_url('admin/sales-target/')?>" class="<?= active_link('sales-target');?>">Target</a></li>                  
+                            <!-- <li class="<?= tab_active('gift');?>"><a href="<?= base_url('admin/gift/')?>" class="<?= active_link('gift');?>">Gifts</a></li>                   -->
+                            <li class="<?= tab_active('sales-report');?>"><a href="<?= base_url('admin/sales-report/')?>" class="<?= active_link('sales-report');?>">Sales Report</a></li>                  
+                        </ul>
+                    </li>
                 <?php } ?>
             </ul>
         </div>

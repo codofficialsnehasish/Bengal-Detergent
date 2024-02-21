@@ -16,7 +16,7 @@ if (!empty($variation)):
                     if ($option->is_default != 1):
                         $option_stock = $option->stock;
                     endif;
-                   // $option->option_names = get_variation_option_name($option->option_names, $this->selected_lang->id); ?>
+                    // $option->option_names = get_variation_option_name($option->option_names, $this->selected_lang->id); ?>
                     <div class="custom-control custom-control-variation custom-control-validate-input swatch-element">
                         <input type="radio" name="variation<?php echo $variation->id; ?>" data-name="variation<?php echo $variation->id; ?>" value="<?php echo $option->id; ?>" id="radio<?php echo $option->id; ?>" class="custom-control-input swatchInput form-check-input" <?php echo ($option->is_default == 1) ? 'checked' : ''; ?> onchange="select_product_variation_option('<?php echo $variation->id; ?>', 'radio_button', $(this).val());" required>
                         <?php if ($variation->option_display_type == 'image'):

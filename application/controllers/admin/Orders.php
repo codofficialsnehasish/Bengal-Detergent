@@ -108,62 +108,63 @@ class Orders extends Core_Controller
 					}
 				} else {
 					if ($order_status == 'completed') {
-                    /////send sms
-                    		$buyers = $this->auth_model->get_user($order_product->buyer_id);
-                            // $senderId = 'MAGXRT';
-             				// $templateID = '1707167113092657812';  	
-                    
-             				// $smstext = 'Dear '.$buyers->first_name.', Your Order is delivered, Order ID is '.select_value_by_id('orders','id',$order_product->order_id,'order_number') .' - Magxmart india.';
-							// send_sms($buyers->phone_number,$senderId,$templateID,$smstext);
-                            // $this->email_template->order_delivered_to_buyer($order_product->buyer_id,$order_product->order_id,$order_product->id);
+                    	/////send sms
+                    	$buyers = $this->auth_model->get_user($order_product->buyer_id);
+						// $senderId = 'MAGXRT';
+						// $templateID = '1707167113092657812';  	
+				
+						// $smstext = 'Dear '.$buyers->first_name.', Your Order is delivered, Order ID is '.select_value_by_id('orders','id',$order_product->order_id,'order_number') .' - Magxmart india.';
+						// send_sms($buyers->phone_number,$senderId,$templateID,$smstext);
+						// $this->email_template->order_delivered_to_buyer($order_product->buyer_id,$order_product->order_id,$order_product->id);
 						//add seller earnings
-					//	$this->earnings_model->add_seller_earnings($order_product);
-                    
+						//	$this->earnings_model->add_seller_earnings($order_product);
 		
 					} else {
                     
                     	if($order_status == 'shipped'){
-                      //  echo 'Buyer Id= '.$order_product->buyer_id;
-                      //  echo '<br>Seller Id='.$order_product->seller_id;
-                       // echo '<br>Product Id= '.$order_product->product_title;
-                        
-                      //  orderManifest($awb , $order_no ,$buyer ,$seller, $invoice_no, $itemCategory ){
-        			//	$consignee = consignee_details_by_id($order_product->buyer_id);
-           			  // $pickup = pickup_details_by_id($order_product->seller_id);
-                       // echo '<pre>>';
-                       // print_r($consignee);
-                        // echo '<pre>>';
-                       // print_r($pickup);
-                        // die;
-    					 $awbNo = $this->ecom->fetchWayBill(1);
-    					 $orderManifest = $this->ecom->orderManifest($awbNo->awb[0] , $order_product->order_id ,$order_product->buyer_id ,$order_product->seller_id, $order_product->order_id, $order_product->product_title);
-                         if(!empty($orderManifest)){
-                         	if($orderManifest->status ==1){
-                            ///update traking no
-                             $this->order_model->updateTrackingNo($order_product->id,$awbNo->awb[0]); 
-                             $this->session->set_flashdata('success', $orderManifest->msg);
+							//  echo 'Buyer Id= '.$order_product->buyer_id;
+							//  echo '<br>Seller Id='.$order_product->seller_id;
+							// echo '<br>Product Id= '.$order_product->product_title;
+								
+							//  orderManifest($awb , $order_no ,$buyer ,$seller, $invoice_no, $itemCategory ){
+							//	$consignee = consignee_details_by_id($order_product->buyer_id);
+							// $pickup = pickup_details_by_id($order_product->seller_id);
+							// echo '<pre>>';
+							// print_r($consignee);
+							// echo '<pre>>';
+							// print_r($pickup);
+							// die;
+
+							// $awbNo = $this->ecom->fetchWayBill(1);
+							// $orderManifest = $this->ecom->orderManifest($awbNo->awb[0] , $order_product->order_id ,$order_product->buyer_id ,$order_product->seller_id, $order_product->order_id, $order_product->product_title);
+							// if(!empty($orderManifest)){
+							// 	if($orderManifest->status ==1){
+									///update traking no
+									// $this->order_model->updateTrackingNo($order_product->id,$awbNo->awb[0]); 
+									$this->order_model->updateTrackingNo($order_product->id,0,$order_product->order_id); 
+									$this->session->set_flashdata('success', $orderManifest->msg);
                             
-                            $buyer = $this->auth_model->get_user($order_product->buyer_id);
-                            /////send sms
-                            $senderId = 'MAGXRT';
-             				$templateID = '1707167107209975522';  	
-             				$smstext = 'Dear '.$buyer->first_name.', Your Order is Shipped, Tracki ID is '.$awbNo->awb[0].', Will be delivered soon - Magxmart india.';
-							send_sms($buyer->phone_number,$senderId,$templateID,$smstext);
-                            /////////////////////
+									// $buyer = $this->auth_model->get_user($order_product->buyer_id);
+									// /////send sms
+									// $senderId = 'MAGXRT';
+									// $templateID = '1707167107209975522';  	
+									// $smstext = 'Dear '.$buyer->first_name.', Your Order is Shipped, Tracki ID is '.$awbNo->awb[0].', Will be delivered soon - Magxmart india.';
+									// send_sms($buyer->phone_number,$senderId,$templateID,$smstext);
+                            		/////////////////////
                             
-                             redirect($this->agent->referrer());
-                            }else{ 
-                            $this->session->set_flashdata('error', $orderManifest->msg);
-                            redirect($this->agent->referrer());
-                            }
-                         }else{
-                          $this->session->set_flashdata('error', 'Error.');
-                            redirect($this->agent->referrer());
-                         }
+                             		redirect($this->agent->referrer());
+                            	// }else{ 
+                            	// 	$this->session->set_flashdata('error', $orderManifest->msg);
+                            	// 	redirect($this->agent->referrer());
+                            	// }
+							// }else{
+							// 	$this->session->set_flashdata('error', 'Error.');
+							// 	redirect($this->agent->referrer());
+							// }
                         
                         }
 						//check if earning added before
-						$order = $this->order_model->get_order($order_product->order_id);
+						// $order = $this->order_model->get_order($order_product->order_id);
 						// if (!empty($order) && !empty($this->earnings_model->get_earning_by_user_id($order_product->seller_id, $order->order_number))) {
 						// 	//remove seller earnings
 						// 	$this->earnings_model->remove_seller_earnings($order_product);
@@ -178,8 +179,8 @@ class Orders extends Core_Controller
 			$this->order_model->update_payment_status_if_all_received($order_product->order_id);
 			$this->order_model->update_order_status_if_completed($order_product->order_id);
 		}
-    $this->session->set_flashdata('success', 'Successfully Updated');
-   // echo $this->input->post('order_status', true);die;
+		$this->session->set_flashdata('success', 'Successfully Updated');
+		// echo $this->input->post('order_status', true);die;
 		redirect($this->agent->referrer() . "#t_product");
 	}
 
@@ -325,6 +326,16 @@ class Orders extends Core_Controller
 		$this->load->view('admin/includes/_header', $data);
 		$this->load->view('admin/order/digital_sales', $data);
 		$this->load->view('admin/includes/_footer');
+	}
+
+	public function dristibuter_order(){
+		$header['pagecss']="contentCss";
+		$header['title']='Orders';
+		$this->load->view('admin/partials/header',$header);
+		$data['orders'] = $this->order_model->get_all_order_for_distributer($this->auth_user->id);
+		$this->load->view($this->view_path.'distributer_order',$data);
+		$script['pagescript']='contentScript';
+		$this->load->view('admin/partials/footer',$script);
 	}
 
 	/**

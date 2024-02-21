@@ -57,12 +57,13 @@
                </div>
             </div>
             <?php if ($variation->use_different_price == 1): ?>
+            <!-- For retailer variation price -->
             <div class="form-group hide-if-default">
                <div class="row">
                   <div class="col-6">
                      <div class="row align-items-center">
                         <div class="col-12">
-                           <label class="control-label">MRP</label>
+                           <label class="control-label">Retailer Price</label>
                            <div id="price_input_container_variation">
                               <div class="input-group">
                                  <div class="input-group-prepend">
@@ -84,8 +85,6 @@
                   </div>
                   <div class="col-6">
                      <div class="row align-items-center">
-                    
-
                         <div class="col-12">
                            <label class="control-label">Discount Rate</label>
                            <div id="discount_input_container_variation">
@@ -109,6 +108,64 @@
                   </div>
                </div>
             </div>
+            <!-- End of retailer variation price -->
+               
+            <p></p>
+
+            <!-- For distributer variation price -->
+            <div class="form-group hide-if-default">
+               <div class="row">
+                  <div class="col-6">
+                     <div class="row align-items-center">
+                        <div class="col-12">
+                           <label class="control-label">Distributor Price</label>
+                           <div id="dis_price_input_container_variation">
+                              <div class="input-group">
+                                 <div class="input-group-prepend">
+                                    <span class="input-group-text input-group-text-currency" id="basic-addon-price-variation">$</span>
+                                 </div>
+                                 <input type="text" name="dis_option_price" id="product_price_input_variation" aria-describedby="basic-addon-price-variation" class="form-control form-input price-input validate-price-input" placeholder="0.00" onpaste="return false;" maxlength="32" required>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="dis_use_default_price" value="1" id="dis_checkbox_price_variation">
+                                <label class="form-check-label" for="dis_checkbox_price_variation">
+                                Use default price
+                                </label>
+                            </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-6">
+                     <div class="row align-items-center">
+                    
+
+                        <div class="col-12">
+                           <label class="control-label">Discount Rate</label>
+                           <div id="dis_discount_input_container_variation">
+                              <div class="input-group">
+                                 <div class="input-group-prepend">
+                                    <span class="input-group-text input-group-text-currency" id="basic-addon-discount-variation">%</span>
+                                 </div>
+                                 <input type="number" name="dis_option_discount_rate" id="input_discount_rate_variation" aria-describedby="basic-addon-discount-variation" class="form-control form-input" value="" min="0" max="99" placeholder="0">
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="dis_no_discount" value="1" id="dis_checkbox_discount_rate_variation">
+                                <label class="form-check-label" for="dis_checkbox_discount_rate_variation">
+                                No Discount
+                                </label>
+                            </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!-- end of distributer veriation price -->
             <?php endif; ?>
          </div>
       </div>

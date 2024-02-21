@@ -1,6 +1,5 @@
 <div class="page-content">
                     <div class="container-fluid">
-
                         <!-- start page title -->
                         <div class="page-title-box">
                             <div class="row align-items-center">
@@ -24,7 +23,10 @@
                             </div>
                         </div>
                         <!-- end page title -->
-							<?php $this->load->view('admin/partials/_messages');?>
+
+
+
+						<?php $this->load->view('admin/partials/_messages');?>
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
@@ -145,7 +147,7 @@
                                 </div>
                                     <div class="card-body">
                                         <table  class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                                                <thead>
+                                            <thead>
                                                 <tr role="row">
                                                     <th>Product Id</th>
                                                     <th>Product</th>
@@ -158,10 +160,10 @@
                                                     <th>updated</th>
                                                     <th class="max-width-120">Options</th>
                                                 </tr>
-                                                </thead>
-                                                <tbody>
+                                            </thead>
+                                            <tbody>
                                                 <?php $is_order_has_physical_product = false; ?>
-                                                <?php foreach ($order_products as $item):
+                                                    <?php foreach ($order_products as $item):
                                                     if ($item->product_type == 'physical') {
                                                         $is_order_has_physical_product = true;
                                                     } ?>
@@ -226,16 +228,16 @@
                                                         <td>
                                                             <?php if (($item->product_type == 'digital' && $item->order_status != 'completed') || $item->product_type == 'physical'): ?>
                                                             
-                                                                <div class="dropdown">
-                                                        <button class="btn btn-primary  dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        Options <i class="mdi mdi-chevron-down"></i>
+                                                            <div class="dropdown">
+                                                                <button class="btn btn-primary  dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                Options <i class="mdi mdi-chevron-down"></i>
                                                             </button>
                                                             <div class="dropdown-menu dropdown-menu-end">
-                                                            <a href="#" class="dropdown-item" data-bs-placement="top" 
-                                                                        title="Edit this Item"  
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#updateStatusModal_<?= $item->id; ?>"><i class="fa fa-edit option-icon"></i>Update order Status
-                                                            </a>
+                                                                <a href="#" class="dropdown-item" data-bs-placement="top" 
+                                                                    title="Edit this Item"  
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#updateStatusModal_<?= $item->id; ?>"><i class="fa fa-edit option-icon"></i>Update order Status
+                                                                </a>
                                                             
                                                             
                                                             <div class="dropdown-divider"></div>
@@ -253,47 +255,47 @@
                                                     </tr>
 
                                                 <?php endforeach; ?>
-                                                </tbody>
+                                            </tbody>
                                         </table>
                                        
                                         <div class="col-lg-4 float-end">
                                             <div class="row mb-0">
-                                                    <label for="example-text-input" class="col-sm-4 col-form-label float-end">Subtotal</label>
-                                                    <div class="col-sm-8">
+                                                <label for="example-text-input" class="col-sm-4 col-form-label float-end">Subtotal</label>
+                                                <div class="col-sm-8">
                                                     <strong class="float-end">
-                                                    <?php echo formatted_price($order->price_subtotal, $order->price_currency,false); ?>
+                                                        <?php echo formatted_price($order->price_subtotal, $order->price_currency,false); ?>
                                                     </strong>
-                                                    </div>
+                                                </div>
                                             </div>
                                             <?php if (!empty($order->price_gst)): ?>
                                             <div class="row mb-0">
-                                                    <label for="example-text-input" class="col-sm-4 col-form-label float-end">GST</label>
-                                                    <div class="col-sm-8">
+                                                <label for="example-text-input" class="col-sm-4 col-form-label float-end">GST</label>
+                                                <div class="col-sm-8">
                                                     <strong class="float-end">
-                                                    <?php echo formatted_price($order->price_gst, $order->price_currency,false); ?>
+                                                        <?php echo formatted_price($order->price_gst, $order->price_currency,false); ?>
                                                     </strong>
-                                                    </div>
+                                                </div>
                                             </div>
                                             <?php endif; ?>
 
                                             <?php if ($is_order_has_physical_product): ?>
                                             <div class="row mb-0">
-                                                    <label for="example-text-input" class="col-sm-4 col-form-label float-end">Shipping</label>
-                                                    <div class="col-sm-8">
+                                                <label for="example-text-input" class="col-sm-4 col-form-label float-end">Shipping</label>
+                                                <div class="col-sm-8">
                                                     <strong class="float-end">
-                                                    <?php echo formatted_price($order->price_shipping, $order->price_currency,false); ?>
+                                                        <?php echo formatted_price($order->price_shipping, $order->price_currency,false); ?>
                                                     </strong>
-                                                    </div>
+                                                </div>
                                             </div>
                                             <?php endif; ?>
 
                                             <div class="row mb-0">
-                                                    <label for="example-text-input" class="col-sm-4 col-form-label float-end">Total</label>
-                                                    <div class="col-sm-8">
+                                                <label for="example-text-input" class="col-sm-4 col-form-label float-end">Total</label>
+                                                <div class="col-sm-8">
                                                     <strong class="float-end">
-                                                    <?php echo formatted_price($order->price_total, $order->price_currency,false); ?>
+                                                        <?php echo formatted_price($order->price_total, $order->price_currency,false); ?>
                                                     </strong>
-                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -308,7 +310,7 @@
  <?php foreach ($order_products as $item): ?>
     <!-- Modal -->
     <div class="modal fade" id="updateStatusModal_<?php echo $item->id; ?>" tabindex="-1" role="dialog"
-                                                    aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
             <?php echo form_open('admin/orders/update_order_product_status_post'); ?>

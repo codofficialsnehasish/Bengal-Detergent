@@ -25,7 +25,7 @@ class My_dashboard extends Core_Controller {
 			}elseif($this->auth_user->role == 'retailer'){
 				redirect('retailer/dashboard');
 			}elseif($this->auth_user->role == 'dristributor'){
-				redirect('distributer/dashboard');
+				redirect('admin/dashboard');
 			}elseif($this->auth_user->role=='technician'){
 				redirect('admin/dashboard');
 			}elseif($this->auth_user->role=='admin'){
@@ -48,7 +48,7 @@ class My_dashboard extends Core_Controller {
 
     }
 
-	public function seller_dashboard(){
+	public function retailer_dashboard(){
 		$this->load->view('partials/header');
 		$conditions['tblName']='products';
 		$conditions['where']=array('user_id'=>$this->auth_user->id);
@@ -60,7 +60,7 @@ class My_dashboard extends Core_Controller {
 		$data['allproducts']=$products; 
 		$data['livedproducts']=$lproducts;
 		$data['product_images']=$this->select->select_single_data('product_images','product_id',$data['allproducts'][0]->id);
-		$this->load->view('auth/seller/dashboard',$data);
+		$this->load->view('auth/buyer/dashboard',$data);
 		$this->load->view('partials/footer');
     }
 
@@ -86,7 +86,7 @@ class My_dashboard extends Core_Controller {
         $data['orders'] = $this->order_model->get_paginated_orders($this->user_id, $pagination['per_page'], $pagination['offset']);
         $data['countries']=$this->select->select_single_data('location_countries','is_visible',1,'name','asc');
 
-		$this->load->view('auth/addressbook',$data);
+		$this->load->view('auth/buyer/addressbook',$data);
 		$this->load->view('partials/footer');
     }
 

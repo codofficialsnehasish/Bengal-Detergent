@@ -25,7 +25,7 @@
                         ?>
                         <div class="">
                            <label>
-                              <input type="radio" name="addrradio" required required value="2" <?= $addr->is_default==1?'checked':'';?>>
+                              <input type="radio" name="addrradio" required value="2" <?= $addr->is_default==1?'checked':'';?>>
                               <p class="name"><?= $addr->billing_first_name?> <?= !empty($addr->billing_first_name)?', '.$addr->billing_phone_number:'';?>
                               <span class="addr_type"><?= address_type($addr->address_type);?></span>
                            </p>
@@ -36,7 +36,7 @@
                         <?php endforeach;endif;?>
                         <div class="">
                            <label>
-                              <input type="radio" name="addrradio" required value="fornewaddr" required <?php if(empty($shipping_address)) echo 'checked'; ?>>
+                              <input type="radio" name="addrradio" required value="fornewaddr" <?php if(empty($shipping_address)) echo 'checked'; ?>>
                               <p class="name">Add New</p><div class="invalid-tooltip" style="width:23%;">Address is Required</div>
                            </label>
                         </div>
@@ -44,54 +44,54 @@
                            <div class="row">
                               <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                  <label for="input-firstname">First Name <span class="required-f">*</span></label>
-                                 <input class="form-control validate"  name="billing_first_name" value="" id="input-firstname" type="text" required>
+                                 <input class="form-control validate"  name="billing_first_name" value="" id="input-firstname" type="text" >
                                  <div class="invalid-feedback">This is Required</div>
                               </div>
                               <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                  <label for="input-lastname">Last Name <span class="required-f">*</span></label>
-                                 <input class="form-control validate"  name="billing_last_name" value="" id="input-lastname" type="text" required>
+                                 <input class="form-control validate"  name="billing_last_name" value="" id="input-lastname" type="text" >
                                  <div class="invalid-feedback">This is Required</div>
                               </div>
                            </div>
                            <div class="row">
                               <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                  <label for="input-email">E-Mail <span class="required-f">*</span></label>
-                                 <input class="form-control validate"  name="billing_email" value="" id="input-email" type="email">
+                                 <input class="validate"  name="billing_email" value="" id="input-email" type="email" >
                               </div>
                               <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                  <label for="input-telephone">Telephone <span class="required-f">*</span></label>
-                                 <input class="form-control validate"  name="billing_phone_number" value="" id="input-telephone" type="tel" required>
+                                 <input class="form-control validate"  name="billing_phone_number" value="" id="input-telephone" type="tel">
                                  <div class="invalid-feedback">This is Required</div>
                               </div>
                            </div>
                            <div class="row">
                               <div class="form-group col-md-6 col-lg-6 col-xl-6">
                                  <label for="input-company">Address</label>
-                                 <input class="form-control validate"  name="billing_address_1" value="" id="input-company" type="text" required>
+                                 <input class="form-control validate"  name="billing_address_1" value="" id="input-company" type="text" >
                                  <div class="invalid-feedback">This is Required</div>
                               </div>
                               <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                  <label for="input-address-1">Street <span class="required-f">*</span></label>
-                                 <input class="form-control validate"  name="billing_address_2" value="" id="input-address-1" type="text" required>
+                                 <input class="form-control validate"  name="billing_address_2" value="" id="input-address-1" type="text" >
                                  <div class="invalid-feedback">This is Required</div>
                               </div>
                            </div>
                            <div class="row">
                               <div class="form-group col-md-6 col-lg-6 col-xl-6">
                                  <label for="input-address-2">Landmark <span class="required-f">*</span></label>
-                                 <input class="form-control validate"  name="billing_landmark" value="" id="input-address-2" type="text" required>
+                                 <input class="form-control validate"  name="billing_landmark" value="" id="input-address-2" type="text" >
                                  <div class="invalid-feedback">This is Required</div>
                               </div>
                               <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                  <label for="input-postcode">Pin Code <span class="required-f">*</span></label>
-                                 <input class="form-control validate" name="billing_zip_code" value="" id="input-postcode" type="text" required>
+                                 <input class="form-control validate" name="billing_zip_code" value="" id="input-postcode" type="text" >
                                  <div class="invalid-feedback">This is Required</div>
                               </div>
                            </div>
                            <div class="row">
                               <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                  <label for="country_id">Country <span class="required-f">*</span></label>
-                                 <select class="form-control form-select validate" id="country_id" name="billing_country" required>
+                                 <select class="form-control form-select validate" id="country_id" name="billing_country" >
                                  <option value="">Choose....</option>
                                     <?php 
                                        if(!empty($countries)):
@@ -106,7 +106,7 @@
                               </div>
                               <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                  <label for="states_id">Region / State <span class="required-f">*</span></label>
-                                 <select class="form-control form-select validate" name="billing_state" id="states_id" required >
+                                 <select class="form-control form-select validate" name="billing_state" id="states_id"  >
                                  </select>
                                  <div class="invalid-feedback">This is Required</div>
                               </div>
@@ -114,7 +114,7 @@
                            <div class="row">
                               <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                  <label for="citys_id">City <span class="required-f">*</span></label>
-                                 <select class="form-control form-select validate" name="billing_city" id="citys_id" required>
+                                 <select class="form-control form-select validate" name="billing_city" id="citys_id" >
                                  </select>
                                  <div class="invalid-feedback">This is Required</div>
                               </div>
@@ -137,8 +137,8 @@
                            </div> -->
                            <div class="row">
                               <div class="form-group col-md-12 col-lg-12 col-xl-12 mb-0">
-                                 <label for="input-company">Order Notes <span class="required-f">*</span></label>
-                                 <textarea class="form-control resize-both" name="addl_info" rows="3"></textarea>
+                                 <label for="input-company">Order Notes</label>
+                                 <textarea class=" resize-both" name="addl_info" rows="3"></textarea>
                               </div>
                            </div>
                         </div>
@@ -178,7 +178,18 @@
                                        $object=$this->cart_model->get_product_price_and_stock($product,$cartvariations,$item->quantity);
                                  ?>
                                  <tr>
-                                       <td class="text-start"><?= $product->title;?></td>
+                                       <td class="text-start">
+                                          <?= $product->title;?>
+                                          <?php if(!empty($item->variations)){
+                                             foreach($cartvariations as $cvariation){
+                                                $variations = $this->variation_model->get_variation_option($cvariation);
+                                                ?>
+                                             <!--<p class="mb-0">--><?= '('.select_value_by_id('variations','id',$variations->variation_id,'label_names');?>: <?= $variations->option_names.')';?><!--</p>-->
+                                          <?php 
+                                             }
+                                          }
+                                          ?>
+                                       </td>
                                        <td><?= select_value_by_id('currencies','id',$product->currency_code,'hex');?> <?= $object->price_calculated;?></td>
                                        <td><?= $item->quantity;?></td>
                                        <td><?= select_value_by_id('currencies','id',$product->currency_code,'hex');?> <?= $object->price_calculated*$item->quantity;?></td>
@@ -260,8 +271,8 @@
                            <div class="option-payment">
                               <?php foreach($dist as $destributer){ ?>
                               <div class="list-left">
-                                 <input type="radio" id="option_cdistributer<?= $destributer->id; ?>" name="distributer_option" value="1" required <?php echo ($check_this == true) ? 'checked' : ''; ?>>
-                                 <input type="hidden" name="dist_id" value="<?= $destributer->id; ?>">
+                                 <input type="radio" id="option_cdistributer<?= $destributer->id; ?>" name="distributer_option" value="<?= $destributer->id; ?>" required <?php echo ($check_this == true) ? 'checked' : ''; ?>>
+                                 <!-- <input type="hidden" name="dist_id" value="<= $destributer->id; ?>"> -->
                                  <label class="ps-4" for="option_cdistributer<?= $destributer->id; ?>">
                                     <div class="payment-way-hd"><?= $destributer->full_name; ?></div>
                                     <div class="payment-way-hd">Address - <?= $destributer->address; ?></div>
@@ -284,3 +295,53 @@
    </div>
    <?php echo form_close(); ?>
 </div>
+
+
+<script>
+    window.onload = function() {
+        var radioButtons = document.querySelectorAll('input[type=radio][name=addrradio]');
+        var firstNameInput = document.getElementById('input-firstname');
+        var lastNameInput = document.getElementById('input-lastname');
+        var inputemail = document.getElementById('input-email');
+        var inputtelephone = document.getElementById('input-telephone');
+
+        var inputcompany = document.getElementById('input-company');
+        var inputaddress1 = document.getElementById('input-address-1');
+        var inputaddress2 = document.getElementById('input-address-2');
+        var inputpostcode = document.getElementById('input-postcode');
+        var countryid = document.getElementById('country_id');
+        var statesid = document.getElementById('states_id');
+        var citysid = document.getElementById('citys_id');
+
+
+        radioButtons.forEach(function(radioButton) {
+            radioButton.addEventListener('change', function() {
+                if (radioButton.value === 'fornewaddr') {
+                    firstNameInput.setAttribute('required', '');
+                    lastNameInput.setAttribute('required', '');
+                    inputemail.setAttribute('required', '');
+                    inputtelephone.setAttribute('required', '');
+                    inputcompany.setAttribute('required', '');
+                    inputaddress1.setAttribute('required', '');
+                    inputaddress2.setAttribute('required', '');
+                    inputpostcode.setAttribute('required', '');
+                    countryid.setAttribute('required', '');
+                    statesid.setAttribute('required', '');
+                    citysid.setAttribute('required', '');
+                } else {
+                    firstNameInput.removeAttribute('required');
+                    lastNameInput.removeAttribute('required');
+                    inputemail.removeAttribute('required');
+                    inputtelephone.removeAttribute('required');
+                    inputcompany.removeAttribute('required');
+                    inputaddress1.removeAttribute('required');
+                    inputaddress2.removeAttribute('required');
+                    inputpostcode.removeAttribute('required');
+                    countryid.removeAttribute('required');
+                    statesid.removeAttribute('required');
+                    citysid.removeAttribute('required');
+                }
+            });
+        });
+    };
+</script>

@@ -31,6 +31,8 @@ class Stocks extends Core_Controller {
 		//	$data['allitems']=$this->select->select->getResult($conditions);
 			//$this->select->select_table($this->table_name,'id','asc');
 			$data['allitems']=$this->select->custom_qry("select * from ".$this->table_name." where is_draft=0 and is_visible=1");
+		}if($this->auth_user->role=='dristributor'){
+			$data['allitems']=$this->select->custom_qry("select * from dristributor_stocks where dristributor_id = ".$this->auth_user->id);
 		}else{
 			$data['allitems']=$this->select->custom_qry("select * from ".$this->table_name." where is_draft=0 and is_visible=1 and user_id=".$this->auth_user->id);
 			//$conditions['where'] = array('user_id'=>$this->auth_user->id);

@@ -20,7 +20,7 @@
         <div class="images-upload-posito">
             <span class="go-checkout" type="button" style="line-height: 32px; padding:0 15px;">Upload image</span>
             <?= form_open_multipart('', 'class="custom-validation" id ="profileForm"');?>
-            <input type="file" id="profileImage" name="profile_image" class="image-input-u">
+            <input type="file" id="profileImage" name="profile_image" class="image-input-u filestyle">
             <?= form_close();?>
         </div>
         <?php }?>

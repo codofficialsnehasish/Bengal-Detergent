@@ -169,7 +169,7 @@ if (!function_exists('get_product_form_data')) {
 }
 
 //get product item image
-if (!function_exists('get_product_item_image')) {
+if (!function_exists('get_product_main_image')) {
     function get_product_main_image($product)
     {
 		// echo '<pre>';
@@ -192,6 +192,24 @@ if (!function_exists('get_product_item_image')) {
          }
     }
 }
+
+//get product item image
+if (!function_exists('get_product_by_id')) {
+    function get_product_by_id($product_id)
+    {
+        $ci =& get_instance();
+        $conditions=array(
+                'tblName'=>'products',
+                'where'=>array(
+                    'id'=>$product_id,
+                )
+        );
+        $result=$ci->select->getResult($conditions);
+
+        return $result[0];
+    }
+}
+
 
 //get product item image
 if (!function_exists('get_product_image_by_id')) {
@@ -628,6 +646,19 @@ if (!function_exists('get_any_orders_count')) {
     {
         $ci =& get_instance();
         $count=$ci->order_model->get_any_orders_count($user_id,$status);
+        if(!empty($count)){
+            return $count;
+        }else{
+            return 0;
+        }
+    }
+}
+
+if (!function_exists('get_retailer_orders_count')) {
+    function get_retailer_orders_count($dist_id,$status=false)
+    {
+        $ci =& get_instance();
+        $count=$ci->order_model->get_retailer_orders_count($dist_id,$status);
         if(!empty($count)){
             return $count;
         }else{

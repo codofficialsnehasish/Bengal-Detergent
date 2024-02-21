@@ -30,7 +30,7 @@ class Order_controller extends Core_Controller
 
         $pagination = $this->paginate(base_url("orders"), $this->order_model->get_orders_count($this->user_id), $this->order_per_page);
         $data['orders'] = $this->order_model->get_paginated_orders($this->user_id, $pagination['per_page'], $pagination['offset']);
-      //  $data['index_settings'] = $this->settings_model->get_index_settings();
+        //  $data['index_settings'] = $this->settings_model->get_index_settings();
 
         $this->load->view('partials/header', $data);
         $this->load->view('order/orders', $data);
@@ -76,11 +76,64 @@ class Order_controller extends Core_Controller
         $data["order_products"] = $this->order_model->get_order_products($data["order"]->id);
        // $data["last_bank_transfer"] = $this->order_admin_model->get_bank_transfer_by_order_number($data["order"]->order_number);
        // $data['index_settings'] = $this->settings_model->get_index_settings();
-
+ 
         $this->load->view('partials/header', $data);
         // $this->load->view('order/order', $data);
         $this->load->view('order/ordersconfirm', $data);
         $this->load->view('partials/footer');
+    }
+
+
+    public function order_d($order_number)
+    {
+         $data['title'] = 'Orders';
+        // $data['description'] = trans("orders") . " - " . $this->app_name;
+        // $data['keywords'] = trans("orders") . "," . $this->app_name;
+         $data["active_tab"] = "";
+
+        $data["order"] = $this->order_model->get_order_by_order_number($order_number);
+        if (empty($data["order"])) {
+            redirect(base_url());
+        }
+        if ($data["order"]->buyer_id != $this->user_id) {
+            redirect(base_url());
+        }
+        $data["order_products"] = $this->order_model->get_order_products($data["order"]->id);
+       // $data["last_bank_transfer"] = $this->order_admin_model->get_bank_transfer_by_order_number($data["order"]->order_number);
+       // $data['index_settings'] = $this->settings_model->get_index_settings();
+ 
+        $this->load->view('partials/header', $data);
+        $this->load->view('order/order', $data);
+        // $this->load->view('order/ordersconfirm', $data);
+        $this->load->view('partials/footer');
+    }
+
+    public function order_distri($order_number)
+    {
+         $data['title'] = 'Orders';
+        // $data['description'] = trans("orders") . " - " . $this->app_name;
+        // $data['keywords'] = trans("orders") . "," . $this->app_name;
+         $data["active_tab"] = "";
+
+        $data["order"] = $this->order_model->get_order_by_order_number($order_number);
+        if (empty($data["order"])) {
+            redirect(base_url());
+        }
+        if ($data["order"]->buyer_id != $this->user_id) {
+            redirect(base_url());
+        }
+        $data["order_products"] = $this->order_model->get_order_products($data["order"]->id);
+       // $data["last_bank_transfer"] = $this->order_admin_model->get_bank_transfer_by_order_number($data["order"]->order_number);
+       // $data['index_settings'] = $this->settings_model->get_index_settings();
+ 
+        // $this->load->view('partials/header', $data);
+        $data['pagecss']="contentCss";
+        $this->load->view('admin/partials/header',$data);
+        $this->load->view('order/dist_order_details', $data);
+        // $this->load->view('order/ordersconfirm', $data);
+        // $this->load->view('partials/footer');
+        $script['pagescript']='contentScript';
+		$this->load->view('admin/partials/footer',$script);
     }
 
     /**
@@ -231,6 +284,7 @@ class Order_controller extends Core_Controller
         if (empty($data["order"])) {
             redirect(base_url());
         }
+
    		// if($buyer_id=='' || $product_id=='' || $order_id==''){
    		// redirect(base_url());
    		// }
@@ -243,6 +297,7 @@ class Order_controller extends Core_Controller
         if (empty($data["invoice"])) {
             redirect(base_url());
         }
+
        // $data["invoice_items"] = unserialize($data["invoice"]->invoice_items);
         $data["order_products"] = $this->order_model->get_order_products($data["order"]->id);
        // $data['index_settings'] = $this->settings_model->get_index_settings();
@@ -257,10 +312,11 @@ class Order_controller extends Core_Controller
                     }
                 }
             }
-            if ($this->auth_user->id != $data["order"]->buyer_id && $is_seller == false) {
-                redirect(base_url());
-                exit();
-            }
+            // echo $is_seller ? 'true':'false';
+            // if ($this->auth_user->id != $data["order"]->buyer_id && $is_seller == false) {
+            //     redirect(base_url());
+            //     exit();
+            // }
         }
 
 
@@ -328,8 +384,21 @@ class Order_controller extends Core_Controller
         if (!empty($order_product)) {
             if ($this->order_model->cancel_order_product($id)) {
             	echo 'Successfully Cancelled';
+                // echo count($order_product);
             }
+        }
+    }
+
+    public function cancel_order(){
+        $id = $this->input->post('id', true);
+        // $order_product = $this->order_model->get_order_product($id);
+        // if (!empty($order_product)) {
+            if ($this->order_model->cancel_order($id)) {
+            	echo 'Successfully Cancelled';
+                // echo count($order_product);
             }
+        // }
+        // echo 'Success';
     }
 
 }

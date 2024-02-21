@@ -1,12 +1,26 @@
+<!-- Page Title -->
+<div class="page section-header text-center mb-0">
+    <div class="page-title">
+        <div class="wrapper">
+            <h1 class="page-width">Dashboard - <?= $this->auth_user->full_name; ?></h1>
+        </div>
+    </div>
+</div>
+<!-- End Page Title --> 
+<!-- Breadcrumbs -->
+<div class="bredcrumbWrap bredcrumbWrapPage bredcrumb-style2 text-center mb-0">
+    <div class="container breadcrumbs">
+        <a href="<?= base_url(' ') ?>" title="Back to the home page">Home</a><span aria-hidden="true">|</span><span class="title-bold">Dashboard</span>
+    </div>
+</div>
+<!-- End Breadcrumbs -->
 <section class="mt-5 mb-5 buy-dashboard">
 		<div class="container ">
 		    <div class="row">
 		        <div class="col-xl-4">
-		            <!-- Profile picture card-->
-                    		            <!-- Profile picture card-->
+                    <!-- Profile picture card-->
 					<?php $this->load->view('auth/buyer/_profileImage');?>
-		            
-
+		        
 		            <div class="card mt-4 mb-4 mb-xl-0">
 		                <div class="card-header">Profile</div>
 		                <div class="card-body">
@@ -14,7 +28,7 @@
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#dashboard">Dashboard</a></li>
                                 <li><a class="nav-link"  href="<?= base_url("orders"); ?>">Orders</a></li>
                                 <li><a class="nav-link"  href="<?= base_url('my-dashboard/address')?>">Addresses</a></li>
-                                <li><a class="nav-link" href="<?= base_url("wishlist"); ?>">Wishlist</a></li>
+                                <!-- <li><a class="nav-link" href="<= base_url("wishlist"); ?>">Wishlist</a></li> -->
                                 <li><a class="nav-link" href="<?= admin_url('dashboard/logout')?>">logout</a></li>
                             </ul>
 
@@ -155,8 +169,33 @@
                                                     </td>
                                                     <td><?php echo formatted_date($order->created_at); ?></td>
                                                     <td>
-                                                        <a href="<?php echo base_url("order-details") . "/" . $order->order_number; ?>"  class="link-underline view">Details</a>
+                                                        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModalScrollable"  class="btn btn-primary waves-effect waves-light">Details</button>
                                                     </td>
+                                                    <div class="col-sm-6 col-md-4 col-xl-3">
+                                                        <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
+                                                            aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-scrollable">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalScrollableTitle">
+                                                                            Scrollable Modal</h5>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                            data-bs-dismiss="modal">Close</button>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- /.modal-content -->
+                                                            </div>
+                                                            <!-- /.modal-dialog -->
+                                                        </div>
+                                                        <!-- /.modal -->
+                                                    </div>
                                                 </tr>
                                             <?php endforeach; ?>
                                         <?php endif; ?>

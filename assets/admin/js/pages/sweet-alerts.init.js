@@ -1,12 +1,22 @@
 function confirmDelete(val, returnUrl) {
         const getUrl = window.location;
+
         if (getUrl.host == 'localhost') {
+            if(getUrl.pathname.split('/')[2] == 'employee-management'){
+                callBcak = "/" + getUrl.pathname.split('/')[2] + "/" + returnUrl;
+            }else{
                 callBcak = "/admin/" + returnUrl;
+            }
         } else {
+            if(getUrl.pathname.split('/')[2] == 'employee-management'){
+                callBcak = "/" + getUrl.pathname.split('/')[2] + "/" + returnUrl;
+            }else{
                 callBcak = "/" + returnUrl;
+            }
         }
         const baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1] + callBcak + "/";
-        console.log(baseUrl);
+        console.log(getUrl);
+        console.log(getUrl.pathname.split('/')[2]);
         Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -556,7 +566,7 @@ function loginConfirm(loginStatus) {
 
 }
 
-function cancelOrder(val, orderId) {
+function cancelOrder(val, orderId, returnurl) {
         const getUrl = window.location;
         const baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1] + "/";
         Swal.fire({
@@ -583,7 +593,51 @@ function cancelOrder(val, orderId) {
                                                 'Your file has been deleted.',
                                                 'success'
                                         ).then((e) => {
-                                                window.location.href = baseUrl + 'order-details/' + orderId;
+                                                // window.location.href = baseUrl + 'order-details/' + orderId;
+                                                window.location.href = baseUrl + returnurl + '/' + orderId;
+                                        })
+                                },
+                                error: function (xhr, ajaxOptions, thrownError) {
+                                        swal("Error deleting!", "Please try again", "error");
+                                }
+                        });
+
+                }
+        })
+
+}
+
+
+
+
+function cancelTotalOrder(val, orderId, returnurl) {
+        const getUrl = window.location;
+        const baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1] + "/";
+        Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+                if (result.isConfirmed) {
+                        $.ajax({
+                                url: baseUrl + "order_controller/cancel_order",
+                                type: "POST",
+                                data: {
+                                        csrf_modesy_token: getCookie('csrf_modesy_token'),
+                                        id: val,orderid:orderId
+                                },
+                                dataType: "html",
+                                success: function () {
+                                        Swal.fire(
+                                                'Deleted!',
+                                                'Your file has been deleted.',
+                                                'success'
+                                        ).then((e) => {
+                                                window.location.href = baseUrl + returnurl;
                                         })
                                 },
                                 error: function (xhr, ajaxOptions, thrownError) {

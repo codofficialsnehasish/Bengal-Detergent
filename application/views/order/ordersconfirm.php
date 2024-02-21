@@ -106,6 +106,9 @@ For what reason would it be advisable for me to think about business content? Th
                                         Go Back to Shop Page
                                     </a>
                                 </p>
+                                <p style="font-size: 16px; font-weight: 400; line-height: 24px; color: #777777;">
+                                    Going to Profile, Redirecting in <span id="countdown">5</span> seconds...
+                                </p>
                             </td>
                         </tr>
                     </table>
@@ -220,29 +223,54 @@ For what reason would it be advisable for me to think about business content? Th
         </td>
     </tr>
 </table>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const confettiContainer = document.querySelector(".confetti-container");
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const confettiContainer = document.querySelector(".confetti-container");
 
-        // Number of confetti particles
-        const confettiCount = 200;
+            // Number of confetti particles
+            const confettiCount = 200;
 
-        // Define a color theme
-        const colorTheme = ['#3498db', '#e74c3c', '#2ecc71', '#f39c12', '#9b59b6', '#1abc9c', '#d35400', '#27ae60'];
+            // Define a color theme
+            const colorTheme = ['#3498db', '#e74c3c', '#2ecc71', '#f39c12', '#9b59b6', '#1abc9c', '#d35400', '#27ae60'];
 
-        for (let i = 0; i < confettiCount; i++) {
-            const confetti = document.createElement("div");
-            confetti.className = "confetti";
-            confetti.style.left = `${Math.random() * 100}vw`;
-            confetti.style.animationDuration = `${Math.random() * 5}s`;
-            confetti.style.backgroundColor = getRandomColorFromTheme();
-            confettiContainer.appendChild(confetti);
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement("div");
+                confetti.className = "confetti";
+                confetti.style.left = `${Math.random() * 100}vw`;
+                confetti.style.animationDuration = `${Math.random() * 5}s`;
+                confetti.style.backgroundColor = getRandomColorFromTheme();
+                confettiContainer.appendChild(confetti);
+            }
+
+            function getRandomColorFromTheme() {
+                return colorTheme[Math.floor(Math.random() * colorTheme.length)];
+            }
+        });
+        // Timer function
+        function countdown() {
+            var seconds = 5; // Set the countdown duration
+            var countdownElement = document.getElementById('countdown');
+
+            var timer = setInterval(function() {
+                seconds--;
+                countdownElement.innerText = seconds;
+
+                if (seconds <= 0) {
+                    clearInterval(timer);
+                    // Redirect using JavaScript
+                    <?php if($this->auth_user->role == 'retailer'){ ?>
+                        window.location.href = '<?= base_url("/orders"); ?>'; // Change "destination-page" to your desired destination URL
+                    <?php }else if($this->auth_user->role == 'dristributor'){ ?>
+                        window.location.href = '<?= base_url("/admin/orders/dristibuter-order"); ?>'; 
+                    <?php } ?>
+                }
+            }, 1000);
         }
 
-        function getRandomColorFromTheme() {
-            return colorTheme[Math.floor(Math.random() * colorTheme.length)];
-        }
-    });
-  </script>
+        // Start the countdown when the page loads
+        window.onload = function() {
+            countdown();
+        };
+    </script>
 </body>
 </html>

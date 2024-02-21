@@ -65,7 +65,8 @@
                                                         if (!empty($buyer)):?>
                                                             <div class="table-orders-user">
                                                                 <a href="#" target="_blank">
-                                                                    <?php echo html_escape($buyer->role); ?>
+                                                                    <?php echo html_escape($buyer->full_name); ?>
+                                                                    <?php echo '('.html_escape($buyer->role) .')'; ?>
                                                                 </a>
                                                             </div>
                                                         <?php endif;
@@ -82,7 +83,7 @@
                                                     <?php endif; ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo $item->payment_status; ?> <br>Txn Id. <strong><?= select_value_by_id('transactions','order_id ',$item->id,'payment_id');?></strong> 
+                                                    <?php echo $item->payment_status; ?> <!-- <br>Txn Id. <strong><= select_value_by_id('transactions','order_id ',$item->id,'payment_id');?></strong> -->
                                                 </td>
                                                 <td><?php echo time_ago($item->updated_at); ?></td>
                                                 <td> <?php echo formatted_date($item->created_at); ?></td>
