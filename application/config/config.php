@@ -40,7 +40,7 @@ define("DBPREFIX","");
 define("DBHOSTNAME",'localhost');
 
  // Add your database name here
-define("DBNAME",DBPREFIX.'talesofjoy'); // Here the database name is 'dummy_myecommerce'
+define("DBNAME",DBPREFIX.'sibom_software'); // Here the database name is 'dummy_myecommerce'
 
 // Add your database user name here
 define("DBUSER",DBPREFIX.'root');  // Here the username is 'dummy_website'

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <style>
     .box-content button {
     display: inline-block;
@@ -20,7 +19,7 @@
    <!-- Home Banner slider -->
    <div class="slideshow slideshow-wrapper pb-section">
       <div class="home-slideshow slideshow--large">
-         <?php foreach($slider as $slide): ?>
+      <?php foreach($slider as $slide): ?>
          <div class="slide slide1 d-block">
                <div class="slideimg blur-up lazyload">
                   <img class="blur-up lazyload" data-src="<?= get_image($slide->media_id);?>" src="<?= get_image($slide->media_id);?>" alt="Welcome to Diva" title="Welcome to Diva" />
@@ -43,10 +42,45 @@
                </div>
          </div>
          <?php endforeach; ?>
+
+         <!-- <div class="slide slide2 d-block">
+               <div class="slideimg blur-up lazyload">
+                  <img class="blur-up lazyload" data-src="assets/images/slideshow-banners/home2-banner2.jpg" src="assets/images/slideshow-banners/home2-banner2.jpg" alt="Beautiful Designs" title="Beautiful Designs" />
+                  <div class="slideshow__text-wrap slideshow__overlay">
+                     <div class="slideshow__text-content mt-0 right  te_lef">
+                           <div class="container">
+                              <div class="wrap-caption right">
+                                 <h2 class="h1 mega-title slideshow__title">Beautiful Designs</h2>
+                                 <span class="mega-subtitle slideshow__subtitle">Looks beautiful and sharp on every device</span>
+                                 <a href="collection-4columns.html" class="btn btn--large">Top Notch support</a>
+                              </div>
+                           </div>
+                     </div>
+                  </div>
+               </div>
+         </div> -->
+
+            <!-- <div class="slide slide3 d-block">
+               <div class="slideimg blur-up lazyload">
+                  <img class="blur-up lazyload" data-src="assets/images/slideshow-banners/home2-banner3.jpg" src="assets/images/slideshow-banners/home2-banner3.jpg" alt="Awesome Desing" title="Awesome Desing" />
+                  <div class="slideshow__text-wrap slideshow__overlay">
+                     <div class="slideshow__text-content mt-0 right  te_lef">
+                           <div class="container">
+                              <div class="wrap-caption right">
+                                 <h2 class="h1 mega-title slideshow__title">Beautiful Designs</h2>
+                                 <span class="mega-subtitle slideshow__subtitle">Looks beautiful and sharp on every device</span>
+                                 <a href="collection-4columns.html" class="btn btn--large">Top Notch support</a>
+                              </div>
+                           </div>
+                     </div>
+                  </div>
+               </div> -->
+         </div>
       </div>
    </div>
    <!-- End Home Banner slider -->
-</div>
+
+
 <?php endif; ?>
 
 <?php 
@@ -54,8 +88,8 @@
    //delete_cookie('user_id');
 ?>
 
-
-<!-- ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp <?php //echo $this->input->cookie('user_id',true) ? $this->input->cookie('user_id',true) : "NULL"; ?> -->
+<!-- ======================= <?php //echo $this->input->cookie('user_id',true) ? $this->input->cookie('user_id',true) : "NULL"; ?> 
+================== <?php //echo $this->auth_user->id; ?> -->
 
 
 <!-- Product slider -->
@@ -150,437 +184,92 @@
                   </div>
                </div>
                <!-- End Product List -->
-=======
-        <div class="main-wrapper">
-            <div class="header-search mobile-search">
-                <input type="text" class="form-control" placeholder="Search for products" aria-label="Search for products " aria-describedby="button-addon2">
-                <button class="btn" type="button" id="button-addon2"><i class="fa fa-search" aria-hidden="true"></i></button>
->>>>>>> 76fa2ac05e97a9c9cb53e84899d4f6fe78de9aa7
             </div>
+      </div>
+   </div>
+</div>
+<!-- End Product slider -->
 
-            <!-- Hero Slider -->
-            <?php if(!empty($slider)): ?>
-            <div class="hero">
-                <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    </div>
-                    <div class="carousel-inner">
-                        <?php foreach($slider as $slide): ?>
-                        <div class="carousel-item active">
-                            <a href="<?= base_url('/products/all_products'); ?>"><img src="<?= get_image($slide->media_id); ?>" class="d-block w-100" alt="..."></a>
-                            <div class="carousel-caption d-none d-md-block">
-                                <h3>Healthy & Tasty</h3>
-                                <p class="text-one">Pet</p>
-                                <p class="text-two">Food</p>
-                                <a href=" " class="btn btn-dark">Shop Now</a>
-                            </div>
-                            <?php 
-                                // if(!empty(get_desc($slide->id))):
-                                // $array = preg_split("/\r\n|\n|\r/", get_desc($slide->id)); 
-                            ?>
-                            <!-- <div class="carousel-caption d-none d-md-block"> -->
-                                <!-- <h3><= strip_tags($array[0]); ?></h3> -->
-                                <!-- <h3>Healthy & Tasty</h3> -->
-                                <!-- <p class="text-one"><= strip_tags($array[1]); ?></p> -->
-                                <!-- <p class="text-one">Pet</p> -->
-                                <!-- <p class="text-two"><= strip_tags($array[2]); ?></p> -->
-                                <!-- <p class="text-two">Food</p> -->
-                                <!-- <a href="<= base_url('/products/all_products'); ?>" class="btn btn-dark">Shop Now</a> -->
-                            <!-- </div> -->
-                            <?php //endif; ?>
+
+<div class="product-rows section">
+   <div class="container">
+      <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+               <div class="section-header text-center">
+                  <h2 class="h2">Featured Products</h2>
+               </div>
+               <!-- Product List -->
+               <div class="grid-products grid-products-hover-btn">
+                  <div class="row">
+                        <?php 
+                           if(!empty($featuredproducts)): 
+                              foreach($featuredproducts as $featurproducts):
+                        ?>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-3 item">
+                           <div class="product-image">
+                              <a href="<?= base_url('product/'.$topproduct->slug);?>">
+                                 <img class="primary blur-up lazyload" data-src="<?= get_product_main_image($featurproducts); ?>" src="<?= get_product_main_image($featurproducts); ?>" alt="image" title="<?= $featurproducts->title; ?>" />
+                                 <img class="hover blur-up lazyload" data-src="<?= get_product_image_by_hovar($featurproducts); ?>" src="<?= get_product_image_by_hovar($featurproducts); ?>" alt="image" title="<?= $featurproducts->title; ?>" />
+                                 <!-- <div class="product-labels rectangular"><span class="lbl on-sale">-16%</span> <span class="lbl pr-label1">new</span></div> -->
+                              </a>
+                              <!-- <div class="saleTime desktop" data-countdown="2022/03/01"></div> -->
+                              <div class="button-set style2">
+                                 <div class="variants add" data-bs-toggle="tooltip" data-bs-placement="right" title="add to cart">
+                                    <?php //if($this->auth_check) { ?>
+                                       <?= form_open('/add-to-cart', 'class="needs-validation" id="cartForm'.$featurproducts->id.'"  novalidate '); ?>
+                                          <input type="hidden" name="product_id" id="product_id" value="<?= $featurproducts->id; ?>">
+                                          <input value="1" name="product_quantity"  class="cart-plus-minus-box" type="hidden">
+                                          <button type="button" id="<?= $featurproducts->id; ?>" onClick="addToCart(this.id)" class="btn cartIcon btn-addto-cart open-addtocart-popup"><i class="icon an an-shopping-bag"></i></button>
+                                       <?= form_close(); ?>
+                                    <?php //}else{ ?>
+                                       <!-- <a href="<= base_url('login/');?>" class="btn cartIcon btn-addto-cart open-addtocart-popup"><i class="icon an an-shopping-bag"></i></a> -->
+                                    <?php //} ?>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="product-details text-center">
+                              <div class="product-name">
+                                 <a href="<?= base_url('product/'.$featurproducts->slug);?>"><?= $featurproducts->title; ?></a>
+                              </div>
+                              <div class="product-price">
+                                 <?php if($featurproducts->no_discount!=1){?>
+                                    <span class="old-price"><?= select_value_by_id('currencies','id',$featurproducts->currency_code,'hex');?> <?php if(!empty($this->auth_user) && $this->auth_user->role == 'dristributor'){echo $featurproducts->dis_price;}else{echo $featurproducts->price;}?></span>
+                                 <?php }?>
+                                 <span class="price"><?= select_value_by_id('currencies','id',$featurproducts->currency_code,'hex');?><?php if(!empty($this->auth_user) && $this->auth_user->role == 'dristributor'){echo $featurproducts->dis_discounted_price;}else{echo $featurproducts->discounted_price;}?></span>
+                              </div>
+                              <div class="product-review">
+                                 <?php
+                                    $averageRating = get_avg_rationg_count($featurproducts->id);
+                                    $fullStars = floor($averageRating);
+                                    $hasHalfStar = ($averageRating - $fullStars) >= 0.5;
+                                    for ($i = 0; $i < $fullStars; $i++) { // Print full stars ?>
+                                       <img src="<?= base_url("assets/site/images/icon/full-star.png");?>" width="20px" alt="">
+                                    <?php }
+                                    if ($hasHalfStar) { // Print half star ?>
+                                       <img src="<?= base_url("assets/site/images/icon/half-star.png");?>" width="20px" alt="">
+                                    <?php }
+                                    for ($i = 0; $i < (5 - ceil($averageRating)); $i++) { // Print empty stars if necessary ?>
+                                       <img src="<?= base_url("assets/site/images/icon/empty-star.png");?>" width="20px" alt="">
+                                    <?php }
+                                 ?>
+                              </div>
+                           </div>
                         </div>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
+                        <?php 
+                           endforeach;
+                           endif; 
+                        ?>
+                     </div>
+               </div>
+               <!-- End Product List -->
             </div>
-            <?php endif; ?>
-            <!-- Hero Slider -->
-
-            <?php if(!empty($allcategories)): ?>
-            <!-- Explore Categories -->
-            <section class="explore-category p-60">
-                <div class="container">
-                    <div class="slider-heading d-flex justify-content-between align-items-start">
-                        <h2>Explore Categories</h2>
-                    </div>
-                    <div class="owl-carousel owl-theme explore-category-slider">
-                        <?php foreach($allcategories as $cata): ?>
-                        <div class="item">
-                            <img src="<?= get_image($cata->media_id);?>" alt="">
-                            <a href="" class="stretched-link"><?= $cata->cat_name ?></a>
-                        </div>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-            </section>
-            <!-- Explore Categories -->
-            <?php endif; ?>
-
-            <!-- Offer -->
-            <section class="category-banner p-60 pt-0">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 col-lg-6">
-                            <div class="category-banner-container">
-                                <img src="<?= base_url('assets/site/images/category-banner1.jpg'); ?>" alt="">
-                                <div class="banner-content">
-                                    <p>Bring Out The<span>Fashionista</span>In Your Pooch</p>
-                                    <p class="category-offer">upto <span>20%</span> off</p>
-                                </div>
-                                <a href="" class="stretched-link"></a>
-                            </div>
-                        </div>
-                        <div class="col-12 col-lg-6">
-                            <div class="category-banner-container">
-                                <img src="<?= base_url('assets/site/images/category-banner2.jpg'); ?>" alt="">
-                                <div class="banner-content">
-                                    <p>Grab The<span>Purr-fect</span>Treat For Your Cat</p>
-                                    <p class="category-offer">upto <span>20%</span> off</p>
-                                </div>
-                                <a href="" class="stretched-link"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- Offer -->
-            
-            <?php if(!empty($featuredproducts)): ?>
-            <!-- Featured Products -->
-            <section class="feature-product p-60 pt-0">
-                <div class="container">
-                    <div class="feature-product-heading d-flex justify-content-between align-items-start">
-                        <h2>Featured Products</h2>
-                        <a href="" class="btn btn-dark">View All</a>
-                    </div>
-                    <div class="owl-carousel owl-theme feature-product-slider">
-                        <?php foreach($featuredproducts as $featurproducts): ?>
-                        <div class="item">
-                            <div class="icon-wishlist <?= is_favorite(1,$featurproducts->id) ? 'in-wishlist' : ''; ?> "></div>
-                            <img src="<?= get_product_main_image($featurproducts); ?>" alt="">
-                            <p><?= $featurproducts->title; ?></p>
-                            <p class="product-price">
-                                Rs.<?= $featurproducts->price; ?>
-                                <?php if($featurproducts->no_discount!=1){?>
-                                    <span><?= $featurproducts->discount_rate; ?>% off</span>
-                                <?php }?>
-                            </p>
-                            <a href="" class="btn btn-blue w-100">View Details</a>
-                        </div>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-            </section>
-            <!-- Featured Products -->
-            <?php endif; ?>
-
-            <!-- Offer 2 -->
-            <section class="ads-banner ads1 p-60 pt-0">
-                <div class="container">
-                    <div class="ads-banner-container">
-                        <img src="<?= base_url('assets/site/images/ads-banner1.jpg'); ?>" alt="">
-                        <div class="ads-banner-content">
-                            <h3>Best Selling Dog Food</h3>
-                            <a href="" class="btn btn-dark">Shop Now</a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- Offer 2 -->
-
-            <!-- Latest Arrivals / Best Selling -->
-            <section class="latest-arrival p-60 pt-0">
-                <div class="container">
-                    <div class="feature-product-heading d-flex justify-content-between align-items-start">
-                        <h2><span>Latest Arrivals</span> / Best Selling</h2>
-                        <a href="" class="btn btn-dark">View All</a>
-                    </div>
-                    <div class="row">
-                            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-                                <div class="item">
-                                <div class="icon-wishlist"></div>
-                                <img src="<?= base_url('assets/site/images/latest1.jpg'); ?>" alt="">
-                                <p>Nulo Cat Food</p>
-                                <p class="product-price">Rs.500<span>20% off</span></p>
-                                <a href="" class="btn btn-blue w-100">View Details</a>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-                            <div class="item">
-                                <div class="icon-wishlist"></div>
-                                <img src="<?= base_url('assets/site/images/latest2.jpg'); ?>" alt="">
-                                <p>Dog Food</p>
-                                <p class="product-price">Rs.500</p>
-                                <a href="" class="btn btn-blue w-100">View Details</a>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-                            <div class="item">
-                                <div class="icon-wishlist"></div>
-                                <img src="<?= base_url('assets/site/images/latest3.jpg'); ?>" alt="">
-                                <p>Bird Food</p>
-                                <p class="product-price">Rs.500</p>
-                                <a href="" class="btn btn-blue w-100">View Details</a>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-                            <div class="item">
-                                <div class="icon-wishlist"></div>
-                                <img src="<?= base_url('assets/site/images/product4.jpg'); ?>" alt="">
-                                <p>Hamster Food</p>
-                                <p class="product-price">Rs.500<span>10% off</span></p>
-                                <a href="" class="btn btn-blue w-100">View Details</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- Latest Arrivals / Best Selling -->
-
-            <!-- Toys & Accessories -->
-            <section class="ads-banner ads2 p-60 pt-0">
-                <div class="ads-banner-container">
-                    <img src="<?= base_url('assets/site/images/ads-banner2.jpg'); ?>" alt="">
-                    <div class="ads-banner-content">
-                        <h3>Toys & Accessories</h3>
-                        <a href="" class="btn btn-dark">Shop Now</a>
-                    </div>
-                </div>
-            </section>
-            <!-- Toys & Accessories -->
-
-            <!-- Chirpy Treats -->
-            <section class="chirpy-treat p-60 pt-0">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-6 col-lg-3">
-                            <div class="chirpy-treat-img">
-                                <a href=""><img src="<?= base_url('assets/site/images/chirpy-treat-img.jpg'); ?>" alt=""></a>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6 col-lg-9">
-                        <div class="chirpy-treat-heading">
-                            <h2>Chirpy Treats</h2>
-                        </div>
-                        <div class="owl-carousel owl-theme chirpy-treat-slider">
-                            <div class="item">
-                                <div class="icon-wishlist"></div>
-                                <img src="<?= base_url('assets/site/images/product1.jpg'); ?>" alt="">
-                                <p>Nulo Cat Food</p>
-                                <p class="product-price">Rs.500<span>20% off</span></p>
-                                <a href="" class="btn btn-blue w-100">View Details</a>
-                            </div>
-                            <div class="item">
-                                <div class="icon-wishlist"></div>
-                                <img src="<?= base_url('assets/site/images/product2.jpg'); ?>" alt="">
-                                <p>Dog Food</p>
-                                <p class="product-price">Rs.500</p>
-                                <a href="" class="btn btn-blue w-100">View Details</a>
-                            </div>
-                            <div class="item">
-                                <div class="icon-wishlist"></div>
-                                <img src="<?= base_url('assets/site/images/product3.jpg'); ?>" alt="">
-                                <p>Bird Food</p>
-                                <p class="product-price">Rs.500</p>
-                                <a href="" class="btn btn-blue w-100">View Details</a>
-                            </div>
-                            <div class="item">
-                                <div class="icon-wishlist"></div>
-                                <img src="<?= base_url('assets/site/images/product4.jpg'); ?>" alt="">
-                                <p>Hamster Food</p>
-                                <p class="product-price">Rs.500<span>10% off</span></p>
-                                <a href="" class="btn btn-blue w-100">View Details</a>
-                            </div>
-                            <div class="item">
-                                <div class="icon-wishlist"></div>
-                                <img src="<?= base_url('assets/site/images/product1.jpg'); ?>" alt="">
-                                <p>Nulo Cat Food</p>
-                                <p class="product-price">Rs.500</p>
-                                <a href="" class="btn btn-blue w-100">View Details</a>
-                            </div>
-                            <div class="item">
-                                <div class="icon-wishlist"></div>
-                                <img src="<?= base_url('assets/site/images/product2.jpg'); ?>" alt="">
-                                <p>Hamster Food</p>
-                                <p class="product-price">Rs.500</p>
-                                <a href="" class="btn btn-blue w-100">View Details</a>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- Chirpy Treats -->
-
-            <!-- Shop By Brand -->
-            <section class="shop-by-brand p-60 pt-0">
-                <div class="container">
-                    <h2 class="text-center">Shop By Brand</h2>
-                    <div class="shop-by-brand-items d-flex justify-content-center justify-content-lg-between">
-                        <span><a href=""><img src="<?= base_url('assets/site/images/brand1.jpg'); ?>" alt=""></a></span>
-                        <span><a href=""><img src="<?= base_url('assets/site/images/brand2.jpg'); ?>" alt=""></a></span>
-                        <span><a href=""><img src="<?= base_url('assets/site/images/brand3.jpg'); ?>" alt=""></a></span>
-                        <span><a href=""><img src="<?= base_url('assets/site/images/brand4.jpg'); ?>" alt=""></a></span>
-                        <span><a href=""><img src="<?= base_url('assets/site/images/brand5.jpg'); ?>" alt=""></a></span>
-                        <span><a href=""><img src="<?= base_url('assets/site/images/brand6.jpg'); ?>" alt=""></a></span>
-                        <span><a href=""><img src="<?= base_url('assets/site/images/brand1.jpg'); ?>" alt=""></a></span>
-                    </div>
-                </div>
-            </section>
-            <!-- Shop By Brand -->
-
-            <?php if(!empty($videoslider)): ?>
-            <!-- Youtube Video -->
-            <section class="pets-in-action p-60">
-                <div class="container">
-                    <div class="pets-in-action-heading d-flex justify-content-between align-items-start">
-                        <h2>Adorable Pets In Action</h2>
-                        <a href="" class="btn btn-dark">View All</a>
-                    </div>
-                    <div class="owl-carousel owl-theme pets-in-action-slider">
-                        <?php foreach($videoslider as $t): ?> 
-                        <div class="item-video" data-merge="1">
-                            <iframe width="543" height="415" src="<?= $t->video_link; ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen></iframe>
-                        </div>
-                        <?php endforeach ?>
-                    </div>
-                </div>
-            </section>
-            <!-- Youtube Video -->
-            <?php endif; ?>
-
-            <?php if(!empty($testimonial)): ?>
-            <!-- Testimonial -->
-            <section class="testimonial p-60 pt-0">
-                <div class="container">
-                    <h2 class="text-center">What They Say</h2>
-                    <div class="row">
-                        <div class="col-lg-12 offset-lg-0 col-xl-8 offset-xl-2">
-                            <div class="owl-carousel owl-theme testimonial-slider">
-                                <?php foreach($testimonial as $t): ?>
-                                <div class="item d-block d-md-flex">
-                                    <figure><img src="<?= get_image($t->media_id);?>" alt=""></figure>
-                                    <div class="testimonial-content">
-                                        <div class="rate">
-                                            <?php for ($i = 0; $i < (5 - ceil($t->rating)); $i++) { // Print empty stars if necessary ?>
-                                                <label title="text"></label>
-                                            <?php } ?>
-                                            <?php for ($i = 0; $i < $t->rating; $i++) { // Print full stars ?>
-                                                <label title="text" style="color:#deb217 !important;"></label>
-                                            <?php } ?>
-                                        </div>
-                                        <h4><?= $t->title ?></h4>
-                                        <p><?= $t->description ?></p>
-                                        <h5><?= $t->name ?></h5>
-                                    </div>
-                                </div> 
-                                <?php endforeach; ?>
-                            </div> 
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- Testimonial -->
-            <?php endif; ?>
-
-            <!-- Instagram Feed -->
-            <section class="insta-slider-container p-60 pt-0">
-                <div class="container">
-                    <h2 class="text-center">Follow Us @talesofjoy</h2>
-                </div>
-                <div class="owl-carousel owl-theme insta-slider">
-                    <?php
-                        $instagramData = instagram('instagram',10);
-                        if(!empty($instagramData)){
-                        foreach($instagramData as $insta){
-                            $username = isset($insta->username) ? $insta->username : "";
-                            $caption = isset($insta->caption) ? $insta->caption : "";
-                            $media_url = isset($insta->media_url) ? $insta->media_url : "";
-                            $permalink = isset($insta->permalink) ? $insta->permalink : "";
-                            $media_type = isset($insta->media_type) ? $insta->media_type : "";
-                    ?>
-                    <div class="item">
-                        <a href="<?= $permalink; ?>" target="_blank">
-                            <img src="<?= $media_url ?>" alt="" />
-                        </a>
-                    </div>
-                    <?php } }?>
-                </div>
-            </section>
-            <!-- Instagram Feed -->
-
-
-            <!-- Quick Links -->
-            <section class="quick-link-container p-0">
-                <div class="container">
-                    <div class="quick-link d-flex align-items-center justify-content-lg-evenly">
-                        <span>Quick Links</span>
-                        <ul class="d-flex gap-20">
-                            <li><a href="">CONTACT US</a></li>
-                            <li><a href="">PRIVACY POLICY</a></li>
-                            <li><a href="">TERMS OF USE</a></li>
-                            <li><a href="">SHIPPING POLICY</a></li>
-                            <li><a href="">CANCELLATIONS AND REFUNDS</a></li>
-                            <li><a href="">STORES</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-            <!-- Quick Links -->
-
-            <!-- Join Our Newsletter -->
-            <section class="newsletter-container p-60">
-                <div class="container">
-                    <h2 class="text-center">Join Our Newsletter</h2>
-                    <p>Subscribe to our Newsletter and receive special <br />promotions and insider information about upcoming collections.</p>
-                    <div class="newsletter-form">
-                        <div class="header-search d-block">
-                            <input type="text" class="form-control" placeholder="Your Email Address" aria-label="Your Email Address " aria-describedby="button-addon2">
-                            <button class="btn" type="button" id="button-addon2"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </section> 
-            <!-- Join Our Newsletter -->
-
-            <!-- Popular searches -->
-            <section class="popular-search-container p-0">
-                <div class="container">
-                    <div class="popular-search">
-                        <span>Popular searches</span>
-                        <ul class="d-flex flex-wrap">
-                            <li><a href="">Dog</a></li>
-                            <li><a href="">Cat Food</a></li>
-                            <li><a href="">Royal Canin</a></li>
-                            <li><a href="">Mat</a></li>
-                            <li><a href="">Whiskas</a></li>
-                            <li><a href="">Toys</a></li>
-                            <li><a href="">Spa</a></li>
-                            <li><a href="">Harness</a></li>
-                            <li><a href="">Dog Food</a></li>
-                            <li><a href="">Toy 2024</a></li>
-                            <li><a href="">Collar PAWS</a></li>
-                            <li><a href="">32 Ball</a></li>
-                            <li><a href="">Dog Toys</a></li>
-                            <li><a href="">PINK PAWS BISCUITS 600</a></li>
-                            <li><a href="">Pedigree</a></li>
-                            <li><a href="">Me O Kitten Food DENTAL</a></li>
-                            <li><a href="">Fit 32</a></li>
-                            <li><a href="">Bed</a></li>
-                            <li><a href="">Bowl  Dog Treats</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-            <!-- Popular searches -->
-
+      </div>
+   </div>
+</div>
 
    <!-- Collection -->
    <?php if(!empty($offeralldata)){ ?>
-   <!-- <div class="collection-box tle-bold section">
+   <div class="collection-box tle-bold section">
       <div class="container">
          <div class="section-header text-center">
                <h2 class="h2">Great Offers</h2>
@@ -597,12 +286,167 @@
                            <span class="btn btn--secondary border-btn-1"><?= $offer->link_title; ?></span>
                         </div>
                      </a>
-                  </div> 
+                  </div>
                </div>
                <?php } ?>
          </div>
          <!-- End Collection Box -->
       </div>
-   </div> -->
+   </div>
    <!-- End Collection -->
    <?php } ?>
+
+   <!-- Logo Slider -->
+   <!-- <div class="section logo-section">
+      <div class="container">
+         <div class="row">
+               <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                  <div class="section-header text-center">
+                     <h2 class="h2">Our Brands</h2>
+                     <p>We have got the brands you love</p>
+                  </div>
+                  <div class="logo-bar">
+                     <div class="logo-bar__item"><a href="#" class="d-block"><img src="<?= base_url('assets/site/images/logo/brandlogo1.png') ?>" alt="Logo" title="" /></a></div>
+                     <div class="logo-bar__item"><a href="#" class="d-block"><img src="<?= base_url('assets/site/images/logo/brandlogo2.png') ?>" alt="Logo" title="" /></a></div>
+                     <div class="logo-bar__item"><a href="#" class="d-block"><img src="<?= base_url('assets/site/images/logo/brandlogo3.png') ?>" alt="Logo" title="" /></a></div>
+                     <div class="logo-bar__item"><a href="#" class="d-block"><img src="<?= base_url('assets/site/images/logo/brandlogo4.png') ?>" alt="Logo" title="" /></a></div>
+                     <div class="logo-bar__item"><a href="#" class="d-block"><img src="<?= base_url('assets/site/images/logo/brandlogo5.png') ?>" alt="Logo" title="" /></a></div>
+                     <div class="logo-bar__item"><a href="#" class="d-block"><img src="<?= base_url('assets/site/images/logo/brandlogo6.png') ?>" alt="Logo" title="" /></a></div>
+                  </div>
+               </div>
+         </div>
+      </div>
+   </div> -->
+   <!-- End Logo Slider -->
+
+   <?php //if(!empty($testimonial)): ?>
+   <!-- Testimonial Slider -->
+   <!-- <div class="section testimonial-bg-style testimonial-slider">
+      <div class="container-fluid px-0">
+         <div class="quote-wraper" style="background:url('<?= base_url('assets/site/images/parallax-banners/testimonials-bg.jpg') ?>') no-repeat center/cover">
+            <div class="quotes-slider">
+               <?php //foreach($testimonial as $t): ?>  
+               <div class="quotes-slide">
+                  <div class="section-header text-center">
+                     <div class="img" style="width: 100px;height: 100px;border-radius: 50%;float: none;border: 5px solid #fff;box-shadow: 2px 3px 6px -3px rgba(0, 0, 0, 0.35);position: relative;display: inline-block;">
+                        <img src="<= get_image($t->media_id);?>" alt="" style="width: 100%;height: 100%;border-radius: 50%;">
+                     </div>
+                  </div>
+                  <blockquote class="quotes-slider__text text-center">             
+                     <div class="rte-setting text-white">
+                        <p><= $t->description ?></p>
+                     </div>
+                     <p class="authour text-white mb-0"><= $t->name; ?></p>
+                  </blockquote>
+               </div>
+               <?php //endforeach ?>
+            </div>
+         </div>
+      </div>
+   </div> -->
+   <!--End Testimonial Slider-->
+   <?php //endif; ?>
+
+
+   <?php if(!empty($videoslider)): ?>
+   <!-- Testimonial Slider -->
+   <div class="section testimonial-bg-style testimonial-slider">
+      <div class="container-fluid px-0">
+         <div class="quote-wraper">
+            <div class="quotes-slider">
+               <?php foreach($videoslider as $t): ?>  
+                  <div class="quotes-slide">
+                     <iframe width="90%" height="600" src="<?= $t->video_link; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe>
+                  </div>
+               <?php endforeach ?>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!--End Testimonial Slider-->
+   <?php endif; ?>
+
+   <!-- Latest Blog -->
+   <!-- <div class="latest-blog section">
+      <div class="container">
+         <div class="row">
+               <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                  <div class="section-header text-center">
+                     <h2 class="h2">Fresh From our blog</h2>
+                     <p>If you like shopify you are going to love this amazing theme.</p>
+                  </div>
+               </div>
+         </div>
+         <div class="row">
+               <div class="blog-item col-12 col-sm-6 col-md-4 col-lg-4 text-start">
+                  <a href="#" class="article__grid-image">   
+                     <img class="blur-up lazyload" data-src="<?= base_url('assets/site/images/blog/post-img1.jpg') ?>" src="<?= base_url('assets/site/images/blog/post-img1.jpg') ?>" alt="blog image" />
+                  </a> 
+                  <div class="wrap-blog-inner text-center">
+                     <h3 class="h5 article__title"><a href="#">It's all about how you wear</a></h3>
+                     <span class="article__date">
+                           <time datetime="2018-02-12T09:22:00Z">February 12, 2018</time>
+                     </span>
+                     <div class="rte-setting">
+                           <p>Plusieurs variations de Lorem Ipsum peuvent être trouvées ici ou là, mais la majeure partie d'entre elles a été altérée par l'addition d'humour ou ...</p>
+                     </div>
+                     <a href="#" class="btn btn--small border-btn-2">Read More</a>
+                     <a href="#" class="btn border-btn-2 btn--small btn--link">1 comment</a>
+                  </div>
+               </div>
+               <div class="blog-item col-12 col-sm-6 col-md-4 col-lg-4 text-start">
+                  <a href="#" class="article__grid-image">   
+                     <img class="blur-up lazyload" data-src="<?= base_url('assets/site/images/blog/post-img2.jpg') ?>" src="<?= base_url('assets/site/images/blog/post-img2.jpg') ?>" alt="blog image" />
+                  </a> 
+                  <div class="wrap-blog-inner text-center">
+                     <h3 class="h5 article__title"><a href="#">27 Days of Spring Fashion Recap</a></h3>
+                     <span class="article__date">
+                           <time datetime="2018-02-12T09:22:00Z">February 12, 2018</time>
+                     </span>
+                     <div class="rte-setting">
+                           <p>On sait depuis longtemps que travailler avec du texte lisible et contenant du sens est source de distractions, et empêche de se concentrer sur la m...</p>
+                     </div>
+                     <a href="#" class="btn btn--small border-btn-2">Read More</a>
+                  </div>
+               </div>
+               <div class="blog-item col-12 col-sm-6 col-md-4 col-lg-4 text-start">
+                  <a href="#" class="article__grid-image">   
+                     <img class="blur-up lazyload" data-src="<?= base_url('assets/site/images/blog/post-img3.jpg') ?>" src="<?= base_url('assets/site/images/blog/post-img2.jpg') ?>" alt="blog image" />
+                  </a> 
+                  <div class="wrap-blog-inner text-center">
+                     <h3 class="h5 article__title"><a href="#">Great stores. Great choices.</a></h3>
+                     <span class="article__date">
+                           <time datetime="2018-02-12T09:22:00Z">February 12, 2018</time>
+                     </span>
+                     <div class="rte-setting">
+                           <p>On sait depuis longtemps que travailler avec du texte lisible et contenant du sens est source de distractions, et empêche de se concentrer sur la m...</p>
+                     </div>
+                     <a href="#" class="btn btn--small border-btn-2">Read More</a>
+                  </div>
+               </div>
+         </div>
+      </div>
+   </div> -->
+   <!-- End Latest Blog -->
+
+   <!-- Store Feature -->
+   <div class="store-feature style2 section">
+      <div class="container">
+         <div class="row">
+               <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                  <ul class="display-table store-info">
+                     <li class="display-table-cell">
+                           <div class="store-info-text">
+                              <h5>we are dedicated to our customers 24/7</h5>
+                              <span class="sub-text">Call us <?= $this->settings->contact_phone;?> . Talk to Us <?= $this->settings->contact_email;?></span>
+                           </div>
+                     </li>
+                  </ul>
+               </div>
+         </div>
+      </div>
+   </div>
+   <!-- End Store Feature -->
+   
+</div>
+<!-- End Body Content -->

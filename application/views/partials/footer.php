@@ -1,35 +1,118 @@
-        <footer>
-            <div class="container">
-                <div class="footer-content-container p-60">
-                    <div class="container">
+<!-- Footer -->
+<footer id="footer" class="footer-2">
+                <div class="site-footer">
+                    <div class="footer-top">
+                        <div class="container">
+                            <!-- Footer Links -->
+                            <div class="row col-grid-5">
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-2 custom-block">
+                                    <div class="footer-logo"><img src="<?= get_logo(); ?>" alt="Diva Multipurpose Html Template" title="Diva Multipurpose Html Template" width="130" /></div>
+                                    <div class="text mb-2 mb-md-0 mt-3">Style, elegance and sophistication. Everything in your wardrobe. Choose styles from some of the best italian designers who have...</div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-2 footer-links">
+                                    <h4 class="h4">Informations</h4>
+                                    <ul>
+                                        <li><a href="#">About us</a></li>
+                                        <li><a href="#">Careers</a></li>
+                                        <li><a href="#">Privacy policy</a></li>
+                                        <li><a href="#">Terms &amp; condition</a></li>
+                                        <li><a href="#">My Account</a></li>
+                                        <li><a href="#">Orders and Returns</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-2 footer-links">
+                                    <h4 class="h4">Help</h4>
+                                    <ul>
+                                        <li><a href="#">FAQs</a></li>
+                                        <li><a href="#">My Orders</a></li>
+                                        <li><a href="#">Terms And Conditions</a></li>
+                                        <li><a href="#">Shipping Policy</a></li>
+                                        <li><a href="#">Returns &amp; Exchange</a></li>
+                                        <li><a href="#">Ordering &amp; Payment</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-2 newsletter">
+                                    <div class="display-table">
+                                        <div class="display-table-cell footer-newsletter">
+                                            <form>
+                                                <label class="h4">Newsletter</label>
+                                                <p>sign up for newsletter to know our latest news and offers.</p>
+                                                <div class="input-group">
+                                                    <input type="email" class="input-group__field newsletter__input" name="EMAIL" value="" placeholder="Email address" required />
+                                                    <span class="input-group__btn">
+                                                        <button type="submit" class="btn newsletter__submit" name="commit" id="Subscribe"><span class="newsletter__submit-text--large">Sign Up</span></button>
+                                                    </span>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4 col-md-3 col-lg-3 col-xl-2 socialPayment">
+                                    <div class="item">
+                                        <h4 class="h4">Stay Connected</h4>
+                                        <ul class="list--inline site-footer__social-icons social-icons">
+                                            <li><a class="social-icons__link d-inline-block" href="<?= $this->settings->facebook_url;?>" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook"><i class="icon an an-facebook"></i></a></li>
+                                            <li><a class="social-icons__link d-inline-block" href="<?= $this->settings->twitter_url;?>" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter"><i class="icon an an-twitter"></i> <span class="icon__fallback-text">Twitter</span></a></li>
+                                            <li><a class="social-icons__link d-inline-block" href="<?= $this->settings->pinterest_url;?>" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="Pinterest"><i class="icon an an-pinterest-p"></i> <span class="icon__fallback-text">Pinterest</span></a></li>
+                                            <li><a class="social-icons__link d-inline-block" href="<?= $this->settings->instagram_url;?>" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="Instagram"><i class="icon an an-instagram"></i> <span class="icon__fallback-text">Instagram</span></a></li>
+                                            <li><a class="social-icons__link d-inline-block" href="<?= $this->settings->youtube_url;?>" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="YouTube"><i class="icon an an-youtube"></i> <span class="icon__fallback-text">YouTube</span></a></li>
+                                        </ul>
+                                    </div>
+                                    <!-- <div class="item">
+                                        <h4 class="h4 mt-lg-4">Payment Options</h4>
+                                        <ul class="payment-icons list--inline">
+                                            <li><i class="icon an an-cc-visa" aria-hidden="true"></i></li>
+                                            <li><i class="icon an an-cc-mastercard" aria-hidden="true"></i></li>
+                                            <li><i class="icon an an-cc-amex" aria-hidden="true"></i></li>
+                                            <li><i class="icon an an-cc-paypal" aria-hidden="true"></i></li>
+                                            <li><i class="icon an an-cc-discover" aria-hidden="true"></i></li>
+                                        </ul>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <!-- End Footer Links -->
+                        </div>
+                    </div>
 
-                        <div class="social-network pb-60 pt-0">
-                            <div class="container d-block d-lg-flex justify-content-between align-items-center">
-                                <h2 class="text-center text-lg-start">Lets Connect<span>Get in touch or just say Hi</span></h2>
-                                <ul class="d-flex justify-content-center flex-wrap gap-20">
-                                    <li><a href=""><i class="fa-brands fa-youtube"></i></a></li>
-                                    <li><a href=""><i class="fa-brands fa-instagram"></i></a></li>
-                                    <li><a href=""><i class="fa-brands fa-google"></i></a></li>
-                                    <li><a href=""><i class="fa-solid fa-location-dot"></i></a></li>
-                                    <li><a href=""><i class="fa-solid fa-location-dot"></i></a></li>
-                                    <li><a href=""><i class="fa-brands fa-twitter"></i></a></li>
-                                </ul>
+                    <div class="footer-bottom">
+                        <div class="container">
+                            <div class="row">
+                                <!-- Footer Copyright -->
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 copyright text-center"><span>&copy; <script>document.write(new Date().getFullYear())</script> <?= $this->settings->application_name?> -</span> Crafted with <i class="mdi mdi-heart text-danger"></i> by <a style="font-weight:500;" href="https://codeofdolphins.com/">Code of Dolphins. </a></span>All Rights Reserved.</div>
+                                <!-- End Footer Copyright -->
                             </div>
-                        </div>  
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- End Footer -->
 
-                        <div class="footer-content d-flex gap-50">
-                            <div class="footer-logo">
-                                <a href=""><img src="<?= base_url('assets/site/images/footer-logo.png'); ?>" alt=""></a>
+            <!-- Scoll Top -->
+            <div id="site-scroll"><i class="icon an an-angle-up"></i></div>
+            <!-- End Scoll Top -->
+
+            <!-- Minicart Drawer -->
+            <div class="minicart-right-drawer right modal fade" id="minicart-drawer" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="minicart-header">
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><i class="an an-times" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="left" title="Close"></i></button>
+                            <?php 
+                                // $crtitm = $this->cart_model->get_cart_by_buyer();
+                                // if(!empty($crtitm)):
+                                //     $total =0;
+                                //     $totalshippinhg= 0;			
+							?>
+                            <h4 class="modal-title" id="myModalLabel2">Shopping Cart items</h4>
+                        </div>
+                        <div class="minicart-body">
+                            <div id="drawer-minicart" class="block block-cart">
+                                <ul class="mini-products-list" id="listproduicttoggle"></ul>
                             </div>
-                            <div class="footer-contact">
-                                <h4>Pet Supply Shop</h4>
-                                <ul>
-                                    <li><span><i class="fa fa-map-marker" aria-hidden="true"></i></span>185/A, PICNIC GARDEN ROAD, NEAR 39 BUS STAND MONGINIS CAKE SHOP, KOLKATA- 700039, WEST BENGAL, INDIA. </li>
-                                    <li><span><i class="fa fa-volume-control-phone" aria-hidden="true"></i></span><a href="tel:+917595936132">+91 75959 36132 </a></li>
-                                    <li><span><i class="fa fa-envelope" aria-hidden="true"></i></span><a href="mailto:loveatpetside@gmail.com">loveatpetside@gmail.com</a></li>
-                                </ul>
+                            <?php //else: ?>
+                            <div class="empty-cart">
+                                <p>You have no items in your shopping cart.</p>
                             </div>
-<<<<<<< HEAD
                             <?php //endif; ?>
                         </div>
                         <div class="minicart-footer minicart-action">
@@ -38,51 +121,46 @@
                                 <p class="label"><b>Shipping:</b><span class="item product-price"><span class="shipping">0.00</span></span></p>
                                 <p class="label"><b>Tax:</b><span class="item product-price"><span class="tax">0.00</span></span></p>
                                 <p class="label"><b>Total:</b><span class="item product-price"><span class="totals" id="tot"></span></span></p>
-=======
-                            <div class="footer-link">
-                                <h4>Information</h4>
-                                <ul>
-                                    <li><a href="">About Us</a></li>
-                                    <li><a href="">Contact Us</a></li>
-                                    <li><a href="">Terms & Conditions</a></li>
-                                    <li><a href="">Faq</a></li>
-                                </ul>
->>>>>>> 76fa2ac05e97a9c9cb53e84899d4f6fe78de9aa7
                             </div>
-                            <div class="footer-link">
-                                <h4>My Account</h4>
-                                <ul>
-                                    <li><a href="">Your Account</a></li>
-                                    <li><a href="">Checkout</a></li>
-                                    <li><a href="">Login</a></li>
-                                    <li><a href="">Register</a></li>
-                                </ul>
+                            <div class="buttonSet d-flex flex-row align-items-center text-center">
+                                <a href="<?= base_url('/cart'); ?>" class="btn btn-secondary w-50 me-3">View Cart</a>
+                                <a href="#" class="btn btn-secondary goCheckout w-50">Checkout</a>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="register-modal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                        <h4 class="modal-title">Choose Register Option</h4>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><i class="an an-times" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="left" title="Close"></i></button>
+                        </div>
+                        
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <div class="register_button d-flex flex-column" stye>
+                                <a href="<?= base_url('authentication/register_distributor'); ?>" class="btn btn-outline-primary mt-3 mb-3">Register as Distributer</a>
+                                <a href="<?= base_url('authentication/register_teamlead'); ?>" class="btn btn-outline-success mt-3 mb-3">Register as Team Leader</a>
+                                <a href="<?= base_url('/signup'); ?>" class="btn btn-outline-primary mt-3 mb-3">Register as Retailer</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Modal footer -->
+                        <!-- <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div> -->
                         
                     </div>
                 </div>
             </div>
-        </footer>
-        <section class="footer-bottom p-0">
-            <div class="container">
-                <div class="copyright d-sm-block d-md-flex justify-content-between">
-                    <p>&copy; <?php echo date("Y"); ?> talesofjoy. All rights reserved. </p>
-                    <ul class="d-flex justify-content-center gap-20">
-                        <li><a href=""><i class="fa-brands fa-facebook-f"></i></a></li>
-                        <li><a href=""><i class="fa-brands fa-instagram"></i></a></li>
-                        <li><a href=""><i class="fa-brands fa-google"></i></a></li>
-                        <li><a href=""><i class="fa-brands fa-youtube"></i></a></li>
-                        <li><a href=""><i class="fa-brands fa-twitter"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-        <!-- End Footer -->
+            <!-- End Minicart Drawer -->
 
-        <!-- Including Javascript -->
 
-<<<<<<< HEAD
             
             <!-- Including Javascript -->
         <!-- Plugins JS -->
@@ -160,19 +238,6 @@
         <script src="<?= base_url('assets/admin/libs/metismenu/metisMenu.min.js'); ?>"></script>
         <script src="<?= base_url('assets/admin/libs/simplebar/simplebar.min.js'); ?>"></script>
         <script src="<?= base_url('assets/admin/libs/node-waves/waves.min.js'); ?>"></script>
-=======
-        <!-- jQuery Master Plugin -->
-        <script src="<?= base_url('assets/site/assets/vendors/jquery.min.js'); ?>"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
-        <script src="<?= base_url('assets/site/js/bootstrap.bundle.min.js'); ?>"crossorigin="anonymous"></script>        
-        <!-- owl javascript -->
-        
-        <script src="<?= base_url('assets/site/assets/owlcarousel/owl.carousel.js'); ?>"></script>
- 
-        <!-- Coustom JS -->
-        <script type="text/javascript" src="<?= base_url('assets/site/js/scripts.js'); ?>"></script>
-
->>>>>>> 76fa2ac05e97a9c9cb53e84899d4f6fe78de9aa7
         <!-- toast message -->
         <script src="<?= base_url('assets/admin/libs/toast/toastr.js');?>"></script>
         <script src="<?= base_url('assets/admin/js/pages/toastr.init.js');?>"></script>
@@ -203,30 +268,31 @@
     </div>
     <!-- End Page Wrapper -->
     <script>
-        (function () {
-        'use strict'
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        var forms = document.querySelectorAll('.needs-validation')
-        // Loop over them and prevent submission
-        Array.prototype.slice.call(forms)
-            .forEach(function (form) {
-            form.addEventListener('submit', function (event) {
-                if (!form.checkValidity()) {
-                event.preventDefault()
-                event.stopPropagation()
-                }else{
-                // $(".animate-container").addClass("animation-added");
-                    setInterval(function() { 
-                //  $('#stepForm1').submit();
-                }, 4000);  
-                }
-                
-                form.classList.add('was-validated')
-                
-            }, false)
-            })
+(function () {
+  'use strict'
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }else{
+           // $(".animate-container").addClass("animation-added");
+            setInterval(function() { 
+          //  $('#stepForm1').submit();
+        }, 4000);  
+        }
+        
+        form.classList.add('was-validated')
+        
+      }, false)
+    })
 
-        })()
-    </script>
+})()
+
+</script>
 </body>
 </html>

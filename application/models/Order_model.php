@@ -1257,6 +1257,19 @@ public function add_invoice($order_id,$dist_id = 0)
                         $this->db->insert('dristributor_stocks', $data);
                     }
                 }
+            }elseif(get_user_by_id($buyer_id)->role == 'retailer'){
+                $order_products = $this->get_order_products($order_id);
+                foreach ($order_products as $item){
+                    if($item->order_status == 'completed'){
+                        $stock_data = $this->check_product_avalibility_for_distributer( $item->product_id,$item->seller_id);
+                        if(count($stock_data) > 0){
+                            $data['stock'] = abs($stock_data[0]->stock - $item->product_quantity);
+                            $this->db->where('dristributor_id', $item->seller_id);
+                            $this->db->where('product_id',$item->product_id);
+                            $this->db->update('dristributor_stocks', $data);
+                        }
+                    }
+                }
             }
             
         }
