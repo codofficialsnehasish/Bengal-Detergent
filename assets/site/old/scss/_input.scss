@@ -1,0 +1,178 @@
+.btn {
+    @include button;
+    position: relative;
+    color: white;
+
+    &:hover{
+        background: $secondary-color;
+        color: white;
+        transition: 0.3s;
+    }
+    
+    &.btn-dark{
+        background: $default-dark;
+        border: 1px solid $default-dark;
+        &:hover{
+            background: transparent;
+            color: $default-dark;
+            border: 1px solid $default-dark;
+            transition: 0.3s;
+        }
+    }
+    &.btn-blue{
+        background: $primary-color;
+    }
+    &.btn-pink{
+        background: $secondary-color;
+    }
+
+}
+
+
+input[type="submit"], input[type="button"]{
+    @include button;
+    &:hover{
+        background: $secondary-color;
+        color: white
+    }
+}
+
+
+%input-styles {
+    @include input;
+}
+
+%input-styles--focus {
+    @include input-focus;
+}
+
+@mixin input-styles($styles, $focus_styles) {
+    $types: 'email','text','select', 'password', 'search';
+
+    @each $type in $types {
+        input[type="#{$type}"] {
+            @extend #{$styles};
+
+            @include macbook{
+                height: 56px;
+            }
+            @include windows-laptop{
+                height: 56px;
+            }
+            @include tab-landscape{
+                height: 56px;
+            }
+
+            @include tab-portrait{
+                height: 48px !important;
+            }
+
+            @include mobile-lg{
+                height: 45px !important;
+            }
+
+            &:focus {
+                @extend #{$focus_styles};
+                box-shadow: none !important;
+            }
+        }
+    }
+
+    select {
+        @extend #{$styles};
+
+        &:focus {
+            @extend #{$focus_styles};
+        }
+    }
+
+    textarea {
+        @extend #{$styles};
+        height: 250px;
+        resize: none;
+        border-radius: 0 !important;
+        border: 1px solid #e8e8e8 !important;
+
+        &:focus {
+            @extend #{$focus_styles};
+            box-shadow: none !important;
+            border-color: #80bdff !important;
+        }
+    }
+
+}
+
+@include input-styles('%input-styles', '%input-styles--focus');
+
+
+// checkbox and radio
+
+// @mixin checbox-radio{
+//     appearance: none;
+//     -webkit-appearance: none;
+//     -moz-appearance: none;
+//     text-indent: -9999px !important;
+
+//     & + label{
+//         padding: 0 0 0 20px!important;
+//         padding-left: 35px !important;
+//         color: #868686 !important;
+//         display: inline-block !important;
+//         max-width: inherit !important;
+//         margin: 0px !important;
+//         font-weight: 500 !important;
+//         line-height: 20px !important;
+//     } 
+
+//     & + label:before{
+//         content: '';
+//         position: absolute;
+//         width: 20px;
+//         height: 20px;
+//         border: solid 1px $primary-color;
+//         background: white;
+//         left: 0;
+//         top: 0px;
+//         border-radius: 55%;
+//     }
+
+//     & + label:after{
+//         content: '';
+//         position: absolute;
+//         width: 7.5px;
+//         height: 7.5px;
+//         background: $primary-color;
+//         left: 6.25px;
+//         top: 6.25px;
+//         border-radius: 55%;
+//         display: none;
+//     }
+
+//     &:checked + label{
+//         color: $primary-color !important;
+//         font-weight: 500 !important;
+//     }
+
+//     &:checked + label:after{
+//         display: block;
+//     }
+// }
+
+
+// input[type=checkbox]{
+//     @include checbox-radio;
+// }
+
+
+
+// input[type=radio]{
+//     @include checbox-radio;
+// }
+
+
+// label{
+//     font-size: 16px !important;
+//     font-weight: bold !important;
+//     color: black !important;
+//     display: inline-block !important;
+// }

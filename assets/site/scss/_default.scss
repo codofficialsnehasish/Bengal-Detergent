@@ -1,0 +1,271 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: none; 
+}
+
+html {
+    height: 100%;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;   
+}
+
+body {
+    overflow-x: hidden;
+    height: 100%;
+    width: 100%;
+    background: white;
+    position: relative;
+    font-family: $primary-font;
+    font-size: $content-font;
+    line-height: 35px;
+    font-weight: 500;
+    color: black;
+}
+
+a{
+    text-decoration: none;
+    &:hover{
+        text-decoration: none;
+    }
+}
+
+
+ul,
+ol,
+li
+{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+h1, h2, h3, h4{
+    @include heading;
+}
+
+h1 {
+    line-height: 0;
+}
+
+
+h2, .common-heading h1 {
+    color: $default-dark;
+    letter-spacing: 0px;
+    margin: 0 0 35px;
+    font-size: $heading-lg;
+    font-family: $primary-font;
+    font-weight: 600;
+    line-height: 1.2;
+
+    span{
+        color: $secondary-color;
+    }
+
+    @include windows-laptop{
+        font-size: 40px;
+    }
+
+    @include tab-landscape{
+        font-size: 30px;
+    }
+
+    @include tab-sm-portrait{
+        font-size: 25px;
+    }
+
+}
+
+h3 {
+    color: $secondary-color;
+    letter-spacing: 0px;
+    margin: 0 0 15px;
+    font-size: $heading-md;
+    font-family: $primary-font;
+    font-weight: 700;
+    text-align: left;
+
+    span{
+        display: block;
+        letter-spacing: 1px;
+        font-size: $content-font;
+        color: #c5c4c4;
+        text-transform: none;
+        margin-bottom: 10px;
+        font-weight: 500; 
+    }
+    
+    @include mobile-lg{
+        font-size: 26px;
+    }
+}
+
+h4 {
+    font-size: $heading-sm;
+}
+
+
+figure{
+    margin: 0;
+    img{
+        width: 100%;
+    }
+}
+
+.btn.focus, .btn:focus {
+    outline: 0;
+    box-shadow: none;
+}
+
+
+// ====================== Common style Start ======================
+
+section{
+    padding: 120px 0;
+    background: white;
+
+    @include desktop-xl{
+        height: auto;
+    }
+
+    @include macbook{
+        padding: 70px 0;
+        height: auto;
+    }
+    @include windows-laptop{
+        padding: 100px 0;
+        height: auto;
+    }
+    @include tab-landscape{
+        padding: 100px 0;
+        height: auto;
+    }
+    @include tab-portrait{
+        padding: 70px 0;
+    }
+    @include mobile-lg{
+       padding: 60px 0;
+    }
+}
+
+section.inner{
+    height: auto;
+    padding: 80px 0;
+
+    @include tab-sm-portrait{
+        padding: 40px 0;
+    }
+}
+
+
+.main-wrapper{   
+    margin: 125px 0 0 0;
+    position: relative;
+    z-index: 9;
+    width: 100vw;
+
+    @include tab-landscape{
+        margin: 80px 0 0 0;
+    }
+
+    @include mobile-lg{
+        margin: 64px 0 0 0;
+    }
+}
+
+
+.custom-wrapper{
+    width: 1340px;
+    margin: 0 auto;
+
+    @include windows-laptop{
+        width: 95%;
+    }
+
+    @include tab-landscape{ 
+        width: 80%;
+    }
+
+    @include mobile-lg{
+        width: 90%;
+    }
+}
+
+.p-60{
+    padding: 60px 0;
+}
+
+.pb-60{
+    padding-bottom: 60px;
+}
+
+.gap-10{
+    column-gap: 10px;
+}
+
+.gap-20{
+    column-gap: 20px;
+    @include tab-landscape{
+        column-gap: 10px;
+    }
+}
+
+.gap-30{
+    column-gap: 30px;
+}
+
+.gap-50{
+    column-gap: 50px;
+
+    @include mobile-lg{
+        column-gap: 15px;
+    }
+}
+
+.gap-100{
+    column-gap: 100px;
+}
+
+
+.rate {
+    height: 30px;
+    padding: 0;
+    display: flex;
+    flex-flow: row-reverse;
+    justify-content: start;
+    margin-bottom: 15px;
+}
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rate:not(:checked) > label {
+    float:right;
+    width:30px;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    color:#cccccc;
+}
+.rate:not(:checked) > label:before {
+    content: "\f005";
+    font: normal normal normal 26px/1 FontAwesome;
+}
+.rate > input:checked ~ label {
+    color: #ffc700;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #deb217;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+}
+
+/* Modified from: https://github.com/mukulkant/Star-rating-using-pure-css */
+
+// ====================== Common style End  ======================

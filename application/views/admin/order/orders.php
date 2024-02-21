@@ -12,7 +12,7 @@
                                         <li class="breadcrumb-item active" aria-current="page">All Orders</li>
                                     </ol>
                                 </div>
-                                <div class="col-md-4">
+                                <!-- <div class="col-md-4">
                                     <div class="float-end d-none d-md-block">
                                         <div class="dropdown">
                                             <a href="javascript:void(0)" class="btn btn-primary  dropdown-toggle" aria-expanded="false">
@@ -20,7 +20,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <!-- end page title -->

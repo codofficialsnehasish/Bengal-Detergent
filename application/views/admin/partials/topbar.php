@@ -47,6 +47,7 @@
         </div>
 
         <div class="d-flex">
+<<<<<<< HEAD
             <?php if($this->auth_user->role == "admin"){ ?>
             <div class="d-none d-sm-block">
                 <div class="dropdown pt-3 d-inline-block text text-center">
@@ -57,6 +58,10 @@
             <button type="button" onclick="javascript:window.location.href='<?= base_url();?>'" class="btn header-item noti-icon waves-effect" id="page-header-search-dropdown"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="mdi mdi-eye"></i>
+=======
+            <button type="button" onclick="javascript:window.location.href='<?= base_url();?>'" class="btn header-item noti-icon waves-effect" id="page-header-search-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="mdi mdi-eye"></i>
+>>>>>>> 76fa2ac05e97a9c9cb53e84899d4f6fe78de9aa7
             </button>
               <!-- App Search-->
               <!-- <form class="app-search d-none d-lg-block">

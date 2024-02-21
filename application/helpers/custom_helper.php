@@ -743,9 +743,11 @@ if (!function_exists('is_favorite')) {
        $ci =& get_instance();
        $result = $ci->select->custom_qry("select * from favorite_products where user_id=".$user_id." and product_id =".$id);
        if(!empty($result)){
-         return '<i class="fas fa-heart" id="icon'.$id.'"></i>';
+        //  return '<i class="fas fa-heart" id="icon'.$id.'"></i>';
+        return true;
        }else{
-        return '<i class="far fa-heart"  id="icon'.$id.'"></i>';
+        // return '<i class="far fa-heart"  id="icon'.$id.'"></i>';
+        return false;
        }
     }
 } 
@@ -2230,5 +2232,62 @@ if (!function_exists('numberTowords')) {
             $ci =& get_instance();
             $res = $ci->select->get_distributer_by_pin($pin);
             return $res;
+        }
+    }
+
+    if (!function_exists('instagram')) {
+        function instagram( $AccessToken , $feed = null ){
+            $timestamp = mktime(date('H'), date('i'), 0, date('n'), date('j') - 1, date('Y'));
+            $AccessToken = 'IGQWROWUppUER3eW5YSXktU0tDQ0xhQjdoejV1M1BqWFdDemk2cXJ6dklaSWlPUlNVZA2dMa0FrOUFCeVc3eUpKWHd3R1AtQmhkSnp2N3lpZA0trTU5OZAUpRRHRGczlmdUp4V2w1YkQ2R2ZAKVzR5UEd5blRiUVdxS2sZD';
+            $instagram_user_id = '1318845355472115';
+            // $url = 'https://graph.instagram.com/'.$instagram_user_id.'/media?access_token=' . $AccessToken;
+            $url = 'https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,thumbnail_url&access_token=' . $AccessToken;
+            $counter = 0;
+         
+            $ch = curl_init();
+         
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_HEADER, false);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+            curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
+            curl_setopt($ch, CURLOPT_USERAGENT, 'Instagram Gallery');
+         
+            $result = curl_exec($ch);
+            $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close($ch);
+         
+            $result = json_decode($result);
+            // print_r($result);
+            $resultArray = array();
+            foreach ($result->data as $media_id){
+                $id = $media_id->id;;
+                 
+                $counter++;
+                if( $counter <= $feed ){
+                 
+                    if( $id ) {
+                        $url = 'https://graph.instagram.com/'.$id.'?fields=id,media_type,media_url,username,timestamp,permalink&access_token=' . $AccessToken;
+                        $ch = curl_init();
+                        curl_setopt($ch, CURLOPT_URL, $url);
+                        curl_setopt($ch, CURLOPT_HEADER, false);
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+                        curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
+                        curl_setopt($ch, CURLOPT_USERAGENT, 'Instagram Gallery');
+         
+                        $result_image = curl_exec($ch);
+                        $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+                        curl_close($ch);
+                        $result_image = json_decode($result_image);
+                       // return $result_image;
+                        $resultArray[] = $result_image;
+                       // $resultArray['media_url'] = $result_image->media_url;
+                        //echo '<span class="instagram-image"><a href="' .$result_image->permalink. '" target="_blank"><img src="' .$result_image->media_url. '"/></a></span>';
+                    }
+                }
+            }
+        
+            return $resultArray;
         }
     }

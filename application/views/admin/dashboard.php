@@ -86,12 +86,11 @@
                                         <div class="card-body">
                                             <div class="mb-4">
                                                 <div class="float-start mini-stat-img me-4">
-                                                    <img src="<?= base_url('assets/admin/images/services-icon/06.png') ?>" alt="">
+                                                    <img src="<?= base_url('assets/admin/images/services-icon/07.png') ?>" alt="">
                                                 </div>
-                                                <h5 class="font-size-16 text-uppercase text-white-50">Distributer</h5>
+                                                <h5 class="font-size-16 text-uppercase text-white-50">Todays Order</h5>
                                                 <h4 class="fw-medium font-size-24" style="color:white;">
-                                                    <span class="badge rounded-pill bg-success"><?= $active_total_distributer ?></span>
-                                                    <span class="badge rounded-pill bg-danger"><?= $inactive_total_distributer ?></span>
+                                                    <span>0</span>
                                                 </h4>
                                             </div>
                                         </div>
@@ -105,12 +104,11 @@
                                         <div class="card-body">
                                             <div class="mb-4">
                                                 <div class="float-start mini-stat-img me-4">
-                                                    <img src="<?= base_url('assets/admin/images/services-icon/05.jpg') ?>" alt="">
+                                                    <img src="<?= base_url('assets/admin/images/services-icon/08.png') ?>" alt="">
                                                 </div>
-                                                <h5 class="font-size-16 text-uppercase text-white-50">Team Leader</h5>
+                                                <h5 class="font-size-16 text-uppercase text-white-50"><?= date('F') ?> Sale</h5>
                                                 <h4 class="fw-medium font-size-24" style="color:white;">
-                                                    <span class="badge rounded-pill bg-success"><?= $active_total_team_leader ?></span>
-                                                    <span class="badge rounded-pill bg-danger"><?= $inactive_total_team_leader ?></span>
+                                                    <span>0</span>
                                                 </h4>
                                             </div>
                                         </div>

@@ -66,7 +66,7 @@
                               </div>
                            </div>
                            <div class="mb-3 col-md-3">
-                              <label class="form-label">Retailer Price</label>
+                              <label class="form-label">Price</label>
                               <input data-parsley-type="text" type="text"
                                  class="form-control" required
                                  placeholder="" name="" id="product_price_input" value="<?= $item->price;?>">
@@ -113,84 +113,22 @@
                            </div>
                            <?php endif; ?>
 
-
-<!--------------------------added----------------------------------->
-
-                           <div class="mb-3 col-md-2">
-                              <label class="form-label">Currency</label>
-                              <div>
-                                 <select class="form-select" name="currency_code" aria-label="Default select example">
-                                    <!-- <option value="">None</option> -->
-                                    <?php foreach($currencies as $currency):?>
-                                    <option value="<?= $currency->id?>" <?= $item->currency_code==$currency->id?'selected':'';?>><?= $currency->symbol?></option>
-                                    <?php endforeach;?>
-                                 </select>
-                              </div>
-                           </div>
-                           <div class="mb-3 col-md-3">
-                              <label class="form-label">Distributor Price</label>
-                              <input data-parsley-type="text" type="text"
-                                 class="form-control" required
-                                 placeholder="" name="dis_price" id="product_price_inpu" value="<?= $item->dis_price;?>">
-                           </div>
-                           <div class="mb-3 col-md-3">
-                              <label class="form-label">Discount Rate</label>
-                              <div id="discount_input_containe" <?= $item->discount_rate==0?'style="display:none;"':'';?>>
-                                 <div class="input-group">
-                                    <div class="input-group-prepend">
-                                       <span class="input-group-text input-group-text-currency" id="basic-addon-discount-variation">%</span>
-                                    </div>
-                                    <input type="number" name="dis_discount_rate" id="input_discount_rat" aria-describedby="basic-addon-discount-variation" class="form-control form-input" value="<?= $item->discount_rate;?>" min="0" max="99" placeholder="0">
-                                 </div>
-                              </div>
-                              <div class="col-12 mt-3">
-                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="dis_no_discount" value="1" id="checkbox_discount_rat" <?= $item->discount_rate==0?'checked':'';?>>
-                                    <label class="form-check-label" for="checkbox_discount_rat">No Discount</label>
-                                 </div>
-                              </div>
-                           </div>
-                              
-                           <?php if ($this->general_settings->gst_status == 1): ?>
-                           <div class="mb-3 col-md-3">
-                              <label class="form-label">GST<small>&nbsp;(Goods & Services Tax)</small></label>
-                              <div id="gst_input_containe" <?= $item->gst_rate==0?'style="display:none;"':'';?>>
-                                 <div class="input-group">
-                                    <div class="input-group-prepend">
-                                       <span class="input-group-text input-group-text-currency" id="basic-addon-gst">%</span>
-                                    </div>
-                                    <input type="number" name="dis_gst_rate" id="input_gst_rat" aria-describedby="basic-addon-gst" class="form-control form-input" value="<?= $item->gst_rate;?>" min="0" max="99" placeholder="0">
-                                 </div>
-                              </div>
-                              <div class="col-12 mt-3">
-                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="gst_include" value="1" id="checkbox_gst_include" <?= $item->gst_rate==0?'checked':'';?>>
-                                    <label class="form-check-label" for="checkbox_gst_include">
-                                    GST Included
-                                    </label>
-                                 </div>
-                              </div>
-                           </div>
-                           <?php endif; ?>
-
-<!-----------XXXXX---------------closed added-----------------XXXXX------------------>
-
                            <div class="row">
-                              <label for="example-text-input" class="col-sm-3 col-form-label">Retailer Reflected Price (<?= get_currency($this->payment_settings->default_product_currency); ?>):</label>
+                              <label for="example-text-input" class="col-sm-3 col-form-label">Reflected Price (<?= get_currency($this->payment_settings->default_product_currency); ?>):</label>
                               <div class="col-sm-9 mt-2 fw-bold" id="calculated_amount">
                               <?= $item->discounted_price;?>
                               </div>
                            </div>
 
                            <div class="row calculated_gst_container" style="display:<?= $item->gst_rate == 0 ? 'none' : ''; ?>">
-                              <label for="example-text-input" class="col-sm-3 col-form-label">Retailer GST Amount (<?= get_currency($this->payment_settings->default_product_currency); ?>):</label>
+                              <label for="example-text-input" class="col-sm-3 col-form-label">GST Amount (<?= get_currency($this->payment_settings->default_product_currency); ?>):</label>
                               <div class="col-sm-9 mt-2 fw-bold" id="gst_amount">
                               <?= $item->gst_amount;?>
                               </div>
                            </div>
 
                            <div class="row">
-                              <label for="example-text-input" class="col-sm-3 col-form-label">Retailer Product Price(<?= get_currency($this->payment_settings->default_product_currency); ?>):</label>
+                              <label for="example-text-input" class="col-sm-3 col-form-label">Product Price(<?= get_currency($this->payment_settings->default_product_currency); ?>):</label>
                               <div class="col-sm-9 mt-2 fw-bold" id="price_amount">
                               <?= number_format($item->price,2);?>
                               </div>
@@ -209,48 +147,6 @@
                               <?= $item->earned_amount;?>
                               </div>
                            </div>
-
-
-<!--/////////////////////////////////////////////////////////////////////////////-->
-                              
-                           <div class="row">
-                              <label for="example-text-input" class="col-sm-3 col-form-label">Distributor Reflected Price (<?= get_currency($this->payment_settings->default_product_currency); ?>):</label>
-                              <div class="col-sm-9 mt-2 fw-bold" id="calculated_amoun">
-                              <?= $item->dis_discounted_price;?>
-                              </div>
-                           </div>
-
-                           <div class="row calculated_gst_container" style="display:<?= $item->dis_gst_rate == 0 ? 'none' : ''; ?>">
-                              <label for="example-text-input" class="col-sm-3 col-form-label">Distributor GST Amount (<?= get_currency($this->payment_settings->default_product_currency); ?>):</label>
-                              <div class="col-sm-9 mt-2 fw-bold" id="gst_amoun">
-                              <?= $item->dis_gst_amount;?>
-                              </div>
-                           </div>
-
-                           <div class="row">
-                              <label for="example-text-input" class="col-sm-3 col-form-label">Distributor Product Price(<?= get_currency($this->payment_settings->default_product_currency); ?>):</label>
-                              <div class="col-sm-9 mt-2 fw-bold" id="price_amoun">
-                              <?= number_format($item->dis_price,2);?>
-                              </div>
-                           </div>
-
-                           <!-- <div class="row">
-                              <label for="example-text-input" class="col-sm-3 col-form-label">Commission Amount(<?= get_currency($this->payment_settings->default_product_currency); ?>):</label>
-                              <div class="col-sm-9 mt-2 fw-bold" id="commission_amount">
-                              <= $item->commission_amount;?>
-                              </div>
-                           </div> -->
-                           
-                           <div class="row">
-                              <label for="example-text-input" class="col-sm-3 col-form-label">You Will Earn (<?= get_currency($this->payment_settings->default_product_currency); ?>):</label>
-                              <div class="col-sm-9 mt-2 fw-bold" id="earned_amoun">
-                              <?= $item->dis_earend_amount;?>
-                              </div>
-                           </div>
-
-<!--/////////////////////////////////////////////////////////////////////////////-->
-
-                           
                         </div>
                      </div>
                   </div>

@@ -36,8 +36,10 @@ class Video_slider extends Core_Controller {
 
 	public function process()
 	{
+		preg_match('/src="([^"]+)"/', $this->input->post('name', true), $matches);
+		$src = isset($matches[1]) ? $matches[1] : '';
         $data=array(
-            'video_link'=>$this->input->post('name', true),
+            'video_link'=>$src,
             'is_visible'=>$this->input->post('is_visible', true),
             'created_at'=>$this->currentTime
         );
@@ -67,8 +69,10 @@ class Video_slider extends Core_Controller {
 	public function update_process()
 	{
 		$id=$this->uri->segment(4);
+		preg_match('/src="([^"]+)"/', $this->input->post('name', true), $matches);
+		$src = isset($matches[1]) ? $matches[1] : '';
         $data=array(
-            'video_link'=>$this->input->post('name', true),
+            'video_link'=>$src,
             'is_visible'=>$this->input->post('is_visible', true),
         );
         $update=$this->edit_model->edit($data,$id,'id',$this->table_name);

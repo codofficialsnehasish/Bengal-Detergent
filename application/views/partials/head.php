@@ -7,13 +7,34 @@
 <link href="<?= base_url('assets/admin/css/icons.min.css');?>" rel="stylesheet" type="text/css">
 <link href="<?= base_url('assets/admin/libs/sweetalert2/sweetalert2.min.css');?>" rel="stylesheet" type="text/css" />
 
-<!-- Plugins CSS -->
-<link rel="stylesheet" href="<?= base_url('assets/site/css/plugins.css'); ?>" />
-<!-- Main Style CSS -->
-<link rel="stylesheet" href="<?= base_url('assets/site/css/style.css'); ?>" />
-<link rel="stylesheet" href="<?= base_url('assets/site/css/responsive.css'); ?>" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- Zoom message -->
 <script src="<?= base_url('assets/admin/libs/zoom/js/my-zoom.js');?>"></script>
 <link href="<?= base_url('assets/admin/libs/zoom/css/my-zoom.css');?>" rel="stylesheet" type="text/css"/>
 
+<<<<<<< HEAD
+=======
+<!-- Plugins CSS -->
+<link rel="stylesheet" href="<?= base_url('assets/site/css/plugins.css'); ?>" />
+
+
+<!---------------------------- Main site Style CSS ------------------------------->
+
+<!-- Css file -->
+<link type="text/css" rel="stylesheet" href="<?= base_url('assets/site/css/bootstrap.min.css'); ?>">
+<link type="text/css" rel="stylesheet" href="<?= base_url('assets/site/css/fontawesome.css'); ?>">
+
+<!-- Owl Stylesheets -->
+<link rel="stylesheet" href="<?= base_url('assets/site/assets/owlcarousel/assets/owl.carousel.min.css'); ?>">
+<link rel="stylesheet" href="<?= base_url('assets/site/assets/owlcarousel/assets/owl.theme.default.min.css'); ?>">
+
+<link type="text/css" rel="stylesheet" href="<?= base_url('assets/site/css/style.css'); ?>">
+
+<!-- main fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,800;0,900;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
+
+<link type="text/css" rel="stylesheet" href="<?= base_url('assets/site/css/all.css'); ?>">
+
+>>>>>>> 76fa2ac05e97a9c9cb53e84899d4f6fe78de9aa7

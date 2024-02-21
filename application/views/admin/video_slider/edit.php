@@ -40,7 +40,7 @@
                         <div>
                            <input data-parsley-type="text" type="text"
                               class="form-control" required
-                              placeholder="Ex : Jhon Doe" value="<?= $item->video_link;?>" name="name" id="name">
+                              placeholder="" value="<?= $item->video_link;?>" name="name" id="name">
                         </div>
                      </div>
                   </div>
