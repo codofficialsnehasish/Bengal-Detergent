@@ -172,7 +172,6 @@
                     </a>
                 </li>
                
-<<<<<<< HEAD
                 <?php }?>
                 <?php if($this->auth_user->role == "dristributor"){ ?>
                     <li>
@@ -221,8 +220,6 @@
                             <li class="<?= tab_active('sales-report');?>"><a href="<?= base_url('admin/sales-report/')?>" class="<?= active_link('sales-report');?>">Sales Report</a></li>                  
                         </ul>
                     </li>
-=======
->>>>>>> 76fa2ac05e97a9c9cb53e84899d4f6fe78de9aa7
                 <?php } ?>
             </ul>
         </div>
