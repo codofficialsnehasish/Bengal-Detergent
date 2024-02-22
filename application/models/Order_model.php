@@ -858,7 +858,7 @@ class Order_model extends CI_Model
     //decrease product stock after sale
     public function decrease_product_stock_after_sale($order_id){
         $order_products = $this->get_order_products($order_id);
-        return $order_products;
+        // return $order_products;
         if (!empty($order_products)) {
             foreach ($order_products as $order_product) {
 
