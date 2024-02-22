@@ -112,7 +112,7 @@
                                                     <td><?php echo formatted_date($order->created_at); ?></td>
                                                     <td>
                                                         <!-- <a href="<php echo base_url("order-details") . "/" . $order->order_number; ?>"  class="link-underline view">Details</a> -->
-                                                        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModalScrollable<?= $order->order_number;?>"  class=" waves-effect waves-light" style="border:none;">Track Order</button>
+                                                        <!-- <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModalScrollable<?= $order->order_number;?>"  class=" waves-effect waves-light" style="border:none;">Track Order</button> -->
                                                         <a href="<?= base_url(); ?>order-detailss/<?= $order->order_number ?>" class="btn btn-info view">Order Details</a>
                                                         
                                                     </td>

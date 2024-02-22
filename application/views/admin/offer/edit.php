@@ -52,7 +52,7 @@
                      </div>
                   </div>
                </div>
-               <div class="card">
+               <!-- <div class="card">
                   <div class="card-header bg-primary text-light">
                      Site Urls
                   </div>
@@ -74,7 +74,7 @@
                         </div>
                      </div>
                   </div>
-               </div>
+               </div> -->
             </div>
             <!-- end col -->
             <div class="col-lg-3">

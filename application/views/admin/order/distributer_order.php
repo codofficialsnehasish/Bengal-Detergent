@@ -40,15 +40,6 @@
                                         <li class="breadcrumb-item active" aria-current="page">All Orders</li>
                                     </ol>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="float-end d-none d-md-block">
-                                        <div class="dropdown">
-                                            <a href="javascript:void(0)" class="btn btn-primary  dropdown-toggle" aria-expanded="false">
-                                                <i class="fas fa-plus me-2"></i> Create Order
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <!-- end page title -->
@@ -139,7 +130,7 @@
 								                </td> -->
                                                 <td>
                                                     <!-- <a href="<php echo base_url("order-details") . "/" . $order->order_number; ?>"  class="link-underline view">Details</a> -->
-                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalScrollable<?= $item->order_number;?>"  class="btn btn-success waves-effect waves-light" style="border:none;">Track Order</a>
+                                                    <!-- <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalScrollable<?= $item->order_number;?>"  class="btn btn-success waves-effect waves-light" style="border:none;">Track Order</a> -->
                                                     <a href="<?= base_url(); ?>distributor-order-details/<?= $item->order_number ?>" class="btn btn-info view">Order Details</a>
                                                     <?php if($item->status == 1){ ?>
                                                         <a href="#" onclick="javascript:popupCenter({url: '<?= base_url(); ?>invoice/<?= $item->order_number.'/'.$item->id.'/'.$item->buyer_id; ?>', title: 'Invoise', w: 1000, h: 600});" class="btn btn-dark view">Download Invoice</a>
@@ -205,10 +196,10 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="modal-footer">
+                                                                    <!-- <div class="modal-footer">
                                                                         <button type="button" class="btn btn-secondary"
                                                                             data-bs-dismiss="modal">Close</button>
-                                                                    </div>
+                                                                    </div> -->
                                                                 </div>
                                                                 <!-- /.modal-content -->
                                                             </div>

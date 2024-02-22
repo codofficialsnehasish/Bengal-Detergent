@@ -280,7 +280,7 @@
                <div class="col-12 col-sm-6 col-md-4 item">
                   <div class="collection-grid-item">
                      <img class="blur-up lazyload" data-src="<?= get_image($offer->media_id); ?>" src="<?= get_image($offer->media_id); ?>" alt="collection" title="" />
-                     <a href="<?= $offer->link_url ?>" class="collection-grid-item__title-wrapper">
+                     <a href="<?= $offer->link_url == ''? base_url('/products/all_products') : $offer->link_url ?>" class="collection-grid-item__title-wrapper">
                         <div class="title-wrapper">
                            <h3 class="collection-grid-item__title fw-bold"><?= $offer->title; ?> <span><?= $offer->description; ?></span></h3>
                            <span class="btn btn--secondary border-btn-1"><?= $offer->link_title; ?></span>

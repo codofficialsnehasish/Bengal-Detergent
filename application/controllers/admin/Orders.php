@@ -98,7 +98,7 @@ class Orders extends Core_Controller
 		$id = $this->input->post('id', true);
 		$order_product = $this->order_model->get_order_product($id);
 		if (!empty($order_product)) {
-			if ($this->order_model->update_order_product_status_admin($order_product->id)) {
+			if ($this->order_model->update_order_product_status_admin($order_product->id,$order_product->order_id)) {
 				$order_status = $this->input->post('order_status', true);
 				if ($order_product->product_type == "digital") {
 					if ($order_status == 'completed' || $order_status == 'payment_received') {

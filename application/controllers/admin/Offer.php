@@ -43,9 +43,12 @@ class Offer extends Core_Controller {
 		}else{
 			$data=array(
 				'title'=>$this->input->post('name', true),
-				'description'=>generate_slug($this->input->post('desc', true)),
-				'link_title'=>$this->input->post('link_title', true),
-				'link_url'=>$this->input->post('link', true),
+				// 'description'=>generate_slug($this->input->post('desc', true)),
+				'description'=>$this->input->post('desc', true),
+				// 'link_title'=>$this->input->post('link_title', true),
+				'link_title'=>'Buy Now',
+				// 'link_url'=>$this->input->post('link', true),
+				'link_url'=>'',
 				'is_visiable'=>$this->input->post('is_visible', true)
 			);
 			if(is_uploaded_file($_FILES['file']['tmp_name'])) 
@@ -89,9 +92,12 @@ class Offer extends Core_Controller {
 		}else{
 			$data=array(
 				'title'=>$this->input->post('name', true),
-				'description'=>generate_slug($this->input->post('desc', true)),
-				'link_title'=>$this->input->post('link_title', true),
-				'link_url'=>$this->input->post('link', true),
+				// 'description'=>generate_slug($this->input->post('desc', true)),
+				'description'=>$this->input->post('desc', true),
+				// 'link_title'=>$this->input->post('link_title', true),
+				'link_title'=>'Buy Now',
+				// 'link_url'=>$this->input->post('link', true),
+				'link_url'=>'',
 				'is_visiable'=>$this->input->post('is_visible', true)
 			);
 			if(is_uploaded_file($_FILES['file']['tmp_name'])) 

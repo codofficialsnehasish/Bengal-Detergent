@@ -87,6 +87,15 @@ imgInp.onchange = evt => {
    $('#media_id').val('');
    }
 }
+
+imgInpedit.onchange = evt => {
+   const [file] = imgInpedit.files
+   if (file) {
+   blahe.style.display='block';
+   blahe.src = URL.createObjectURL(file);
+   $('#media_id').val('');
+   }
+}
 ///////
 imgInplogo.onchange = evt => {
    const [file] = imgInplogo.files

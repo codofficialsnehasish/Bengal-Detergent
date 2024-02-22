@@ -1185,10 +1185,11 @@ public function add_invoice($order_id,$dist_id = 0)
     }
 
     //update order product status
-    public function update_order_product_status_admin($order_product_id)
+    public function update_order_product_status_admin($order_product_id,$order_id)
     {
         $order_product_id = clean_number($order_product_id);
         $order_product = $this->get_order_product($order_product_id);
+        // return $order_product;
         if (!empty($order_product)) {
             $data = array(
                 'order_status' => $this->input->post('order_status', true),
@@ -1201,6 +1202,46 @@ public function add_invoice($order_id,$dist_id = 0)
                 $data['is_approved'] = 0;
             }
 
+            // $this->db->where('id', $order_product_id);
+            // $this->db->update('order_products', $data);
+
+            if ($data["order_status"] == "completed"){
+                $buyer_id = $this->get_userid_from_order($order_id);
+                if(get_user_by_id($buyer_id)->role == 'dristributor'){
+                    // $order_products = $this->get_order_products($order_id);
+                    // foreach ($order_products as $item){
+                        $datast = array(
+                            'dristributor_id' => $buyer_id,
+                            'product_id' => $order_product->product_id,
+                            'stock' => $order_product->product_quantity,
+                            'updated_at' => date('Y-m-d H:i:s')
+                        );
+                        $stock_data = $this->check_product_avalibility_for_distributer( $order_product->product_id,$buyer_id);
+                        // return 
+                        if($stock_data > 0 || $stock_data == -1){
+                            $datast['stock'] += $stock_data;
+                            $this->db->where('dristributor_id', $order_product->buyer_id );
+                            $this->db->where('product_id',$order_product->product_id);
+                            $this->db->update('dristributor_stocks', $datast);
+                        }else{
+                            $this->db->insert('dristributor_stocks', $datast);
+                        }
+                    // }
+                }elseif(get_user_by_id($buyer_id)->role == 'retailer'){
+                    // $order_products = $this->get_order_products($order_id);
+                    // foreach ($order_products as $item){
+                        // if($item->order_status == 'completed'){
+                            $stock_data = $this->check_product_avalibility_for_distributer( $order_product->product_id,$order_product->seller_id);
+                            if($stock_data > $order_product->product_quantity && $stock_data > 0){
+                                $datastock['stock'] = ($stock_data - $order_product->product_quantity);
+                                $this->db->where('dristributor_id', $order_product->seller_id);
+                                $this->db->where('product_id',$order_product->product_id);
+                                $this->db->update('dristributor_stocks', $datastock);
+                            }
+                        // }
+                    // }
+                }
+            }
             $this->db->where('id', $order_product_id);
             return $this->db->update('order_products', $data);
         }
@@ -1238,39 +1279,7 @@ public function add_invoice($order_id,$dist_id = 0)
                 $this->db->update('order_tracking_status', $data1);
             }
 
-            $buyer_id = $this->get_userid_from_order($order_id);
-            if(get_user_by_id($buyer_id)->role == 'dristributor'){
-                $order_products = $this->get_order_products($order_id);
-                foreach ($order_products as $item){
-                    $data = array(
-                        'dristributor_id' => $buyer_id,
-                        'product_id' => $item->product_id,
-                        'stock' => $item->product_quantity,
-                        'updated_at' => date('Y-m-d H:i:s')
-                    );
-                    $stock_data = $this->check_product_avalibility_for_distributer( $item->product_id,$buyer_id);
-                    if(count($stock_data) > 0){
-                        $data['stock'] += $stock_data[0]->stock;
-                        $this->db->where('id', $stock_data[0]->id);
-                        $this->db->update('dristributor_stocks', $data);
-                    }else{
-                        $this->db->insert('dristributor_stocks', $data);
-                    }
-                }
-            }elseif(get_user_by_id($buyer_id)->role == 'retailer'){
-                $order_products = $this->get_order_products($order_id);
-                foreach ($order_products as $item){
-                    if($item->order_status == 'completed'){
-                        $stock_data = $this->check_product_avalibility_for_distributer( $item->product_id,$item->seller_id);
-                        if(count($stock_data) > 0){
-                            $datastock['stock'] = abs($stock_data[0]->stock - $item->product_quantity);
-                            $this->db->where('dristributor_id', $item->seller_id);
-                            $this->db->where('product_id',$item->product_id);
-                            $this->db->update('dristributor_stocks', $datastock);
-                        }
-                    }
-                }
-            }
+            
             
         }
     }
@@ -1282,7 +1291,27 @@ public function add_invoice($order_id,$dist_id = 0)
 		// $this->db->from('dristributor_stocks');
 		$query = $this->db->get('dristributor_stocks');
 		// return count($query->result());
-		return $query->result();
+		$res = $query->result();
+        if(!empty($res)){
+            if($res[0]->stock <= 0){
+                return -1;
+            }else{
+                return $res[0]->stock;
+            }
+        }else{
+            return 0;
+        }
+        // return $res;
+        // return $res[0]->stock;
+        // if(!empty($res)){
+        //     if($status == 'entry_stock'){
+        //         return $res[0]->stock <= 0 ? 1 : $res[0]->stock;
+        //     }else{
+        //         return $res[0]->stock;
+        //     }
+        // }else{
+        //     return 0;
+        // }
         // return $this->db->count_all_results();	
 		// $res = $query->row();
 		// return $res->buyer_id;

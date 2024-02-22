@@ -232,6 +232,10 @@
                                                                 <button class="btn btn-primary  dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                                                                 Options <i class="mdi mdi-chevron-down"></i>
                                                             </button>
+                                                            <?php if($this->auth_user->role == "dristributor"){ ?>
+                                                            <?php if($this->order_model->check_product_avalibility_for_distributer( $item->product_id,$item->seller_id) < $item->product_quantity && $item->order_status != 'completed'){ ?>
+                                                            <br><span style="top: 10px;position: relative;" class="text-danger">In <strong>Order Status</strong>, Only <strong>Cancell</strong> Button avaliable due to low Stock</span>
+                                                            <?php } } ?>
                                                             <div class="dropdown-menu dropdown-menu-end">
                                                                 <a href="#" class="dropdown-item" data-bs-placement="top" 
                                                                     title="Edit this Item"  
@@ -326,18 +330,20 @@
                         <div class="form-group">
                             <label class="control-label">Status</label>
                             <select name="order_status"class="form-select" aria-label="Default select example">
-                                <?php if($this->order_model->check_product_avalibility_for_distributer( $item->product_id,$item->seller_id) >= 1){ ?>
-                                <?php if ($item->product_type == 'physical'): ?>
+                                <?php if($this->auth_user->role == "dristributor" && $this->order_model->check_product_avalibility_for_distributer( $item->product_id,$item->seller_id) < $item->product_quantity){ ?>
+                                    <option value="cancelled" <?php echo ($item->order_status == 'cancelled') ? 'selected' : ''; ?>>Cancelled</option>
+                                <?php }else{ ?>
+                                    <?php if ($item->product_type == 'physical'): ?>
                                     <option value="awaiting_payment" <?php echo ($item->order_status == 'awaiting_payment') ? 'selected' : ''; ?>>Awaiting Payment</option>
                                     <option value="payment_received" <?php echo ($item->order_status == 'payment_received') ? 'selected' : ''; ?>>Payment Received</option>
                                     <option value="order_processing" <?php echo ($item->order_status == 'order_processing') ? 'selected' : ''; ?>>Order Processing</option>
                                     <option value="shipped" <?php echo ($item->order_status == 'shipped') ? 'disabled' : ''; ?>>Shipped</option>
-                                <?php endif; ?>
-                                <?php if ($item->buyer_id != 0 && $item->order_status != 'completed'): ?>
-                                    <option value="completed" <?php echo ($item->order_status == 'completed') ? 'selected' : ''; ?>>Completed</option>
-                                <?php endif; ?>
+                                    <?php endif; ?>
+                                    <?php if ($item->buyer_id != 0 && $item->order_status != 'completed'): ?>
+                                        <option value="completed" <?php echo ($item->order_status == 'completed') ? 'selected' : ''; ?>>Completed</option>
+                                    <?php endif; ?>
+                                    <option value="cancelled" <?php echo ($item->order_status == 'cancelled') ? 'selected' : ''; ?>>Cancelled</option>
                                 <?php } ?>
-                                <option value="cancelled" <?php echo ($item->order_status == 'cancelled') ? 'selected' : ''; ?>>Cancelled</option>
                             </select>
                         </div>
                     </div>
