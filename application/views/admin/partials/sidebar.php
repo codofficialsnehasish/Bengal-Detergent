@@ -22,15 +22,16 @@
                         <span>Orders</span>
                     </a>
                 </li>
-                <?php
-                    $segment='';
-                    if($this->uri->segment(2)=='settings'){$segment='settings';}
-                    if($this->uri->segment(2)=='email-settings'){$segment='email-settings';}
-                    if($this->uri->segment(2)=='social-login-settings'){$segment='social-login-settings';}
-                    if($this->uri->segment(2)=='custom-fields'){$segment='custom-fields';}
-                    if($this->uri->segment(2)=='category'){$segment='category';}
-                    if($this->uri->segment(2)=='currencies'){$segment='currencies';}
-                ?>   
+                        <?php
+                        $segment='';
+                        if($this->uri->segment(2)=='settings'){$segment='settings';}
+                        if($this->uri->segment(2)=='email-settings'){$segment='email-settings';}
+                        if($this->uri->segment(2)=='social-login-settings'){$segment='social-login-settings';}
+                        if($this->uri->segment(2)=='custom-fields'){$segment='custom-fields';}
+                        if($this->uri->segment(2)=='category'){$segment='category';}
+                        if($this->uri->segment(2)=='currencies'){$segment='currencies';}
+                        
+                        ?>   
                 <li class="<?= active_menu('pages');?>">
                     <a href="javascript: void(0);" class="has-arrow waves-effect <?= active_menu('pages');?>">
                         <i class="ti-book"></i>
@@ -79,25 +80,25 @@
                         <span>Manage Products</span>
                     </a>
                 </li>
-                <!-- <li class="<?= active_menu('stocks');?>">
+                <li class="<?= active_menu('stocks');?>">
                     <a href="<?= base_url('admin/stocks/')?>" class="waves-effect <?= active_link('stocks');?>">
                          <i class="fas fa-sort-amount-up-alt"></i>
                         <span>Manage Stocks</span>
                     </a>
-                </li> -->
-                <!-- <li class="<?= active_menu('offer');?>">
+                </li>
+                <li class="<?= active_menu('offer');?>">
                     <a href="<?= base_url('admin/offer/')?>" class="waves-effect <?= active_link('offer');?>">
                          <i class="mdi mdi-av-timer"></i>
                         <span>Offer</span>
                     </a>
-                </li> -->
+                </li>
                 <?php 
                $usegment='';
                if($this->uri->segment(2)=='buyer'){$usegment='buyer';}
                if($this->uri->segment(2)=='dristributor'){$usegment='dristributor';}
                if($this->uri->segment(2)=='team-lead'){$usegment='team-lead';}
                ?>
-                <!-- <li class="<?= active_menu($usegment);?>">
+                <li class="<?= active_menu($usegment);?>">
                     <a href="javascript: void(0);" class="has-arrow waves-effect <?= active_menu($usegment);?>">
                         <i class="ti-user"></i>
                         <span>Users</span>
@@ -107,7 +108,7 @@
                         <li class="<?= tab_active('dristributor');?>"><a href="<?= base_url('admin/dristributor/')?>" class="<?= active_link('dristributor');?>">Dristributor</a></li>                    
                         <li class="<?= tab_active('team-lead');?>"><a href="<?= base_url('admin/team-lead/')?>" class="<?= active_link('team-lead');?>">Team Lead</a></li>                    
                     </ul>
-                </li> -->
+                </li>
 
                 <?php 
                $usegment='';
@@ -116,7 +117,7 @@
                if($this->uri->segment(2)=='sales-report'){$usegment='sales-report';}
 
                ?>
-                <!-- <li class="<?= active_menu($usegment);?>">
+                <li class="<?= active_menu($usegment);?>">
                     <a href="javascript: void(0);" class="has-arrow waves-effect <?= active_menu($usegment);?>">
                         <i class="fas fa-money-bill-alt"></i>
                         <span>Sales</span>
@@ -126,48 +127,38 @@
                         <li class="<?= tab_active('gift');?>"><a href="<?= base_url('admin/gift/')?>" class="<?= active_link('gift');?>">Gifts</a></li>                  
                         <li class="<?= tab_active('sales-report');?>"><a href="<?= base_url('admin/sales-report/')?>" class="<?= active_link('sales-report');?>">Sales Report</a></li>                  
                     </ul>
-                </li> -->
+                </li>
                
-                <!-- <li class="<?= active_menu('team_lead_req');?>">
+                <li class="<?= active_menu('team_lead_req');?>">
                     <a href="<?= base_url('admin/team_lead/request')?>" class="waves-effect <?= active_link('team_lead_req');?>">
                         <i class="mdi mdi-frequently-asked-questions"></i>
                         <span class="badge rounded-pill bg-danger float-end"><?= team_lead_request(); ?></span>
                         <span>Requests</span>
                     </a>
-                </li> -->
+                </li>
 
-                <!-- <li class="<?= active_menu('about');?>">
+                <li class="<?= active_menu('about');?>">
                     <a href="<?= base_url('admin/about/')?>" class="waves-effect <?= active_link('about');?>">
                          <i class="fas fa-snowman"></i>
                         
                         <span>About Us</span>
                     </a>
-                </li> -->
-
-                <!-- <li class="<?= active_menu('contact');?>">
+                </li>
+                <li class="<?= active_menu('contact');?>">
                     <a href="<?= base_url('admin/contact/')?>" class="waves-effect <?= active_link('contact');?>">
                          <i class="ti-email"></i>
                         <span>Contact Us</span>
                     </a>
-                </li> -->
-
+                </li>
                 <li class="<?= active_menu('slider');?>">
                     <a href="<?= base_url('admin/slider/')?>" class="waves-effect <?= active_link('slider');?>">
-                        <i class="ti-image"></i>
+                         <i class="ti-image"></i>
                         <span>Slider</span>
                     </a>
                 </li> 
-
-                <li class="<?= active_menu('testimonial');?>">
-                    <a href="<?= base_url('admin/testimonial/')?>" class="waves-effect <?= active_link('testimonial');?>">
-                        <i class="fas fa-comment-alt"></i>
-                        <span>Testimonial</span>
-                    </a>
-                </li>
-
                 <li class="<?= active_menu('video_slider');?>">
                     <a href="<?= base_url('admin/video_slider/')?>" class="waves-effect <?= active_link('video_slider');?>">
-                         <i class="fas fa-photo-video"></i>
+                         <i class="ti-image"></i>
                         <span>Video Slider</span>
                     </a>
                 </li>
