@@ -125,7 +125,7 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li class="<?= tab_active('sales-target');?>"><a href="<?= base_url('admin/sales-target/')?>" class="<?= active_link('sales-target');?>">Target</a></li>                  
                         <li class="<?= tab_active('gift');?>"><a href="<?= base_url('admin/gift/')?>" class="<?= active_link('gift');?>">Gifts</a></li>                  
-                        <li class="<?= tab_active('sales-report');?>"><a href="<?= base_url('admin/sales-report/')?>" class="<?= active_link('sales-report');?>">Sales Report</a></li>                  
+                        <!-- <li class="<?= tab_active('sales-report');?>"><a href="<?= base_url('admin/sales-report/')?>" class="<?= active_link('sales-report');?>">Sales Report</a></li>                   -->
                     </ul>
                 </li>
                
@@ -208,7 +208,7 @@
                         <ul class="sub-menu" aria-expanded="false">
                             <li class="<?= tab_active('sales-target');?>"><a href="<?= base_url('admin/sales-target/')?>" class="<?= active_link('sales-target');?>">Target</a></li>                  
                             <!-- <li class="<?= tab_active('gift');?>"><a href="<?= base_url('admin/gift/')?>" class="<?= active_link('gift');?>">Gifts</a></li>                   -->
-                            <li class="<?= tab_active('sales-report');?>"><a href="<?= base_url('admin/sales-report/')?>" class="<?= active_link('sales-report');?>">Sales Report</a></li>                  
+                            <!-- <li class="<?= tab_active('sales-report');?>"><a href="<?= base_url('admin/sales-report/')?>" class="<?= active_link('sales-report');?>">Sales Report</a></li>                   -->
                         </ul>
                     </li>
                 <?php } ?>

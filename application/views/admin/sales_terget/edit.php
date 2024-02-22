@@ -41,13 +41,13 @@
                             <input class="form-control" type="month" name="month" value="<?= $item->month; ?>" id="example-month-input">
                         </div>
                      </div>
-                     <div class="mb-3">
+                     <!-- <div class="mb-3">
                         <label class="form-label">Date Range</label>
                         <div class="input-daterange input-group" id="datepicker6" data-date-format="dd M, yyyy" data-date-autoclose="true" data-provide="datepicker" data-date-container='#datepicker6'>
                            <input type="text" class="form-control" name="start_date" value="<?= $item->start_date; ?>" placeholder="Start Date" />
                            <input type="text" class="form-control" name="end_date" value="<?= $item->end_date; ?>" placeholder="End Date" />
                         </div>
-                     </div>
+                     </div> -->
                      <div  class="mb-3">
                         <label class="form-label">Choose Salesman</label>
                         <select class="form-control select2" name="salesman">
@@ -70,16 +70,16 @@
                         </div>
                      </div>
                      <?php
-                        $ppduct = explode(",",$item->perticilar_product);
+                        //$ppduct = explode(",",$item->perticilar_product);
                      ?>
-                     <div  class="mb-3">
+                     <!-- <div  class="mb-3">
                         <label class="form-label">Perticular Product</label>
                         <select class="select2 form-control select2-multiple" multiple="multiple" multiple data-placeholder="Choose ..." name="perticilar_product">
-                           <?php foreach($products as $p){ ?>
-                              <option value="<?= $p->id ?>" <?= in_array($p->id,$ppduct)?'selected':'';?>><?= $p->title ?></option>
-                           <?php } ?>
+                           <?php //foreach($products as $p){ ?>
+                              <option value="<= $p->id ?>" <= in_array($p->id,$ppduct)?'selected':'';?>><?= $p->title ?></option>
+                           <?php //} ?>
                         </select>
-                     </div>
+                     </div> -->
                      <div  class="mb-3">
                         <label class="form-label">Gift</label>
                         <select class="form-control select2" name="gift">

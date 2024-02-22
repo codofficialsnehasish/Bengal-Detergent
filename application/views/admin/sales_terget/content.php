@@ -11,6 +11,7 @@
                                         <li class="breadcrumb-item active" aria-current="page">Sales Report</li>
                                     </ol>
                                 </div>
+                                <?php if($this->auth_user->role == 'admin'){ ?>
                                 <div class="col-md-4">
                                     <div class="float-end d-none d-md-block">
                                         <div class="dropdown">
@@ -20,10 +21,11 @@
                                         </div>
                                     </div>
                                 </div>
+                                <?php } ?>
                             </div>
                         </div>
                         <!-- end page title -->
-
+                        <?php if($this->auth_user->role == 'admin'){ ?>
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
@@ -33,11 +35,12 @@
                                                 <tr>
                                                     <th>Sl No.</th>
                                                     <th>Month</th>
-                                                    <th>Duration</th>
+                                                    <!-- <th>Duration</th> -->
                                                     <th>Salesman Name</th>
                                                     <th>Designation</th>
 													<th>Target</th>
-                                                    <th>Product</th>
+                                                    <!-- <th>Product</th> -->
+                                                    <th>Achieved</th>
                                                     <th>Gift</th>
                                                     <th>Visibility</th>
                                                     <th>Action</th>
@@ -54,20 +57,23 @@
 
                                                 <tr>
                                                     <td><?= $i++;?></td>
-                                                    <td><?= $item->month;?></td>
-                                                    <td><?= $item->start_date;?> - <?= $item->end_date;?></td>
+                                                    <td><?= date('F', strtotime($item->month));?></td>
+                                                    <!-- <td><?= $item->month;?></td> -->
+                                                    <!-- <td><?= $item->start_date;?> - <?= $item->end_date;?></td> -->
                                                     <td><?= $saman->full_name;?></td>
-                                                    <td><?= $saman->role;?></td>
+                                                    <td><span class="badge <?= $saman->role == 'dristributor'? 'bg-success' : 'bg-info' ?>" style="font-size:15px;"><?= ucfirst($saman->role);?></span></td>
                                                     <td><?= $item->terget_amount; ?></td>
-                                                    <td>
+                                                    <!-- <td>
+                                                        <ol>
                                                         <?php 
                                                             $pdct_id = explode(",",$item->perticilar_product); 
                                                             foreach($pdct_id as $d){
-                                                                echo get_title($d,"products");
-                                                                ?>&nbsp;&nbsp;&nbsp;&nbsp;<?php
+                                                                echo "<li>".get_title($d,"products")."</li>";
                                                             }
                                                         ?>
-                                                    </td>
+                                                        </ol>
+                                                    </td> -->
+                                                    <td><?= get_achieved_target_data($item->salesman_id,$item->month); ?> (<?= check_target_completion_percentage($item->terget_amount,get_achieved_target_data($item->salesman_id,$item->month)); ?>%)</td>
                                                     <td><?= get_title($item->gift,"gift") ? get_title($item->gift,"gift") : ""; ?></td>
                                                     <td><?= check_visibility($item->is_visible); ?></td>
                                                     <td>
@@ -87,6 +93,61 @@
                                 </div>
                             </div> <!-- end col -->
                         </div> <!-- end row -->
+                        <?php }
+                        elseif($this->auth_user->role == 'dristributor'){ ?>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                            <thead>
+                                                <tr>
+                                                    <th>Sl No.</th>
+                                                    <th>Month</th>
+                                                    <!-- <th>Duration</th> -->
+													<th>Target</th>
+                                                    <!-- <th>Product</th> -->
+                                                    <th>Achieved</th>
+                                                    <th>Gift</th>
+                                                </tr>
+                                            </thead>
+
+
+                                            <tbody>
+                                                <?php $i=1;
+                                                foreach($allitems as $item):
+                                                    if($this->auth_user->id == $item->salesman_id):
+                                                    $saman = $this->select->select_single_data("users","id",$item->salesman_id);
+                                                    $saman = $saman[0];
+                                                ?>
+
+                                                <tr>
+                                                    <td><?= $i++;?></td>
+                                                    <td><?= date('F', strtotime($item->month));?></td>
+                                                    <!-- <td><?= $item->start_date;?> - <?= $item->end_date;?></td> -->
+                                                    <td><?= $item->terget_amount; ?></td>
+                                                    <!-- <td>
+                                                        <ol>
+                                                        <?php 
+                                                            $pdct_id = explode(",",$item->perticilar_product); 
+                                                            foreach($pdct_id as $d){
+                                                                echo "<li>".get_title($d,"products")."</li>";
+                                                            }
+                                                        ?>
+                                                        </ol>
+                                                    </td> -->
+                                                    <td><?= get_achieved_target_data($item->salesman_id,$item->month); ?> (<?= check_target_completion_percentage($item->terget_amount,get_achieved_target_data($item->salesman_id,$item->month)); ?>%)</td>
+                                                    <td><?= get_title($item->gift,"gift") ? get_title($item->gift,"gift") : ""; ?></td>
+                                                </tr>
+                                                <?php endif; endforeach;?>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div> <!-- end col -->
+                        </div> <!-- end row -->
+                        <?php } ?>
 
                     </div> <!-- container-fluid -->
                 </div>

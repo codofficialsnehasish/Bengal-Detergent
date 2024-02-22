@@ -88,9 +88,9 @@
                                                 <div class="float-start mini-stat-img me-4">
                                                     <img src="<?= base_url('assets/admin/images/services-icon/07.png') ?>" alt="">
                                                 </div>
-                                                <h5 class="font-size-16 text-uppercase text-white-50">Todays Order</h5>
+                                                <h5 class="font-size-16 text-uppercase text-white-50">Dristributor</h5>
                                                 <h4 class="fw-medium font-size-24" style="color:white;">
-                                                    <span>0</span>
+                                                    <span class="text-success">0</span>
                                                 </h4>
                                             </div>
                                         </div>
@@ -106,7 +106,7 @@
                                                 <div class="float-start mini-stat-img me-4">
                                                     <img src="<?= base_url('assets/admin/images/services-icon/08.png') ?>" alt="">
                                                 </div>
-                                                <h5 class="font-size-16 text-uppercase text-white-50"><?= date('F') ?> Sale</h5>
+                                                <h5 class="font-size-16 text-uppercase text-white-50">Retailer</h5>
                                                 <h4 class="fw-medium font-size-24" style="color:white;">
                                                     <span>0</span>
                                                 </h4>
@@ -116,45 +116,8 @@
                                 </div>
                             </div>
 
-                            <div class="col-xl-3">
-                               <div class="card">
-                                   <div class="card-body">
-                                       <h4 class="card-title mb-4">Sales Report</h4>
-
-                                       <div class="cleafix">
-                                           <p class="float-start"><i class="mdi mdi-calendar me-1 text-primary"></i> Jan 01
-                                               - Jan 31</p>
-                                           <h5 class="font-18 text-end">₹ 4230</h5>
-                                       </div>
-
-                                       <div id="ct-donut" class="ct-chart wid"></div>
-
-                                       <div class="mt-4">
-                                           <table class="table mb-0">
-                                               <tbody>
-                                                   <tr>
-                                                       <td><span class="badge bg-primary">Desk</span></td>
-                                                       <td>Desktop</td>
-                                                       <td class="text-end">54.5%</td>
-                                                   </tr>
-                                                   <tr>
-                                                       <td><span class="badge bg-success">Mob</span></td>
-                                                       <td>Mobile</td>
-                                                       <td class="text-end">28.0%</td>
-                                                   </tr>
-                                                   <tr>
-                                                       <td><span class="badge bg-warning">Tab</span></td>
-                                                       <td>Tablets</td>
-                                                       <td class="text-end">17.5%</td>
-                                                   </tr>
-                                               </tbody>
-                                           </table>
-                                       </div>
-                                   </div>
-                               </div>
-                            </div>
                             <!-- <div class="row"> -->
-                            <div class="col-xl-9">
+                            <div class="col-xl-12">
                                 <div class="card">
                                     <div class="card-body">
                                         <h4 class="card-title mb-4">Monthly Earning</h4>
@@ -763,7 +726,7 @@
                                                             <img src="<?= base_url('assets/admin/images/services-icon/11.png') ?>" alt="">
                                                         </div>
                                                         <h5 class="font-size-16 text-uppercase text-white-50">Cancelled Orders</h5>
-                                                        <h4 class="fw-medium font-size-24" style="color:white;"><?= get_any_orders_count($this->auth_user->id,2);?></h4>
+                                                        <h4 class="fw-medium font-size-24" style="color:white;"><?= get_any_orders_count($this->auth_user->id,'cancelled');?></h4>
                                                     </div>
                                                 </div>
                                             </a>
@@ -808,7 +771,7 @@
                                                             <img src="<?= base_url('assets/admin/images/services-icon/08.png') ?>" alt="">
                                                         </div>
                                                         <h5 class="font-size-16 text-uppercase text-white-50"><?php echo date('F'); ?> Sales</h5>
-                                                        <h4 class="fw-medium font-size-24" style="color:white;">0 <!--<i class="mdi mdi-arrow-up text-success ms-2"></i>--> </h4>
+                                                        <h4 class="fw-medium font-size-24" style="color:white;"><?= get_achieved_target_data($this->auth_user->id,date('Y-m')); ?> </h4>
                                                     </div>
                                                 </div>
                                             </a>
@@ -823,7 +786,7 @@
                                                             <img src="<?= base_url('assets/admin/images/services-icon/13.png') ?>" alt="">
                                                         </div>
                                                         <h5 class="font-size-16 text-uppercase text-white-50"><?php echo date('F', strtotime('-1 month', strtotime(date('Y-m-d')))); ?> Sales</h5>
-                                                        <h4 class="fw-medium font-size-24" style="color:white;">0 <!--<i class="mdi mdi-arrow-up text-success ms-2"></i>--> </h4>
+                                                        <h4 class="fw-medium font-size-24" style="color:white;"><?= get_achieved_target_data($this->auth_user->id,date('Y-m')); ?> </h4>
                                                     </div>
                                                 </div>
                                             </a>

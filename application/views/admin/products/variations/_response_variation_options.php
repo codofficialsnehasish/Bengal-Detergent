@@ -22,8 +22,8 @@
                                     <?php endif; ?>
                                 </td>
                                 <td align="right">
-                                    <button type="button" class="btn btn-sm btn-primary btn-variation-table" onclick='edit_product_variation_option("<?php echo $variation->id; ?>","<?php echo $option->id; ?>");'><i class="fas fa-pencil-alt"></i> Edit</button>
-                                    <button type="button" class="btn btn-sm btn-danger btn-variation-table" onclick='delete_product_variation_option("<?php echo $variation->id; ?>","<?php echo $option->id; ?>");'><i class="fas fa-trash-alt"></i> Delete</button>
+                                    <!-- <button type="button" class="btn btn-sm btn-primary btn-variation-table" onclick='edit_product_variation_option("<?php echo $variation->id; ?>","<?php echo $option->id; ?>");'><i class="fas fa-pencil-alt"></i> Edit</button> -->
+                                    <!-- <button type="button" class="btn btn-sm btn-danger btn-variation-table" onclick='delete_product_variation_option("<?php echo $variation->id; ?>","<?php echo $option->id; ?>");'><i class="fas fa-trash-alt"></i> Delete</button> -->
                                 </td>
                             </tr>
                            

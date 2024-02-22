@@ -135,9 +135,9 @@
                                        <?php echo $buttton; ?> 
                                  <?php endif; ?>
                               </div>
-                              <div class="payment-button" data-shopify="payment-button">
+                              <!-- <div class="payment-button" data-shopify="payment-button">
                                  <button type="button" id="<?= $product->id; ?>" onclick="buynow(this.id)" class="payment-button__button payment-button__button--unbranded">Buy it now</button>
-                              </div>
+                              </div> -->
                            </div>
                            <!-- End Product Action -->
                            <!-- </form> -->

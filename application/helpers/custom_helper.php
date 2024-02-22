@@ -2291,3 +2291,22 @@ if (!function_exists('numberTowords')) {
             return $resultArray;
         }
     }
+
+
+    if (!function_exists('get_achieved_target_data')) {
+        function get_achieved_target_data($user_id,$month){
+            $ci =& get_instance();
+            list($year, $monthNumber) = explode('-', $month);
+            // $year = 2024;
+            // $monthNumber = 2;
+            $result = $ci->select->custom_qry("SELECT SUM(product_total_price) AS total_price FROM order_products WHERE order_status = 'completed' AND seller_id = $user_id AND YEAR(created_at) = $year AND MONTH(created_at) = $monthNumber");
+            return !empty($result[0]->total_price) ? $result[0]->total_price : 0;
+        }
+    }
+
+    if (!function_exists('check_target_completion_percentage')) {
+        function check_target_completion_percentage($totalTarget,$completedTarget){
+            $completionPercentage = ($completedTarget / $totalTarget) * 100;
+            return number_format($completionPercentage, 2);
+        }
+    }

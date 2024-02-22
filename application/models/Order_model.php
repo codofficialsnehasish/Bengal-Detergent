@@ -1405,6 +1405,9 @@ public function add_invoice($order_id,$dist_id = 0)
             if($status=='pending'){
                 $this->db->where('status', 0);
             }
+            if($status=='cancelled'){
+                $this->db->where('is_canceled', 1);
+            }
             $query = $this->db->get('orders');
             return $query->num_rows();
     }
