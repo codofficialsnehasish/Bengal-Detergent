@@ -52,57 +52,64 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		return $this->db->count_all_results();	
 	}
 
-	public function record_count_category($id) {
+	public function active_employee_count() {
+		$this->db->where('role','employee');
 		$this->db->where('status',1);
-		$this->db->where('cat_id',$id);
-		$this->db->from('post');
+		$this->db->from('users');
 		return $this->db->count_all_results();	
+	}
+
+	public function record_count_category($id) {
+			$this->db->where('status',1);
+			$this->db->where('cat_id',$id);
+			$this->db->from('post');
+			return $this->db->count_all_results();	
 		}
 		
 		public function record_count_archive($month,$year) {
-		$this->db->where('status',1);
-		$this->db->where('Monthname(`posted`)',$month);
-		$this->db->where('year(`posted`)',$year);
-		$this->db->from('post');
-		return $this->db->count_all_results();	
+			$this->db->where('status',1);
+			$this->db->where('Monthname(`posted`)',$month);
+			$this->db->where('year(`posted`)',$year);
+			$this->db->from('post');
+			return $this->db->count_all_results();	
 		}
-	  public function select_table1($table)  
-      {  
-         $this->db->select('*');
-		 $this->db->from($table);
-		 $this->db->order_by("id", 'desc');
-		 $query = $this->db->get(); 
-		 return $query->result();
-      }  
+		public function select_table1($table)  
+		{  
+			$this->db->select('*');
+			$this->db->from($table);
+			$this->db->order_by("id", 'desc');
+			$query = $this->db->get(); 
+			return $query->result();
+		}  
 
-	 public function select_table($table,$orderby="",$order="",$limit="", $offset="1000000")  
-      {  
-         $this->db->select('*');
-		 $this->db->from($table);
-		 $this->db->limit($offset, $limit);
-		 $this->db->order_by($orderby, $order);
-		 $query = $this->db->get(); 
-		 return $query->result();
-      }  
-	   function select_single_data($table,$field_id,$id,$orderby="",$order="",$limit="", $offset="10000000")
-	  {
-         $this->db->select('*');
-		 $this->db->from($table);
-		 $this->db->limit($offset, $limit);
-		 $this->db->where($field_id,$id);  
-		 $query = $this->db->get();
-		 return $query->result();
-	  }
-	  function select_teamlead_data($table,$limit="", $offset="10000000")
-	  {
-         $this->db->select('*');
-		 $this->db->from($table);
-		 $this->db->limit($offset, $limit);
-		 $this->db->where("(role = 'teamlead' OR role = 'dristributor') AND is_approved = 0");   
-		//  $this->db->where($field_id2,$id2);  
-		 $query = $this->db->get();
-		 return $query->result();
-	  }
+		public function select_table($table,$orderby="",$order="",$limit="", $offset="1000000")  
+		{  
+			$this->db->select('*');
+			$this->db->from($table);
+			$this->db->limit($offset, $limit);
+			$this->db->order_by($orderby, $order);
+			$query = $this->db->get(); 
+			return $query->result();
+		}  
+		function select_single_data($table,$field_id,$id,$orderby="",$order="",$limit="", $offset="10000000")
+		{
+			$this->db->select('*');
+			$this->db->from($table);
+			$this->db->limit($offset, $limit);
+			$this->db->where($field_id,$id);  
+			$query = $this->db->get();
+			return $query->result();
+		}
+		function select_teamlead_data($table,$limit="", $offset="10000000")
+		{
+			$this->db->select('*');
+			$this->db->from($table);
+			$this->db->limit($offset, $limit);
+			$this->db->where("(role = 'teamlead' OR role = 'dristributor') AND is_approved = 0");   
+			//  $this->db->where($field_id2,$id2);  
+			$query = $this->db->get();
+			return $query->result();
+		}
 
 	  function select_teamlead($table,$t1,$t2,$t3,$t4,$limit="", $offset="10000000")
 	  {

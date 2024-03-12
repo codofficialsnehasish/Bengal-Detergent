@@ -211,6 +211,29 @@
                </div>
                <div class="card">
                   <div class="card-header bg-primary text-light">
+                     Team Leader
+                  </div>
+                  <div class="card-body">
+                     <div class="col-md-12 mb-3">
+                           <label for="package_id" class="form-label">Choose Team Leader</label>
+                           <select class="form-select" name="tl_id" id="package_id" required>
+                              <option selected disabled value="">Choose...</option>
+                              <?php if(!empty($employee)):
+                                 foreach($employee as $designatin):
+                              ?>
+                              <option value="<?= $designatin->id;?>"><?= $designatin->full_name;?></option>
+                              <?php 
+                                 endforeach;
+                              endif;?>
+                           </select>
+                           <div class="invalid-feedback">
+                              This field is required
+                           </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="card">
+                  <div class="card-header bg-primary text-light">
                      Publish
                   </div>
                   <div class="card-body">

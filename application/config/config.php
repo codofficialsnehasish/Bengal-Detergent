@@ -497,7 +497,8 @@ $config['csrf_exclude_uris'] = array(
                                     'fetchCartCount',
                                     'registration',
                                     'saveReview',
-                                    'square-payment-post'
+                                    'square-payment-post',
+                                    'employees/documentinfo',
                                 );
 
 /*

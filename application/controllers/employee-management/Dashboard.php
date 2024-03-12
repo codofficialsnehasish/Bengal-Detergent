@@ -18,6 +18,7 @@ class Dashboard extends Core_Controller {
 		//	$data['allitems']=$this->select->select_table('payment_details','id','desc',0,10);
 		//	print_r($data['allitems']);die;
 		$data = [];
+		$data['employee_count']=$this->select->active_employee_count();
 		$this->load->view('employee_management/dashboard',$data);
 		$script['pagescript']='dashboardScript';
 		$this->load->view('employee_management/partialss/footer',$script);

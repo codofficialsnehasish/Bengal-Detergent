@@ -31,7 +31,116 @@
                         <!-- end page title -->
                         <?php if($this->auth_user->role=='admin'){?>
                         <div class="row">
-                        
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card mini-stat bg-primary text-white">
+                                    <a href="<?= employee_url('employees/')?>">
+                                    <div class="card-body">
+                                        <div class="mb-4">
+                                            <div class="float-start mini-stat-img me-4">
+                                                <img src="<?= base_url('assets/admin/images/services-icon/14.png') ?>" alt="">
+                                            </div>
+                                            <h5 class="font-size-16 text-uppercase text-white-50">Total Employee</h5>
+                                            <h4 class="fw-medium font-size-24" style="color:white;">
+                                                <?= $employee_count; ?> <i class="mdi mdi-arrow-up text-success ms-2"></i>
+                                            </h4>
+                                            <!-- <div class="mini-stat-label bg-success">
+                                                <p class="mb-0">10%</p>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card mini-stat bg-primary text-white">
+                                    <div class="card-body">
+                                        <div class="mb-4">
+                                            <div class="float-start mini-stat-img me-4">
+                                                <img src="<?= base_url('assets/admin/images/services-icon/15.png') ?>" alt="">
+                                            </div>
+                                            <h5 class="font-size-16 text-uppercase text-white-50">Today Present</h5>
+                                            <h4 class="fw-medium font-size-24">
+                                                0 <i class="mdi mdi-arrow-up text-success ms-2"></i>
+                                            </h4>
+                                            <!-- <div class="mini-stat-label bg-success">
+                                                <p class="mb-0">10%</p>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card mini-stat bg-primary text-white">
+                                    <div class="card-body">
+                                        <div class="mb-4">
+                                            <div class="float-start mini-stat-img me-4">
+                                                <img src="<?= base_url('assets/admin/images/services-icon/16.png') ?>" alt="">
+                                            </div>
+                                            <h5 class="font-size-16 text-uppercase text-white-50">Today Absent</h5>
+                                            <h4 class="fw-medium font-size-24">
+                                                0 <i class="mdi mdi-arrow-up text-success ms-2"></i>
+                                            </h4>
+                                            <!-- <div class="mini-stat-label bg-success">
+                                                <p class="mb-0">10%</p>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card mini-stat bg-primary text-white">
+                                    <div class="card-body">
+                                        <div class="mb-4">
+                                            <div class="float-start mini-stat-img me-4">
+                                                <img src="<?= base_url('assets/admin/images/services-icon/17.png') ?>" alt="">
+                                            </div>
+                                            <h5 class="font-size-16 text-uppercase text-white-50">Late Checkin</h5>
+                                            <h4 class="fw-medium font-size-24">
+                                                0 <i class="mdi mdi-arrow-up text-success ms-2"></i>
+                                            </h4>
+                                            <!-- <div class="mini-stat-label bg-success">
+                                                <p class="mb-0">10%</p>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card mini-stat bg-primary text-white">
+                                    <div class="card-body">
+                                        <div class="mb-4">
+                                            <div class="float-start mini-stat-img me-4">
+                                                <img src="<?= base_url('assets/admin/images/services-icon/18.png') ?>" alt="">
+                                            </div>
+                                            <h5 class="font-size-16 text-uppercase text-white-50">Today On Leave</h5>
+                                            <h4 class="fw-medium font-size-24">
+                                                0 <i class="mdi mdi-arrow-up text-success ms-2"></i>
+                                            </h4>
+                                            <!-- <div class="mini-stat-label bg-success">
+                                                <p class="mb-0">10%</p>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card mini-stat bg-primary text-white">
+                                    <div class="card-body">
+                                        <div class="mb-4">
+                                            <div class="float-start mini-stat-img me-4">
+                                                <img src="<?= base_url('assets/admin/images/services-icon/20.png') ?>" alt="">
+                                            </div>
+                                            <h5 class="font-size-16 text-uppercase text-white-50">Now Working</h5>
+                                            <h4 class="fw-medium font-size-24">
+                                                0 <i class="mdi mdi-arrow-up text-success ms-2"></i>
+                                            </h4>
+                                            <!-- <div class="mini-stat-label bg-success">
+                                                <p class="mb-0">10%</p>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <!-- <div class="col-xl-3">
                                <div class="card">
                                    <div class="card-body">

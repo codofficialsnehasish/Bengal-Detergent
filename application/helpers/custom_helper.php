@@ -2310,3 +2310,16 @@ if (!function_exists('numberTowords')) {
             return number_format($completionPercentage, 2);
         }
     }
+
+    if(!function_exists('get_user_name')) {
+        function get_user_name($id){
+            $id = !empty($id) ? $id : 0;
+            $ci =& get_instance();
+            $result= $ci->select->custom_qry("select full_name from users where id=".$id."");
+            if(!empty($result)){
+                return $result[0]->full_name;
+            }else{
+                return '';
+            }
+        }
+    }

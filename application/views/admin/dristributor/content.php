@@ -38,6 +38,7 @@
                                                     <th>Contact</th>
                                                     <th>E-Mail</th>
                                                     <th>Status</th>
+                                                    <th>Work Pin Code</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -47,15 +48,15 @@
                                                 <?php $i=1;
                                                 foreach($allitems as $item):?>
                                                 <tr>
-                                                    <td><?= $item->user_id;?></td>
+                                                    <td class="text-wrap"><?= $item->user_id;?></td>
                                                     <td><img src="<?= get_image($item->user_image);?>" width="50" />&nbsp;&nbsp;&nbsp;&nbsp;<a href="<?= admin_url('dristributor/details/'.$item->id);?>"><?= $item->full_name;?></a></td>
-                                                    <td><a href="<?= admin_url('dristributor/details/'.$item->id);?>"><?= $item->shop_name;?></a></td>
-                                                    <td><a href="<?= admin_url('dristributor/details/'.$item->id);?>"><?= get_tl_name($item->tl_id); ?></a></td>
+                                                    <td class="text-wrap"><a href="<?= admin_url('dristributor/details/'.$item->id);?>"><?= $item->shop_name;?></a></td>
+                                                    <td class="text-wrap"><?= get_user_name($item->tl_id);?></td>
                                                     <!-- <td><a href="<= admin_url('dristributor/details/'.$item->id);?>"><= $item->designation;?></a></td> -->
                                                     <td><a href="<?= admin_url('dristributor/details/'.$item->id);?>"><?= $item->phone_number;?></a></td>
-                                                    <td><a href="<?= admin_url('dristributor/details/'.$item->id);?>"><?= $item->email;?></a></td>
+                                                    <td class="text-wrap"><a href="<?= admin_url('dristributor/details/'.$item->id);?>"><?= $item->email;?></a></td>
                                                     <td class="text text-center"><?= check_status($item->status);?> </td>
-                                                    
+                                                    <td class="text-wrap"><?= $item->prefarable_zip_code; ?></td>
                                                     <td>
                                                             <a href="<?= admin_url('dristributor/edit/'.$item->id);?>" class="btn btn-primary btn-sm edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit this Item">
                                                                 <i class="fas fa-pencil-alt" title="Edit"></i>

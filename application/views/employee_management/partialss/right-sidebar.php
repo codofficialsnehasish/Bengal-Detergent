@@ -9,7 +9,7 @@
         </div>
 
         <!-- Settings -->
-        <hr class="mt-0" />
+        <!-- <hr class="mt-0" />
         <h6 class="text-center">Choose Layouts</h6>
 
         <div class="p-4">
@@ -40,7 +40,7 @@
             <div class="d-grid">
                 <a href="https://1.envato.market/grNDB" class="btn btn-primary mt-3" target="_blank"><i class="mdi mdi-cart me-1"></i> Purchase Now</a>
             </div>
-        </div>
+        </div> -->
 
     </div> <!-- end slimscroll-menu-->
 </div>

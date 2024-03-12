@@ -25,7 +25,7 @@
         </div>
         <div class="col-12 col-sm-12 col-md-12 col-lg-6 justify-content-center align-items-center flex-wrap px-3 px-sm-5 pt-4 pb-2 mb-md-5 mb-lg-0 mb-sm-5 mb-5">
             <h2 class="text-center">DROP US A LINE</h2>
-            <p class="text-center">Lorem Ipsum é um texto modelo da indústria tipográfica e de impressão. O Lorem Ipsum tem vindo a ser o texto padrão usado por estas indústrias desde o ano de 1500 </p>
+            <p class="text-center">If you have any questions or need assistance, feel free to reach out to us. You can contact us through our website's contact form or email us directly at <?= $this->settings->contact_email; ?>. We're here to help!</p>
             <!-- Contact Form -->
             <?php $this->load->view('admin/partials/_messages');?>
             <div class="formFeilds contact-form form-vertical">

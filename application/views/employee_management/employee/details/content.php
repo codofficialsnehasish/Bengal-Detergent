@@ -34,11 +34,31 @@
                             <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile Picture</button>
                             <button class="nav-link" id="v-documents-tab" data-bs-toggle="pill" data-bs-target="#documents" type="button" role="tab" aria-controls="v-documents" aria-selected="false">Documents</button>
                             <button class="nav-link" id="v-contact-details-tab" data-bs-toggle="pill" data-bs-target="#contact_details" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">Contact Details</button>
+                            <!-- <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#emergency_contacts" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Salary</button> -->
+                            <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#qualification_details" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">Qualification</button>
+                            <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#work_experience" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Work Experience</button>
+                            <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#achievements_details" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Achievements</button>
+                            <button class="nav-link " id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#bank_details" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Bank Account</button>
                             <button class="nav-link " id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#emergency_contacts" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Login Details</button>
-                            <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Change Password</button>
-                            <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">User Role</button>
+                            <!-- <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Change Password</button> -->
+                            <!-- <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">User Role</button> -->
                         </div>
                         <div class="tab-content col-lg-9" id="v-pills-tabContent">
+                            <div class="tab-pane fade" id="work_experience" role="tabpanel" aria-labelledby="work_experience-tab">
+                                <?php $this->load->view('employee_management/employee/details/_workExperience');?>
+                            </div>
+                            <div class="tab-pane fade" id="achievements_details" role="tabpanel" aria-labelledby="achievements_details-tab">
+                                <?php $this->load->view('employee_management/employee/details/_achievements');?>
+                            </div>
+                            <div class="tab-pane fade" id="qualification_details" role="tabpanel" aria-labelledby="qualification_details-tab">
+                                <?php $this->load->view('employee_management/employee/details/_qualification');?>
+                            </div>
+                            <div class="tab-pane fade" id="bank_details" role="tabpanel" aria-labelledby="bank_details-tab">
+                                <?php $this->load->view('employee_management/employee/details/_bankAccount');?>
+                            </div>
+
+
+
                             <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                                 <?php $this->load->view('employee_management/employee/details/_basicinfo');?>
                             </div>

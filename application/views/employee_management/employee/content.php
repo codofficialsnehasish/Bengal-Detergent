@@ -14,7 +14,7 @@
                                 <div class="col-md-4">
                                     <div class="float-end d-none d-md-block">
                                         <div class="dropdown">
-                                        <a href="<?= employee_url('employee/add-new')?>" class="btn btn-primary  dropdown-toggle" aria-expanded="false">
+                                        <a href="<?= employee_url('employees/add-new')?>" class="btn btn-primary  dropdown-toggle" aria-expanded="false">
                                         <i class="fas fa-plus me-2"></i> Add New
                                         </a>
                                         </div>
@@ -33,34 +33,39 @@
                                                 <tr>
                                                     <th>Sl No.</th>
                                                     <th>Name</th>
+                                                    <th>Status</th>
                                                     <th>Phone</th>
                                                     <th>Gender</th>
                                                     <th>Date of Birth</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
 
 
                                             <tbody>
                                                 <?php $i=1;
-                                                foreach($allitems as $item):
-                                                    $userdata = get_user_data($item->user_id);
+                                                foreach($allitems as $userdata):
+                                                    // $userdata = get_user_data($item->user_id);
                                                 ?>
                                                 <tr>
                                                     <td><?= $i++;?></td>
-                                                    <td><a href="<?= employee_url('employees/details/'.$item->id);?>"><?= $userdata->full_name;?></a></td>
-                                                    <!-- <td><= check_visibility($item->is_visible);?> </td> -->
+                                                    <td><a href="<?= employee_url('employees/details/'.$userdata->id);?>"><img class="rounded-circle avatar-xl" alt="200x200" src="<?= get_image($userdata->user_image); ?>" data-holder-rendered="true" style="width: 38px;height: 38px;margin-right: 20px;"><?= $userdata->full_name;?></a></td>
+                                                    <td><?= $userdata->status == 1? '<span class="badge bg-success"style="font-size:15px;">Active</span>' : '<span class="badge bg-danger"style="font-size:15px;">Inactive</span>'; ?> </td>
                                                     <td><?= $userdata->phone_number;?> </td>
                                                     <td><?= get_name("gender_master",$userdata->gender); ?> </td>
                                                     <td><?= $userdata->dob;?> </td>
                                                     <!-- <td><= formated_date($item->created_at);?></td> -->
-                                                    <!-- <td>
-                                                        <a href="<= admin_url('role/edit/'.$item->id);?>" class="btn btn-primary btn-sm edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit this Item">
+                                                    <td>
+                                                        <a href="<?= employee_url('employees/employee-profile/'.$userdata->id);?>" class="btn btn-success btn-sm edit" data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                                            <i class="fas fa-eye" title="Edit"></i>
+                                                        </a>
+                                                        <a href="<?= employee_url('employees/details/'.$userdata->id);?>" class="btn btn-primary btn-sm edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit this Item">
                                                             <i class="fas fa-pencil-alt" title="Edit"></i>
                                                         </a>
                                                         <a class="btn btn-danger btn-sm edit" onclick="confirmDelete(this.id,'role');" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove this Item" id="<= $item->id;?>">
                                                             <i class="fas fa-trash-alt" title="Remove"></i>
                                                         </a>
-                                                    </td> -->
+                                                    </td>
                                                 </tr>
                                                 <?php endforeach;?>
                                                

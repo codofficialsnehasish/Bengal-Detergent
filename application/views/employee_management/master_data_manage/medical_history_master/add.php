@@ -23,7 +23,7 @@
          </div>
       </div>
       <div class="row mb-5">
-      <?php $this->load->view('partials/_messages');?>
+      <?php $this->load->view('employee_management/partialss/_messages');?>
       </div>
       <!-- end page title -->
       <?= form_open_multipart('employee-management/master-manage/medical-history-master/process', 'class="custom-validation"');?>

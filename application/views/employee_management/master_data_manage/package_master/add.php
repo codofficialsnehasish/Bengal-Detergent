@@ -6,15 +6,15 @@
             <div class="col-md-8">
                <h6 class="page-title">Package Master</h6>
                <ol class="breadcrumb m-0">
-                  <li class="breadcrumb-item"><a href="<?= admin_url('')?>">Home</a></li>
-                  <li class="breadcrumb-item"><a href="<?= admin_url('master-manage/package-master')?>">Package Master</a></li>
+                  <li class="breadcrumb-item"><a href="<?= employee_url('')?>">Home</a></li>
+                  <li class="breadcrumb-item"><a href="<?= employee_url('master-manage/package-master')?>">Package Master</a></li>
                   <li class="breadcrumb-item active" aria-current="page">Add new Package</li>
                </ol>
             </div>
             <div class="col-md-4">
                <div class="float-end d-none d-md-block">
                   <div class="dropdown">
-                     <a href="<?= admin_url('master-manage/package-master/')?>" class="btn btn-primary  dropdown-toggle" aria-expanded="false">
+                     <a href="<?= employee_url('master-manage/package-master/')?>" class="btn btn-primary  dropdown-toggle" aria-expanded="false">
                      <i class="fas fa-arrow-left me-2"></i> Back
                      </a>
                   </div>
@@ -23,10 +23,10 @@
          </div>
       </div>
       <div class="row mb-5">
-      <?php $this->load->view('partials/_messages');?>
+      <?php $this->load->view('employee_management/partialss/_messages');?>
       </div>
       <!-- end page title -->
-      <?= form_open_multipart('master-manage/package-master/process', 'class="custom-validation"');?>
+      <?= form_open_multipart('employee-management/master-manage/package-master/process', 'class="custom-validation"');?>
       
          <div class="row">
             <div class="col-lg-9">

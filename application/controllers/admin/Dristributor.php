@@ -147,7 +147,15 @@ class Dristributor extends Core_Controller {
 		$header['pagecss']="";
 		$header['title']='Add Dristributor';
 		$this->load->view('admin/partials/header',$header);
-		$this->load->view($this->view_path.'add');
+		$designationdata = array(
+			'tblName' => 'users',
+			'where' => array(
+					'role'=>'employee',
+					'status'=>1
+				)
+		);
+		$data['employee']= $this->select->getResult($designationdata);
+		$this->load->view($this->view_path.'add',$data);
 		$script['pagescript']='formScript';
 		$this->load->view('admin/partials/footer',$script);
 	}

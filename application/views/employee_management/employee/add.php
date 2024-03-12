@@ -12,17 +12,17 @@
       <div class="page-title-box">
          <div class="row align-items-center">
             <div class="col-md-8">
-               <h6 class="page-title">Members</h6>
+               <h6 class="page-title">Add Employees</h6>
                <ol class="breadcrumb m-0">
-                  <li class="breadcrumb-item"><a href="<?= admin_url('')?>">Home</a></li>
-                  <li class="breadcrumb-item"><a href="<?= admin_url('members')?>">Members</a></li>
+                  <li class="breadcrumb-item"><a href="<?= employee_url('')?>">Home</a></li>
+                  <li class="breadcrumb-item"><a href="<?= employee_url('employees')?>">Employees</a></li>
                   <li class="breadcrumb-item active" aria-current="page">Add new Member</li>
                </ol>
             </div>
             <div class="col-md-4">
                <div class="float-end d-none d-md-block">
                   <div class="dropdown">
-                     <a href="<?= admin_url('members/')?>" class="btn btn-primary  dropdown-toggle" aria-expanded="false">
+                     <a href="<?= employee_url('employees/')?>" class="btn btn-primary  dropdown-toggle" aria-expanded="false">
                      <i class="fas fa-arrow-left me-2"></i> Back
                      </a>
                   </div>
@@ -31,10 +31,10 @@
          </div>
       </div>
       <div class="row mb-5">
-      <?php $this->load->view('partials/_messages');?>
+      <?php $this->load->view('employee_management/partialss/_messages');?>
       </div>
       <!-- end page title -->
-      <?= form_open_multipart('members/process', 'class="row g-3 needs-validation" novalidate');?>
+      <?= form_open_multipart('employee-management/employees/process', 'class="row g-3 needs-validation" novalidate');?>
       
          <div class="row">
             <div class="col-lg-9">
@@ -46,21 +46,21 @@
                       <div class="row">
                         <div class="col-md-4 mb-3">
                             <label for="validationCustom01" class="form-label">First name</label>
-                            <input type="text" class="form-control" value="<?= !empty($inquiry_data) ? $inquiry_data->first_name : ''; ?>" name="first_name" id="first_name" placeholder="" required>
+                            <input type="text" class="form-control" name="first_name" id="first_name" placeholder="" required>
                             <div class="invalid-feedback">
                                 This field is required
                             </div>
                         </div>
                         <div class="col-md-4">
                             <label for="validationCustom02" class="form-label">Middle name</label>
-                            <input type="text" class="form-control" value="<?= !empty($inquiry_data) ? $inquiry_data->middle_name : ''; ?>" name="middle_name" id="middle_name" placeholder="" required>
+                            <input type="text" class="form-control" name="middle_name" id="middle_name" placeholder="">
                             <div class="invalid-feedback">
                                 This field is required
                             </div>
                         </div>
                         <div class="col-md-4">
                             <label for="validationCustom03" class="form-label">Last Name</label>
-                            <input type="text" class="form-control" value="<?= !empty($inquiry_data) ? $inquiry_data->last_name : ''; ?>" name="last_name" id="last_name" required>
+                            <input type="text" class="form-control" name="last_name" id="last_name" required>
                             <div class="invalid-feedback">
                                 This field is required
                             </div>
@@ -81,7 +81,7 @@
                             <div class="input-group has-validation">
                                 <span class="input-group-text" id="inputGroupPrepend"><i class="fas fa-phone"></i></span>
                                 <input type="text" class="form-control" value="<?= !empty($inquiry_data) ? $inquiry_data->opt_mobile : ''; ?>" name="home_phone_number" id="home_phone_number"
-                                    aria-describedby="inputGroupPrepend" required>
+                                    aria-describedby="inputGroupPrepend">
                                 <div class="invalid-feedback">
                                     This field is required
                                 </div>
@@ -92,7 +92,7 @@
                             <div class="input-group has-validation">
                                 <span class="input-group-text" value="<?= !empty($inquiry_data) ? $inquiry_data->email : ''; ?>" name="email" id="email"><i class="fas fa-at"></i></span>
                                 <input type="text" class="form-control" id="validationCustomUsername"
-                                    aria-describedby="inputGroupPrepend" required>
+                                    aria-describedby="inputGroupPrepend" name="email">
                                 <div class="invalid-feedback">
                                     This field is required
                                 </div>
@@ -148,7 +148,7 @@
                       
                         <div class="col-md-3 mb-3">
                             <label for="religion" class="form-label">Religion</label>
-                            <select class="form-select" name="religion" id="religion" required>
+                            <select class="form-select" name="religion" id="religion">
                                 <option selected disabled value="">Choose...</option>
                                 <?php if(!empty($religion_master)):
                                     foreach($religion_master as $relation):
@@ -164,7 +164,7 @@
                         </div>
                         <div class="col-md-3">
                             <label for="marital_status" class="form-label">Marital Status</label>
-                            <select class="form-select" name="marital_status" id="marital_status" required>
+                            <select class="form-select" name="marital_status" id="marital_status">
                                 <option selected disabled value="">Choose...</option>
                                 <?php if(!empty($marital_status_master)):
                                     foreach($marital_status_master as $maritalStatus):
@@ -180,7 +180,7 @@
                         </div>
                         <div class="col-md-3">
                             <label for="blood_group" class="form-label">Blood Group</label>
-                            <select class="form-select" name="blood_group" id="blood_group" required>
+                            <select class="form-select" name="blood_group" id="blood_group">
                                 <option selected disabled value="">Choose...</option>
                                 <?php if(!empty($blood_group_master)):
                                     foreach($blood_group_master as $blood):
@@ -194,9 +194,9 @@
                                 This field is required
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <!-- <div class="col-md-3">
                             <label for="validationCustom04" class="form-label">Shift</label>
-                            <select class="form-select" id="validationCustom04" required>
+                            <select class="form-select" id="validationCustom04">
                                 <option selected disabled value="">Choose...</option>
                                 <?php if(!empty($shift_master)):
                                     foreach($shift_master as $shift):
@@ -209,10 +209,10 @@
                             <div class="invalid-feedback">
                                 This field is required
                             </div>
-                        </div>                        
-                        <div class="col-md-4">
+                        </div>                         -->
+                        <!-- <div class="col-md-4">
                             <label for="medical_history" class="form-label">Medical History</label>
-                            <select class="form-select" name="medical_history" id="medical_history" required>
+                            <select class="form-select" name="medical_history" id="medical_history">
                                 <option selected disabled value="">Choose...</option>
                                 <?php if(!empty($medical_history_master)):
                                     foreach($medical_history_master as $medical):
@@ -225,17 +225,17 @@
                             <div class="invalid-feedback">
                                 This field is required
                             </div>
-                        </div> 
+                        </div>  -->
                         <div class="col-md-4">
                             <label for="aadhar_no" class="form-label">Aadhar No.</label>
-                            <input type="text" class="form-control" name="aadhar_no" id="aadhar_no" required>
+                            <input type="text" class="form-control" name="aadhar_no" id="aadhar_no">
                             <div class="invalid-feedback">
                                 This field is required
                             </div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="pan_no" class="form-label">Pan No.</label>
-                            <input type="text" class="form-control" name="pan_no" id="pan_no" required>
+                            <input type="text" class="form-control" name="pan_no" id="pan_no">
                             <div class="invalid-feedback">
                                 This field is required
                             </div>
@@ -245,7 +245,7 @@
                              <div class="row">
                                 <div class="col-md-3 mb-3">
                                     <label for="validationCustom04" class="form-label">Country</label>
-                                    <select class="form-select" id="pr_country_id" required>
+                                    <select class="form-select" name="country_id" id="pr_country_id" required>
                                         <option selected disabled value="">Choose...</option>
                                         <?php if(!empty($countries)):
                                             foreach($countries as $country):
@@ -261,7 +261,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label for="validationCustom04" class="form-label">State</label>
-                                    <select class="form-select" id="pr_state_id" required>
+                                    <select class="form-select" name="state_id" id="pr_state_id" required>
                                         <option selected disabled value="">Choose...</option>
                                     </select>
                                     <div class="invalid-feedback">
@@ -270,7 +270,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label for="validationCustom04" class="form-label">City</label>
-                                    <select class="form-select" id="pr_city_id" required>
+                                    <select class="form-select" name="city_id" id="pr_city_id">
                                         <option selected disabled value="">Choose...</option>
                                     </select>
                                     <div class="invalid-feedback">
@@ -279,7 +279,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label for="validationCustom03" class="form-label">Pin Code</label>
-                                    <input type="text" class="form-control" id="validationCustom03" required>
+                                    <input type="text" class="form-control" name="zip_code" id="validationCustom03" required>
                                     <div class="invalid-feedback">
                                         This field is required
                                     </div>
@@ -287,7 +287,7 @@
                              </div>
                         <div class="col-md-12 mb-3">
                             <label for="validationCustom03" class="form-label">Address</label>
-                            <textarea class="form-control" id="validationCustom03" required><?= !empty($inquiry_data) ? $inquiry_data->address : '' ?></textarea>
+                            <textarea class="form-control" name="address" id="validationCustom03"></textarea>
                             <div class="invalid-feedback">
                                 This field is required
                             </div>
@@ -299,7 +299,7 @@
                              <div class="row">
                                 <div class="col-md-3 mb-3">
                                     <label for="validationCustom04" class="form-label">Country</label>
-                                    <select class="form-select" id="pm_country_id" required>
+                                    <select class="form-select" name="pn_country_id" id="pm_country_id" required>
                                         <option selected disabled value="">Choose...</option>
                                         <?php if(!empty($countries)):
                                             foreach($countries as $country):
@@ -315,7 +315,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label for="validationCustom04" class="form-label">State</label>
-                                    <select class="form-select" id="pm_state_id" required>
+                                    <select class="form-select" name="pn_state_id" id="pm_state_id" required>
                                         <option selected disabled value="">Choose...</option>
                                       
                                     </select>
@@ -325,7 +325,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label for="validationCustom04" class="form-label">City</label>
-                                    <select class="form-select" id="pm_city_id" required>
+                                    <select class="form-select" name="pn_city_id" id="pm_city_id" >
                                         <option selected disabled value="">Choose...</option>
                                     </select>
                                     <div class="invalid-feedback">
@@ -334,7 +334,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label for="validationCustom03" class="form-label">Pin Code</label>
-                                    <input type="text" class="form-control" id="validationCustom03" required>
+                                    <input type="text" class="form-control" name="pn_zip_code" id="validationCustom03" required>
                                     <div class="invalid-feedback">
                                         This field is required
                                     </div>
@@ -342,7 +342,7 @@
                              </div>
                         <div class="col-md-12">
                             <label for="validationCustom03" class="form-label">Address</label>
-                            <textarea class="form-control" id="validationCustom03" required><?= !empty($inquiry_data) ? $inquiry_data->address : '' ?></textarea>
+                            <textarea class="form-control" name="pn_address" id="validationCustom03"></textarea>
                             <div class="invalid-feedback">
                                 This field is required
                             </div>
@@ -356,20 +356,20 @@
             </div>
             <!-- end col -->
             <div class="col-lg-3">
-                 <?php $this->load->view('partials/_input-image');?>
-                 <div class="card">
-                  <div class="card-header bg-primary text-light">
-                     Payment & Package
-                  </div>
-                  <div class="card-body">
-                       <div class="col-md-12 mb-3">
-                            <label for="validationCustom04" class="form-label">Package</label>
-                            <select class="form-select" id="validationCustom04" required>
+                <?php $this->load->view('employee_management/partialss/_input-image');?>
+                <div class="card">
+                    <div class="card-header bg-primary text-light">
+                        Designation
+                    </div>
+                    <div class="card-body">
+                        <div class="col-md-12 mb-3">
+                            <label for="package_id" class="form-label">Designation</label>
+                            <select class="form-select" name="designation" id="package_id" required>
                                 <option selected disabled value="">Choose...</option>
-                                <?php if(!empty($package_master)):
-                                    foreach($package_master as $package):
+                                <?php if(!empty($designation)):
+                                    foreach($designation as $designatin):
                                 ?>
-                                <option value="<?= $package->id;?>"><?= $package->name;?></option>
+                                <option value="<?= $designatin->id;?>"><?= $designatin->name;?></option>
                                 <?php 
                                     endforeach;
                                 endif;?>
@@ -378,62 +378,28 @@
                                 This field is required
                             </div>
                         </div>
-                          <div class="col-md-12 mb-3">
-                            <label for="validationCustom04" class="form-label">Payment Mode</label>
-                            <select class="form-select" id="validationCustom04" required>
-                                <option selected disabled value="">Choose...</option>
-                                <?php if(!empty($payment_mode_master)):
-                                    foreach($payment_mode_master as $paymentmode):
-                                ?>
-                                <option value="<?= $paymentmode->id;?>"><?= $paymentmode->name;?></option>
-                                <?php 
-                                    endforeach;
-                                endif;?>
-                            </select>
-                            <div class="invalid-feedback">
-                                This field is required
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header bg-primary text-light">
+                        Publish
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3 d-flex justify-content-between">
+                            <label class="form-label mb-3 d-flex">Status</label>
+                            <input class="form-check form-switch" type="checkbox" name="status" id="switch3" value="1" switch="bool" checked>
+                            <label class="form-label" for="switch3" data-on-label="Active" data-off-label="Inactive"></label>
+                        </div>
+                        <div class="mb-0">
+                            <div>
+                                <button type="submit" class="btn btn-primary waves-effect waves-light me-1">
+                                Save & Publish
+                                </button>
+                                <button type="reset" class="btn btn-secondary waves-effect">
+                                    Reset
+                                </button>
                             </div>
                         </div>
-                    
-                  </div>
-               </div>
-               <div class="card">
-                  <div class="card-header bg-primary text-light">
-                     Publish
-                  </div>
-                  <div class="card-body">
-                     <div class="mb-3">
-                        <label class="form-label mb-3 d-flex">Visiblity</label>
-                        <div class="form-check form-check-inline">
-                           <input type="radio" id="customRadioInline1" name="is_visible" class="form-check-input" value="1" checked>
-                           <label class="form-check-label" for="customRadioInline1">Show</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                           <input type="radio" id="customRadioInline2" name="is_visible" class="form-check-input" value="0">
-                           <label class="form-check-label" for="customRadioInline2">Hide</label>
-                        </div>
-                     </div>
-                     <!-- <div class="mb-3">
-                        <label class="form-label mb-3 d-flex">Popular business_category</label>
-                        <div class="form-check form-check-inline">
-                           <input type="radio" id="pcy" name="is_popular" class="form-check-input" value="1">
-                           <label class="form-check-label" for="pcy">Yes</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                           <input type="radio" id="pcn" name="is_popular" class="form-check-input" value="0" checked>
-                           <label class="form-check-label" for="pcn">No</label>
-                        </div>
-                     </div> -->
-                     <div class="mb-0">
-                        <div>
-                           <button type="submit" class="btn btn-primary waves-effect waves-light me-1">
-                           Save & Publish
-                           </button>
-                           <!-- <button type="reset" class="btn btn-secondary waves-effect">
-                              Cancel
-                              </button> -->
-                        </div>
-                     </div>
                   </div>
                </div>
             </div>

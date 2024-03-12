@@ -26,6 +26,7 @@ $categoriesMenu=$this->select->get_parent_categories();
                 </div>
             </div>
             <!-- End Search Form Drawer -->
+            
             <!-- Main Header -->
             <div class="header-section clearfix animated hdr-sticky">
                 <!-- Desktop Header -->

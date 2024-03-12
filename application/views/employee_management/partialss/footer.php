@@ -12,6 +12,20 @@
              
             <script src="<?= base_url('assets/admin/js/app.js');?>"></script>
             <?php $this->load->view('employee_management/partialss/mediaUpload');?>
+            <script>
+                $("#switch3").on("click", function() {
+                    var currentValue = parseInt($(this).val());
+        
+                    // Toggle the value between 1 and 0
+                    var newValue = currentValue === 1 ? 0 : 1;
+                    
+                    // Set the new value of the checkbox
+                    $(this).val(newValue);
+                    
+                    // Output the new value to the console
+                    console.log("Checkbox value:", newValue);
+                });
+            </script>
 </body>
     
 </html>

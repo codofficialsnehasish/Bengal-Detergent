@@ -15,7 +15,9 @@
 <script src="<?= base_url('assets/admin/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js');?>"></script>
 <script src="<?= base_url('assets/admin/js/pages/form-advanced.init.js');?>"></script>
 
+
  <?php PageSpecScriptEmp($pagescript); ?>
+ <?php PageSpecScriptEmp('formScript'); ?>
 
  <?php $this->load->view('admin/partials/_messages');?>    
  <script>

@@ -4,7 +4,7 @@
         <p class="card-title-desc">Jhon Doe</p>
     
         <form class="row g-3 needs-validation" id="contactInfoForm" method="post" novalidate>
-        <input type="hidden" name="user_id" value="<?= $this->uri->segment(3);?>" />
+        <input type="hidden" name="user_id" value="<?= $this->uri->segment(4);?>" />
             <div class="col-md-4">
                 <label for="validationCustomUsername" class="form-label">Email</label>
                 <div class="input-group has-validation">
@@ -45,7 +45,7 @@
                                         <?php if(!empty($countries)):
                                             foreach($countries as $country):
                                         ?>
-                                        <option value="<?= $country->id;?>"><?= $country->name;?></option>
+                                        <option value="<?= $country->id;?>" <?= $country->id==$user->country_id?'selected':'';?>><?= $country->name;?></option>
                                         <?php 
                                             endforeach;    
                                         endif;?>

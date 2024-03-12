@@ -9,14 +9,14 @@
             <ul class="metismenu list-unstyled" id="side-menu">
                 <?php //if($this->auth_user->role=='admin'){?>
                 <li>
-                    <a href="<?= employee_url('dashboard/')?>" class="waves-effect <?= emp_active_link('dashboard');?>">
-                         <i class="ti-home"></i><!--<span class="badge rounded-pill bg-primary float-end">2</span> -->
+                    <a href="<?= employee_url('dashboard/')?>" class="waves-effect <?= emp_active_link('');?>">
+                        <i class="ti-home"></i><!--<span class="badge rounded-pill bg-primary float-end">2</span> -->
                         <span>Dashboard</span>
                     </a>
                 </li>  
 
                 <?php 
-                    $usegment='';
+                    $usegment='-';
                     if($this->uri->segment(3)=='shift-master'){$usegment='shift-master';}
                     if($this->uri->segment(3)=='gender-master'){$usegment='gender-master';}
                     if($this->uri->segment(3)=='medical-history-master'){$usegment='medical-history-master';}
@@ -29,6 +29,7 @@
                     if($this->uri->segment(3)=='status-master'){$usegment='status-master';}
                     if($this->uri->segment(3)=='catagory-master'){$usegment='catagory-master';}
                     if($this->uri->segment(3)=='how-to-know-master'){$usegment='how-to-know-master';}
+                    if($this->uri->segment(3)=='designation_master'){$usegment='designation_master';}
                 ?>
                 <!-- All Master Data -->
                 <li class="<?= emp_active_menu($usegment);?>">
@@ -49,6 +50,7 @@
                         <li class="<?= emp_tab_active('status-master');?>"><a href="<?= base_url('employee-management/master-manage/status-master/')?>" class="<?= emp_active_link('status-master');?>">Status Master</a></li>
                         <li class="<?= emp_tab_active('catagory-master');?>"><a href="<?= base_url('employee-management/master-manage/catagory-master/')?>" class="<?= emp_active_link('catagory-master');?>">Catagory Master</a></li>
                         <li class="<?= emp_tab_active('how-to-know-master');?>"><a href="<?= base_url('employee-management/master-manage/how-to-know-master/')?>" class="<?= emp_active_link('how-to-know-master');?>">How to Know Master</a></li>
+                        <li class="<?= emp_tab_active('designation-master');?>"><a href="<?= base_url('employee-management/master-manage/designation-master/')?>" class="<?= emp_active_link('designation-master');?>">Designation Master</a></li>
                     </ul>
                 </li> 
                 <?php
@@ -89,16 +91,74 @@
                 </li>
 
                 <!-- Employee -->
-                <li class="<= active_menu($segment);?>">
-                    <a href="javascript: void(0);" class="has-arrow waves-effect <= active_menu($segment);?>">
+                <?php 
+                    $empsegment='-';
+                    if($this->uri->segment(2)=='employees'){$empsegment='employees';}
+                ?>
+                <li class="<?= active_menu($empsegment);?>">
+                    <a href="javascript: void(0);" class="has-arrow waves-effect <?= active_menu($empsegment);?>">
                         <i class="fas fa-users"></i>
-                        <span>Manage Employee</span>
+                        <span>Employee</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li class="<?= emp_tab_active('modules');?>"><a href="<?= base_url('employee-management/employees/')?>" class="<?= emp_active_link('modules');?>">Employees</a></li>
-                        <li class="<?= emp_tab_active('modules');?>"><a href="<?= base_url('employee-management/employees/')?>" class="<?= emp_active_link('modules');?>">Attendance</a></li>
+                        <li class="<?= emp_tab_active('employees');?>">
+                            <a href="<?= employee_url('employees/add-new')?>" class="<?= emp_active_link('employees');?>">Add Employee</a>
+                            <a href="<?= employee_url('employees/')?>" class="<?= emp_active_link('employees');?>">Employee List</a>
+                        </li>
                     </ul>
                 </li>
+
+                <?php 
+                    $attendancesegment='-';
+                    if($this->uri->segment(2)=='attendance'){$attendancesegment='attendance';}
+                    if($this->uri->segment(3)=='add-attendance'){$attendancesegment='add-attendance';}
+                    if($this->uri->segment(3)=='today-log'){$usegment='today-log';}
+                    if($this->uri->segment(3)=='attendance-list'){$usegment='attendance-list';}
+                ?>
+                <li class="<?= active_menu($attendancesegment);?>">
+                    <a href="javascript: void(0);" class="has-arrow waves-effect <?= active_menu($attendancesegment);?>">
+                        <i class="fas fa-clock"></i>
+                        <span>Attendance</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li class="<?= emp_tab_active('attendance');?>">
+                            <a href="<?= employee_url('attendance/add-attendance')?>" class="<?= emp_active_link('add-attendance');?>">Add Attendance</a>
+                            <a href="<?= employee_url('attendance/today-log')?>" class="<?= emp_active_link('today-log');?>">Today Logs</a>
+                            <!-- <a href="<?= employee_url('attendance/')?>" class="<?= emp_active_link('attendance');?>">Search Attendance</a>
+                            <a href="<?= employee_url('attendance/')?>" class="<?= emp_active_link('attendance');?>">Employee Logs</a> -->
+                            <a href="<?= employee_url('attendance/attendance-list')?>" class="<?= emp_active_link('attendance-list');?>">Attendance List</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <?php 
+                    $leavesegment='-';
+                    if($this->uri->segment(2)=='leave'){$leavesegment='leave';}
+                ?>
+                <li class="<?= active_menu($leavesegment);?>">
+                    <a href="javascript: void(0);" class="has-arrow waves-effect <?= active_menu($leavesegment);?>">
+                        <i class="mdi mdi-human-scooter"></i>
+                        <span>Leave</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li class="<?= emp_tab_active('leave');?>">
+                            <a href="<?= employee_url('leave/add-new')?>" class="<?= emp_active_link('leave');?>">Weekly Holiday</a>
+                            <a href="<?= employee_url('leave/')?>" class="<?= emp_active_link('leave');?>">Holiday</a>
+                            <a href="<?= employee_url('leave/')?>" class="<?= emp_active_link('leave');?>">Search Attendance</a>
+                            <a href="<?= employee_url('leave/')?>" class="<?= emp_active_link('leave');?>">Add Leave Type</a>
+                            <a href="<?= employee_url('leave/')?>" class="<?= emp_active_link('leave');?>">Leave Application</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="<?= active_menu('payroll');?>">
+                    <a href="javascript: void(0);" class=" waves-effect <?= active_menu('payroll');?>">
+                        <i class="far fa-money-bill-alt"></i>
+                        <span>Payroll</span>
+                    </a>
+                </li>
+
+
                 <?php //}?>
             </ul>
         </div>

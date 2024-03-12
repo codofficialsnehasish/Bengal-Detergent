@@ -1,4 +1,16 @@
 <!-- Footer -->
+<!-- <p> This page demonstrate a simple popup modal on page load. Refresh the page to see again popup notification. </p> -->
+
+<div class='popup-onload'>
+    <div class='cnt223'>
+        <div class="popup-content">
+            <!-- <h2>Welcome to our website!</h2>
+            <p>Thank you for visiting. This is a sample popup window on page load.</p> -->
+            <img src="<?= base_url('assets/site/images/collection/home2-collection1.jpg'); ?>" alt="">
+            <a href='' class='close'>Close</a>
+        </div>
+    </div>
+</div>
 <footer id="footer" class="footer-2">
                 <div class="site-footer">
                     <div class="footer-top">
@@ -145,7 +157,7 @@
                         <div class="modal-body">
                             <div class="register_button d-flex flex-column" stye>
                                 <a href="<?= base_url('authentication/register_distributor'); ?>" class="btn btn-outline-primary mt-3 mb-3">Register as Distributer</a>
-                                <a href="<?= base_url('authentication/register_teamlead'); ?>" class="btn btn-outline-success mt-3 mb-3">Register as Team Leader</a>
+                                <!-- <a href="<?= base_url('authentication/register_teamlead'); ?>" class="btn btn-outline-success mt-3 mb-3">Register as Team Leader</a> -->
                                 <a href="<?= base_url('/signup'); ?>" class="btn btn-outline-primary mt-3 mb-3">Register as Retailer</a>
                             </div>
                         </div>
@@ -159,10 +171,77 @@
                 </div>
             </div>
             <!-- End Minicart Drawer -->
-
+        <style>
+            #overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: #000;
+                filter:alpha(opacity=70);
+                -moz-opacity:0.7;
+                -khtml-opacity: 0.7;
+                opacity: 0.7;
+                z-index: 100;
+                display: none;
+            }
+            .popup-content{
+                padding: 14px 10px;
+                line-height: 1.5;
+            }
+            .cnt223 a{
+                text-decoration: none;
+            }
+            .popup-onload{
+                margin: 0 auto;
+                display: none;
+                position: fixed;
+                z-index: 101;
+                top: 50%;
+                left: 50%;
+                margin-top: -300px;
+                margin-left: -300px;
+            }
+            .cnt223{
+                min-width: 600px;
+                width: 600px;
+                min-height: 150px;
+                margin: 10px auto;
+                /* margin: 100px auto; */
+                background: #f3f3f3;
+                position: relative;
+                z-index: 103;
+                padding: 15px 35px;
+                border-radius: 5px;
+                box-shadow: 0 2px 5px #000;
+            }
+            .cnt223 p{
+                clear: both;
+                color: #555555;
+                /* text-align: justify; */
+                font-size: 20px;
+                font-family: sans-serif;
+            }
+            .cnt223 p a{
+                color: #d91900;
+                font-weight: bold;
+            }
+            .cnt223 .x{
+                float: right;
+                height: 35px;
+                left: 22px;
+                position: relative;
+                top: -25px;
+                width: 34px;
+            }
+            .cnt223 .x:hover{
+                cursor: pointer;
+            }
+        </style>
 
             
-            <!-- Including Javascript -->
+        <!-- Including Javascript -->
         <!-- Plugins JS -->
         <script src="<?= base_url('assets/site/js/plugins.js') ?>"></script>
         <!-- Main JS -->
@@ -293,6 +372,26 @@
 
 })()
 
+</script>
+
+<script>
+    $(function(){
+        var overlay = $('<div id="overlay"></div>');
+        overlay.appendTo(document.body);
+        overlay.show();
+        $('.popup-onload').show();
+        $('.close').click(function(){
+            $('.popup-onload').hide();
+            overlay.appendTo(document.body).remove();
+            return false;
+        });
+    
+        $('.x').click(function(){
+            $('.popup').hide();
+            overlay.appendTo(document.body).remove();
+            return false;
+        });
+    });
 </script>
 </body>
 </html>
