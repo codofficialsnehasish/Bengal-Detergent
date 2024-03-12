@@ -16,7 +16,6 @@ class Employees extends Core_Controller {
 		$this->view_path='employee_management/employee/';
 		$this->file_name = 'profile_picture';
 		//$this->output->enable_profiler(TRUE);
-		
 	}
 
 	public function index()
@@ -626,10 +625,10 @@ class Employees extends Core_Controller {
 	public function delete(){
 		$id= $this->input->post('id');
 		$configs = array(
-			'tblName' => $this->employee,
+			'tblName' => $this->users,
 			'where' => array('id'=>$id)
 		);
-		$this->delete_model->delete($configs);
+		$this->delete_model->emp_delete($configs);
 		echo 'Deleted Successfully';
 	}
 

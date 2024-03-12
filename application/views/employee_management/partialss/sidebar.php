@@ -133,7 +133,9 @@
 
                 <?php 
                     $leavesegment='-';
-                    if($this->uri->segment(2)=='leave'){$leavesegment='leave';}
+                    if($this->uri->segment(3)=='weekly-holiday'){$leavesegment='weekly-holiday';}
+                    if($this->uri->segment(3)=='holiday'){$leavesegment='holiday';}
+                    if($this->uri->segment(3)=='leave-type-master'){$leavesegment='leave-type-master';}
                 ?>
                 <li class="<?= active_menu($leavesegment);?>">
                     <a href="javascript: void(0);" class="has-arrow waves-effect <?= active_menu($leavesegment);?>">
@@ -142,10 +144,9 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li class="<?= emp_tab_active('leave');?>">
-                            <a href="<?= employee_url('leave/add-new')?>" class="<?= emp_active_link('leave');?>">Weekly Holiday</a>
-                            <a href="<?= employee_url('leave/')?>" class="<?= emp_active_link('leave');?>">Holiday</a>
-                            <a href="<?= employee_url('leave/')?>" class="<?= emp_active_link('leave');?>">Search Attendance</a>
-                            <a href="<?= employee_url('leave/')?>" class="<?= emp_active_link('leave');?>">Add Leave Type</a>
+                            <a href="<?= employee_url('leave/weekly-holiday')?>" class="<?= emp_active_link('weekly-holiday');?>">Weekly Holiday</a>
+                            <a href="<?= employee_url('leave/holiday')?>" class="<?= emp_active_link('holiday');?>">Holiday</a>
+                            <a href="<?= base_url('employee-management/master-manage/leave-type-master')?>" class="<?= emp_active_link('leave-type-master');?>">Add Leave Type</a>
                             <a href="<?= employee_url('leave/')?>" class="<?= emp_active_link('leave');?>">Leave Application</a>
                         </li>
                     </ul>
