@@ -27,6 +27,7 @@ class Dashboard extends Core_Controller {
 		$data['inactive_total_distributer'] = $this->select->inactive_distributer_count();
 		$data['active_total_team_leader'] = $this->select->active_team_leader_count();
 		$data['inactive_total_team_leader'] = $this->select->inactive_team_leader_count();
+		$data['active_retailer_count'] = $this->select->active_retailer_count();
 		$this->load->view('admin/dashboard',$data);
 		$script['pagescript']='dashboardScript';
 		$this->load->view('admin/partials/footer',$script);

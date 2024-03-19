@@ -105,8 +105,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li class="<?= tab_active('buyer');?>"><a href="<?= base_url('admin/buyer/')?>" class="<?= active_link('buyer');?>">Retailer</a></li>
-                        <li class="<?= tab_active('dristributor');?>"><a href="<?= base_url('admin/dristributor/')?>" class="<?= active_link('dristributor');?>">Dristributor</a></li>                    
-                        <li class="<?= tab_active('team-lead');?>"><a href="<?= base_url('admin/team-lead/')?>" class="<?= active_link('team-lead');?>">Team Lead</a></li>                    
+                        <li class="<?= tab_active('dristributor');?>"><a href="<?= base_url('admin/dristributor/')?>" class="<?= active_link('dristributor');?>">Dristributor</a></li>                                   
                     </ul>
                 </li>
 

@@ -499,6 +499,9 @@ $config['csrf_exclude_uris'] = array(
                                     'saveReview',
                                     'square-payment-post',
                                     'employees/documentinfo',
+                                    'employee-management/employees/profile-picture',
+                                    'employees/workexprenceinfo',
+                                    'employees/bankinfo'
                                 );
 
 /*

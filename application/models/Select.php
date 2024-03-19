@@ -28,6 +28,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		$this->db->from('users');
 		return $this->db->count_all_results();	
 	}
+	public function active_retailer_count() {
+		$this->db->where('role','retailer');
+		$this->db->where('status',1);
+		$this->db->from('users');
+		return $this->db->count_all_results();	
+	}
 	public function inactive_distributer_count() {
 		$this->db->where('role','dristributor');
 		$this->db->where('is_approved',1);

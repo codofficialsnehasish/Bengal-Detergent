@@ -147,7 +147,7 @@
                             <a href="<?= employee_url('leave/weekly-holiday')?>" class="<?= emp_active_link('weekly-holiday');?>">Weekly Holiday</a>
                             <a href="<?= employee_url('leave/holiday')?>" class="<?= emp_active_link('holiday');?>">Holiday</a>
                             <a href="<?= base_url('employee-management/master-manage/leave-type-master')?>" class="<?= emp_active_link('leave-type-master');?>">Add Leave Type</a>
-                            <a href="<?= employee_url('leave/')?>" class="<?= emp_active_link('leave');?>">Leave Application</a>
+                            <a href="<?= employee_url('leave/leave-application')?>" class="<?= emp_active_link('leav-application');?>">Leave Application</a>
                         </li>
                     </ul>
                 </li>

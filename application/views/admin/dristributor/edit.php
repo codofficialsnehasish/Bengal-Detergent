@@ -187,15 +187,38 @@
                         Image
                   </div>
                   <div class="card-body text-center">
-                        <div class="mb-0">
-                           <img class="img-thumbnail rounded me-2" id="blah" alt="" width="200" src="<?= get_image($item->user_image);?>" data-holder-rendered="true" style="display:<?= $item->user_image!=0?'block':'none';?>">
-                        </div>
-                        <div class="mb-0">
-                           <input type="file" name="file" class="filestyle" id="imgInp" data-input="false" data-buttonname="btn-secondary">
-                           <input type="hidden" name="media_id" id="media_id" />
-                           <input type="hidden" name="hdn_media_id" id="media_id" value="<?= $item->user_image;?>" />
-                           <!-- <a href="javascript:;" id="openLibrary">or Choose From Library</a> -->
-                           </div> 
+                     <div class="mb-0">
+                        <img class="img-thumbnail rounded me-2" id="blah" alt="" width="200" src="<?= get_image($item->user_image);?>" data-holder-rendered="true" style="display:<?= $item->user_image!=0?'block':'none';?>">
+                     </div>
+                     <div class="mb-0">
+                        <input type="file" name="file" class="filestyle" id="imgInp" data-input="false" data-buttonname="btn-secondary">
+                        <input type="hidden" name="media_id" id="media_id" />
+                        <input type="hidden" name="hdn_media_id" id="media_id" value="<?= $item->user_image;?>" />
+                        <!-- <a href="javascript:;" id="openLibrary">or Choose From Library</a> -->
+                     </div> 
+                  </div>
+               </div>
+               <div class="card">
+                  <div class="card-header bg-primary text-light">
+                     Team Leader
+                  </div>
+                  <div class="card-body">
+                     <div class="col-md-12 mb-3">
+                           <label for="package_id" class="form-label">Choose Team Leader</label>
+                           <select class="form-select" name="tl_id" id="package_id" required>
+                              <option selected disabled value="">Choose...</option>
+                              <?php if(!empty($employee)):
+                                 foreach($employee as $designatin):
+                              ?>
+                              <option value="<?= $designatin->id;?>"><?= $designatin->full_name;?></option>
+                              <?php 
+                                 endforeach;
+                              endif;?>
+                           </select>
+                           <div class="invalid-feedback">
+                              This field is required
+                           </div>
+                     </div>
                   </div>
                </div>
                <div class="card">

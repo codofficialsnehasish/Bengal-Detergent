@@ -56,7 +56,7 @@
                                             </div>
                                             <?php }else{ ?>
                                             <div class="mini-stat-label bg-danger">
-                                                <p class="mb-0">+<?= round($percentageChange) . "%" ?></p>
+                                                <p class="mb-0"><?= round($percentageChange) . "%" ?></p>
                                             </div>
                                             <?php } ?>
                                         </div>
@@ -90,7 +90,9 @@
                                                 </div>
                                                 <h5 class="font-size-16 text-uppercase text-white-50">Dristributor</h5>
                                                 <h4 class="fw-medium font-size-24" style="color:white;">
-                                                    <span class="text-success">0</span>
+                                                    <!-- <span class="text-success">0</span> -->
+                                                    <span class="badge rounded-pill bg-success"><?= $active_total_distributer; ?></span>
+                                                    <span class="badge rounded-pill bg-danger"><?= $inactive_total_distributer; ?></span>
                                                 </h4>
                                             </div>
                                         </div>
@@ -108,7 +110,7 @@
                                                 </div>
                                                 <h5 class="font-size-16 text-uppercase text-white-50">Retailer</h5>
                                                 <h4 class="fw-medium font-size-24" style="color:white;">
-                                                    <span>0</span>
+                                                    <span><?= $active_retailer_count; ?></span>
                                                 </h4>
                                             </div>
                                         </div>

@@ -26,6 +26,8 @@ class My_dashboard extends Core_Controller {
 				redirect('retailer/dashboard');
 			}elseif($this->auth_user->role == 'dristributor'){
 				redirect('admin/dashboard');
+			}elseif($this->auth_user->role == 'employee'){
+				redirect('admin/dashboard');
 			}elseif($this->auth_user->role=='technician'){
 				redirect('admin/dashboard');
 			}elseif($this->auth_user->role=='admin'){

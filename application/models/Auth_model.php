@@ -95,7 +95,7 @@ class Auth_model extends CI_Model
                 $this->session->set_flashdata('error', 'Wrong Password!');
                 return false;
             }
-            if(($user->role == 'teamlead' || $user->role == 'dristributor') && $user->is_approved == 1){
+            if(($user->role == 'teamlead' || $user->role == 'dristributor' || $user->role == 'employee') && $user->is_approved == 1){
                 //set user data
                 $user_data = array(
                     'modesy_sess_user_id' => $user->id,

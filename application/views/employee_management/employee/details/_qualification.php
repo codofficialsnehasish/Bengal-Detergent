@@ -73,3 +73,36 @@
         </form>
     </div>
 </div>
+
+<script>
+    function delete_qualification(delid){
+        const getUrl = window.location;
+        const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1]+"/"+getUrl.pathname.split('/')[2]+"/";
+        $.ajax({
+            url: base_url + "employees/deletequalification",
+            type: "POST",
+            data: {
+                csrf_modesy_token: getCookie('csrf_modesy_token'),
+                id: delid
+            },
+            dataType: "html",
+            success: function (response) {
+                var dataArray = JSON.parse(response);
+                if(dataArray.status == 1){
+                    $.ajax({
+                        url: base_url + "employees/getQualification",
+                        type: "POST",
+                        data: { csrf_modesy_token: getCookie('csrf_modesy_token'),id: <?= $this->uri->segment(4); ?> },
+                        dataType: "html",
+                        success: function (resp) {
+                            $("#qualificationdata").html(resp);
+                        }
+                    });
+                    showToast('success','Success',dataArray.msg);     
+                }else{
+                    showToast('error','Error',dataArray.msg);
+                }
+            }
+        });
+    } 
+</script>

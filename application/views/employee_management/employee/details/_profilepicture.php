@@ -9,7 +9,7 @@
                 </div>
             </div> -->
             <div class="col-md-12 d-flex ">
-            <?= form_open_multipart('employee-management/employees/profilepicture');?>
+            <?= form_open_multipart('employee-management/employees/profile-picture'); ?>
             <input type="hidden" name="user_id" value="<?= $this->uri->segment(4);?>" />        
             <div class="card">
                 <!-- <div class="card-header bg-primary text-light">
@@ -21,7 +21,7 @@
                     </div>
                     <div class="mb-0">
                         <input type="file" name="file" class="filestyle" id="imgInp" data-input="false" data-buttonname="btn-secondary">
-                        <input type="hidden" name="media_id" id="media_id" />
+                        <input type="hidden" name="media_id" id="media_id" value="<?= $user->user_image;?>" />
                         <input type="hidden" name="hdn_media_id" id="media_id" value="<?= $user->user_image;?>" />
                         <!-- <a href="javascript:;" id="openLibrary">or Choose From Library</a> -->
                     </div> 

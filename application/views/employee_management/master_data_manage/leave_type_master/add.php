@@ -7,7 +7,7 @@
                <h6 class="page-title">Leave Type Master</h6>
                <ol class="breadcrumb m-0">
                   <li class="breadcrumb-item"><a href="<?= employee_url('dashboard/')?>">Home</a></li>
-                  <li class="breadcrumb-item"><a href="<?= employee_url('master-manage/leave-type-master')?>">Designation Master</a></li>
+                  <li class="breadcrumb-item"><a href="<?= employee_url('master-manage/leave-type-master')?>">Leave</a></li>
                   <li class="breadcrumb-item active" aria-current="page">Add new Leave Type</li>
                </ol>
             </div>

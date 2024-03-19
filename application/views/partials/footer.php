@@ -375,20 +375,46 @@
 </script>
 
 <script>
+    // $(function(){
+    //     var overlay = $('<div id="overlay"></div>');
+    //     overlay.appendTo(document.body);
+    //     overlay.show();
+    //     $('.popup-onload').show();
+    //     $('.close').click(function(){
+    //         $('.popup-onload').hide();
+    //         overlay.appendTo(document.body).remove();
+    //         return false;
+    //     });
+    
+    //     $('.x').click(function(){
+    //         $('.popup').hide();
+    //         overlay.appendTo(document.body).remove();
+    //         return false;
+    //     });
+    // });
+
+
     $(function(){
-        var overlay = $('<div id="overlay"></div>');
-        overlay.appendTo(document.body);
-        overlay.show();
-        $('.popup-onload').show();
+        // Check if the popup has been shown before
+        if (!localStorage.getItem('popupShown')) {
+            var overlay = $('<div id="overlay"></div>');
+            overlay.appendTo(document.body);
+            overlay.show();
+            $('.popup-onload').show();
+            
+            // Mark the popup as shown in local storage
+            localStorage.setItem('popupShown', true);
+        }
+        
         $('.close').click(function(){
             $('.popup-onload').hide();
-            overlay.appendTo(document.body).remove();
+            $('#overlay').remove(); // No need to append to document body again
             return false;
         });
-    
+
         $('.x').click(function(){
             $('.popup').hide();
-            overlay.appendTo(document.body).remove();
+            $('#overlay').remove(); // No need to append to document body again
             return false;
         });
     });

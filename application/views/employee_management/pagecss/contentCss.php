@@ -6,7 +6,7 @@
         <link href="<?= base_url('assets/admin/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css');?>" rel="stylesheet" type="text/css">
         <!-- Sweet Alert-->
         <link href="<?= base_url('assets/admin/libs/sweetalert2/sweetalert2.min.css');?>" rel="stylesheet" type="text/css" />
-        <link href="<?= base_url('assets/admin/assets/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css');?>" rel="stylesheet">
+        <link href="<?= base_url('assets/admin/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css');?>" rel="stylesheet">
 <style>
 .post-outer {
         /*background: #f5f5f5;*/

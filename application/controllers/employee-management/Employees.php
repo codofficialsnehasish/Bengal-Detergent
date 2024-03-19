@@ -10,6 +10,8 @@ class Employees extends Core_Controller {
 		$this->employee='employee';
 		$this->users='users';
 		$this->employee_qualification = 'employee_qualification';
+		$this->work_exprence = 'work_exprence';
+		$this->bank = 'bank';
 		$this->country = 'location_countries';
 		$this->state = 'location_states';
 		$this->city = 'location_cities';
@@ -163,13 +165,24 @@ class Employees extends Core_Controller {
 				'designation'=> $this->input->post('designation', true),
 				'status'=>$this->input->post('status', true) == null ? 0 : $this->input->post('status', true),
 				'created_at'=> $this->currentTime,
+				'is_approved'=>1,
 				'date_of_joining'=> date('Y-m-d')
 			);
+
 			if(!empty($data['middle_name'])){
 				$data['full_name'] = $data['first_name'].' '.$data['middle_name'].' '.$data['last_name'];
 			}else{
 				$data['full_name'] = $data['first_name'].' '.$data['last_name'];
 			}
+
+			$this->load->library('bcrypt');
+			$user_name = remove_special_characters(strtolower($data['first_name']));
+			$data["username"] = $user_name;
+			$data['password'] = $this->bcrypt->hash_password('user');
+        	$data['user_type'] = 'admin_register';
+        	$data["slug"] = $this->slug->create_unique_slug($data["username"], 'users','slug');
+        	$data['token'] = generate_token();
+
 			if(is_uploaded_file($_FILES['file']['tmp_name'])) 
 			{  
 				$data['user_image']=$this->mediaupload->doUpload('file');
@@ -197,7 +210,7 @@ class Employees extends Core_Controller {
 	public function details(){
 		$id=$this->uri->segment(4);
 		$header['pagecss']="contentCss";
-		$header['title']='Role';
+		$header['title']='Details';
 		$this->load->view('employee_management/partialss/header',$header);
         $user=$this->auth_model->get_user_by_id($id);
 		$data['user']=$user;
@@ -415,7 +428,7 @@ class Employees extends Core_Controller {
 		echo json_encode(array('status'=>$status,'msg'=>$msg));
 	}
 
-	public function profilepicture(){	
+	public function profile_picture(){	
 		if(is_uploaded_file($_FILES['file']['tmp_name'])) 
 		{    
 			$data['user_image']=$this->mediaupload->doUpload('file');
@@ -433,12 +446,12 @@ class Employees extends Core_Controller {
             	redirect($this->agent->referrer());
 			}
 		}else{
-			$this->session->set_flashdata('error', 'Same Image Given');
+			$this->session->set_flashdata('error', 'Try Again');
             	redirect($this->agent->referrer());
 		}
 
-		// $this->edit->emp_edit()
-		// echo $this->mediaupload->doUpload($this->file_name);0
+		$this->edit->emp_edit();
+		echo $this->mediaupload->doUpload($this->file_name);
 	}
 
 	public function documentinfo(){
@@ -513,16 +526,20 @@ class Employees extends Core_Controller {
 			$msg = validation_errors();
 		}else{
 			$data=array(
-				'trainer_id'=> $this->input->post('trainer_id', true),
+				'employee_id'=> $this->input->post('trainer_id', true),
 				'name'=> $this->input->post('name', true),
 				'exp_year'=> $this->input->post('exp_year', true),
 				'exp_months'=> $this->input->post('exp_months', true),
 			);
+			if(is_uploaded_file($_FILES['sertificate']['tmp_name'])) 
+			{    
+				$data['sertificate']=$this->mediaupload->doUpload('sertificate');
+			}
 			$configs = array(
 				'tblName' => $this->work_exprence,
 				'data' => $data
 			);
-			$update=$this->insert_model->insert_data($configs);
+			$update=$this->insert_model->emp_insert_data($configs);
 			if($update){
 			    $status = 1;
 			    $msg = 'Data has been updated successfully';
@@ -569,7 +586,7 @@ class Employees extends Core_Controller {
 			$msg = validation_errors();
 		}else{
 			$data=array(
-				'trainer_id'=> $this->input->post('trainer_id', true),
+				'employee_id'=> $this->input->post('employee_id', true),
 				'bank_name'=> $this->input->post('bank_name', true),
 				'account_number'=> $this->input->post('account_number', true),
 				'ifsc_code'=> $this->input->post('ifsc_code', true),
@@ -578,7 +595,7 @@ class Employees extends Core_Controller {
 				'tblName' => $this->bank,
 				'data' => $data
 			);
-			$update=$this->insert_model->insert_data($configs);
+			$update=$this->insert_model->emp_insert_data($configs);
 			if($update){
 			    $status = 1;
 			    $msg = 'Data has been updated successfully';
@@ -589,7 +606,6 @@ class Employees extends Core_Controller {
 		}
 		echo json_encode(array('status'=>$status,'msg'=>$msg));
 	}
-
 
 	public function update_process()
 	{
@@ -621,7 +637,6 @@ class Employees extends Core_Controller {
 		}
 	}
 
-
 	public function delete(){
 		$id= $this->input->post('id');
 		$configs = array(
@@ -637,8 +652,8 @@ class Employees extends Core_Controller {
 		$qualifications = array(
 			'tblName'=>$this->employee_qualification,
 			'where'=> array(
-					'employee_id'=> $id
-				)
+				'employee_id'=> $id
+			)
 		);
 		$qualificationdata = $this->select->getResult($qualifications);
 		$html = '';
@@ -650,20 +665,20 @@ class Employees extends Core_Controller {
 				$html .= '<td>'. $q->subject .'</td>';
 				$html .= '<td>'. $q->passing_year .'</td>';
 				$html .= '<td>'. $q->percentage .'</td>';
-				$html .= '<td><a class="btn btn-danger" onclick="delete_qualification(this.id);" id="'. $q->id .'"><i class="ti-trash"></i></a></td>';
+				$html .= '<td><a class="btn btn-danger" onclick="if(confirm(\'Are you sure?\')) return delete_qualification(this.id);" id="'. $q->id .'"><i class="ti-trash"></i></a></td>';
 				$html .= '</tr>';
 			}
 		}
 		echo $html;
 	}
 
-	public function deleteQualification(){
+	public function deletequalification(){
 		$id = $this->input->post('id');
 		$configs = array(
 			'tblName' => $this->employee_qualification,
 			'where' => array('id'=>$id)
 		);
-		$delete = $this->delete_model->delete($configs);
+		$delete = $this->delete_model->emp_delete($configs);
 		if($delete){
 			$status = 1;
 			$msg = 'Data has been deleted successfully';
@@ -679,8 +694,8 @@ class Employees extends Core_Controller {
 		$exprence = array(
 			'tblName'=>$this->work_exprence,
 			'where'=> array(
-					'trainer_id'=> $id
-				)
+				'employee_id'=> $id
+			)
 		);
 		$exp = $this->select->getResult($exprence);
 		$html = '';
@@ -688,13 +703,30 @@ class Employees extends Core_Controller {
 			foreach($exp as $e){
 				$html .= '<tr>';
 				$html .= '<td>'. $e->name .'</td>';
-				$html .= '<td>'. $e->exp_year .'</td>';
-				$html .= '<td>'. $e->exp_months .'</td>';
-				$html .= '<td><a class="btn btn-danger" onclick="delete_qualification(this.id);" id="'. $e->id .'"><i class="ti-trash"></i></a></td>';
+				$html .= '<td>'. $e->exp_year.' Year '.$e->exp_months.' Months </td>';
+				$html .= '<td><img src="'. get_image($e->sertificate) .'" width="50" /></td>';
+				$html .= '<td><a class="btn btn-danger" onclick="if(confirm(\'Are you sure?\')) return delete_work_exp(this.id);" id="'. $e->id .'"><i class="ti-trash"></i></a></td>';
 				$html .= '</tr>';
 			}
 		}
 		echo $html;
+	}
+
+	public function deleteworkexp(){
+		$id = $this->input->post('id');
+		$configs = array(
+			'tblName' => $this->work_exprence,
+			'where' => array('id'=>$id)
+		);
+		$delete = $this->delete_model->emp_delete($configs);
+		if($delete){
+			$status = 1;
+			$msg = 'Data has been deleted successfully';
+		}else{
+			$status = 0;
+			$msg = 'Query error';
+		}
+		echo json_encode(array('status'=>$status,'msg'=>$msg));
 	}
 
 	public function getachievements(){
@@ -725,7 +757,7 @@ class Employees extends Core_Controller {
 		$bank_data = array(
 			'tblName'=>$this->bank,
 			'where'=> array(
-					'trainer_id'=> $id
+					'employee_id'=> $id
 				)
 		);
 		$bank = $this->select->getResult($bank_data);
@@ -736,11 +768,28 @@ class Employees extends Core_Controller {
 				$html .= '<td>'. $a->bank_name .'</td>';
 				$html .= '<td>'. $a->account_number .'</td>';
 				$html .= '<td>'. $a->ifsc_code .'</td>';
-				$html .= '<td><a class="btn btn-danger" id="'. $a->id .'"><i class="ti-trash"></i></a></td>';
+				$html .= '<td><a class="btn btn-danger" onclick="if(confirm(\'Are you sure?\')) return delete_bank_accounts_details(this.id);" id="'. $a->id .'"><i class="ti-trash"></i></a></td>';
 				$html .= '</tr>';
 			}
 		}
 		echo $html;
+	}
+
+	public function deletebankaccounts(){
+		$id = $this->input->post('id');
+		$configs = array(
+			'tblName' => $this->bank,
+			'where' => array('id'=>$id)
+		);
+		$delete = $this->delete_model->emp_delete($configs);
+		if($delete){
+			$status = 1;
+			$msg = 'Data has been deleted successfully';
+		}else{
+			$status = 0;
+			$msg = 'Query error';
+		}
+		echo json_encode(array('status'=>$status,'msg'=>$msg));
 	}
 
 }

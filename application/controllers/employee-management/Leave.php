@@ -11,6 +11,7 @@ class Leave extends Core_Controller {
 		$this->users='users';
 		$this->weekly_holiday = 'weekly_holiday';
 		$this->country = 'location_countries';
+		$this->leave_apply = 'leave_apply';
 		$this->state = 'location_states';
 		$this->city = 'location_cities';
 		$this->view_path='employee_management/leave/';
@@ -81,11 +82,11 @@ class Leave extends Core_Controller {
     }
 
     public function process_holiday(){
-        $date1_obj = DateTime::createFromFormat('d M, Y', $this->input->post('start_date', true));
-        $date1_new_format = $date1_obj->format('Y-m-d');
+        // $date1_obj = DateTime::createFromFormat('d M, Y', $this->input->post('start_date', true));
+        // $date1_new_format = $date1_obj->format('Y-m-d');
 
-        $date2_obj = DateTime::createFromFormat('d M, Y', $this->input->post('end_date', true));
-        $date2_new_format = $date2_obj->format('Y-m-d');
+        // $date2_obj = DateTime::createFromFormat('d M, Y', $this->input->post('end_date', true));
+        // $date2_new_format = $date2_obj->format('Y-m-d');
 
         $this->form_validation->set_rules('holiday_name', 'Holiday Name', 'required|xss_clean|max_length[200]');
 		if ($this->form_validation->run() == false) {
@@ -108,6 +109,143 @@ class Leave extends Core_Controller {
 			$insert=$this->insert_model->emp_insert_data($configs);
 			if($insert){
 				$this->session->set_flashdata('success', 'Data has been inserted successfully');
+				redirect($this->agent->referrer());
+			}else{
+				$this->session->set_flashdata('errors', 'Query error');
+		     	redirect($this->agent->referrer());
+			}
+		}
+    }
+
+	public function leave_application(){
+        $header['pagecss']="contentCss";
+		$header['title']='Leave Application';
+		$this->load->view('employee_management/partialss/header',$header);
+		$data['allitems']=$this->select->select_table($this->leave_apply,'leave_appl_id','asc');
+		$data['allemployee']=$this->select->select_single_data($this->users,'role','employee');
+		$data['allleavetype']=$this->select->select_table('leave_type_master','id','asc');
+		$this->load->view($this->view_path.'leave_application',$data);
+		$script['pagescript']='contentScript';
+		$this->load->view('employee_management/partialss/footer',$script);
+    }
+
+	public function process_leave_application(){
+        // $date1_obj = DateTime::createFromFormat('d M, Y', $this->input->post('start_date', true));
+        // $date1_new_format = $date1_obj->format('Y-m-d');
+
+        // $date2_obj = DateTime::createFromFormat('d M, Y', $this->input->post('end_date', true));
+        // $date2_new_format = $date2_obj->format('Y-m-d');
+
+        $this->form_validation->set_rules('employee_id', 'Employee', 'required|xss_clean|max_length[200]');
+        $this->form_validation->set_rules('start_date', 'Start Date', 'required|xss_clean|max_length[200]');
+        $this->form_validation->set_rules('end_date', 'End Date', 'required|xss_clean|max_length[200]');
+		if ($this->form_validation->run() == false) {
+			$this->session->set_flashdata('errors', validation_errors());
+			//$this->session->set_flashdata('form_data', $this->auth_model->input_values());
+			redirect($this->agent->referrer());
+		}else{
+			$data=array(
+				'employee_id'=> $this->input->post('employee_id', true),
+				'leave_type_id'=> $this->input->post('leave_type', true),
+				'apply_strt_date'=> $this->input->post('start_date', true),
+				'apply_end_date'=> $this->input->post('end_date', true),
+				'apply_day'=> $this->input->post('no_of_days', true),
+				'reason'=> $this->input->post('reason', true),
+				'apply_date'=> date("Y-m-d"),
+			);
+			$configs = array(
+				'tblName' => $this->leave_apply,
+				'data' => $data
+			);
+			$insert=$this->insert_model->emp_insert_data($configs);
+			if($insert){
+				$this->session->set_flashdata('success', 'Data has been inserted successfully');
+				redirect($this->agent->referrer());
+			}else{
+				$this->session->set_flashdata('errors', 'Query error');
+		     	redirect($this->agent->referrer());
+			}
+		}
+    }
+
+	public function update_leave_status(){
+		$id = $this->uri->segment(4); 
+		$status = $this->uri->segment(5); 
+		$data = array(
+			'status'=>$this->uri->segment(5),
+			'approved_by'=>$this->auth_user->full_name
+		);
+		if($status == 1){
+			$data['approve_date'] = date("Y-m-d");
+			$data['num_aprv_day'] = date("Y-m-d");
+		}
+		$edit_resp = $this->edit_model->edit($data,$id,'leave_appl_id ',$this->leave_apply);
+		if($edit_resp){
+			$this->session->set_flashdata('success', 'Status Updated Successfully');
+			redirect($this->agent->referrer());
+		}else{
+			$this->session->set_flashdata('errors', 'Query error');
+			redirect($this->agent->referrer());
+		}
+	}
+
+	public function delete_leave_application(){
+		$id = $this->uri->segment(4);
+		$configs = array(
+			'tblName' => $this->leave_apply,
+			'where' => array('leave_appl_id'=>$id)
+		);
+		$this->delete_model->emp_delete($configs);
+		$this->session->set_flashdata('success', 'Deleted Successfully');
+		redirect($this->agent->referrer());
+	}
+
+	public function update_leave_application(){
+		$id = $this->uri->segment(4);
+        $header['pagecss']="contentCss";
+		$header['title']='Edit Leave Application';
+		$this->load->view('employee_management/partialss/header',$header);
+		$items=$this->select->select_single_data($this->leave_apply,'leave_appl_id',$id);
+		$data['item'] = $items[0];
+		$data['allemployee']=$this->select->select_single_data($this->users,'role','employee');
+		$data['allleavetype']=$this->select->select_table('leave_type_master','id','asc');
+		$this->load->view($this->view_path.'edit_leave_application',$data);
+		$script['pagescript']='contentScript';
+		$this->load->view('employee_management/partialss/footer',$script);
+    }
+
+	public function process_update_leave_application(){
+        // $date1_obj = DateTime::createFromFormat('d M, Y', $this->input->post('start_date', true));
+        // $date1_new_format = $date1_obj->format('Y-m-d');
+
+        // $date2_obj = DateTime::createFromFormat('d M, Y', $this->input->post('end_date', true));
+        // $date2_new_format = $date2_obj->format('Y-m-d');
+
+        $this->form_validation->set_rules('employee_id', 'Employee', 'required|xss_clean|max_length[200]');
+        $this->form_validation->set_rules('start_date', 'Start Date', 'required|xss_clean|max_length[200]');
+        $this->form_validation->set_rules('end_date', 'End Date', 'required|xss_clean|max_length[200]');
+		if ($this->form_validation->run() == false) {
+			$this->session->set_flashdata('errors', validation_errors());
+			//$this->session->set_flashdata('form_data', $this->auth_model->input_values());
+			redirect($this->agent->referrer());
+		}else{
+			$data=array(
+				'employee_id'=> $this->input->post('employee_id', true),
+				'leave_type_id'=> $this->input->post('leave_type', true),
+				'apply_strt_date'=> $this->input->post('start_date', true),
+				'apply_end_date'=> $this->input->post('end_date', true),
+				'apply_day'=> $this->input->post('no_of_days', true),
+				'reason'=> $this->input->post('reason', true),
+				'apply_date'=> date("Y-m-d"),
+			);
+			$configs = array(
+				'tblName' => $this->leave_apply,
+				'data' => $data,
+				'where' => array('leave_appl_id'=>$this->input->post('leave_id', true))
+			);
+			$update=$this->edit_model->emp_edit($configs);
+			if($update){
+				$this->session->set_flashdata('success', 'Data has been Updated Successfully');
 				redirect($this->agent->referrer());
 			}else{
 				$this->session->set_flashdata('errors', 'Query error');

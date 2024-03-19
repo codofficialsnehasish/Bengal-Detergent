@@ -1,23 +1,24 @@
-<script src="<?= base_url('assets/libs/parsleyjs/parsley.min.js');?>"></script>
+<script src="<?= base_url('assets/admin/libs/parsleyjs/parsley.min.js');?>"></script>
 
-<script src="<?= base_url('assets/js/pages/form-validation.init.js');?>"></script>
+<script src="<?= base_url('assets/admin/js/pages/form-validation.init.js');?>"></script>
 
 <!--tinymce js-->
-<script src="<?= base_url('assets/libs/tinymce/tinymce.min.js');?>"></script>
+<script src="<?= base_url('assets/admin/libs/tinymce/tinymce.min.js');?>"></script>
 
-<script src="<?= base_url('assets/libs/admin-resources/bootstrap-filestyle/bootstrap-filestyle.min.js');?>"></script>
+<script src="<?= base_url('assets/admin/libs/admin-resources/bootstrap-filestyle/bootstrap-filestyle.min.js');?>"></script>
 <!-- init js -->
-<script src="<?= base_url('assets/js/pages/form-editor.init.js');?>"></script>
+<script src="<?= base_url('assets/admin/js/pages/form-editor.init.js');?>"></script>
 
-<script src="<?= base_url('assets/js/pages/form-advanced.init.js');?>"></script>
+<script src="<?= base_url('assets/admin/js/pages/form-advanced.init.js');?>"></script>
 
-<script src="<?= base_url('assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js');?>"></script>
-         <script src="<?= base_url('assets/libs/dropzone/min/dropzone.min.js');?>"></script>
+<script src="<?= base_url('assets/admin/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js');?>"></script>
+<script src="<?= base_url('assets/admin/libs/dropzone/min/dropzone.min.js');?>"></script>
+<script src="<?= base_url('assets/admin/js/pages/sweet-alerts.init.js');?>"></script>
 
 <script>
     $(document).ready(function() {
         const getUrl = window.location;
-        const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1]+"/";
+        const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1]+"/"+getUrl.pathname.split('/')[2]+"/";
         /////////////////////////////get state name
         $("#pr_country_id").on('change', function(){ 
             $("#pr_state_id").html('');
@@ -195,18 +196,19 @@
                 success: function (response) {
                     $('.cinfoBtn').prop("disabled", false);
                     $('.cinfoBtn').html('Save Changes');
-                    //var obj = JSON.parse(response);
-                     console.log(response);
-                    if (response.status == 1) {
+                    var obj = JSON.parse(response);
+                    //  console.log(response);
+                    if (obj.status == 1) {
                         // form[0].reset();  
-                        showToast('success','Success',response.msg);                         
+                        showToast('success','Success',obj.msg);                         
                     }else{
-                        showToast('error','Error',response.msg);
+                        showToast('error','Error',obj.msg);
                     }
                 }
             });
             event.preventDefault();
         }); 
+
 
         //qualification form
         $(document).on("submit", "#qualification", function (event) {
@@ -257,27 +259,27 @@
         }
         qualification();
 
-        function delete_qualification(delid){
-            const getUrl = window.location;
-            const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1]+"/"+getUrl.pathname.split('/')[2]+"/";
-            $.ajax({
-                url: base_url + "employees/deleteQualification",
-                type: "POST",
-                data: {
-                    csrf_modesy_token: getCookie('csrf_modesy_token'),
-                    id: delid
-                },
-                dataType: "html",
-                success: function (response) {
-                    if (response.status == 1) {
-                        qualification();
-                        showToast('success','Success',response.msg);                         
-                    }else{
-                        showToast('error','Error',response.msg);
-                    }
-                }
-            });
-        }
+        // function delete_qualification(delid){
+        //     const getUrl = window.location;
+        //     const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1]+"/"+getUrl.pathname.split('/')[2]+"/";
+        //     $.ajax({
+        //         url: base_url + "employees/deletequalification",
+        //         type: "POST",
+        //         data: {
+        //             csrf_modesy_token: getCookie('csrf_modesy_token'),
+        //             id: delid
+        //         },
+        //         dataType: "html",
+        //         success: function (response) {
+        //             if (response.status == 1) {
+        //                 qualification();
+        //                 showToast('success','Success',response.msg);                         
+        //             }else{
+        //                 showToast('error','Error',response.msg);
+        //             }
+        //         }
+        //     });
+        // }
 
 
         //work exprence form
@@ -286,25 +288,32 @@
             $('.workxpBtn').html('<span class="spinner-border me-1" role="status" aria-hidden="true"></span>Loading...');
             const getUrl = window.location;
             const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1]+"/"+getUrl.pathname.split('/')[2]+"/";
-            var form = $("#workexprenceinfo");
-            var serializedData = form.serializeArray();
-            serializedData.push({name: "csrf_modesy_token", value: getCookie('csrf_modesy_token')});
+            // var form = $("#workexprenceinfo");
+            var form = new FormData($("#workexprenceinfo")[0]);
+            // var serializedData = form.serializeArray();
+            // serializedData.push({name: "csrf_modesy_token", value: getCookie('csrf_modesy_token')});
+            form.append("csrf_modesy_token",getCookie('csrf_modesy_token'));
             $.ajax({
                 url: base_url + "employees/workexprenceinfo",
                 type: "post",
-                data: serializedData,
-                dataType: "json",
+                // data: serializedData,
+                // dataType: "json",
+                data: form,
+                processData: false,
+                contentType: false,
                 success: function (response) {
                     $('.workxpBtn').prop("disabled", false);
                     $('.workxpBtn').html('Save Changes');
                     //var obj = JSON.parse(response);
                      console.log(response);
-                    if (response.status == 1) {
-                           form[0].reset();  
-                           exprence();
-                            showToast('success','Success',response.msg);                         
+                     var dataArray = JSON.parse(response);
+                    if (dataArray.status == 1) {
+                        //    form[0].reset();
+                        $("#workexprenceinfo")[0].reset();  
+                        exprence();
+                        showToast('success','Success',dataArray.msg);                         
                     }else{
-                            showToast('error','Error',response.msg);
+                        showToast('error','Error',dataArray.msg);
                     }
                 }
             });
@@ -312,13 +321,13 @@
         });
         function exprence(){
             const getUrl = window.location;
-            const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1]+"/";
+            const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1]+"/"+getUrl.pathname.split('/')[2]+"/";
             $.ajax({
                 url: base_url + "employees/getworkExprence",
                 type: "POST",
                 data: {
                     csrf_modesy_token: getCookie('csrf_modesy_token'),
-                    id: <?= $this->uri->segment(3); ?>
+                    id: <?= $this->uri->segment(4); ?>
                 },
                 dataType: "html",
                 success: function (resp) {
@@ -332,79 +341,80 @@
 
 
         //achievements form
-        $(document).on("submit", "#achievementsinfo", function (event) {
-            $('.achieveBtn').prop("disabled", true);
-            $('.achieveBtn').html('<span class="spinner-border me-1" role="status" aria-hidden="true"></span>Loading...');
-            const getUrl = window.location;
-            const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1]+"/";
-            var form = $("#achievementsinfo");
-            var serializedData = form.serializeArray();
-            serializedData.push({name: "csrf_modesy_token", value: getCookie('csrf_modesy_token')});
-            $.ajax({
-                url: base_url + "employees/achievementsinfo",
-                type: "post",
-                data: serializedData,
-                dataType: "json",
-                success: function (response) {
-                    $('.achieveBtn').prop("disabled", false);
-                    $('.achieveBtn').html('Save Changes');
-                    //var obj = JSON.parse(response);
-                     console.log(response);
-                    if (response.status == 1) {
-                           form[0].reset();  
-                           achievements();
-                            showToast('success','Success',response.msg);                         
-                    }else{
-                            showToast('error','Error',response.msg);
-                    }
-                }
-            });
-            event.preventDefault();
-        });
-        function achievements(){
-            const getUrl = window.location;
-            const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1]+"/";
-            $.ajax({
-                url: base_url + "employees/getachievements",
-                type: "POST",
-                data: {
-                    csrf_modesy_token: getCookie('csrf_modesy_token'),
-                    id: <?= $this->uri->segment(3); ?>
-                },
-                dataType: "html",
-                success: function (resp) {
-                    $("#achievements").html(resp);
-                }
-            });
-        }
-        achievements();
+        // $(document).on("submit", "#achievementsinfo", function (event) {
+        //     $('.achieveBtn').prop("disabled", true);
+        //     $('.achieveBtn').html('<span class="spinner-border me-1" role="status" aria-hidden="true"></span>Loading...');
+        //     const getUrl = window.location;
+        //     const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1]+"/";
+        //     var form = $("#achievementsinfo");
+        //     var serializedData = form.serializeArray();
+        //     serializedData.push({name: "csrf_modesy_token", value: getCookie('csrf_modesy_token')});
+        //     $.ajax({
+        //         url: base_url + "employees/achievementsinfo",
+        //         type: "post",
+        //         data: serializedData,
+        //         dataType: "json",
+        //         success: function (response) {
+        //             $('.achieveBtn').prop("disabled", false);
+        //             $('.achieveBtn').html('Save Changes');
+        //             //var obj = JSON.parse(response);
+        //              console.log(response);
+        //             if (response.status == 1) {
+        //                    form[0].reset();  
+        //                    achievements();
+        //                     showToast('success','Success',response.msg);                         
+        //             }else{
+        //                     showToast('error','Error',response.msg);
+        //             }
+        //         }
+        //     });
+        //     event.preventDefault();
+        // });
+        // function achievements(){
+        //     const getUrl = window.location;
+        //     const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1]+"/";
+        //     $.ajax({
+        //         url: base_url + "employees/getachievements",
+        //         type: "POST",
+        //         data: {
+        //             csrf_modesy_token: getCookie('csrf_modesy_token'),
+        //             id: <= $this->uri->segment(3); ?>
+        //         },
+        //         dataType: "html",
+        //         success: function (resp) {
+        //             $("#achievements").html(resp);
+        //         }
+        //     });
+        // }
+        // achievements();
 
 
         //bank_account form
-        $(document).on("submit", "#bank_account", function (event) {
+        $(document).on("submit", "#bank_acc_details", function (event) {
             $('.bankBtn').prop("disabled", true);
             $('.bankBtn').html('<span class="spinner-border me-1" role="status" aria-hidden="true"></span>Loading...');
             const getUrl = window.location;
-            const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1]+"/";
-            var form = $("#bank_account");
-            var serializedData = form.serializeArray();
+            const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1]+"/"+getUrl.pathname.split('/')[2]+"/";
+            var formd = $("#bank_acc_details");
+            var serializedData = formd.serializeArray();
             serializedData.push({name: "csrf_modesy_token", value: getCookie('csrf_modesy_token')});
+            console.log(serializedData);
             $.ajax({
-                url: base_url + "trainer/bankinfo",
+                url: base_url + "employees/bankinfo",
                 type: "post",
                 data: serializedData,
-                dataType: "json",
+                dataType: "html",
                 success: function (response) {
                     $('.bankBtn').prop("disabled", false);
                     $('.bankBtn').html('Save Changes');
-                    //var obj = JSON.parse(response);
-                     console.log(response);
-                    if (response.status == 1) {
-                           form[0].reset();  
-                           bankaccounts();
-                            showToast('success','Success',response.msg);                         
+                    var obj = JSON.parse(response);
+                    if (obj.status == 1) {
+                        // form[0].reset(); 
+                        $("#bank_acc_details")[0].reset();  
+                        bankaccounts();
+                        showToast('success','Success',obj.msg);                         
                     }else{
-                            showToast('error','Error',response.msg);
+                        showToast('error','Error',obj.msg);
                     }
                 }
             });
@@ -412,13 +422,13 @@
         });
         function bankaccounts(){
             const getUrl = window.location;
-            const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1]+"/";
+            const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1]+"/"+getUrl.pathname.split('/')[2]+"/";
             $.ajax({
-                url: base_url + "trainer/getbankaccounts",
+                url: base_url + "employees/getbankaccounts",
                 type: "POST",
                 data: {
                     csrf_modesy_token: getCookie('csrf_modesy_token'),
-                    id: <?= $this->uri->segment(3); ?>
+                    id: <?= $this->uri->segment(4); ?>
                 },
                 dataType: "html",
                 success: function (resp) {

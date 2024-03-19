@@ -3,19 +3,13 @@
         <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
             <thead>
                 <tr>
-                    <th>GYM Name</th>
+                    <th>Company Name</th>
                     <th>Experience</th>
                     <th>Sertificate</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody id="work_exprence">
-            <tr>
-                <td>Zorita Serrano</td>
-                <td>Software Engineer</td>
-                <td>San Francisco</td>
-                <td></td>
-            </tr>
             </tbody>
         </table>
    </div>
@@ -26,9 +20,9 @@
         <h4 class="card-title">Add New Experience</h4>
         <p class="card-title-desc">&nbsp;</p>
         <form class="row g-3 custom-validation" id="workexprenceinfo" method="post" novalidate>
-        <input type="hidden" name="trainer_id" value="<?= $this->uri->segment(3); ?>" >
+        <input type="hidden" name="trainer_id" value="<?= $this->uri->segment(4); ?>" >
             <div class="col-md-12">
-                <label for="validationCustom01" class="form-label">GYM Name</label>
+                <label for="validationCustom01" class="form-label">Company Name</label>
                 <input type="integer" class="form-control" name="name" id="validationCustom01" placeholder="Mark" required>
                 <div class="valid-feedback">
                     Looks good!
@@ -57,11 +51,8 @@
                 </div>
             </div>
             <div class="col-md-6 mb-0">
-                <div class="mt-4 mt-md-0">
-                    <img class="rounded" alt="200x200" src="<?= base_url('admin/assets/images/users/user-4.jpg') ?>" data-holder-rendered="true">
-                </div>
                 <label class="form-label">Sertificate (if any)</label>
-                <input type="file" class="filestyle" data-input="false" data-buttonname="btn-secondary">
+                <input type="file" name="sertificate" class="filestyle" data-buttonname="btn-secondary">
             </div>
 
             <div class="col-12">
@@ -70,3 +61,43 @@
         </form>
     </div>
 </div>
+
+
+
+<script>
+    function delete_work_exp(delid){
+        const getUrl = window.location;
+        const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1]+"/"+getUrl.pathname.split('/')[2]+"/";
+        $.ajax({
+            url: base_url + "employees/deleteworkexp",
+            type: "POST",
+            data: {
+                csrf_modesy_token: getCookie('csrf_modesy_token'),
+                id: delid
+            },
+            dataType: "html",
+            success: function (response) {
+                var dataArray = JSON.parse(response);
+                if (dataArray.status == 1) {
+                    $.ajax({
+                        url: base_url + "employees/getworkExprence",
+                        type: "POST",
+                        data: {
+                            csrf_modesy_token: getCookie('csrf_modesy_token'),
+                            id: <?= $this->uri->segment(4); ?>
+                        },
+                        dataType: "html",
+                        success: function (resp) {
+                            $("#work_exprence").html(resp);
+                        }
+                    });
+                    showToast('success','Success',dataArray.msg);     
+
+                }else{
+                    showToast('error','Error',dataArray.msg);
+                }
+            }
+        });
+    } 
+
+</script>
