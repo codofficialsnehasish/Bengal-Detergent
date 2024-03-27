@@ -119,3 +119,11 @@ $route['payment']='cart_controller/payment';
 
 //$route['paymentmethod']='cart_controller/subscription_payment_method';
 //$route['payment-processing']='cart_controller/subscription_payment_processing';
+
+
+
+
+//employee management
+$route['employee-according-designation']='employee-management/payroll/employee_according_designation';
+$route['get-salary-config-by-employe-id']='employee-management/payroll/get_salary_config_by_employee_id';
+$route['check-employee-payslip-created-or-not']='employee-management/payroll/check_employee_payslip_created_or_not';

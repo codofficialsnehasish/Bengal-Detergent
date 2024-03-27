@@ -226,19 +226,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		function getResult($params = array()){
 			$this->db->select('*');
 			if(array_key_exists("tblName",$params)){
-			$this->db->from($params['tblName']);
-		}
-		//fetch data by conditions
-        if(array_key_exists("where",$params)){
-            foreach ($params['where'] as $key => $value){
-                $this->db->where($key,$value);
-            }
-        }
+				$this->db->from($params['tblName']);
+			}
+			//fetch data by conditions
+			if(array_key_exists("where",$params)){
+				foreach ($params['where'] as $key => $value){
+					$this->db->where($key,$value);
+				}
+			}
 		
-		if(array_key_exists("order_by",$params)){
-			//$this->db->order_by($params['order_by']);
-			$this->db->order_by($params['order_by'],$params['order']);
-		}
+			if(array_key_exists("order_by",$params)){
+				//$this->db->order_by($params['order_by']);
+				$this->db->order_by($params['order_by'],$params['order']);
+			}
 		
         if(array_key_exists("single",$params)){
             $this->db->where($params['single']);

@@ -128,8 +128,7 @@ class Employees extends Core_Controller {
 	}
 
 
-	public function process()
-	{
+	public function process(){
 		// print_r($this->input->post());
 		$this->form_validation->set_rules('first_name', 'Title', 'required|xss_clean|max_length[200]');
 		if ($this->form_validation->run() == false) {
@@ -642,7 +641,7 @@ class Employees extends Core_Controller {
 					'user_id'=> $this->input->post('user_id', true)
 				)
 			);
-			$salary_configs= $this->select->getResult($salary_config)[0];
+			$salary_configs= $this->select->getResult($salary_config);
 			if(!empty($salary_configs)){
 				$configs = array(
 					'tblName' => $this->salary_configuration,
