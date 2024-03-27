@@ -210,7 +210,7 @@
                               <?php if(!empty($employee)):
                                  foreach($employee as $designatin):
                               ?>
-                              <option value="<?= $designatin->id;?>"><?= $designatin->full_name;?></option>
+                              <option value="<?= $designatin->id;?>" <?= $item->tl_id == $designatin->id?'selected':''; ?>><?= $designatin->full_name;?></option>
                               <?php 
                                  endforeach;
                               endif;?>

@@ -74,6 +74,14 @@ class Dristributor extends Core_Controller {
 		$this->load->view('admin/partials/header',$header);
 		$sellerArray=$this->select->select_single_data($this->table_name,'id',$id);
 		$data['item']=$sellerArray[0];
+		$designationdata = array(
+			'tblName' => 'users',
+			'where' => array(
+					'role'=>'employee',
+					'status'=>1
+				)
+		);
+		$data['employee']= $this->select->getResult($designationdata);
 		$this->load->view($this->view_path.'edit',$data);
 		$script['pagescript']='formScript';
 		$this->load->view('admin/partials/footer',$script);
@@ -107,7 +115,8 @@ class Dristributor extends Core_Controller {
 				'pan_no'=>$this->input->post('pan_no', true),
 				'gst_no'=>$this->input->post('gst_no', true),
 				'trade_licence_no'=>$this->input->post('trade_license', true),
-				'prefarable_zip_code'=>$this->input->post('prefer_pin', true)
+				'prefarable_zip_code'=>$this->input->post('prefer_pin', true),
+				'tl_id'=>$this->input->post('tl_id', true)
 
 			);
 
@@ -204,6 +213,7 @@ class Dristributor extends Core_Controller {
 				'prefarable_zip_code'=>$this->input->post('prefer_pin', true),
 				'role'=>'dristributor',
 				'is_approved'=>1,
+				'tl_id'=>$this->input->post('tl_id', true),
 				'password'=>$this->input->post('password', true)
 			);
 			$this->load->library('bcrypt');

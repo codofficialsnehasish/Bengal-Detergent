@@ -10,6 +10,7 @@ class Employees extends Core_Controller {
 		$this->employee='employee';
 		$this->users='users';
 		$this->employee_qualification = 'employee_qualification';
+		$this->salary_configuration = 'salary_configuration';
 		$this->work_exprence = 'work_exprence';
 		$this->bank = 'bank';
 		$this->country = 'location_countries';
@@ -214,6 +215,19 @@ class Employees extends Core_Controller {
 		$this->load->view('employee_management/partialss/header',$header);
         $user=$this->auth_model->get_user_by_id($id);
 		$data['user']=$user;
+
+		$salary_config = array(
+			'tblName'=>$this->salary_configuration,
+			'where'=> array(
+				'user_id'=> $id
+			)
+		);
+		$salary_configs= $this->select->getResult($salary_config);
+		if(!empty($salary_configs[0])){
+			$data['salary_config']= $this->select->getResult($salary_config)[0];
+		}else{
+			$data['salary_config']= $this->select->getResult($salary_config);
+		}
 
         $stateCon = array(
 			'tblName'=>$this->state,
@@ -607,34 +621,51 @@ class Employees extends Core_Controller {
 		echo json_encode(array('status'=>$status,'msg'=>$msg));
 	}
 
-	public function update_process()
-	{
-		$id=$this->uri->segment(3);
-		$this->form_validation->set_rules('name', 'Title', 'required|xss_clean|max_length[200]');
+	public function salary_configuration(){
+		$this->form_validation->set_rules('base_salary', 'Base Salary', 'required|xss_clean|max_length[200]');
 		if ($this->form_validation->run() == false) {
-			$this->session->set_flashdata('errors', validation_errors());
-			//$this->session->set_flashdata('form_data', $this->auth_model->input_values());
-			redirect($this->agent->referrer());
+			$status = 0;
+			$msg = validation_errors();
 		}else{
 			$data=array(
-				'name'=> $this->input->post('name', true),
-				'is_visible'=> $this->input->post('is_visible', true),
-				'created_at'=> $this->currentTime
+				'user_id'=>$this->input->post('user_id', true),
+				'base_salary'=> $this->input->post('base_salary', true),
+				'provident_fund'=> $this->input->post('provident_fund', true),
+				'health_insurance'=> $this->input->post('health_insurance', true),
+				'income_tax'=> $this->input->post('income_tax', true),
+				'other_deductions'=> $this->input->post('other_deductions', true),
+				'paying_in_hand'=> $this->input->post('paying_in_hand', true),
 			);
-			$configs = array(
-				'tblName' => $this->employee,
-				'data' => $data,
-				'where' => array('id'=>$id)
+			$salary_config = array(
+				'tblName'=>$this->salary_configuration,
+				'where'=> array(
+					'user_id'=> $this->input->post('user_id', true)
+				)
 			);
-			$update=$this->edit_model->edit($configs);
-			if($update){
-				$this->session->set_flashdata('success', 'Data has been updated successfully');
-				redirect($this->agent->referrer());
+			$salary_configs= $this->select->getResult($salary_config)[0];
+			if(!empty($salary_configs)){
+				$configs = array(
+					'tblName' => $this->salary_configuration,
+					'data' => $data,
+					'where' => array('user_id'=>$this->input->post('user_id', true))
+				);
+				$update=$this->edit_model->emp_edit($configs);
 			}else{
-				$this->session->set_flashdata('errors', 'Query error');
-		     	redirect($this->agent->referrer());
+				$configs = array(
+					'tblName' => $this->salary_configuration,
+					'data' => $data
+				);
+				$update=$this->insert_model->emp_insert_data($configs);
+			}
+			if($update){
+			    $status = 1;
+			    $msg = 'Data has been updated successfully';
+			}else{
+			    $status = 0;
+			    $msg = 'Query error';
 			}
 		}
+		echo json_encode(array('status'=>$status,'msg'=>$msg));
 	}
 
 	public function delete(){

@@ -89,7 +89,7 @@
                 </div>
             </div>
             <div class="profile-footer">
-                <button class="btn btn-primary">Edit Profile</button>
+                <a href="<?= employee_url('employees/details/'.$userdata->id); ?>" class="btn btn-primary">Edit Profile</a>
             </div>
         </div>
     </div>

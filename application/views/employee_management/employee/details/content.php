@@ -38,8 +38,9 @@
                             <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#qualification_details" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">Qualification</button>
                             <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#work_experience" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Work Experience</button>
                             <!-- <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#achievements_details" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Achievements</button> -->
+                            <button class="nav-link " id="v-salary_configuration-tab" data-bs-toggle="pill" data-bs-target="#salary_configuration" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Salary Configuration</button>
                             <button class="nav-link " id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#bank_details" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Bank Account</button>
-                            <!-- <button class="nav-link " id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#emergency_contacts" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Login Details</button> -->
+                            <!-- <button class="nav-link " id="v-login-details-tab" data-bs-toggle="pill" data-bs-target="#login_details" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Login Details</button> -->
                             <!-- <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Change Password</button> -->
                             <!-- <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">User Role</button> -->
                         </div>
@@ -56,9 +57,6 @@
                             <div class="tab-pane fade" id="bank_details" role="tabpanel" aria-labelledby="bank_details-tab">
                                 <?php $this->load->view('employee_management/employee/details/_bankAccount');?>
                             </div>
-
-
-
                             <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                                 <?php $this->load->view('employee_management/employee/details/_basicinfo');?>
                             </div>
@@ -71,7 +69,14 @@
                             <div class="tab-pane fade" id="contact_details" role="tabpanel" aria-labelledby="v-contact-details-tab">
                                 <?php $this->load->view('employee_management/employee/details/_contactDetails');?>
                             </div>
-                            
+                            <div class="tab-pane fade" id="salary_configuration" role="tabpanel" aria-labelledby="v-salary_configuration-tab">
+                                <?php $this->load->view('employee_management/employee/details/_salaryConfiguration');?>
+                            </div>
+                            <div class="tab-pane fade" id="login_details" role="tabpanel" aria-labelledby="v-login-details-tab">
+                                <?php $this->load->view('employee_management/employee/details/_loginDetails');?>
+                            </div>
+
+
                         </div>
                     </div>
 

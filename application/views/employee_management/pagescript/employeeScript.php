@@ -145,6 +145,36 @@
             event.preventDefault();
         });
 
+        //salary configaration form
+        $(document).on("submit", "#salaryconfigForm", function (event) {
+            $('.sinfoBtn').prop("disabled", true);
+            $('.sinfoBtn').html('<span class="spinner-border me-1" role="status" aria-hidden="true"></span>Loading...');
+            const getUrl = window.location;
+            const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1]+"/" + getUrl.pathname.split('/')[2]+"/";
+            var form = $("#salaryconfigForm");
+            var serializedData = form.serializeArray();
+            serializedData.push({name: "csrf_modesy_token", value: getCookie('csrf_modesy_token')});
+            $.ajax({
+                url: base_url + "employees/salary-configuration",
+                type: "post",
+                data: serializedData,
+                dataType: "json",
+                success: function (response) {
+                    $('.sinfoBtn').prop("disabled", false);
+                    $('.sinfoBtn').html('Save Changes');
+                    //var obj = JSON.parse(response);
+                     console.log(response);
+                    if (response.status == 1) {
+                           // form[0].reset();  
+                            showToast('success','Success',response.msg);                         
+                    }else{
+                            showToast('error','Error',response.msg);
+                    }
+                }
+            });
+            event.preventDefault();
+        });
+
  
         // contact form   
         $(document).on("submit", "#contactInfoForm", function (event) {

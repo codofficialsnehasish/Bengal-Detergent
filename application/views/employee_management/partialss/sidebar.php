@@ -153,10 +153,16 @@
                 </li>
 
                 <li class="<?= active_menu('payroll');?>">
-                    <a href="javascript: void(0);" class=" waves-effect <?= active_menu('payroll');?>">
+                    <a href="javascript: void(0);" class="has-arrow waves-effect <?= active_menu('payroll');?>">
                         <i class="far fa-money-bill-alt"></i>
                         <span>Payroll</span>
                     </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li class="<?= emp_tab_active('payroll');?>">
+                            <a href="<?= employee_url('payroll/create-payslip')?>" class="<?= emp_active_link('create-payslip');?>">Create Payslip</a>
+                            <a href="<?= employee_url('payroll/')?>" class="<?= emp_active_link('payslip');?>">Payslip List</a>
+                        </li>
+                    </ul>
                 </li>
 
 

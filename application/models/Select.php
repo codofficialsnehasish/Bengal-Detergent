@@ -224,9 +224,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	  }
 	//////////////////////////////////////////////////////////////
 		function getResult($params = array()){
-        $this->db->select('*');
-		if(array_key_exists("tblName",$params)){
-        $this->db->from($params['tblName']);
+			$this->db->select('*');
+			if(array_key_exists("tblName",$params)){
+			$this->db->from($params['tblName']);
 		}
 		//fetch data by conditions
         if(array_key_exists("where",$params)){
