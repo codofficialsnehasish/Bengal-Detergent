@@ -144,26 +144,35 @@ class Leave extends Core_Controller {
 			//$this->session->set_flashdata('form_data', $this->auth_model->input_values());
 			redirect($this->agent->referrer());
 		}else{
-			$data=array(
-				'employee_id'=> $this->input->post('employee_id', true),
-				'leave_type_id'=> $this->input->post('leave_type', true),
-				'apply_strt_date'=> $this->input->post('start_date', true),
-				'apply_end_date'=> $this->input->post('end_date', true),
-				'apply_day'=> $this->input->post('no_of_days', true),
-				'reason'=> $this->input->post('reason', true),
-				'apply_date'=> date("Y-m-d"),
-			);
-			$configs = array(
-				'tblName' => $this->leave_apply,
-				'data' => $data
-			);
-			$insert=$this->insert_model->emp_insert_data($configs);
-			if($insert){
-				$this->session->set_flashdata('success', 'Data has been inserted successfully');
-				redirect($this->agent->referrer());
-			}else{
-				$this->session->set_flashdata('errors', 'Query error');
+			$total_leave_type = get_pending_leave_type_of_employee($this->input->post('employee_id', true), $this->input->post('leave_type', true));
+			$approved_leave = calculate_approved_leave($this->input->post('employee_id', true), $this->input->post('leave_type', true));
+			$leave_type_name = get_name("leave_type_master",$this->input->post('leave_type', true));
+			if(abs($total_leave_type-$approved_leave) < $this->input->post('no_of_days', true)){
+				$masage = "You have only ".abs($total_leave_type - $approved_leave)." day ".$leave_type_name." avaliable";
+				$this->session->set_flashdata('error', $masage);
 		     	redirect($this->agent->referrer());
+			}else{
+				$data=array(
+					'employee_id'=> $this->input->post('employee_id', true),
+					'leave_type_id'=> $this->input->post('leave_type', true),
+					'apply_strt_date'=> $this->input->post('start_date', true),
+					'apply_end_date'=> $this->input->post('end_date', true),
+					'apply_day'=> $this->input->post('no_of_days', true),
+					'reason'=> $this->input->post('reason', true),
+					'apply_date'=> date("Y-m-d"),
+				);
+				$configs = array(
+					'tblName' => $this->leave_apply,
+					'data' => $data
+				);
+				$insert=$this->insert_model->emp_insert_data($configs);
+				if($insert){
+					$this->session->set_flashdata('success', 'Data has been inserted successfully');
+					redirect($this->agent->referrer());
+				}else{
+					$this->session->set_flashdata('errors', 'Query error');
+					redirect($this->agent->referrer());
+				}		
 			}
 		}
     }
@@ -175,10 +184,10 @@ class Leave extends Core_Controller {
 			'status'=>$this->uri->segment(5),
 			'approved_by'=>$this->auth_user->full_name
 		);
-		if($status == 1){
-			$data['approve_date'] = date("Y-m-d");
-			$data['num_aprv_day'] = date("Y-m-d");
-		}
+		// if($status == 1){
+		// 	$data['approve_date'] = date("Y-m-d");
+		// 	$data['num_aprv_day'] = date("Y-m-d");
+		// }
 		$edit_resp = $this->edit_model->edit($data,$id,'leave_appl_id ',$this->leave_apply);
 		if($edit_resp){
 			$this->session->set_flashdata('success', 'Status Updated Successfully');
@@ -188,6 +197,29 @@ class Leave extends Core_Controller {
 			redirect($this->agent->referrer());
 		}
 	}
+
+
+	//======================= processing leave application ======================
+	public function process_leave_approve(){
+		$id = $this->input->post('leave_id');
+		$data = array(
+			'status'=>1,
+			'approve_date'=>date("Y-m-d"),
+			'num_aprv_day'=>$this->input->post('approved_days'),
+			'approved_by'=>$this->auth_user->full_name
+		);
+		$edit_resp = $this->edit_model->edit($data,$id,'leave_appl_id ',$this->leave_apply);
+		if($edit_resp){
+			$this->session->set_flashdata('success', 'Status Updated Successfully');
+			redirect($this->agent->referrer());
+		}else{
+			$this->session->set_flashdata('errors', 'Query error');
+			redirect($this->agent->referrer());
+		}
+	}
+	//======================= processing leave application ======================
+
+
 
 	public function delete_leave_application(){
 		$id = $this->uri->segment(4);
@@ -253,4 +285,32 @@ class Leave extends Core_Controller {
 			}
 		}
     }
+
+
+
+	//========== for employee leave from employee personal profile ==============
+
+	public function emp_leave(){
+		$header['pagecss']="contentCss";
+		$header['title']='Leave';
+		$this->load->view('admin/partials/header',$header);
+        $data['allitems']=$this->select->select_single_data($this->leave_apply,'employee_id',$this->auth_user->id);
+		$data['allleavetype']=$this->select->select_table('leave_type_master','id','asc');
+		$this->load->view($this->view_path.'emp_leave',$data);
+		$script['pagescript']='contentScript';
+		$this->load->view('admin/partials/footer',$script);
+	}
+
+	public function check_pending_leaves(){
+		$emp_id = $this->input->post('emp_id');
+		$leave_id = $this->input->post('leave');
+		$leave = get_employee_total_leave($emp_id);
+		$total_leave_type = get_pending_leave_type_of_employee($emp_id, $leave_id);
+		$approved_leave = calculate_approved_leave($emp_id, $leave_id);
+		$leave_type_name = get_name("leave_type_master",$leave_id);
+		$masage = "You have ".abs($total_leave_type - $approved_leave)." ".$leave_type_name." avaliable, out of ".$total_leave_type;
+		echo json_encode($masage);
+	}
+
+	//========== for employee leave from employee personal profile ==============
 }

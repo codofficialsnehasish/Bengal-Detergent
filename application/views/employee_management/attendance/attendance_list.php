@@ -44,17 +44,16 @@
                                                 </tr>
                                             </thead>
 
-
                                             <tbody>
                                                 <?php
                                                 foreach($all_attendance as $item):?>
                                                 <tr>
-                                                    <td><?= $item->user_id;?></td>
+                                                    <td><?= get_user_name($item->user_id);?></td>
                                                     <td><?= $item->date;?></td>
                                                     <td><?= $item->check_in_time;?></td>
-                                                    <td><?= $item->check_in_location;?></td>
+                                                    <td class="text-wrap"><?= $item->check_in_location;?></td>
                                                     <td><?= $item->check_out_time;?></td>
-                                                    <td><?= $item->check_out_location;?></td>
+                                                    <td class="text-wrap"><?= $item->check_out_location;?></td>
                                                     <td><?= $item->stay_time;?></td>
                                                     <td><?= $item->status;?></td>
                                                     <td>

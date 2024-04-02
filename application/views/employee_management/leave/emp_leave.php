@@ -31,9 +31,8 @@
                 <div class="col-md-4">
                     <div class="float-end d-none d-md-block">
                         <div class="dropdown">
-                            <a href="javascript:void(0)" class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="modal"
-                                        data-bs-target=".bs-example-modal-lg">
-                            <i class="fas fa-plus me-2"></i> Add New
+                            <a href="javascript:void(0)" class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg">
+                                <i class="fas fa-plus me-2"></i> Leave Apply
                             </a>
                         </div>
                     </div>
@@ -54,30 +53,15 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="row mb-3">
-                                    <label for="employee_id" class="col-sm-4 col-form-label">Employee</label>
+                                    <!-- <label for="employee_id" class="col-sm-4 col-form-label">Employee</label> -->
                                     <div class="col-sm-8">
-                                        <select class="form-select" name="employee_id" id="employee_id" required>
-                                            <option selected disabled value="">Choose...</option>
-                                            <?php if(!empty($allemployee)):
-                                                foreach($allemployee as $emp):
-                                            ?>
-                                            <option value="<?= $emp->id;?>"><?= $emp->full_name;?></option>
-                                            <?php 
-                                                endforeach;
-                                            endif;?>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="example-text-input" class="col-sm-4 col-form-label">No of Days</label>
-                                    <div class="col-sm-8">
-                                        <input class="form-control" name="no_of_days" type="text" id="no_of_days" readonly>
+                                        <input type="hidden" name="employee_id" value="<?= $this->auth_user->id; ?>" id="employee_id" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="leave_type" class="col-sm-4 col-form-label">Leave Type</label>
                                     <div class="col-sm-8">
-                                        <select class="form-select" name="leave_type" id="leave_type" required>
+                                        <select class="form-select mb-2" name="leave_type" id="leave_type" required onchange="calculate_leave()">
                                             <option selected disabled value="">Choose...</option>
                                             <?php if(!empty($allleavetype)):
                                                 foreach($allleavetype as $leavet):
@@ -87,7 +71,14 @@
                                                 endforeach;
                                             endif;?>
                                         </select>
+                                        <b class="text-success pt-2" id="msg-text"></b>
                                     </div> 
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="example-text-input" class="col-sm-4 col-form-label">No of Days</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" name="no_of_days" type="text" id="no_of_days" readonly>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -127,10 +118,8 @@
                                     <th>Approved Days</th>
                                     <th>Status</th>
                                     <th>Action</th>
-                                    <th>Approved</th>
                                 </tr>
                             </thead>
-
 
                             <tbody>
                                 <?php
@@ -154,26 +143,16 @@
                                         <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#myModal<?= $item->leave_appl_id; ?>" class="btn btn-xs btn-info leaveView m-r-2 mx-1 my-1" data-id="4">
                                             <i class="fa fa-eye"></i>
                                         </a> 
-                                        <a href="<?= employee_url('leave/update-leave-application/'.$item->leave_appl_id) ?>" class="btn btn-xs btn-primary m-r-2 mx-1 my-1">
+                                        <?php if($item->status != 2 && $item->status != 1 && $item->status != -1){ ?>
+                                        <!-- <a href="<?= employee_url('leave/update-leave-application/'.$item->leave_appl_id) ?>" class="btn btn-xs btn-primary m-r-2 mx-1 my-1">
                                             <i class="fa fa-edit"></i>
-                                        </a>
+                                        </a> -->
+                                        <?php } ?>
+                                        <?php if($item->status != 2 && $item->status != 1 && $item->status != -1){ ?>
                                         <a href="<?= employee_url('leave/delete-leave-application/'.$item->leave_appl_id) ?>" onclick="return confirm('Are You Sure?');" class="btn btn-xs btn-danger deleteAction mx-1 my-1" data-id="4">
                                             <i class="fa fa-trash" data-toggle="tooltip" data-placement="top" title="Delete"></i>
                                         </a> 
-                                    </td>
-                                    <td class="text-wrap">
-                                        <?php
-                                            if($item->status == 0){ ?>
-                                                <a href="<?= employee_url('leave/update-leave-status/'.$item->leave_appl_id.'/2');?>" onclick="return confirm('Are You Sure?');" class="btn btn-info mx-1 my-1">In Progress</a>
-                                                <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#staticBackdrop<?= $item->leave_appl_id; ?>" class="btn btn-success mx-1 my-1">Approved</a>
-                                                <a href="<?= employee_url('leave/update-leave-status/'.$item->leave_appl_id.'/-1');?>" onclick="return confirm('Are You Sure?');" class="btn btn-danger mx-1 my-1">Cancel</a>
-                                        <?php
-                                            }elseif($item->status == 2){ ?>
-                                                <a href="<?= employee_url('leave/update-leave-status/'.$item->leave_appl_id.'/1');?>" onclick="return confirm('Are You Sure?');" class="btn btn-success mx-1 my-1">Approved</a>
-                                                <a href="<?= employee_url('leave/update-leave-status/'.$item->leave_appl_id.'/-1');?>" onclick="return confirm('Are You Sure?');" class="btn btn-danger mx-1 my-1">Cancel</a>
-                                        <?php
-                                            } 
-                                        ?>
+                                        <?php } ?>
                                     </td>
                                 </tr>
                                 <div id="myModal<?= $item->leave_appl_id; ?>" class="modal fade" tabindex="-1" role="dialog"
@@ -216,49 +195,15 @@
                                     </div>
                                     <!-- /.modal-dialog -->
                                 </div>
-
-                                <div class="modal fade" id="staticBackdrop<?= $item->leave_appl_id; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="staticBackdropLabel">Leave Approval</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <?= form_open_multipart('employee-management/leave/process-leave-approve', 'class="custom-validation"');?>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <input type="hidden" name="leave_id" value="<?= $item->leave_appl_id ?>">
-                                                        <div class="row mb-3">
-                                                            <label for="approved_days" class="col-sm-4 col-form-label">Total Approved Days</label>
-                                                            <div class="col-sm-8">
-                                                                <input class="form-control" name="approved_days" type="text" id="approved_days" value="<?= $item->apply_day;?>" required>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Approve Leave</button>
-                                            </div>
-                                            <?= form_close();?>
-                                        </div>
-                                        <!-- /.modal-content -->
-                                    </div>
-                                    <!-- /.modal-dialog -->
-                                </div>
                                 <?php endforeach;?>
                                 
                             </tbody>
                         </table>
-
                     </div>
                 </div>
-            </div> <!-- end col -->
-        </div> <!-- end row -->
-
-    </div> <!-- container-fluid -->
+            </div>
+        </div>
+    </div>
 </div>
 
 <script> 
@@ -275,4 +220,30 @@
             $('#no_of_days').val('');
         }
     }
+
+    // $(document).ready(function() {
+        // const getUrl = window.location;
+        // const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1]+"/";
+
+        // $("#leave_type").on('change', function(){ 
+            function calculate_leave(){
+            $("#msg-text").html('');
+            var employee_id = $("#employee_id").val();
+            var leave_type = $("#leave_type").val();
+            // const designationid= $(this).val();
+            $.ajax({
+                url : "<?= base_url('check-pending-leaves')?>",
+                data:{emp_id : employee_id, leave : leave_type, csrf_modesy_token:getCookie('csrf_modesy_token')},
+                method:'post',
+                dataType:'json',
+                beforeSend: function(){
+                    $('#msg-text').html('Calculating pending leave......'); 
+                },
+                success:function(response) {
+                    $('#msg-text').html(response);
+                }
+            });
+        }
+        // });
+    // });
 </script>

@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-body">
         <h4 class="card-title">Contact Information</h4>
-        <p class="card-title-desc">Jhon Doe</p>
+        <p class="card-title-desc"><?= $user->full_name;?></p>
     
         <form class="row g-3 needs-validation" id="contactInfoForm" method="post" novalidate>
         <input type="hidden" name="user_id" value="<?= $this->uri->segment(4);?>" />

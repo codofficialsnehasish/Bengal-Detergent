@@ -97,3 +97,80 @@ if (!function_exists('formated_date')) {
 		return $formatedDate;
     }
 }
+
+if(!function_exists('get_employee_designation')){
+    function get_employee_designation($emp_id){
+        $ci =& get_instance();
+        $ci->db->select('designation');
+        $ci->db->from('users');
+        $ci->db->where('users.id', $emp_id);
+        $query = $ci->db->get();
+        $result = $query->row();
+
+        if ($result) {
+            return $result->designation;
+        } else {
+            return null;
+        }
+    }
+}
+
+if(!function_exists('get_employee_total_leave')){
+    function get_employee_total_leave($emp_id){
+        $des_id = get_employee_designation($emp_id);
+        $ci =& get_instance();
+        $ci->db->select_sum('no_of_days', 'total_leave');
+        $ci->db->from('leave_according_designation');
+        $ci->db->where('designation_id', $des_id);
+        $query = $ci->db->get();
+        $result = $query->row();
+        return $result->total_leave;
+    }
+}
+
+if(!function_exists('get_pending_leave_type_of_employee')){
+    function get_pending_leave_type_of_employee($emp_id,$leave_id){
+        $des_id = get_employee_designation($emp_id);
+        $ci =& get_instance();
+        $ci->db->select_sum('no_of_days', 'pending_leave');
+        $ci->db->from('leave_according_designation');
+        $ci->db->where('designation_id', $des_id);
+        $ci->db->where('leave_id', $leave_id);
+        $query = $ci->db->get();
+        $result = $query->row();
+        return $result->pending_leave;
+    }
+}
+
+if(!function_exists('calculate_approved_leave')){
+    function calculate_approved_leave($emp_id, $leave_id){
+        $ci =& get_instance();
+        $ci->db->select_sum('num_aprv_day', 'total_approve_leave');
+        $ci->db->from('leave_apply');
+        $ci->db->where('employee_id', $emp_id);
+        $ci->db->where('leave_type_id', $leave_id);
+        $query = $ci->db->get();
+        $result = $query->row();
+        return $result->total_approve_leave;
+    }
+}
+
+if(!function_exists('check_todays_attendance')){
+    function check_todays_attendance($emp_id){
+        $ci =& get_instance();
+        $ci->db->select('status');
+        $ci->db->from('attendance_employee');
+        $ci->db->where('user_id', $emp_id);
+        $ci->db->where('date', 'CURDATE()', false);
+        $ci->db->order_by('date', 'desc');
+        $ci->db->limit(1);
+        $query = $ci->db->get();
+        $result = $query->row();
+
+        if ($result) {
+            return $result->status;
+        } else {
+            return "null";
+        }
+    }
+}

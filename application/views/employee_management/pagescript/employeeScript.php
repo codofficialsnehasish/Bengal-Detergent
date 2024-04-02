@@ -18,7 +18,7 @@
 <script>
     $(document).ready(function() {
         const getUrl = window.location;
-        const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1]+"/"+getUrl.pathname.split('/')[2]+"/";
+        const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1]+"/";
         /////////////////////////////get state name
         $("#pr_country_id").on('change', function(){ 
             $("#pr_state_id").html('');
@@ -33,7 +33,8 @@
                        $('#pr_state_id').html('<option value="">Loading...</option>'); 
                     },
                 success:function(response) {
-                    console.log(response);
+                    // console.log(response);
+                    $("#pr_state_id").html('');
                     $("#pr_state_id").append('<option selected disabled value="">Choose...</option>');
                     $.each(response , function(index, item) { 
                     $("#pr_state_id").append('<option value="'+item.id+'">'+item.name+'</option>');
@@ -56,7 +57,8 @@
                         $('#pm_state_id').html('<option value="">Loading...</option>'); 
                     },
                 success:function(response) {
-                    console.log(response);
+                    // console.log(response);
+                    $("#pm_state_id").html('');
                     $("#pm_state_id").append('<option selected disabled value="">Choose...</option>');
                     $.each(response , function(index, item) { 
                     $("#pm_state_id").append('<option value="'+item.id+'">'+item.name+'</option>');

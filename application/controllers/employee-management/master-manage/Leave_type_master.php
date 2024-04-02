@@ -45,7 +45,6 @@ class Leave_type_master extends Core_Controller {
 		}else{
 			$data=array(
 				'name'=> $this->input->post('name', true),
-				'no_of_days'=> $this->input->post('no_of_days', true),
 				'is_visible'=> $this->input->post('is_visible', true),
 				'created_at'=> $this->currentTime
 			);
@@ -89,7 +88,6 @@ class Leave_type_master extends Core_Controller {
 		}else{
 			$data=array(
 				'name'=> $this->input->post('name', true),
-				'no_of_days'=> $this->input->post('no_of_days', true),
 				'is_visible'=> $this->input->post('is_visible', true),
 				'created_at'=> $this->currentTime
 			);

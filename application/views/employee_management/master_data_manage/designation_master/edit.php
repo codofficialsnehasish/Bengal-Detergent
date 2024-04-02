@@ -43,12 +43,7 @@
                               placeholder="Enter Title" name="name" value="<?= $item->name;?>" required>
                         </div>
 
-                        <label class="form-label pt-3">Leave in Days</label>
-                        <div>
-                           <input data-parsley-type="number" type="number"
-                              class="form-control" required
-                              placeholder="Enter Leave Days" name="leave_days" value="<?= $item->leave_days;?>" value="" required>
-                        </div>
+                        
                      </div>
                   </div>
                </div>

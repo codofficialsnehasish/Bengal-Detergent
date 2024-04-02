@@ -163,10 +163,10 @@ if (!function_exists('get_current_user_session')) {
                 if(!empty($result)){
                     return base_url($result[0]->file_path.$result[0]->file_name);
                 }else{
-                    return base_url('assets/admin/images/users/user.png');;
-                    }
+                    return base_url('assets/admin/images/users/user-4.jpg');
+                }
             }else{
-                return base_url('assets/admin/images/users/user.png');;
+                return base_url('assets/admin/images/users/user-4.jpg');
             }
         }
         }
@@ -2321,5 +2321,15 @@ if (!function_exists('numberTowords')) {
             }else{
                 return '';
             }
+        }
+    }
+
+    if(!function_exists('getTimeDifference')) {
+        function getTimeDifference($time1, $time2) {
+            $dateTime1 = DateTime::createFromFormat('H:i', $time1);
+            $dateTime2 = DateTime::createFromFormat('H:i', $time2);
+            $interval = $dateTime1->diff($dateTime2);
+            $differenceFormatted = $interval->format('%H:%I:%S');
+            return $differenceFormatted;
         }
     }

@@ -136,4 +136,21 @@ class Payroll extends Core_Controller {
 		$this->delete_model->emp_delete($configs);
 		echo 'Deleted Successfully';
 	}
+
+
+
+
+	//========== for employee payslip from employee personal profile ==============
+
+	public function emp_payslip(){
+		$header['pagecss']="contentCss";
+		$header['title']='Leave';
+		$this->load->view('admin/partials/header',$header);
+        $data['allitems']=$this->select->select_single_data('payroll_payslip','employee_id',$this->auth_user->id);
+		$this->load->view($this->view_path.'emp_payslip',$data);
+		$script['pagescript']='contentScript';
+		$this->load->view('admin/partials/footer',$script);
+	}
+
+	//========== for employee payslip from employee personal profile ==============
 }

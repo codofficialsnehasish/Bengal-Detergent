@@ -5,16 +5,16 @@
                         <div class="page-title-box">
                             <div class="row align-items-center">
                                 <div class="col-md-8">
-                                    <h6 class="page-title">Designation Master</h6>
+                                    <h6 class="page-title">Assign Leave for Designation</h6>
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="<?= admin_url('dashboard/');?>">Home</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">All Designations</li>
+                                        <li class="breadcrumb-item active" aria-current="page">Assign Leave for Designation</li>
                                     </ol>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="float-end d-none d-md-block">
                                         <div class="dropdown">
-                                        <a href="<?= employee_url('master-manage/designation-master/add-new')?>" class="btn btn-primary  dropdown-toggle" aria-expanded="false">
+                                        <a href="<?= employee_url('master-manage/leave-in-designation/add-new')?>" class="btn btn-primary  dropdown-toggle" aria-expanded="false">
                                         <i class="fas fa-plus me-2"></i> Add New
                                         </a>
                                         </div>
@@ -33,8 +33,8 @@
                                                 <tr>
                                                     <th>Sl No.</th>
                                                     <th>Designation</th>
-                                                    <th>Visibility</th>
-                                                    <th>Created On</th>
+                                                    <th>Leave Type</th>
+                                                    <th>Number of Days</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -45,16 +45,18 @@
                                                 foreach($allitems as $item):?>
                                                 <tr>
                                                     <td><?= $i++;?></td>
-                                                    <td><a href="<?= employee_url('master-manage/designation-master/edit/'.$item->id);?>"><?= $item->name;?></a></td>
-                                                    <td><?= check_visibility($item->is_visible);?> </td>
+                                                    <td><a href="<?= employee_url('master-manage/leave-in-designation/edit/'.$item->id);?>"><?= get_name("designation_master",$item->designation_id); ?></a></td>
+                                                    <td><?= get_name("leave_type_master",$item->leave_id); ?> </td>
+                                                    <td><?= $item->no_of_days;?> </td>
                                                     <td><?= formated_date($item->created_at);?></td>
                                                     <td>
-                                                        <a href="<?= employee_url('master-manage/designation-master/edit/'.$item->id);?>" class="btn btn-primary btn-sm edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit this Item">
-                                                                <i class="fas fa-pencil-alt" title="Edit"></i>
-                                                            </a>
-                                                            <a class="btn btn-danger btn-sm edit" onclick="confirmDelete(this.id,'master-manage/designation-master');" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove this Item" id="<?= $item->id;?>">
-                                                                <i class="fas fa-trash-alt" title="Remove"></i>
-                                                            </a></td>
+                                                        <a href="<?= employee_url('master-manage/leave-in-designation/edit/'.$item->id);?>" class="btn btn-primary btn-sm edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit this Item">
+                                                            <i class="fas fa-pencil-alt" title="Edit"></i>
+                                                        </a>
+                                                        <a class="btn btn-danger btn-sm edit" onclick="confirmDelete(this.id,'master-manage/leave-in-designation');" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove this Item" id="<?= $item->id;?>">
+                                                            <i class="fas fa-trash-alt" title="Remove"></i>
+                                                        </a>
+                                                    </td>
                                                 </tr>
                                                 <?php endforeach;?>
                                                

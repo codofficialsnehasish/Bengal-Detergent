@@ -5,7 +5,16 @@
 <script src="<?= base_url('assets/admin/libs/simplebar/simplebar.min.js');?>"></script>
 <script src="<?= base_url('assets/admin/libs/node-waves/waves.min.js');?>"></script>
 
-
+<!-- plugin js -->
+<script src="<?= base_url('assets/admin/libs/moment/min/moment.min.js');?>"></script>
+<script src="<?= base_url('assets/admin/libs/jquery-ui-dist/jquery-ui.min.js');?>"></script>
+<script src="<?= base_url('assets/admin/libs/@fullcalendar/core/main.min.js');?>"></script>
+<script src="<?= base_url('assets/admin/libs/@fullcalendar/bootstrap/main.min.js');?>"></script>
+<script src="<?= base_url('assets/admin/libs/@fullcalendar/daygrid/main.min.js');?>"></script>
+<script src="<?= base_url('assets/admin/libs/@fullcalendar/timegrid/main.min.js');?>"></script>
+<script src="<?= base_url('assets/admin/libs/@fullcalendar/interaction/main.min.js');?>"></script>
+<!-- Calendar init -->
+<script src="<?= base_url('assets/admin/js/pages/calendar.init.js');?>"></script>
 
 <!-- toast message -->
 <script src="<?= base_url('assets/admin/libs/toast/toastr.js');?>"></script>

@@ -42,13 +42,6 @@
                               class="form-control" required
                               placeholder="Enter Title" name="name" value="" required>
                         </div>
-
-                        <label class="form-label pt-3">No. of Days</label>
-                        <div>
-                           <input data-parsley-type="number" type="number"
-                              class="form-control" required
-                              placeholder="Enter Leave Days" name="no_of_days" value="" required>
-                        </div>
                      </div>
                    </div>
                </div>

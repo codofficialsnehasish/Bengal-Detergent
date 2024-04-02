@@ -33,7 +33,6 @@
                                                 <tr>
                                                     <th>Sl No.</th>
                                                     <th>Leave Type</th>
-                                                    <th>No. of Days</th>
                                                     <th>Visibility</th>
                                                     <th>Created On</th>
                                                     <th>Action</th>
@@ -47,7 +46,6 @@
                                                 <tr>
                                                     <td><?= $i++;?></td>
                                                     <td><a href="<?= employee_url('master-manage/leave-type-master/edit/'.$item->id);?>"><?= $item->name;?></a></td>
-                                                    <td><?= $item->no_of_days;?> </td>
                                                     <td><?= check_visibility($item->is_visible);?> </td>
                                                     <td><?= formated_date($item->created_at);?></td>
                                                     <td>

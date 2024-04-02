@@ -48,7 +48,7 @@ class Attendance extends Core_Controller {
 				'check_out_location'=> $this->input->post('latitude', true).','.$this->input->post('longitude', true),
 				'stay_time'=> $stay_time,
 				'status'=> $this->input->post('status', true),
-				'register_by'=> $this->auth_user->role,
+				'register_by'=> $this->auth_user->full_name,
 				'updated_at'=> $this->currentTime
 			);
 			$configs = array(
@@ -120,7 +120,7 @@ class Attendance extends Core_Controller {
 				'check_out_time'=> $this->input->post('check_out_time', true),
 				'stay_time'=> $stay_time,
 				'status'=> $this->input->post('status', true),
-				'register_by'=> $this->auth_user->role,
+				'register_by'=> $this->auth_user->full_name,
 				'updated_at'=> $this->currentTime
 			);
 			$configs = array(
@@ -139,7 +139,106 @@ class Attendance extends Core_Controller {
 		}
     }
 
-    public function delete_attendance(){
-        
+    public function delete(){
+        $id= $this->input->post('id');
+		$configs = array(
+			'tblName' => $this->attendance,
+			'where' => array('id'=>$id)
+		);
+		$this->delete_model->emp_delete($configs);
+		echo 'Deleted Successfully';
     }
+
+
+
+
+	//========== for employee attendance from employee personal profile ==============
+
+	public function emp_attendance(){
+		$header['pagecss']="contentCss";
+		$header['title']='Attendance';
+		$this->load->view('admin/partials/header',$header);
+        $data = [];
+		$this->load->view($this->view_path.'emp_attendance',$data);
+		$script['pagescript']='contentScript';
+		$this->load->view('admin/partials/footer',$script);
+	}
+
+	public function get_attendance_for_user(){
+		$attendanceData = $this->select->select_single_data('attendance_employee','user_id',$this->auth_user->id);
+		$formattedData = [];
+        foreach ($attendanceData as $attendance) {
+            $formattedData[] = array(
+                'title' => $attendance->status == 'Check In' ? 'Check In' : 'Check Out',
+                'start' => $attendance->date . 'T' . $attendance->time,
+                'allDay' => false,
+                'className' => $attendance->status == 'Check In' ? 'bg-success' : 'bg-danger'
+            );
+        }
+		echo json_encode($formattedData);
+	}
+
+	public function save_attendance(){
+		$data=array(
+			'user_id'=> $this->auth_user->id,
+			'date'=> date("Y-m-d"),
+			'time'=> date('H:i'),
+			'location'=> $this->input->post('latitude', true).','.$this->input->post('longitude', true),
+			'status'=> $this->input->post('title', true),
+			'register_by'=> $this->auth_user->role,
+			'created_at'=> $this->currentTime
+		);
+		$configs = array(
+			'tblName' => 'attendance_employee',
+			'data' => $data
+		);
+		$insert=$this->insert_model->emp_insert_data($configs);
+
+		if($this->input->post('title', true) == 'Check Out'){
+			$user_id = $this->auth_user->id;
+			$check_in = $this->select->custom_qry("SELECT * FROM `attendance_employee` WHERE user_id = '$user_id' and date = CURRENT_DATE() AND status = 'Check In'");
+			$check_in = $check_in[0];
+			$check_out = $this->select->custom_qry("SELECT * FROM `attendance_employee` WHERE user_id = '$user_id' and date = CURRENT_DATE() AND status = 'Check Out'");
+			$check_out = $check_out[0];
+			$data=array(
+				'user_id'=> $this->auth_user->id,
+				'check_out_time'=> $check_out->time,
+				'check_out_location'=> $check_out->location,
+				'stay_time'=> getTimeDifference($check_in->time,$check_out->time),
+				'status'=> 'Check Out',
+				'register_by'=> $this->auth_user->full_name,
+				'updated_at'=> $this->currentTime
+			);
+			$configs = array(
+				'tblName' => $this->attendance,
+				'data' => $data,
+                'where' => array(
+					'user_id'=>$this->auth_user->id,
+					'date'=>date("Y-m-d")
+				)
+			);
+			$update=$this->edit_model->emp_edit($configs);
+		}
+
+		if($this->input->post('title', true) == 'Check In'){
+			$user_id = $this->auth_user->id;
+			$check_in = $this->select->custom_qry("SELECT * FROM `attendance_employee` WHERE user_id = '$user_id' and date = CURRENT_DATE() AND status = 'Check In'");
+			$check_in = $check_in[0];
+			$data=array(
+				'user_id'=> $this->auth_user->id,
+				'date'=> date("Y-m-d"),
+				'check_in_time'=> $check_in->time,
+				'check_in_location'=> $check_in->location,
+				'status'=> 'Check In',
+				'register_by'=> $this->auth_user->full_name,
+				'created_at'=> $this->currentTime,
+				'updated_at'=> $this->currentTime
+			);
+			$configs = array(
+				'tblName' => $this->attendance,
+				'data' => $data
+			);
+			$insert=$this->insert_model->emp_insert_data($configs);
+		}
+	}
 }

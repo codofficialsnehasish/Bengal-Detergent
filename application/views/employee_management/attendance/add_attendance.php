@@ -117,22 +117,22 @@
 
 <script>
     function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition);
-            } else {
-                alert("Geolocation is not supported by this browser.");
-            }
+        if(navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(showPosition);
+        }else{
+            alert("Geolocation is not supported by this browser.");
         }
+    }
 
-        function showPosition(position) {
-            var latitude = position.coords.latitude;
-            var longitude = position.coords.longitude;
-            document.getElementById("lat").value = latitude;
-            document.getElementById("long").value = longitude;
-        }
+    function showPosition(position){
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        document.getElementById("lat").value = '';
+        document.getElementById("long").value = '';
+    }
 
-        // Call getLocation() when the user logs in
-        // For demonstration purpose, it's called on page load
-        // You might trigger this based on your login mechanism
-        getLocation();
+    // Call getLocation() when the user logs in
+    // For demonstration purpose, it's called on page load
+    // You might trigger this based on your login mechanism
+    getLocation();
 </script>

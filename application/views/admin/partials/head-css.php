@@ -16,3 +16,9 @@
 
 <!-- Bootstrap Rating css -->
 <link href="<?= base_url('assets/admin/libs/bootstrap-rating/bootstrap-rating.css'); ?>" rel="stylesheet" type="text/css" />
+
+<!-- Plugin css -->
+<link href="<?= base_url('assets/admin/libs/@fullcalendar/core/main.min.css'); ?>" rel="stylesheet" type="text/css" />
+<link href="<?= base_url('assets/admin/libs/@fullcalendar/daygrid/main.min.css'); ?>" rel="stylesheet" type="text/css" />
+<link href="<?= base_url('assets/admin/libs/@fullcalendar/bootstrap/main.min.css'); ?>" rel="stylesheet" type="text/css" />
+<link href="<?= base_url('assets/admin/libs/@fullcalendar/timegrid/main.min.css'); ?>" rel="stylesheet" type="text/css" />

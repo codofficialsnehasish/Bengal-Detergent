@@ -49,7 +49,7 @@
                                                 <?php
                                                 foreach($all_attendance as $item):?>
                                                 <tr>
-                                                    <td><?= $item->user_id;?></td>
+                                                    <td><?= get_user_name($item->user_id);?></td>
                                                     <td><?= $item->date;?></td>
                                                     <td><?= $item->check_in_time;?></td>
                                                     <td><?= $item->check_in_location;?></td>

@@ -56,12 +56,13 @@
             <?php } ?>
             <button type="button" onclick="javascript:window.location.href='<?= base_url();?>'" class="btn header-item noti-icon waves-effect" id="page-header-search-dropdown"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="mdi mdi-eye"></i>
+                    <!-- <i class="mdi mdi-eye"></i> -->
+                    <i class="fas fa-home"></i>
             </button>
-              <!-- App Search-->
-              <!-- <form class="app-search d-none d-lg-block">
+            <!-- App Search-->
+            <!-- <form class="app-search d-none d-lg-block">
                 <div class="position-relative">
-                    <input type="text" class="form-control" placeholder="Search...">
+                    <input type="text" class="form-control" id="search-input" placeholder="Search..." onkeyup="search()">
                     <span class="fa fa-search"></span>
                 </div>
             </form> -->
@@ -241,18 +242,19 @@
                     </div>
                 </div>
             </div> -->
-
+            <div style="width: 0;border-right: 1px solid #c3c6d0;height: calc(4.375rem - 2rem);margin: auto 1rem;"></div>
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="rounded-circle header-profile-user" src="<?= base_url('assets/admin/images/users/user-4.jpg');?>"
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small" style="font-size:15px;"><?= $this->auth_user->full_name; ?></span>
+                    <img class="rounded-circle header-profile-user" src="<?= get_user_image($this->auth_user->user_image);?>"
                         alt="Header Avatar">
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">  
-                    <?php if(is_admin()):?>               
-                    <a class="dropdown-item" href="<?= admin_url('changepassword')?>"><i class="mdi mdi-lock-open-outline font-size-17 align-middle me-1"></i> Chabge Password</a>
+                    <?php //if(is_admin()):?>               
+                    <a class="dropdown-item" href="<?= admin_url('changepassword')?>"><i class="mdi mdi-lock-open-outline font-size-17 align-middle me-1"></i> Change Password</a>
                     <div class="dropdown-divider"></div>
-                    <?php endif;?>
+                    <?php //endif;?>
                     <a class="dropdown-item text-danger" href="<?= admin_url('dashboard/logout')?>"><i class="bx bx-power-off font-size-17 align-middle me-1 text-danger"></i> Logout</a>
                 </div>
             </div>
@@ -266,3 +268,13 @@
         </div>
     </div>
 </header>
+
+<script>
+    // function search() {
+    //     var searchText = document.getElementById('search-input').value;
+    //     var found = window.find(searchText);
+    //     // if (!found) {
+    //     //     alert('No results found.');
+    //     // }
+    // }
+</script>

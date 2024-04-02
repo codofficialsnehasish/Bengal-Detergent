@@ -22,7 +22,6 @@
           $("#pr_country_id").on('change', function(){ 
           $("#pr_state_id").html('');
           const countryid= $(this).val();
-         // console.log(base_url);
             $.ajax({
                 url : base_url + "get-state-list",
                 data:{country_id : countryid,csrf_modesy_token:getCookie('csrf_modesy_token')},
@@ -32,7 +31,8 @@
                        $('#pr_state_id').html('<option value="">Loading...</option>'); 
                     },
                 success:function(response) {
-                    console.log(response);
+                    // console.log(response);
+                    $("#pr_state_id").html('');
                     $("#pr_state_id").append('<option selected disabled value="">Choose...</option>');
                     $.each(response , function(index, item) { 
                     $("#pr_state_id").append('<option value="'+item.id+'">'+item.name+'</option>');
@@ -55,7 +55,8 @@
                               $('#pm_state_id').html('<option value="">Loading...</option>'); 
                             },
                         success:function(response) {
-                            console.log(response);
+                            // console.log(response);
+                            $("#pm_state_id").html('');
                             $("#pm_state_id").append('<option selected disabled value="">Choose...</option>');
                             $.each(response , function(index, item) { 
                             $("#pm_state_id").append('<option value="'+item.id+'">'+item.name+'</option>');

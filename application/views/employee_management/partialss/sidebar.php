@@ -29,7 +29,8 @@
                     if($this->uri->segment(3)=='status-master'){$usegment='status-master';}
                     if($this->uri->segment(3)=='catagory-master'){$usegment='catagory-master';}
                     if($this->uri->segment(3)=='how-to-know-master'){$usegment='how-to-know-master';}
-                    if($this->uri->segment(3)=='designation_master'){$usegment='designation_master';}
+                    if($this->uri->segment(3)=='designation-master'){$usegment='designation-master';}
+                    if($this->uri->segment(3)=='leave-type-master'){$usegment='leave-type-master';}
                 ?>
                 <!-- All Master Data -->
                 <li class="<?= emp_active_menu($usegment);?>">
@@ -38,19 +39,21 @@
                         <span>All Master Data</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li class="<?= emp_tab_active('shift-master');?>"><a href="<?= base_url('employee-management/master-manage/shift-master/')?>" class="<?= emp_active_link('shift-master');?>">Shift Master</a></li>
+                        <!-- <li class="<?= emp_tab_active('shift-master');?>"><a href="<?= base_url('employee-management/master-manage/shift-master/')?>" class="<?= emp_active_link('shift-master');?>">Shift Master</a></li> -->
                         <li class="<?= emp_tab_active('gender-master');?>"><a href="<?= base_url('employee-management/master-manage/gender-master/')?>" class="<?= emp_active_link('gender-master');?>">Gender Master</a></li>
-                        <li class="<?= emp_tab_active('medical-history-master');?>"><a href="<?= base_url('employee-management/master-manage/medical-history-master/')?>" class="<?= emp_active_link('medical-history-master');?>">Medical History Master</a></li>
-                        <li class="<?= emp_tab_active('package-master');?>"><a href="<?= base_url('employee-management/master-manage/package-master/')?>" class="<?= emp_active_link('package-master');?>">Package Master</a></li>
+                        <!-- <li class="<?= emp_tab_active('medical-history-master');?>"><a href="<?= base_url('employee-management/master-manage/medical-history-master/')?>" class="<?= emp_active_link('medical-history-master');?>">Medical History Master</a></li> -->
+                        <!-- <li class="<?= emp_tab_active('package-master');?>"><a href="<?= base_url('employee-management/master-manage/package-master/')?>" class="<?= emp_active_link('package-master');?>">Package Master</a></li> -->
                         <li class="<?= emp_tab_active('payment-mode-master');?>"><a href="<?= base_url('employee-management/master-manage/payment-mode-master/')?>" class="<?= emp_active_link('payment-mode-master');?>">Payment Mode Master</a></li>
                         <li class="<?= emp_tab_active('blood-group-master');?>"><a href="<?= base_url('employee-management/master-manage/blood-group-master/')?>" class="<?= emp_active_link('blood-group-master');?>">Blood Group Master</a></li>
                         <li class="<?= emp_tab_active('marital-status-master');?>"><a href="<?= base_url('employee-management/master-manage/marital-status-master/')?>" class="<?= emp_active_link('marital-status-master');?>">Marital Status Master</a></li>
                         <li class="<?= emp_tab_active('religion-master');?>"><a href="<?= base_url('employee-management/master-manage/religion-master/')?>" class="<?= emp_active_link('religion-master');?>">Religion Master</a></li>
                         <li class="<?= emp_tab_active('nationality-master');?>"><a href="<?= base_url('employee-management/master-manage/nationality-master/')?>" class="<?= emp_active_link('nationality-master');?>">Nationality Master</a></li>
-                        <li class="<?= emp_tab_active('status-master');?>"><a href="<?= base_url('employee-management/master-manage/status-master/')?>" class="<?= emp_active_link('status-master');?>">Status Master</a></li>
-                        <li class="<?= emp_tab_active('catagory-master');?>"><a href="<?= base_url('employee-management/master-manage/catagory-master/')?>" class="<?= emp_active_link('catagory-master');?>">Catagory Master</a></li>
-                        <li class="<?= emp_tab_active('how-to-know-master');?>"><a href="<?= base_url('employee-management/master-manage/how-to-know-master/')?>" class="<?= emp_active_link('how-to-know-master');?>">How to Know Master</a></li>
+                        <!-- <li class="<?= emp_tab_active('status-master');?>"><a href="<?= base_url('employee-management/master-manage/status-master/')?>" class="<?= emp_active_link('status-master');?>">Status Master</a></li> -->
+                        <!-- <li class="<?= emp_tab_active('catagory-master');?>"><a href="<?= base_url('employee-management/master-manage/catagory-master/')?>" class="<?= emp_active_link('catagory-master');?>">Catagory Master</a></li> -->
+                        <!-- <li class="<?= emp_tab_active('how-to-know-master');?>"><a href="<?= base_url('employee-management/master-manage/how-to-know-master/')?>" class="<?= emp_active_link('how-to-know-master');?>">How to Know Master</a></li> -->
                         <li class="<?= emp_tab_active('designation-master');?>"><a href="<?= base_url('employee-management/master-manage/designation-master/')?>" class="<?= emp_active_link('designation-master');?>">Designation Master</a></li>
+                        <li class="<?= emp_tab_active('leave-type-master');?>"><a href="<?= base_url('employee-management/master-manage/leave-type-master/')?>" class="<?= emp_active_link('leave-type-master');?>">Leave Type Master</a></li>
+                        <li class="<?= emp_tab_active('leave-in-designation');?>"><a href="<?= base_url('employee-management/master-manage/leave-in-designation/')?>" class="<?= emp_active_link('leave-in-designation');?>">Leave for Designation</a></li>
                     </ul>
                 </li> 
                 <?php
@@ -146,7 +149,7 @@
                         <li class="<?= emp_tab_active('leave');?>">
                             <a href="<?= employee_url('leave/weekly-holiday')?>" class="<?= emp_active_link('weekly-holiday');?>">Weekly Holiday</a>
                             <a href="<?= employee_url('leave/holiday')?>" class="<?= emp_active_link('holiday');?>">Holiday</a>
-                            <a href="<?= base_url('employee-management/master-manage/leave-type-master')?>" class="<?= emp_active_link('leave-type-master');?>">Add Leave Type</a>
+                            <!-- <a href="<?= base_url('employee-management/master-manage/leave-type-master')?>" class="<?= emp_active_link('leave-type-master');?>">Add Leave Type</a> -->
                             <a href="<?= employee_url('leave/leave-application')?>" class="<?= emp_active_link('leav-application');?>">Leave Application</a>
                         </li>
                     </ul>
