@@ -221,6 +221,19 @@
                             <span>Attendance</span>
                         </a>
                     </li>
+                    <?php 
+                        $usegment='';
+                        if($this->uri->segment(2)=='dristributor'){$usegment='dristributor';}
+                    ?>
+                    <li class="<?= active_menu($usegment);?>">
+                        <a href="javascript: void(0);" class="has-arrow waves-effect <?= active_menu($usegment);?>">
+                            <i class="ti-user"></i>
+                            <span>Distributers</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li class="<?= tab_active('distributer');?>"><a href="<?= base_url('admin/dristributor/tl-distributer/')?>" class="<?= active_link('tl-distributer');?>">Distributer List</a></li>                                   
+                        </ul>
+                    </li>
 
                     <?php 
                         $usegment='';

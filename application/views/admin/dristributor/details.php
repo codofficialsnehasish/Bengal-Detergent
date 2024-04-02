@@ -11,6 +11,7 @@
                   <li class="breadcrumb-item active" aria-current="page">Dristributor</li>
                </ol>
             </div>
+            <?php if($this->auth_user->role == "admin"){ ?>
             <div class="col-md-4">
                <div class="float-end d-none d-md-block">
                   <div class="dropdown">
@@ -20,6 +21,18 @@
                   </div>
                </div>
             </div>
+            <?php } ?>
+            <?php if($this->auth_user->role == "employee"){ ?>
+            <div class="col-md-4">
+               <div class="float-end d-none d-md-block">
+                  <div class="dropdown">
+                     <a href="<?= admin_url('dristributor/tl-distributer')?>" class="btn btn-primary  dropdown-toggle" aria-expanded="false">
+                     <i class="fas fa-arrow-left me-2"></i> Back
+                     </a>
+                  </div>
+               </div>
+            </div>
+            <?php } ?>
          </div>
       </div>
       <div class="row mb-5">
@@ -104,7 +117,7 @@
                   </div>
                  
                   <div class="row row mb-3">
-                        <label  for="example-text-input" for="excol-sm-3 col-form-labelch-input" class="col-sm-3 col-form-label">Created on</label>
+                        <label  for="example-text-input" for="excol-sm-3 col-form-labelch-input" class="col-sm-3 col-form-label">Joined on</label>
                         <div class="col-sm-9">
                         <?= formatted_date($item->created_at);?>
                         </div>
@@ -141,6 +154,7 @@
                      <?= $item->shop_police_station;?>
                      </div>
                   </div>
+                  <?php if($this->auth_user->role == "admin"){ ?>
                   <div class="row mb-3">
                      <label  for="example-text-input" class="col-sm-3 col-form-label">Trade Licence No.</label>
                      <div  class="col-sm-9">
@@ -183,6 +197,7 @@
                      </a>
                      </div>
                   </div>
+                  <?php } ?>
                   
                   <!-- <div class="row mb-3">
                      <label  for="example-text-input" class="col-sm-3 col-form-label">MOA & AOA Proof.</label>
@@ -268,6 +283,7 @@
                      </div>
                   </div>
                </div>
+               <?php if($this->auth_user->role == "admin"){ ?>
                <div class="card">
                   <div class="card-header bg-primary text-light">Status</div>
                   <div class="card-body">
@@ -307,6 +323,7 @@
                  
                   </div>
                </div>
+               <?php } ?>
             </div>
 
          </div>

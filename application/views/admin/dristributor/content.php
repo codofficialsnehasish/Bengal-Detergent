@@ -11,6 +11,7 @@
                                         <li class="breadcrumb-item active" aria-current="page">All Dristributor</li>
                                     </ol>
                                 </div>
+                                <?php if($this->auth_user->role == "admin"){ ?>
                                 <div class="col-md-4">
                                     <div class="float-end d-none d-md-block">
                                         <div class="dropdown">
@@ -20,6 +21,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <?php } ?>
                             </div>
                         </div>
                         <!-- end page title -->
@@ -34,12 +36,16 @@
                                                     <th>ID</th>
                                                     <th>Name</th>
                                                     <th>Business Name</th>
+                                                    <?php if($this->auth_user->role == "admin"){ ?>
                                                     <th>Team Lead</th>
+                                                    <?php } ?>
                                                     <th>Contact</th>
                                                     <th>E-Mail</th>
                                                     <th>Status</th>
                                                     <th>Work Pin Code</th>
+                                                    <?php if($this->auth_user->role == "admin"){ ?>
                                                     <th>Action</th>
+                                                    <?php } ?>
                                                 </tr>
                                             </thead>
 
@@ -51,20 +57,25 @@
                                                     <td class="text-wrap"><?= $item->user_id;?></td>
                                                     <td><img src="<?= get_image($item->user_image);?>" width="50" />&nbsp;&nbsp;&nbsp;&nbsp;<a href="<?= admin_url('dristributor/details/'.$item->id);?>"><?= $item->full_name;?></a></td>
                                                     <td class="text-wrap"><a href="<?= admin_url('dristributor/details/'.$item->id);?>"><?= $item->shop_name;?></a></td>
+                                                    <?php if($this->auth_user->role == "admin"){ ?>
                                                     <td class="text-wrap"><?= get_user_name($item->tl_id);?></td>
+                                                    <?php } ?>
                                                     <!-- <td><a href="<= admin_url('dristributor/details/'.$item->id);?>"><= $item->designation;?></a></td> -->
                                                     <td><a href="<?= admin_url('dristributor/details/'.$item->id);?>"><?= $item->phone_number;?></a></td>
                                                     <td class="text-wrap"><a href="<?= admin_url('dristributor/details/'.$item->id);?>"><?= $item->email;?></a></td>
                                                     <td class="text text-center"><?= check_status($item->status);?> </td>
                                                     <td class="text-wrap"><?= $item->prefarable_zip_code; ?></td>
+                                                    <?php if($this->auth_user->role == "admin"){ ?>
                                                     <td>
-                                                            <a href="<?= admin_url('dristributor/edit/'.$item->id);?>" class="btn btn-primary btn-sm edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit this Item">
-                                                                <i class="fas fa-pencil-alt" title="Edit"></i>
-                                                            </a>
+                                                        <a href="<?= admin_url('dristributor/edit/'.$item->id);?>" class="btn btn-primary btn-sm edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit this Item">
+                                                            <i class="fas fa-pencil-alt" title="Edit"></i>
+                                                        </a>
 
-                                                            <a class="btn btn-danger btn-sm edit" onclick="confirmDelete(this.id,'dristributor');" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove this Item" id="<?= $item->id;?>">
-                                                                <i class="fas fa-trash-alt" title="Remove"></i>
-                                                            </a></td>
+                                                        <a class="btn btn-danger btn-sm edit" onclick="confirmDelete(this.id,'dristributor');" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove this Item" id="<?= $item->id;?>">
+                                                            <i class="fas fa-trash-alt" title="Remove"></i>
+                                                        </a>
+                                                    </td>
+                                                    <?php } ?>
                                                 </tr>
                                                 <?php endforeach;?>
                                                

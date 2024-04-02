@@ -269,4 +269,15 @@ class Dristributor extends Core_Controller {
 		echo 'Deleted Successfully';
 	}
 
+
+	public function tl_distributer(){
+		$header['pagecss']="contentCss";
+		$header['title']='Dristributor';
+		$this->load->view('admin/partials/header',$header);
+		$data['allitems']=$this->select->custom_qry("SELECT * FROM users WHERE role = 'dristributor' AND is_approved = 1 AND tl_id = ".$this->auth_user->id);
+		$this->load->view($this->view_path.'content',$data);
+		$script['pagescript']='contentScript';
+		$this->load->view('admin/partials/footer',$script);
+	}
+
 }

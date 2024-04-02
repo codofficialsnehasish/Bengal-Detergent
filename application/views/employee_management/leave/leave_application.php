@@ -169,7 +169,7 @@
                                                 <a href="<?= employee_url('leave/update-leave-status/'.$item->leave_appl_id.'/-1');?>" onclick="return confirm('Are You Sure?');" class="btn btn-danger mx-1 my-1">Cancel</a>
                                         <?php
                                             }elseif($item->status == 2){ ?>
-                                                <a href="<?= employee_url('leave/update-leave-status/'.$item->leave_appl_id.'/1');?>" onclick="return confirm('Are You Sure?');" class="btn btn-success mx-1 my-1">Approved</a>
+                                                <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#staticBackdrop<?= $item->leave_appl_id; ?>" class="btn btn-success mx-1 my-1">Approved</a>
                                                 <a href="<?= employee_url('leave/update-leave-status/'.$item->leave_appl_id.'/-1');?>" onclick="return confirm('Are You Sure?');" class="btn btn-danger mx-1 my-1">Cancel</a>
                                         <?php
                                             } 
