@@ -40,7 +40,7 @@
                             <!-- <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#achievements_details" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Achievements</button> -->
                             <button class="nav-link " id="v-salary_configuration-tab" data-bs-toggle="pill" data-bs-target="#salary_configuration" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Salary Configuration</button>
                             <button class="nav-link " id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#bank_details" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Bank Account</button>
-                            <!-- <button class="nav-link " id="v-login-details-tab" data-bs-toggle="pill" data-bs-target="#login_details" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Login Details</button> -->
+                            <button class="nav-link " id="v-login-details-tab" data-bs-toggle="pill" data-bs-target="#login_details" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Login Details</button>
                             <!-- <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Change Password</button> -->
                             <!-- <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">User Role</button> -->
                         </div>

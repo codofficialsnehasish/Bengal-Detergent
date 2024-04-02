@@ -822,4 +822,34 @@ class Employees extends Core_Controller {
 		echo json_encode(array('status'=>$status,'msg'=>$msg));
 	}
 
+
+	public function logindetailsinfo(){
+		$this->form_validation->set_rules('login_email', 'Email', 'required|xss_clean|max_length[200]');
+		if ($this->form_validation->run() == false) {
+			$status = 0;
+			$msg = validation_errors();
+		}else{
+			$data=array(
+				'email'=> $this->input->post('login_email', true),
+				'password' =>$this->input->post('login_password', true)
+			);
+			$this->load->library('bcrypt');
+			$data['password'] = $this->bcrypt->hash_password($data['password']);
+			$configs = array(
+				'tblName' => $this->users,
+				'data' => $data,
+				'where' => array('id'=>$this->input->post('user_id', true))
+			);
+			$update=$this->edit_model->emp_edit($configs);
+			if($update){
+			    $status = 1;
+			    $msg = 'Data has been updated successfully';
+			}else{
+			    $status = 0;
+			    $msg = 'Query error';
+			}
+		}
+		echo json_encode(array('status'=>$status,'msg'=>$msg));
+	}
+
 }

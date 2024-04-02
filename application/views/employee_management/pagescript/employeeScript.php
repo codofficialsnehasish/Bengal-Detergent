@@ -291,6 +291,35 @@
         }
         qualification();
 
+        $(document).on("submit", "#logindetailsForm", function (event) {
+            $('.binlogBtn').prop("disabled", true);
+            $('.binlogBtn').html('<span class="spinner-border me-1" role="status" aria-hidden="true"></span>Loading...');
+            const getUrl = window.location;
+            const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1]+"/"+getUrl.pathname.split('/')[2]+"/";
+            var form = $("#logindetailsForm");
+            var serializedData = form.serializeArray();
+            serializedData.push({name: "csrf_modesy_token", value: getCookie('csrf_modesy_token')});
+            $.ajax({
+                url: base_url + "employees/logindetailsinfo",
+                type: "post",
+                data: serializedData,
+                dataType: "json",
+                success: function (response) {
+                    $('.binlogBtn').prop("disabled", false);
+                    $('.binlogBtn').html('Save Changes');
+                    //var obj = JSON.parse(response);
+                    //  console.log(response);
+                    if (response.status == 1) {
+                           form[0].reset();  
+                            showToast('success','Success',response.msg);                         
+                    }else{
+                            showToast('error','Error',response.msg);
+                    }
+                }
+            });
+            event.preventDefault();
+        });
+
         // function delete_qualification(delid){
         //     const getUrl = window.location;
         //     const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1]+"/"+getUrl.pathname.split('/')[2]+"/";
