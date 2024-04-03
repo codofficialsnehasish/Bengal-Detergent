@@ -255,13 +255,17 @@
                             <span>Leave</span>
                         </a>
                     </li>
-
+                    
+                    <?php
+                        if ($this->permission->module('permission')->access() || $this->permission->method('payslip', 'read')->access()) {
+                    ?>
                     <li class="<?= active_menu('stocks');?>">
                         <a href="<?= check_todays_attendance($this->auth_user->id) == "Check In" ? employee_url('payroll/emp-payslip') : 'javascript:void(0)'; ?>" class="waves-effect <?= active_link('stocks');?>">
                             <i class="fas fa-file-invoice"></i>
                             <span>Payslip</span>
                         </a>
                     </li>
+                    <?php } ?>
                 <?php } ?>
             </ul>
         </div>

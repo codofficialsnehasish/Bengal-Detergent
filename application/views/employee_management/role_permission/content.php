@@ -6,7 +6,7 @@
                                 <div class="col-md-8">
                                     <h6 class="page-title">Role</h6>
                                     <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item"><a href="<?= admin_url();?>">Home</a></li>
+                                        <li class="breadcrumb-item"><a href="<?= employee_url('dashboard/');?>">Home</a></li>
                                         <li class="breadcrumb-item active" aria-current="page">All Role</li>
                                     </ol>
                                 </div>
@@ -20,7 +20,7 @@
                             </div>
                         </div>
                         <!-- end page title -->
-                        <?= form_open_multipart('role-permission/permission', 'class="custom-validation"');?>
+                        <?= form_open_multipart('employee-management/role-permission/permission', 'class="custom-validation"');?>
                         <div class="row">
                             <div class="col-9">
                                 <div class="card">

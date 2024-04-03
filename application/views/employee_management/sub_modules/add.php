@@ -4,17 +4,17 @@
       <div class="page-title-box">
          <div class="row align-items-center">
             <div class="col-md-8">
-               <h6 class="page-title">Module</h6>
+               <h6 class="page-title">Sub Modules</h6>
                <ol class="breadcrumb m-0">
                   <li class="breadcrumb-item"><a href="<?= employee_url('dashboard/')?>">Home</a></li>
-                  <li class="breadcrumb-item"><a href="<?= employee_url('modules/')?>">Module</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Edit Module</li>
+                  <li class="breadcrumb-item"><a href="<?= employee_url('sub-modules')?>">Sub Modules</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Add new Sub Module</li>
                </ol>
             </div>
             <div class="col-md-4">
                <div class="float-end d-none d-md-block">
                   <div class="dropdown">
-                     <a href="<?= employee_url('modules/')?>" class="btn btn-primary  dropdown-toggle" aria-expanded="false">
+                     <a href="<?= employee_url('sub-modules/')?>" class="btn btn-primary  dropdown-toggle" aria-expanded="false">
                      <i class="fas fa-arrow-left me-2"></i> Back
                      </a>
                   </div>
@@ -26,57 +26,46 @@
       <?php $this->load->view('employee_management/partialss/_messages');?>
       </div>
       <!-- end page title -->
-      <?= form_open_multipart('employee-management/modules/update-process/'.$item->id, 'class="custom-validation"');?>
+      <?= form_open_multipart('employee-management/sub-modules/process', 'class="custom-validation"');?>
       
          <div class="row">
             <div class="col-lg-9">
                <div class="card">
                   <div class="card-header bg-primary text-light">
-                     Edit Module
+                     Add New Sub Module
                   </div>
                   <div class="card-body">
-                     <div class="mb-3">
+                        <div class="mb-3">
                               <label class="form-label">Select Module</label>
                               <select class="form-control select2" id="module_id" name="module_id">
                                     <option value="0">Select</option>
                                     <?php if(!empty($allmodules)){
                                              foreach($allmodules as $module){
                                     ?>
-                                    <option value="<?= $module->id;?>" <? $module->id==$item->module_id?'selected':'';?>><?= $module->name;?></option>
+                                    <option value="<?= $module->id;?>"><?= $module->name;?></option>
                                     <?php }
                                     }?>
                               </select>
-                     </div>
-
-                     <div class="mb-3">
-                        <label class="form-label">Name</label>
-                        <div>
-                           <input data-parsley-type="text" type="text"
-                              class="form-control" required
-                              placeholder="Enter Title" name="name" value="<?= $item->name;?>" required>
                         </div>
-                     </div>
-                     <div class="mb-3">
-                        <label class="form-label">Description</label>
-                        <div>
-                           <input data-parsley-type="text" type="text"
-                              class="form-control" required
-                              placeholder="Enter Title" name="description" value="<?= $item->description;?>" required>
-                        </div>
-                     </div>
 
-                     <div class="mb-3">
-                        <label class="form-label">Directory</label>
-                        <div>
-                           <input data-parsley-type="text" type="text"
-                              class="form-control" required
-                              placeholder="Enter Title" disabled value="<?= $item->directory;?>" required>
+                        <div class="mb-3">
+                           <label class="form-label">Name</label>
+                              <div>
+                                 <input data-parsley-type="text" type="text"
+                                    class="form-control" required
+                                    placeholder="Enter Title" name="name" value="" required>
+                              </div>
                         </div>
-                     </div>
-
-                  </div>
+                        <div class="mb-3">
+                           <label class="form-label">Description</label>
+                              <div>
+                                 <input data-parsley-type="text" type="text"
+                                    class="form-control" required
+                                    placeholder="Description" name="description" value="" required>
+                              </div>
+                        </div>
+                   </div>
                </div>
-               
             </div>
             <!-- end col -->
             <div class="col-lg-3">
@@ -88,18 +77,29 @@
                      <div class="mb-3">
                         <label class="form-label mb-3 d-flex">Visiblity</label>
                         <div class="form-check form-check-inline">
-                           <input type="radio" id="customRadioInline1" name="is_visible" class="form-check-input" value="1" <?= check_uncheck($item->is_visible,1);?>>
+                           <input type="radio" id="customRadioInline1" name="is_visible" class="form-check-input" value="1" checked>
                            <label class="form-check-label" for="customRadioInline1">Show</label>
                         </div>
                         <div class="form-check form-check-inline">
-                           <input type="radio" id="customRadioInline2" name="is_visible" class="form-check-input" value="0" <?= check_uncheck($item->is_visible,0);?>>
+                           <input type="radio" id="customRadioInline2" name="is_visible" class="form-check-input" value="0">
                            <label class="form-check-label" for="customRadioInline2">Hide</label>
                         </div>
                      </div>
+                     <!-- <div class="mb-3">
+                        <label class="form-label mb-3 d-flex">Popular business_category</label>
+                        <div class="form-check form-check-inline">
+                           <input type="radio" id="pcy" name="is_popular" class="form-check-input" value="1">
+                           <label class="form-check-label" for="pcy">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                           <input type="radio" id="pcn" name="is_popular" class="form-check-input" value="0" checked>
+                           <label class="form-check-label" for="pcn">No</label>
+                        </div>
+                     </div> -->
                      <div class="mb-0">
                         <div>
                            <button type="submit" class="btn btn-primary waves-effect waves-light me-1">
-                           Save Changes
+                           Save & Publish
                            </button>
                            <!-- <button type="reset" class="btn btn-secondary waves-effect">
                               Cancel

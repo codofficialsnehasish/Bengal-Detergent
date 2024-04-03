@@ -88,8 +88,7 @@ class Permission
  
 	public function access()
 	{ 
-		// return $this->permission;
-		return true;
+		return $this->permission;
 	}
 
 	public function redirect()

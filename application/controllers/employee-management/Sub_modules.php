@@ -1,14 +1,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Modules extends Core_Controller {
+class Sub_modules extends Core_Controller {
 
 	public function __construct()
     {
         parent::__construct();
 		$this->is_not_logged_in();
-		$this->table_name='module';
-		$this->view_path='employee_management/modules/';
+		$this->table_name='sub_module';
+		$this->modules='module';
+		$this->view_path='employee_management/sub_modules/';
 		//$this->output->enable_profiler(TRUE);
 		
 	}
@@ -18,19 +19,19 @@ class Modules extends Core_Controller {
 		$header['pagecss']="contentCss";
 		$header['title']='Role';
 		$this->load->view('employee_management/partialss/header',$header);
-		$data['allitems']=$this->select->select_table($this->table_name,'id','asc');
+		$data['allitems']=$this->select->select_table($this->table_name,'is_visible','desc');
 		$this->load->view($this->view_path.'content',$data);
 		$script['pagescript']='contentScript';
 		$this->load->view('employee_management/partialss/footer',$script);
 	}
 	public function add_new()
 	{
-		$header['pagecss']="";
+		$header['pagecss']="contentCss";
 		$header['title']='Add New Role';
 		$this->load->view('employee_management/partialss/header',$header);
-		$data['categories']='';
+		$data['allmodules']= $this->select->select_table($this->modules,'id','asc');
 		$this->load->view($this->view_path.'add',$data);
-		$script['pagescript']='formScript';
+		$script['pagescript']='roleScript';
 		$this->load->view('employee_management/partialss/footer',$script);
 	}
 
@@ -44,13 +45,12 @@ class Modules extends Core_Controller {
 			redirect($this->agent->referrer());
 		}else{
 			$data=array(
+				'module_id'=> $this->input->post('module_id', true),
 				'name'=> $this->input->post('name', true),
 				'description'=> $this->input->post('description', true),
 				'directory'=> $this->slug->slugify($this->input->post('name', true)),
 				'is_visible'=> $this->input->post('is_visible', true)
 			);
-			//'created_at'=> $this->currentTime
-
 			$configs = array(
 				'tblName' => $this->table_name,
 				'data' => $data
@@ -69,14 +69,14 @@ class Modules extends Core_Controller {
 	public function edit()
 	{
 		$id=$this->uri->segment(4);
-		$header['pagecss']="";
+		$header['pagecss']="contentCss";
 		$header['title']='Edit Brand';
 		$this->load->view('employee_management/partialss/header',$header);
 		$categoryArray=$this->select->select_single_data($this->table_name,'id',$id);
-		//print_r($categoryArray);die;
+		$data['allmodules']= $this->select->select_table($this->modules,'id','asc');
 		$data['item']=$categoryArray[0];
 		$this->load->view($this->view_path.'edit',$data);
-		$script['pagescript']='formScript';
+		$script['pagescript']='roleScript';
 		$this->load->view('employee_management/partialss/footer',$script);
 	}
 
@@ -90,6 +90,7 @@ class Modules extends Core_Controller {
 			redirect($this->agent->referrer());
 		}else{
 			$data=array(
+				'module_id'=> $this->input->post('module_id', true),
 				'name'=> $this->input->post('name', true),
 				'description'=> $this->input->post('description', true),
 				'directory'=> $this->slug->slugify($this->input->post('name', true)),

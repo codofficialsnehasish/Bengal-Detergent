@@ -4,17 +4,17 @@
       <div class="page-title-box">
          <div class="row align-items-center">
             <div class="col-md-8">
-               <h6 class="page-title">Module</h6>
+               <h6 class="page-title">Sub Module</h6>
                <ol class="breadcrumb m-0">
                   <li class="breadcrumb-item"><a href="<?= employee_url('dashboard/')?>">Home</a></li>
-                  <li class="breadcrumb-item"><a href="<?= employee_url('modules/')?>">Module</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Edit Module</li>
+                  <li class="breadcrumb-item"><a href="<?= employee_url('sub-modules/')?>">Sub Module</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Edit Sub Module</li>
                </ol>
             </div>
             <div class="col-md-4">
                <div class="float-end d-none d-md-block">
                   <div class="dropdown">
-                     <a href="<?= employee_url('modules/')?>" class="btn btn-primary  dropdown-toggle" aria-expanded="false">
+                     <a href="<?= employee_url('sub-modules/')?>" class="btn btn-primary  dropdown-toggle" aria-expanded="false">
                      <i class="fas fa-arrow-left me-2"></i> Back
                      </a>
                   </div>
@@ -23,30 +23,30 @@
          </div>
       </div>
       <div class="row mb-5">
-      <?php $this->load->view('employee_management/partialss/_messages');?>
+         <?php $this->load->view('employee_management/partialss/_messages'); ?>
       </div>
       <!-- end page title -->
-      <?= form_open_multipart('employee-management/modules/update-process/'.$item->id, 'class="custom-validation"');?>
+      <?= form_open_multipart('employee-management/sub-modules/update-process/'.$item->id, 'class="custom-validation"');?>
       
          <div class="row">
             <div class="col-lg-9">
                <div class="card">
                   <div class="card-header bg-primary text-light">
-                     Edit Module
+                     Edit Sub Module
                   </div>
                   <div class="card-body">
-                     <div class="mb-3">
+                  <div class="mb-3">
                               <label class="form-label">Select Module</label>
                               <select class="form-control select2" id="module_id" name="module_id">
                                     <option value="0">Select</option>
                                     <?php if(!empty($allmodules)){
                                              foreach($allmodules as $module){
                                     ?>
-                                    <option value="<?= $module->id;?>" <? $module->id==$item->module_id?'selected':'';?>><?= $module->name;?></option>
+                                    <option value="<?= $module->id;?>" <?= $module->id==$item->module_id?'selected':'';?>><?= $module->name;?></option>
                                     <?php }
                                     }?>
                               </select>
-                     </div>
+                        </div>
 
                      <div class="mb-3">
                         <label class="form-label">Name</label>

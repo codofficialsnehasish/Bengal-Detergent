@@ -9,7 +9,7 @@ class Role_permission extends Core_Controller {
 		$this->is_not_logged_in();
 		$this->table_name='role_permission';
 		$this->user_role = 'user_role';
-		$this->view_path='role_permission/';
+		$this->view_path='employee_management/role_permission/';
 		//$this->output->enable_profiler(TRUE);
 		
 	}
@@ -18,11 +18,11 @@ class Role_permission extends Core_Controller {
 	{
 		$header['pagecss']="contentCss";
 		$header['title']='Role';
-		$this->load->view('partials/header',$header);
+		$this->load->view('employee_management/partialss/header',$header);
 		$data['allroles']=$this->select->select_table('role','id','desc');
 		$this->load->view($this->view_path.'content',$data);
 		$script['pagescript']='roleScript';
-		$this->load->view('partials/footer',$script);
+		$this->load->view('employee_management/partialss/footer',$script);
 	}
 
 
@@ -30,12 +30,12 @@ class Role_permission extends Core_Controller {
 	{
 		$header['pagecss']="contentCss";
 		$header['title']='Role';
-		$this->load->view('partials/header',$header);
+		$this->load->view('employee_management/partialss/header',$header);
 		$data['allroles']=$this->select->select_table('role','id','desc');
 		$data['allusers']=$this->select->select_table('users','id','desc');
 		$this->load->view($this->view_path.'asign_role',$data);
 		$script['pagescript']='roleScript';
-		$this->load->view('partials/footer',$script);
+		$this->load->view('employee_management/partialss/footer',$script);
 	}
 
 	public function user_role(){
@@ -52,7 +52,7 @@ class Role_permission extends Core_Controller {
 					'tblName' => $this->user_role,
 					'data' => $data
 				);
-				$insert=$this->insert_model->insert_data($configs);	
+				$insert=$this->insert_model->emp_insert_data($configs);	
 	
 		 }
 		 if($insert){
@@ -77,7 +77,7 @@ class Role_permission extends Core_Controller {
 			'tblName' => $this->table_name,
 			'where' => array('role_id'=>$role_id)
 		);
-		$this->delete_model->delete($deleteconfigs);
+		$this->delete_model->emp_delete($deleteconfigs);
 		 foreach($this->input->post('module_id', true) as $module){
 			
 				$data = array(
@@ -108,7 +108,7 @@ class Role_permission extends Core_Controller {
 					'tblName' => $this->table_name,
 					'data' => $data
 				);
-				$insert=$this->insert_model->insert_data($configs);	
+				$insert=$this->insert_model->emp_insert_data($configs);	
 		 }
 		 if($insert){
 			$this->session->set_flashdata('success', 'Role Added Successfully');
@@ -145,7 +145,7 @@ class Role_permission extends Core_Controller {
 		);
 	 $data['allmodules'] = $this->select->getResult($moduleConditions);
 	 $data['role_id'] = $role_id;
-	 $html_content = $this->load->view('role_permission/' . $view, $data, true);
+	 $html_content = $this->load->view('employee_management/role_permission/' . $view, $data, true);
 	 $data = array(
 		 'result' => 1,
 		 'html_content' => $html_content,
@@ -177,7 +177,7 @@ private function html_content_role($user_id, $view)
 	$data['user_id'] = $user_id;
 	$userName = 'to '.select_value_by_id('users','id',$user_id,'full_name');
 	$roleList = $this->select->custom_qry("select * from role where id not in (select role_id from user_role where user_id=".$user_id.")");
-	$html_content = $this->load->view('role_permission/' . $view, $data, true);
+	$html_content = $this->load->view('employee_management/role_permission/' . $view, $data, true);
 	$data = array(
 		'result' => 1,
 		'html_content' => $html_content,
@@ -204,7 +204,7 @@ public function user_role_delete(){
 		'tblName' => $this->user_role,
 		'where' => array('id'=>$id)
 	);
-	$this->delete_model->delete($configs);
+	$this->delete_model->emp_delete($configs);
 	echo 'Deleted Successfully';
 }
 

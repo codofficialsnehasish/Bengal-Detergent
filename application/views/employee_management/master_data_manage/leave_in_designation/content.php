@@ -45,7 +45,7 @@
                                                 foreach($allitems as $item):?>
                                                 <tr>
                                                     <td><?= $i++;?></td>
-                                                    <td><a href="<?= employee_url('master-manage/leave-in-designation/edit/'.$item->id);?>"><?= get_name("designation_master",$item->designation_id); ?></a></td>
+                                                    <td><a href="<?= employee_url('master-manage/leave-in-designation/edit/'.$item->id);?>"><?= get_name("role",$item->designation_id); ?></a></td>
                                                     <td><?= get_name("leave_type_master",$item->leave_id); ?> </td>
                                                     <td><?= $item->no_of_days;?> </td>
                                                     <td><?= formated_date($item->created_at);?></td>

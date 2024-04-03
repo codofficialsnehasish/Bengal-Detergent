@@ -57,25 +57,29 @@
                     </ul>
                 </li> 
                 <?php
+                    $rolesegment='';
+                    if($this->uri->segment(2)=='role'){$rolesegment='role';}
+                    if($this->uri->segment(2)=='role-permission'){$rolesegment='role-permission';}
+                    if($this->uri->segment(2)=='asign-role'){$rolesegment='asign-role';}
+                ?>   
+                <?php
                     if ($this->permission->module('permission')->access() || $this->permission->method('add_role', 'create')->access()) {
                 ?>
                 <!-- Role & Permission -->
-                <li class="<= active_menu($rolesegment);?>">
-                    <a href="javascript: void(0);" class="has-arrow waves-effect <= active_menu($rolesegment);?>">
+                <li class="<?= active_menu($rolesegment);?>">
+                    <a href="javascript: void(0);" class="has-arrow waves-effect <?= active_menu($rolesegment);?>">
                         <i class="ti-unlock"></i>
                         <span>Role & Permission</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <?php
-                            if ($this->permission->method('add_role', 'create')->access() || $this->permission->method('add_role', 'read')->access() || $this->permission->method('add_role', 'update')->access() || $this->permission->method('add_role', 'delete')->access()) {
-                        ?>
-                            <li class="<?= emp_tab_active('role');?>"><a href="<?= base_url('role/')?>" class="<?= emp_active_link('role');?>">Role</a></li>
-                        <?php } ?>
-                        <li class="<?= emp_tab_active('role-permission');?>"><a href="<?= base_url('role-permission/')?>" class="<?= emp_active_link('role-permission');?>">Role Permission</a></li>
-                        <?php
-                        if ($this->permission->module('assign_role')->access()) {
-                            ?>
-                        <li class="<?= emp_tab_active('asign-role');?>"><a href="<?= base_url('asign-role/')?>" class="<?= emp_active_link('asign-role');?>">Asign Role</a></li>
+                        <?php //if ($this->permission->method('add_role', 'create')->access() || $this->permission->method('add_role', 'read')->access() || $this->permission->method('add_role', 'update')->access() || $this->permission->method('add_role', 'delete')->access()) { ?>
+                            <!-- <li class="<?= emp_tab_active('role');?>"><a href="<?= employee_url('role/')?>" class="<?= emp_active_link('role');?>">Role</a></li> -->
+                        <?php //} ?>
+
+                        <li class="<?= emp_tab_active('role-permission');?>"><a href="<?= employee_url('role-permission/')?>" class="<?= emp_active_link('role-permission');?>">Role Permission</a></li>
+                        
+                        <?php if ($this->permission->module('assign_role')->access()) { ?>
+                            <li class="<?= emp_tab_active('asign-role');?>"><a href="<?= employee_url('role-permission/asign-role/')?>" class="<?= emp_active_link('asign-role');?>">Asign Role</a></li>
                         <?php } ?>
                     </ul>
                 </li>

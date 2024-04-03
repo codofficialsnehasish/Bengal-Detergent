@@ -835,6 +835,7 @@ class Employees extends Core_Controller {
 			);
 			$this->load->library('bcrypt');
 			$data['password'] = $this->bcrypt->hash_password($data['password']);
+			$data['token'] = generate_token();
 			$configs = array(
 				'tblName' => $this->users,
 				'data' => $data,

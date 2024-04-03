@@ -357,7 +357,7 @@
             <!-- end col -->
             <div class="col-lg-3">
                 <?php $this->load->view('employee_management/partialss/_input-image');?>
-                <div class="card">
+                <!-- <div class="card">
                     <div class="card-header bg-primary text-light">
                         Designation
                     </div>
@@ -366,20 +366,20 @@
                             <label for="package_id" class="form-label">Designation</label>
                             <select class="form-select" name="designation" id="package_id" required>
                                 <option selected disabled value="">Choose...</option>
-                                <?php if(!empty($designation)):
-                                    foreach($designation as $designatin):
+                                <?php //if(!empty($designation)):
+                                    //foreach($designation as $designatin):
                                 ?>
-                                <option value="<?= $designatin->id;?>"><?= $designatin->name;?></option>
+                                <option value="<= $designatin->id;?>"><= $designatin->name;?></option>
                                 <?php 
-                                    endforeach;
-                                endif;?>
+                                    //endforeach;
+                                //endif;?>
                             </select>
                             <div class="invalid-feedback">
                                 This field is required
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="card">
                     <div class="card-header bg-primary text-light">
                         Publish

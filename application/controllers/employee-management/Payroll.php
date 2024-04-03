@@ -35,7 +35,7 @@ class Payroll extends Core_Controller {
 		$header['title']='Create Payslip';
 		$this->load->view('employee_management/partialss/header',$header);
 		$designationdata = array(
-			'tblName' => 'designation_master',
+			'tblName' => 'role',
 			'where' => array(
 				'is_visible'=>1
 			)

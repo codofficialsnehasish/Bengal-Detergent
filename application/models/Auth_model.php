@@ -95,33 +95,46 @@ class Auth_model extends CI_Model
                 $this->session->set_flashdata('error', 'Wrong Password!');
                 return false;
             }
+            if(check_admin($user->id)){
+                $checkPermission = $this->userPermissionadmin($user->id);
+            }
+            else{
+                $checkPermission = $this->userPermission($user->id);
+            }
+            $permission = array();
+            if(!empty($checkPermission)){
+                foreach ($checkPermission as $value) {
+                    $permission[$value->directory] = array(
+                        'create' => $value->create,
+                        'read'   => $value->read,
+                        'update' => $value->update,
+                        'delete' => $value->delete
+                    );
+                }
+            }
             if(($user->role == 'teamlead' || $user->role == 'dristributor' || $user->role == 'employee') && $user->is_approved == 1){
                 //set user data
                 $user_data = array(
                     'modesy_sess_user_id' => $user->id,
+                    'isAdmin' => check_admin($user->id),
                     'modesy_sess_user_email' => $user->email,
                     'modesy_sess_user_role' => $user->role,
                     'modesy_sess_logged_in' => true,
                     'modesy_sess_app_key' => $this->config->item('app_key'),
+                    'modesy_sess_permission'   => json_encode($permission)
                 );
-                // if(get_cookie("user_id")){
-                //     delete_cookie('user_id');
-                //     delete_cookie('user_role');
-                // }
                 $this->session->set_userdata($user_data);
                 return true;
             }else if($user->role == 'retailer' || $user->role == 'admin'){
                 $user_data = array(
                     'modesy_sess_user_id' => $user->id,
+                    'isAdmin' => check_admin($user->id),
                     'modesy_sess_user_email' => $user->email,
                     'modesy_sess_user_role' => $user->role,
                     'modesy_sess_logged_in' => true,
                     'modesy_sess_app_key' => $this->config->item('app_key'),
+                    'modesy_sess_permission'   => json_encode($permission)
                 );
-                // if(get_cookie("user_id")){
-                //     delete_cookie('user_id');
-                //     delete_cookie('user_role');
-                // }
                 $this->session->set_userdata($user_data);
                 return true;
             }else{
@@ -546,6 +559,88 @@ class Auth_model extends CI_Model
         $query = $this->db->get('users');
         return $query->row();
     }
+
+
+    public function userPermissionadmin($id = null){
+		return $this->db->select("
+			sub_module.directory, 
+			role_permission.fk_module_id, 
+			role_permission.create, 
+			role_permission.read, 
+			role_permission.update, 
+			role_permission.delete
+			")
+			->from('role_permission')
+			->join('sub_module', 'sub_module.id = role_permission.fk_module_id', '')
+			->where('role_permission.role_id', $id)
+			->where('sub_module.is_visible', 1)
+			->group_start()
+				->where('create', 1)
+				->or_where('read', 1)
+				->or_where('update', 1)
+				->or_where('delete', 1)
+			->group_end()
+			->get()
+			->result();
+	}
+
+    public function userPermission($id = null){
+
+		$userrole=$this->db->select('*')->from('user_role')
+						->where('user_id',$id)->get()->result();
+
+
+		$roleid = array();
+		foreach ($userrole as $role) {
+			$roleid[] =$role->role_id;
+		}
+	
+		if(!empty($roleid)){
+		    return $result =  $this->db->select("
+					role_permission.fk_module_id, 
+					sub_module.directory,
+					IF(SUM(role_permission.create) >= 1,1,0) AS 'create', 
+					IF(SUM(role_permission.read) >= 1,1,0) AS 'read', 
+					IF(SUM(role_permission.update) >= 1,1,0) AS 'update', 
+					IF(SUM(role_permission.delete) >= 1,1,0) AS 'delete'
+				")
+				->from('role_permission')
+				->join('sub_module', 'sub_module.id = role_permission.fk_module_id', '')
+				->where_in('role_permission.role_id',$roleid)
+				->where('sub_module.is_visible', 1)
+				->group_by('role_permission.fk_module_id')
+				->group_start()
+					->where('create', 1)
+					->or_where('read', 1)
+					->or_where('update', 1)
+					->or_where('delete', 1)
+				->group_end()
+				
+				->get()
+				->result();
+		}else{
+			return $this->db->select("
+                sub_module.directory, 
+                role_permission.fk_module_id, 
+                role_permission.create, 
+                role_permission.read, 
+                role_permission.update, 
+                role_permission.delete
+			")
+			->from('role_permission')
+			->join('sub_module', 'sub_module.id = role_permission.fk_module_id', 0)
+			->where('role_permission.role_id', 0)
+			->where('sub_module.is_visible', 1)
+			->group_start()
+				->where('create', 1)
+				->or_where('read', 1)
+				->or_where('update', 1)
+				->or_where('delete', 1)
+			->group_end()
+			->get()
+			->result();
+		}
+	}
 
 }
 ?>

@@ -23,10 +23,10 @@
          </div>
       </div>
       <div class="row mb-5">
-      <?php $this->load->view('partials/_messages');?>
+      <?php $this->load->view('employee_management/partialss/_messages');?>
       </div>
       <!-- end page title -->
-      <?= form_open_multipart('modules/process', 'class="custom-validation"');?>
+      <?= form_open_multipart('employee-management/modules/process', 'class="custom-validation"');?>
       
          <div class="row">
             <div class="col-lg-9">

@@ -174,3 +174,20 @@ if(!function_exists('check_todays_attendance')){
         }
     }
 }
+
+if (!function_exists('check_permission')) {
+    function check_permission($role_id,$module_id,$fieldName)
+    {
+        $ci =& get_instance();
+        $result= $ci->select->custom_qry("select * from role_permission  where role_id=".$role_id." and fk_module_id=".$module_id);
+        if(!empty($result)){
+         if($result[0]->$fieldName == 1){
+            return "checked";
+         }else{
+            return "";
+         }
+         }else{
+             return '';
+         }
+     }
+}

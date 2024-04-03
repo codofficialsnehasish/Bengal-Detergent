@@ -1959,6 +1959,19 @@ if (!function_exists('is_admin')) {
         return false;
     }
 }
+if (!function_exists('check_admin')) {
+    function check_admin($user_id)
+    {
+        // Get a reference to the controller object
+        $ci =& get_instance();
+        $result= $ci->select->custom_qry("select role_id from user_role  where user_id=".$user_id." and role_id=1");
+        if(!empty($result)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+}
 /////////////////////////////04/06/2023
 function is_president(){
     $ci =& get_instance();

@@ -504,7 +504,8 @@ $config['csrf_exclude_uris'] = array(
                                     'employees/bankinfo',
                                     'employee-management/payroll/create-pay-slip',
                                     'save-attendance',
-                                    'employee-management/leave/process-leave-application'
+                                    'employee-management/leave/process-leave-application',
+                                    'employee-management/role-permission/permission'
                                 );
 
 /*

@@ -26,7 +26,7 @@ class Leave_in_designation extends Core_Controller {
 		$header['pagecss']="";
 		$header['title']='Asign Leave for Designation';
 		$this->load->view('employee_management/partialss/header',$header);
-		$data['designation']=$this->select->select_table('designation_master','id','asc');
+		$data['designation']=$this->select->select_table('role','id','asc');
 		$data['leave_type']=$this->select->select_table('leave_type_master','id','asc');
 		$this->load->view($this->view_path.'add',$data);
 		$script['pagescript']='formScript';
@@ -72,7 +72,7 @@ class Leave_in_designation extends Core_Controller {
 		$header['title']='Edit Leave for Designation';
 		$this->load->view('employee_management/partialss/header',$header);
 		$categoryArray=$this->select->select_single_data($this->table_name,'id',$id);
-		$data['designation']=$this->select->select_table('designation_master','id','asc');
+		$data['designation']=$this->select->select_table('role','id','asc');
 		$data['leave_type']=$this->select->select_table('leave_type_master','id','asc');
 		$data['item']=$categoryArray[0];
 		$this->load->view($this->view_path.'edit',$data);

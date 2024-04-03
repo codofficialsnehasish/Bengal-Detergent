@@ -7,7 +7,8 @@ class Designation_master extends Core_Controller {
     {
         parent::__construct();
 		$this->is_not_logged_in();
-		$this->table_name='designation_master';
+		// $this->table_name='designation_master';
+		$this->table_name='role';
 		$this->view_path='employee_management/master_data_manage/designation_master/';
 		//$this->output->enable_profiler(TRUE);
 		
