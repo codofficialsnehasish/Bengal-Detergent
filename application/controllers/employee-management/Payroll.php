@@ -49,10 +49,11 @@ class Payroll extends Core_Controller {
     }
 
 	public function employee_according_designation(){
-		$conditions['tblName'] = 'users';
-		$conditions['where'] = array('designation'=>$this->input->post('designation_id'));
-		$conditions['is_visible'] = 1;
-		$result = $this->select->select->getResult($conditions);
+		$role_id = $this->input->post('designation_id',true);
+		// $conditions['tblName'] = 'users';
+		// $conditions['where'] = array('designation'=>$this->input->post('designation_id'));
+		// $conditions['is_visible'] = 1;
+		$result = $this->select->select->custom_qry("SELECT users.* FROM users LEFT JOIN user_role on users.id = user_role.user_id WHERE user_role.role_id = ".$role_id);
 		echo json_encode($result);
 	}
 

@@ -231,7 +231,7 @@
                             <span>Distributers</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
-                            <li class="<?= tab_active('distributer');?>"><a href="<?= base_url('admin/dristributor/tl-distributer/')?>" class="<?= active_link('tl-distributer');?>">Distributer List</a></li>                                   
+                            <li class="<?= tab_active('distributer');?>"><a href="<?= check_todays_attendance($this->auth_user->id) == "Check In" ? base_url('admin/dristributor/tl-distributer/') : 'javascript:void(0)';?>" class="<?= active_link('tl-distributer');?>">Distributer List</a></li>                                   
                         </ul>
                     </li>
 
@@ -259,8 +259,8 @@
                     <?php
                         if ($this->permission->module('permission')->access() || $this->permission->method('payslip', 'read')->access()) {
                     ?>
-                    <li class="<?= active_menu('stocks');?>">
-                        <a href="<?= check_todays_attendance($this->auth_user->id) == "Check In" ? employee_url('payroll/emp-payslip') : 'javascript:void(0)'; ?>" class="waves-effect <?= active_link('stocks');?>">
+                    <li class="<?= active_menu('emp-payslip');?>">
+                        <a href="<?= check_todays_attendance($this->auth_user->id) == "Check In" ? employee_url('payroll/emp-payslip') : 'javascript:void(0)'; ?>" class="waves-effect <?= active_link('emp-payslip');?>">
                             <i class="fas fa-file-invoice"></i>
                             <span>Payslip</span>
                         </a>
