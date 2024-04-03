@@ -831,7 +831,8 @@ class Employees extends Core_Controller {
 		}else{
 			$data=array(
 				'email'=> $this->input->post('login_email', true),
-				'password' =>$this->input->post('login_password', true)
+				'password' =>$this->input->post('login_password', true),
+				'is_approved'=>1,
 			);
 			$this->load->library('bcrypt');
 			$data['password'] = $this->bcrypt->hash_password($data['password']);
