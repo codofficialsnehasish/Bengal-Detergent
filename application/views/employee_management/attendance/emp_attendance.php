@@ -14,7 +14,7 @@
                 <div class="col-md-4">
                     <div class="float-end d-none d-md-block">
                         <div class="dropdown">
-                            <a href="<?= employee_url('leave/emp-leave'); ?>" class="btn btn-primary  dropdown-toggle" type="button" aria-expanded="false">
+                            <a href="<?= check_todays_attendance($this->auth_user->id) == "Check In" ? employee_url('leave/emp-leave') : 'javascript:void(0)'; ?>" class="btn btn-primary  dropdown-toggle" type="button" aria-expanded="false">
                                 <i class="fas fa-envelope me-2"></i> Apply Leave
                             </a>
                         </div>
