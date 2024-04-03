@@ -32,7 +32,7 @@ class Role_permission extends Core_Controller {
 		$header['title']='Role';
 		$this->load->view('employee_management/partialss/header',$header);
 		$data['allroles']=$this->select->select_table('role','id','desc');
-		$data['allusers']=$this->select->select_table('users','id','desc');
+		$data['allusers']=$this->select->select_single_data('users','role','employee');
 		$this->load->view($this->view_path.'asign_role',$data);
 		$script['pagescript']='roleScript';
 		$this->load->view('employee_management/partialss/footer',$script);

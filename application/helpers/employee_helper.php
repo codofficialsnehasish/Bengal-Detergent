@@ -101,14 +101,18 @@ if (!function_exists('formated_date')) {
 if(!function_exists('get_employee_designation')){
     function get_employee_designation($emp_id){
         $ci =& get_instance();
-        $ci->db->select('designation');
-        $ci->db->from('users');
-        $ci->db->where('users.id', $emp_id);
+        // $ci->db->select('designation');
+        // $ci->db->from('users');
+        // $ci->db->where('users.id', $emp_id);
+
+        $ci->db->select('role_id');
+        $ci->db->from('user_role');
+        $ci->db->where('user_id', $emp_id);
         $query = $ci->db->get();
         $result = $query->row();
 
         if ($result) {
-            return $result->designation;
+            return $result->role_id;
         } else {
             return null;
         }

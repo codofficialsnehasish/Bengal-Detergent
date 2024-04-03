@@ -128,5 +128,6 @@ $route['employee-according-designation']='employee-management/payroll/employee_a
 $route['get-salary-config-by-employe-id']='employee-management/payroll/get_salary_config_by_employee_id';
 $route['check-employee-payslip-created-or-not']='employee-management/payroll/check_employee_payslip_created_or_not';
 $route['get-attendance-for-user']='employee-management/attendance/get_attendance_for_user';
+$route['get-attendance-for-users/(:num)']='employee-management/attendance/get_attendance_for_user/$1';
 $route['save-attendance']='employee-management/attendance/save_attendance';
 $route['check-pending-leaves']='employee-management/leave/check_pending_leaves';

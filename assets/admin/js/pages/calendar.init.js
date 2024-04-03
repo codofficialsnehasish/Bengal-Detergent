@@ -70,8 +70,9 @@ const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.sp
                         var titleText = document.querySelector('.fc-center h2').innerText;
                         var date = new Date(titleText + " 1"); // Parse the title text
                         date.setMonth(date.getMonth() - 1); // Subtract one month
-                        var formattedDate = date.toLocaleString('default', { month: 'long', year: 'numeric' });
-                        alert(formattedDate);
+                        // var formattedDate = date.toLocaleString('default', { month: 'long', year: 'numeric' });
+                        var formattedDate = date.toLocaleString('default', { month: 'numeric'});
+                        get_att_data(formattedDate);
                         c.prev();
                     }
                 },
@@ -83,8 +84,9 @@ const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.sp
                         var titleText = document.querySelector('.fc-center h2').innerText;
                         var date = new Date(titleText + " 1"); // Parse the title text
                         date.setMonth(date.getMonth() + 1); // Add one month
-                        var formattedDate = date.toLocaleString('default', { month: 'long', year: 'numeric' });
-                        alert(formattedDate);
+                        // var formattedDate = date.toLocaleString('default', { month: 'long', year: 'numeric' });
+                        var formattedDate = date.toLocaleString('default', { month: 'numeric'});
+                        get_att_data(formattedDate);
                         c.next(); // Navigate to the next month
                     }
                 }
@@ -116,6 +118,22 @@ const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.sp
                 });
             },
         });
+        function get_att_data(month){
+            $.ajax({
+                url: base_url +'get-attendance-for-users/'+month,
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    c.removeAllEvents();
+                    data.forEach(function(item) {
+                        item.start = new Date(item.start);
+                    });
+                    data.forEach(function(item) {
+                        c.addEvent(item);
+                    });
+                },
+            });
+        }
         v(n).on("submit", function(e) {
             e.preventDefault();
             v("#form-event :input");

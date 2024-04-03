@@ -164,19 +164,95 @@ class Attendance extends Core_Controller {
 		$this->load->view('admin/partials/footer',$script);
 	}
 
-	public function get_attendance_for_user(){
-		$attendanceData = $this->select->select_single_data('attendance_employee','user_id',$this->auth_user->id);
+	// public function get_attendance_for_user(){
+	// 	$attendanceData = $this->select->select_single_data('attendance_employee','user_id',$this->auth_user->id);
+	// 	$formattedData = [];
+    //     foreach ($attendanceData as $attendance) {
+    //         $formattedData[] = array(
+    //             'title' => $attendance->status == 'Check In' ? 'Check In' : 'Check Out',
+    //             'start' => $attendance->date . 'T' . $attendance->time,
+    //             'allDay' => false,
+    //             'className' => $attendance->status == 'Check In' ? 'bg-success' : 'bg-danger'
+    //         );
+    //     }
+	// 	echo json_encode($formattedData);
+	// }
+
+	////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////
+	public function get_attendance_for_user() {
+		$get_month = $this->uri->segment(2);
+		if ($get_month && $get_month != date("m") && $get_month < date("m")) {
+			$month = intval($get_month);
+			if ($month >= 1 && $month <= 12) {
+				$currentMonthStart = date('Y-' . sprintf('%02d', $month) . '-01');
+				$endDate = date('Y-' . sprintf('%02d', $month) . '-t', strtotime($currentMonthStart));
+			} else {
+				$currentMonthStart = date('Y-m-01');
+				$endDate = date('Y-m-d');
+			}
+		} else {
+			$currentMonthStart = date('Y-m-01');
+			$endDate = date('Y-m-d');
+		}
+
+
+		// $currentMonthStart = date('Y-m-01');
+		// $endDate = date('Y-m-d');
+		$currentDate = date('Y-m-d');
+		$u_id = $this->auth_user->id;
 		$formattedData = [];
-        foreach ($attendanceData as $attendance) {
-            $formattedData[] = array(
-                'title' => $attendance->status == 'Check In' ? 'Check In' : 'Check Out',
-                'start' => $attendance->date . 'T' . $attendance->time,
-                'allDay' => false,
-                'className' => $attendance->status == 'Check In' ? 'bg-success' : 'bg-danger'
-            );
-        }
+
+		$currentDateTimestamp = strtotime($currentMonthStart);
+		while ($currentDateTimestamp <= strtotime($endDate)) {
+			$date = date('Y-m-d', $currentDateTimestamp);
+	
+			// $attendanceData = $this->select->select_single_data('attendance_employee', 'date', $date);
+			$attendanceData = $this->select->custom_qry("SELECT * FROM attendance_employee WHERE date = '$date' AND user_id = '$u_id'");
+			
+			if ($attendanceData) {
+				foreach ($attendanceData as $attendance) {
+					$formattedData[] = array(
+						'title' => $attendance->status == 'Check In' ? 'Check In' : 'Check Out',
+						'start' => $attendance->date . 'T' . $attendance->time,
+						'allDay' => false,
+						'className' => $attendance->status == 'Check In' ? 'bg-success' : 'bg-warning'
+					);
+				}
+			} else {
+				if ($date != $currentDate) {
+					$leaveData = $this->select->custom_qry("SELECT * FROM leave_apply WHERE employee_id = '$u_id' AND '$date' BETWEEN apply_strt_date AND DATE_ADD(apply_strt_date, INTERVAL (num_aprv_day-1) DAY) AND status = 1");
+					if ($leaveData) {
+						foreach ($leaveData as $leave) {
+							$formattedData[] = array(
+								'title' => 'Leave',
+								'start' => $date,
+								'allDay' => true,
+								'className' => 'bg-info'
+							);
+						}
+					} else {
+						$formattedData[] = array(
+							'title' => 'Absent',
+							'start' => $date,
+							'allDay' => true,
+							'className' => 'bg-danger'
+						);
+					}
+				}
+			}
+			$currentDateTimestamp = strtotime('+1 day', $currentDateTimestamp);
+		}
 		echo json_encode($formattedData);
 	}
+	
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
 
 	public function save_attendance(){
 		$data=array(
