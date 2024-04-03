@@ -209,7 +209,7 @@
                 <?php } ?>
                 <?php if($this->auth_user->role == "employee"){ ?>
                     <li>
-                        <a href="<?= check_todays_attendance($this->auth_user->id) == "Check In" ? base_url('admin/dashboard/') : 'javascript:void(0)';?>" class="waves-effect <?= active_link('dashboard');?>">
+                        <a href="<?= base_url('admin/dashboard/'); ?>" class="waves-effect <?= active_link('dashboard');?>">
                             <i class="ti-home"></i>
                             <span>Dashboard</span>
                         </a>
