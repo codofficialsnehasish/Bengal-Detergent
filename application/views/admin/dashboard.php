@@ -808,7 +808,7 @@
                                         <div class="card-body">
                                             <h5 class="card-title"><?= $this->auth_user->full_name;?></h5>
                                             <h6 class="card-text"><?= $this->auth_user->user_id;?></h6>
-                                            <h6 class="card-text mb-3">Designation : <?= get_name("designation_master",$this->auth_user->designation); ?></h6>
+                                            <h6 class="card-text mb-3">Designation : <?= get_name("role",get_employee_designation($this->auth_user->id)); ?></h6>
                                             <p><a href="<?= employee_url('employees/details/'.$this->auth_user->id);?>" class="btn btn-outline-primary btn-block" style="width: 100%;">Edit Profile</a></p>
                                             <!-- Add more profile details -->
                                         </div>
@@ -823,8 +823,11 @@
                                                         <div class="float-start mini-stat-img me-4">
                                                             <img src="<?= base_url('assets/admin/images/services-icon/21.png') ?>" alt="">
                                                         </div>
-                                                        <h5 class="font-size-16 text-uppercase text-white-50">Present day in <?= date("F"); ?></h5>
-                                                        <h4 class="fw-medium font-size-24" style="color:white;"><?= get_any_orders_count($this->auth_user->id,'all');?> <!--<i class="mdi mdi-arrow-up text-success ms-2"></i>--> </h4>
+                                                        <h5 class="font-size-16 text-uppercase text-white-50">Attendance in <?= date("F"); ?></h5>
+                                                        <h4 class="fw-medium font-size-24" style="color:white;">
+                                                            <span class="badge rounded-pill bg-success" title="Present">0</span>
+                                                            <span class="badge rounded-pill bg-danger" title="Absent">0</span>
+                                                        </h4>
                                                     </div>
                                                 </div>
                                             </a>
@@ -836,10 +839,10 @@
                                                 <div class="card-body">
                                                     <div class="mb-4">
                                                         <div class="float-start mini-stat-img me-4">
-                                                            <img src="<?= base_url('assets/admin/images/services-icon/22.png') ?>" alt="">
+                                                            <img src="<?= base_url('assets/admin/images/services-icon/24.png') ?>" alt="">
                                                         </div>
-                                                        <h5 class="font-size-16 text-uppercase text-white-50">Total Absent in <?= date("F"); ?></h5>
-                                                        <h4 class="fw-medium font-size-24" style="color:white;"><?= get_any_orders_count($this->auth_user->id,1);?> </h4>
+                                                        <h5 class="font-size-16 text-uppercase text-white-50"><?= date('F', strtotime('-1 month', strtotime(date('Y-m-d')))) ?> Gross Salary</h5>
+                                                        <h4 class="fw-medium font-size-24" style="color:white;">₹ 0</h4>
                                                     </div>
                                                 </div>
                                             </a>
@@ -851,55 +854,10 @@
                                                 <div class="card-body">
                                                     <div class="mb-4">
                                                         <div class="float-start mini-stat-img me-4">
-                                                            <img src="<?= base_url('assets/admin/images/services-icon/11.png') ?>" alt="">
+                                                            <img src="<?= base_url('assets/admin/images/services-icon/23.png') ?>" alt="">
                                                         </div>
-                                                        <h5 class="font-size-16 text-uppercase text-white-50">Cancelled Orders</h5>
-                                                        <h4 class="fw-medium font-size-24" style="color:white;"><?= get_any_orders_count($this->auth_user->id,'cancelled');?></h4>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="card mini-stat bg-primary text-white">
-                                            <a href="<?= admin_url('orders/dristibuter-order')?>">
-                                                <div class="card-body">
-                                                    <div class="mb-4">
-                                                        <div class="float-start mini-stat-img me-4">
-                                                            <img src="<?= base_url('assets/admin/images/services-icon/10.png') ?>" alt="">
-                                                        </div>
-                                                        <h5 class="font-size-16 text-uppercase text-white-50">Active Orders</h5>
-                                                        <h4 class="fw-medium font-size-24" style="color:white;"><?= get_any_orders_count($this->auth_user->id,'pending');?></h4>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="card mini-stat bg-primary text-white">
-                                            <a href="<?= admin_url('orders')?>">
-                                                <div class="card-body">
-                                                    <div class="mb-4">
-                                                        <div class="float-start mini-stat-img me-4">
-                                                            <img src="<?= base_url('assets/admin/images/services-icon/07.png') ?>" alt="">
-                                                        </div>
-                                                        <h5 class="font-size-16 text-uppercase text-white-50">Retailers Orders</h5>
-                                                        <h4 class="fw-medium font-size-24" style="color:white;"><?= get_retailer_orders_count($this->auth_user->id,'pending');?></h4>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="card mini-stat bg-primary text-white">
-                                            <a href="#">
-                                                <div class="card-body">
-                                                    <div class="mb-4">
-                                                        <div class="float-start mini-stat-img me-4">
-                                                            <img src="<?= base_url('assets/admin/images/services-icon/08.png') ?>" alt="">
-                                                        </div>
-                                                        <h5 class="font-size-16 text-uppercase text-white-50"><?php echo date('F'); ?> Sales</h5>
-                                                        <h4 class="fw-medium font-size-24" style="color:white;"><?= get_achieved_target_data($this->auth_user->id,date('Y-m')); ?> </h4>
+                                                        <h5 class="font-size-16 text-uppercase text-white-50">Remaining Leaves</h5>
+                                                        <h4 class="fw-medium font-size-24" style="color:white;">0</h4>
                                                     </div>
                                                 </div>
                                             </a>
