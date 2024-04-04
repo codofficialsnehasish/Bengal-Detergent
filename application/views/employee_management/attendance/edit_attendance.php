@@ -77,7 +77,7 @@
                                 <select class="form-select" id="validationCustom04" name="status" aria-label="Default select example" required="">
                                     <option value="" desabled selected>Choose....</option>
                                     <option value="Check In" <?= $item->status == 'Check In'? 'desabled selected' : ''?>>Check In</option>
-                                    <option value="Checked Out" <?= $item->status == 'Check Out'? 'desabled selected' : ''?>>Check Out</option>
+                                    <option value="Check Out" <?= $item->status == 'Check Out'? 'desabled selected' : ''?>>Check Out</option>
                                 </select>
                             </div>
                         </div>

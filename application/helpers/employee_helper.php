@@ -163,16 +163,34 @@ if(!function_exists('check_todays_attendance')){
     function check_todays_attendance($emp_id){
         $ci =& get_instance();
         $ci->db->select('status');
-        $ci->db->from('attendance_employee');
+        $ci->db->from('attendance');
         $ci->db->where('user_id', $emp_id);
         $ci->db->where('date', 'CURDATE()', false);
-        $ci->db->order_by('date', 'desc');
         $ci->db->limit(1);
         $query = $ci->db->get();
         $result = $query->row();
 
         if ($result) {
             return $result->status;
+        } else {
+            return "null";
+        }
+    }
+}
+
+if(!function_exists('get_todays_check_in_time')){
+    function get_todays_check_in_time($emp_id){
+        $ci =& get_instance();
+        $ci->db->select('check_in_time');
+        $ci->db->from('attendance');
+        $ci->db->where('user_id', $emp_id);
+        $ci->db->where('date', 'CURDATE()', false);
+        $ci->db->limit(1);
+        $query = $ci->db->get();
+        $result = $query->row();
+
+        if ($result) {
+            return $result->check_in_time;
         } else {
             return "null";
         }

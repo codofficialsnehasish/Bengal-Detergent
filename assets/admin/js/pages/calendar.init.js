@@ -92,7 +92,12 @@ const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.sp
                 }
             },
             eventClick: function(e) {
-                a.modal("show"), n[0].reset(), l = e.event, v("#event-title").val(l.title), v("#event-category").val(l.classNames[0]), i = null, t.text("Edit Event"), i = null
+                var clickedDate = e.date;
+                var today = new Date();
+                if (clickedDate.getDate() === today.getDate() && clickedDate.getMonth() === today.getMonth() && clickedDate.getFullYear() === today.getFullYear()) {
+                    // o(e);
+                    a.modal("show"), n[0].reset(), l = e.event, v("#event-title").val(l.title), v("#event-category").val(l.classNames[0]), i = null, t.text("Edit Event"), i = null
+                }
             },
             dateClick: function(e) {
                 // o(e)

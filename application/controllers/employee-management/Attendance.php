@@ -180,8 +180,6 @@ class Attendance extends Core_Controller {
 
 	////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////
-	////////////////////////////////////////////////////////////////////////////
-	////////////////////////////////////////////////////////////////////////////
 	public function get_attendance_for_user() {
 		$get_month = $this->uri->segment(2);
 		if ($get_month && $get_month != date("m") && $get_month < date("m")) {
@@ -210,17 +208,34 @@ class Attendance extends Core_Controller {
 			$date = date('Y-m-d', $currentDateTimestamp);
 	
 			// $attendanceData = $this->select->select_single_data('attendance_employee', 'date', $date);
-			$attendanceData = $this->select->custom_qry("SELECT * FROM attendance_employee WHERE date = '$date' AND user_id = '$u_id'");
+			$attendanceData = $this->select->custom_qry("SELECT * FROM attendance WHERE date = '$date' AND user_id = ".$u_id);
 			
 			if ($attendanceData) {
-				foreach ($attendanceData as $attendance) {
+				$attendanceData = $attendanceData[0];
+				if(!empty($attendanceData->check_in_time)){
 					$formattedData[] = array(
-						'title' => $attendance->status == 'Check In' ? 'Check In' : 'Check Out',
-						'start' => $attendance->date . 'T' . $attendance->time,
+						'title' => 'Check In',
+						'start' => $attendanceData->date . 'T' . $attendanceData->check_in_time,
 						'allDay' => false,
-						'className' => $attendance->status == 'Check In' ? 'bg-success' : 'bg-warning'
+						'className' => 'bg-success'
 					);
 				}
+				if(!empty($attendanceData->check_out_time)){
+					$formattedData[] = array(
+						'title' => 'Check Out',
+						'start' => $attendanceData->date . 'T' . $attendanceData->check_out_time,
+						'allDay' => false,
+						'className' => 'bg-warning'
+					);
+				}
+				// foreach ($attendanceData as $attendance) {
+				// 	$formattedData[] = array(
+				// 		'title' => $attendance->status == 'Check In' ? 'Check In' : 'Check Out',
+				// 		'start' => $attendance->date . 'T' . $attendance->time,
+				// 		'allDay' => false,
+				// 		'className' => $attendance->status == 'Check In' ? 'bg-success' : 'bg-warning'
+				// 	);
+				// }
 			} else {
 				if ($date != $currentDate) {
 					$leaveData = $this->select->custom_qry("SELECT * FROM leave_apply WHERE employee_id = '$u_id' AND '$date' BETWEEN apply_strt_date AND DATE_ADD(apply_strt_date, INTERVAL (num_aprv_day-1) DAY) AND status = 1");
@@ -247,41 +262,19 @@ class Attendance extends Core_Controller {
 		}
 		echo json_encode($formattedData);
 	}
-	
-	///////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 
 	public function save_attendance(){
-		$data=array(
-			'user_id'=> $this->auth_user->id,
-			'date'=> date("Y-m-d"),
-			'time'=> date('H:i'),
-			'location'=> $this->input->post('latitude', true).','.$this->input->post('longitude', true),
-			'status'=> $this->input->post('title', true),
-			'register_by'=> $this->auth_user->role,
-			'created_at'=> $this->currentTime
-		);
-		$configs = array(
-			'tblName' => 'attendance_employee',
-			'data' => $data
-		);
-		$insert=$this->insert_model->emp_insert_data($configs);
-
-		if($this->input->post('title', true) == 'Check Out'){
-			$user_id = $this->auth_user->id;
-			$check_in = $this->select->custom_qry("SELECT * FROM `attendance_employee` WHERE user_id = '$user_id' and date = CURRENT_DATE() AND status = 'Check In'");
-			$check_in = $check_in[0];
-			$check_out = $this->select->custom_qry("SELECT * FROM `attendance_employee` WHERE user_id = '$user_id' and date = CURRENT_DATE() AND status = 'Check Out'");
-			$check_out = $check_out[0];
+		$emp_id = $this->auth_user->id;
+		$attendance_status = $this->input->post('title', true);
+		$today_check_in_time = get_todays_check_in_time($emp_id);
+		if(check_todays_attendance($emp_id) == 'Check In' && $attendance_status == 'Check Out'){
 			$data=array(
-				'user_id'=> $this->auth_user->id,
-				'check_out_time'=> $check_out->time,
-				'check_out_location'=> $check_out->location,
-				'stay_time'=> getTimeDifference($check_in->time,$check_out->time),
-				'status'=> 'Check Out',
+				'check_out_time'=> date('H:i:s'),
+				'check_out_location'=> $this->input->post('latitude', true).','.$this->input->post('longitude', true),
+				'stay_time'=> getTimeDifference($today_check_in_time,date('H:i:s')),
+				'status'=> $attendance_status,
 				'register_by'=> $this->auth_user->full_name,
 				'updated_at'=> $this->currentTime
 			);
@@ -289,23 +282,18 @@ class Attendance extends Core_Controller {
 				'tblName' => $this->attendance,
 				'data' => $data,
                 'where' => array(
-					'user_id'=>$this->auth_user->id,
+					'user_id'=>$emp_id,
 					'date'=>date("Y-m-d")
 				)
 			);
 			$update=$this->edit_model->emp_edit($configs);
-		}
-
-		if($this->input->post('title', true) == 'Check In'){
-			$user_id = $this->auth_user->id;
-			$check_in = $this->select->custom_qry("SELECT * FROM `attendance_employee` WHERE user_id = '$user_id' and date = CURRENT_DATE() AND status = 'Check In'");
-			$check_in = $check_in[0];
+		}else if($attendance_status == 'Check In' && check_todays_attendance($emp_id) != 'Check In'){
 			$data=array(
-				'user_id'=> $this->auth_user->id,
+				'user_id'=> $emp_id,
 				'date'=> date("Y-m-d"),
-				'check_in_time'=> $check_in->time,
-				'check_in_location'=> $check_in->location,
-				'status'=> 'Check In',
+				'check_in_time'=> date('H:i:s'),
+				'check_in_location'=> $this->input->post('latitude', true).','.$this->input->post('longitude', true),
+				'status'=> $attendance_status,
 				'register_by'=> $this->auth_user->full_name,
 				'created_at'=> $this->currentTime,
 				'updated_at'=> $this->currentTime
@@ -315,6 +303,8 @@ class Attendance extends Core_Controller {
 				'data' => $data
 			);
 			$insert=$this->insert_model->emp_insert_data($configs);
+		}else{
+			echo json_encode('Sorry, You need to First Check In');
 		}
 	}
 }

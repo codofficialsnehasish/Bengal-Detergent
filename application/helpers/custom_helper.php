@@ -2343,8 +2343,8 @@ if (!function_exists('numberTowords')) {
 
     if(!function_exists('getTimeDifference')) {
         function getTimeDifference($time1, $time2) {
-            $dateTime1 = DateTime::createFromFormat('H:i', $time1);
-            $dateTime2 = DateTime::createFromFormat('H:i', $time2);
+            $dateTime1 = DateTime::createFromFormat('H:i:s', $time1);
+            $dateTime2 = DateTime::createFromFormat('H:i:s', $time2);
             $interval = $dateTime1->diff($dateTime2);
             $differenceFormatted = $interval->format('%H:%I:%S');
             return $differenceFormatted;
