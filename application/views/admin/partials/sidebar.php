@@ -225,15 +225,22 @@
                         $usegment='';
                         if($this->uri->segment(2)=='dristributor'){$usegment='dristributor';}
                     ?>
+                    <?php
+                        if ($this->permission->module('permission')->access() || $this->permission->method('distributer_list', 'read')->access()) {
+                    ?>
                     <li class="<?= active_menu($usegment);?>">
                         <a href="javascript: void(0);" class="has-arrow waves-effect <?= active_menu($usegment);?>">
                             <i class="ti-user"></i>
                             <span>Distributers</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
-                            <li class="<?= tab_active('distributer');?>"><a href="<?= check_todays_attendance($this->auth_user->id) == "Check In" ? base_url('admin/dristributor/tl-distributer/') : 'javascript:void(0)';?>" class="<?= active_link('tl-distributer');?>">Distributer List</a></li>                                   
+                            <li class="<?= tab_active('distributer');?>"><a href="<?= check_todays_attendance($this->auth_user->id) == "Check In" ? base_url('admin/dristributor/tl-distributer/') : 'javascript:void(0)';?>" class="<?= active_link('tl-distributer');?>">Distributer List</a></li>     
+                            <?php if ($this->permission->method('distributer_list', 'create')->access()) { ?>                              
+                            <li class="<?= tab_active('distributer');?>"><a href="<?= check_todays_attendance($this->auth_user->id) == "Check In" ? base_url('admin/dristributor/add-new/') : 'javascript:void(0)';?>" class="<?= active_link('tl-distributer');?>">Add Distributer</a></li>
+                            <?php } ?>                                   
                         </ul>
                     </li>
+                    <?php } ?>
 
                     <?php 
                         $usegment='';

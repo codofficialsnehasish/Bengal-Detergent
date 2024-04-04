@@ -209,6 +209,7 @@
                         </div> 
                   </div>
                </div>
+               <?php if($this->auth_user->role == "admin"){ ?>
                <div class="card">
                   <div class="card-header bg-primary text-light">
                      Team Leader
@@ -232,11 +233,16 @@
                      </div>
                   </div>
                </div>
+               <?php } ?>
+               <?php if($this->auth_user->role == "employee"){ ?>
+                  <input type="hidden" name="tl_id" value="<?= $this->auth_user->id; ?>">
+               <?php } ?>
                <div class="card">
                   <div class="card-header bg-primary text-light">
                      Publish
                   </div>
                   <div class="card-body">
+                     <?php if($this->auth_user->role == "admin"){ ?>
                      <div class="mb-3">
                         <label class="form-label mb-3 d-flex">Status</label>
                         <div class="form-check form-check-inline">
@@ -248,6 +254,9 @@
                            <label class="form-check-label" for="customRadioInline2">Inactive</label>
                         </div>
                      </div>
+                     <?php }else{ ?>
+                        <input type="hidden" name="status" value="1">
+                     <?php } ?>
                     
                      <div class="mb-0">
                         <div>

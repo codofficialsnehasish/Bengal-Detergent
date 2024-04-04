@@ -224,7 +224,7 @@ class Dristributor extends Core_Controller {
 			$data["username"] = $user_name;
 			$data['password'] = $this->bcrypt->hash_password($data['password']);
         	$data['role'] = $data['role'];
-        	$data['user_type'] = 'admin_register';
+        	$data['user_type'] = $this->auth_user->role.'_register';
         	$data["slug"] = $this->slug->create_unique_slug($data["username"], 'users','slug');
         	$data['created_at'] = date('Y-m-d H:i:s');
         	$data['token'] = generate_token();
