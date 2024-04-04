@@ -54,12 +54,15 @@ class Dristributor extends Core_Controller {
 	public function details()
 	{
 		$id=$this->uri->segment(4);
-		
 		$header['pagecss']="contentCss";
 		$header['title']='Dristributor';
 		$this->load->view('admin/partials/header',$header);
 		$items=$this->select->select_single_data($this->table_name,'id',$id);
 		$data['item']=$items[0];
+		if($this->auth_user->role == "employee"){
+			$data['orders']=$this->select->select_double_data('orders','is_for_distributer',1,'distributer_id',$id);
+			$data['allitems']=$this->select->custom_qry("select * from dristributor_stocks where dristributor_id = ".$id);
+		}
 		$this->load->view($this->view_path.'details',$data);
 		$script['pagescript']='contentScript';
 		$this->load->view('admin/partials/footer',$script);

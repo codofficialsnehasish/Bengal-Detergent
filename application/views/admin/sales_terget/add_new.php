@@ -56,7 +56,7 @@
                                 <option value="<?= $d->id ?>"><?= $d->full_name ?></option>
                               <?php } ?>
                             </optgroup>
-                            <optgroup label="Teamleader">
+                            <optgroup label="Employee">
                             <?php foreach($teamleader as $t){ ?>
                                 <option value="<?= $t->id ?>"><?= $t->full_name ?></option>
                               <?php } ?>

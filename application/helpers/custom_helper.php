@@ -2242,9 +2242,13 @@ if (!function_exists('numberTowords')) {
 
     if (!function_exists('get_dristributer_data')) {
         function get_dristributer_data($pin){
-            $ci =& get_instance();
-            $res = $ci->select->get_distributer_by_pin($pin);
-            return $res;
+            if(!empty($pin)){
+                $ci =& get_instance();
+                $res = $ci->select->get_distributer_by_pin($pin);
+                return $res;
+            }else{
+                return Array();
+            }
         }
     }
 

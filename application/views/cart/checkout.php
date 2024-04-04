@@ -266,23 +266,29 @@
                         </div>
                         <?php if($this->auth_user->role == 'retailer'){ ?>
                         <h2 class="payment-title mb-3 mt-3">Distributer</h2>
-                        <?php $dist = get_dristributer_data($this->auth_user->zip_code); $check_this = true; ?>
+                        <?php 
+                            $dist = get_dristributer_data($this->auth_user->zip_code); 
+                            $check_this = true; 
+                            if(!empty($dist)){
+                        ?>
                         <li style="list-style:none;">
-                           <div class="option-payment">
-                              <?php foreach($dist as $destributer){ ?>
-                              <div class="list-left">
-                                 <input type="radio" id="option_cdistributer<?= $destributer->id; ?>" name="distributer_option" value="<?= $destributer->id; ?>" required <?php echo ($check_this == true) ? 'checked' : ''; ?>>
-                                 <!-- <input type="hidden" name="dist_id" value="<= $destributer->id; ?>"> -->
-                                 <label class="ps-4" for="option_cdistributer<?= $destributer->id; ?>">
-                                    <div class="payment-way-hd"><?= $destributer->full_name; ?></div>
-                                    <div class="payment-way-hd">Address - <?= $destributer->address; ?></div>
-                                 </label>
-                              </div>
-                              <hr>
-                              <?php $check_this = false; } ?>
-                           </div>
+                            <div class="option-payment">
+                                <?php foreach($dist as $destributer){ ?>
+                                <div class="list-left">
+                                    <input type="radio" id="option_cdistributer<?= $destributer->id; ?>" name="distributer_option" value="<?= $destributer->id; ?>" required <?php echo ($check_this == true) ? 'checked' : ''; ?>>
+                                    <!-- <input type="hidden" name="dist_id" value="<= $destributer->id; ?>"> -->
+                                    <label class="ps-4" for="option_cdistributer<?= $destributer->id; ?>">
+                                        <div class="payment-way-hd"><?= $destributer->full_name; ?></div>
+                                        <div class="payment-way-hd">Address - <?= $destributer->address; ?></div>
+                                    </label>
+                                </div>
+                                <hr>
+                                <?php $check_this = false; } ?>
+                            </div>
                         </li>
-                        <?php } ?>
+                        <?php } else{?>
+                            <div class="payment-way-text">Can't fetched Distributer, update your pin code <a href="<?= base_url('settings/'); ?>" style="color:blue;">Click This Link</a>.</div>
+                        <?php } } ?>
                         <div class="order-button-payment">
                            <button type="submit" class="btn">Place order</button>
                         </div>

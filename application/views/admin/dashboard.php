@@ -788,7 +788,7 @@
                                                             <img src="<?= base_url('assets/admin/images/services-icon/13.png') ?>" alt="">
                                                         </div>
                                                         <h5 class="font-size-16 text-uppercase text-white-50"><?php echo date('F', strtotime('-1 month', strtotime(date('Y-m-d')))); ?> Sales</h5>
-                                                        <h4 class="fw-medium font-size-24" style="color:white;"><?= get_achieved_target_data($this->auth_user->id,date('Y-m')); ?> </h4>
+                                                        <h4 class="fw-medium font-size-24" style="color:white;"><?= get_achieved_target_data($this->auth_user->id,date('Y-m', strtotime('-1 month', strtotime(date('Y-m-d'))))); ?> </h4>
                                                     </div>
                                                 </div>
                                             </a>

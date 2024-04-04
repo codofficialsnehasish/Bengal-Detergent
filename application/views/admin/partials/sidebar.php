@@ -239,15 +239,15 @@
                         $usegment='';
                         if($this->uri->segment(2)=='sales-target'){$usegment='sales-target';}
                     ?>
-                    <!-- <li class="<?= active_menu($usegment);?>">
+                    <li class="<?= active_menu($usegment);?>">
                         <a href="javascript: void(0);" class="has-arrow waves-effect <?= active_menu($usegment);?>">
                             <i class="fas fa-money-bill-alt"></i>
                             <span>Sales</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
-                            <li class="<?= tab_active('sales-target');?>"><a href="<?= base_url('admin/sales-target/')?>" class="<?= active_link('sales-target');?>">Target</a></li>                  
+                            <li class="<?= tab_active('sales-target');?>"><a href="<?= base_url('admin/sales-target/'); ?>" class="<?= active_link('sales-target');?>">Target</a></li>                  
                         </ul>
-                    </li> -->
+                    </li>
 
                     <li class="<?= active_menu('emp-leave');?>">
                         <a href="<?= check_todays_attendance($this->auth_user->id) == "Check In" ? employee_url('leave/emp-leave') : 'javascript:void(0)'; ?>" class="waves-effect <?= active_link('emp-leave');?>">
@@ -256,9 +256,6 @@
                         </a>
                     </li>
                     
-                    <?php
-                        if ($this->permission->module('permission')->access() || $this->permission->method('payslip', 'read')->access()) {
-                    ?>
                     <li class="<?= active_menu('emp-payslip');?>">
                         <a href="<?= check_todays_attendance($this->auth_user->id) == "Check In" ? employee_url('payroll/emp-payslip') : 'javascript:void(0)'; ?>" class="waves-effect <?= active_link('emp-payslip');?>">
                             <i class="fas fa-file-invoice"></i>
@@ -266,7 +263,6 @@
                         </a>
                     </li>
                     <?php } ?>
-                <?php } ?>
             </ul>
         </div>
         <!-- Sidebar -->

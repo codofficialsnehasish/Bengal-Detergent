@@ -28,7 +28,7 @@ class Sales_target extends Core_Controller {
 		$header['title']='Add New Target';
 		$this->load->view('admin/partials/header',$header);
 		$data['dristributer']=$this->select->custom_qry("select * from users where role='dristributor' and is_approved=1 order by full_name asc");
-		$data['teamleader']=$this->select->custom_qry("select * from users where role='teamlead' and is_approved=1");
+		$data['teamleader']=$this->select->custom_qry("select * from users where role='employee' and is_approved=1");
 		$data['gift']=$this->select->custom_qry("select * from gift where is_visible=1");
 		$data['products']=$this->select->custom_qry("select * from products where is_draft=0 and is_visible=1");
 		$this->load->view($this->view_path.'add_new',$data);
@@ -38,7 +38,7 @@ class Sales_target extends Core_Controller {
 	public function process()
 	{
 		$s_man = $this->input->post('salesman', true);
-		$pduct = implode(",",$this->input->post('perticilar_product', true));
+		// $pduct = implode(",",$this->input->post('perticilar_product', true));
 		foreach($s_man as $data){
 			$data=array(
 				'month'=>$this->input->post('month', true),
@@ -49,7 +49,7 @@ class Sales_target extends Core_Controller {
 				'gift'=>$this->input->post('gift', true),
 				'is_visible'=>$this->input->post('is_visible', true),
 				'massage'=>$this->input->post('massage', true),
-				'perticilar_product'=>$pduct,
+				// 'perticilar_product'=>$pduct,
 			);
 			$product_id=$this->insert_model->insert_data($data,$this->table_name);
 		}
@@ -69,7 +69,7 @@ class Sales_target extends Core_Controller {
 		$header['title']='Edit Target';
 		$this->load->view('admin/partials/header',$header);
 		$data['dristributer']=$this->select->custom_qry("select * from users where role='dristributor' and is_approved=1 order by full_name asc");
-		$data['teamleader']=$this->select->custom_qry("select * from users where role='teamlead' and is_approved=1");
+		$data['teamleader']=$this->select->custom_qry("select * from users where role='employee' and is_approved=1");
 		$data['gift']=$this->select->custom_qry("select * from gift where is_visible=1");
 		$data['products']=$this->select->custom_qry("select * from products where is_draft=0 and is_visible=1");
 		$s_target=$this->select->select_single_data($this->table_name,'id',$id);
@@ -91,7 +91,7 @@ class Sales_target extends Core_Controller {
 			'gift'=>$this->input->post('gift', true),
 			'is_visible'=>$this->input->post('is_visible', true),
 			'massage'=>$this->input->post('massage', true),
-			'perticilar_product'=>$this->input->post('perticilar_product', true),
+			// 'perticilar_product'=>$this->input->post('perticilar_product', true),
 		);
 		$update=$this->edit_model->edit($data,$id,'id',$this->table_name);
 		if($update){
