@@ -809,7 +809,7 @@
                                             <h5 class="card-title"><?= $this->auth_user->full_name;?></h5>
                                             <h6 class="card-text"><?= $this->auth_user->user_id;?></h6>
                                             <h6 class="card-text mb-3">Designation : <?= get_name("role",get_employee_designation($this->auth_user->id)); ?></h6>
-                                            <p><a href="<?= employee_url('employees/emp-details-edit/'.$this->auth_user->id);?>" class="btn btn-outline-primary btn-block" style="width: 100%;">Edit Profile</a></p>
+                                            <!-- <p><a href="<?= employee_url('employees/emp-details-edit/'.$this->auth_user->id);?>" class="btn btn-outline-primary btn-block" style="width: 100%;">Edit Profile</a></p> -->
                                             <!-- Add more profile details -->
                                         </div>
                                     </div>
