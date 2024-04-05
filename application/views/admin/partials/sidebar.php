@@ -252,7 +252,7 @@
                             <span>Sales</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
-                            <li class="<?= tab_active('sales-target');?>"><a href="<?= base_url('admin/sales-target/'); ?>" class="<?= active_link('sales-target');?>">Target</a></li>                  
+                            <li class="<?= tab_active('sales-target');?>"><a href="<?= check_todays_attendance($this->auth_user->id) == "Check In" ? base_url('admin/sales-target/') : 'javascript:void(0)'; ?>" class="<?= active_link('sales-target');?>">Target</a></li>                  
                         </ul>
                     </li>
 
