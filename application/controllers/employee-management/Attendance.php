@@ -189,11 +189,13 @@ class Attendance extends Core_Controller {
 				$endDate = date('Y-' . sprintf('%02d', $month) . '-t', strtotime($currentMonthStart));
 			} else {
 				$currentMonthStart = date('Y-m-01');
-				$endDate = date('Y-m-d');
+				// $endDate = date('Y-m-d');
+				$endDate = date('Y-m-t');
 			}
 		} else {
 			$currentMonthStart = date('Y-m-01');
-			$endDate = date('Y-m-d');
+			// $endDate = date('Y-m-d');
+			$endDate = date('Y-m-t');
 		}
 
 
@@ -209,7 +211,36 @@ class Attendance extends Core_Controller {
 	
 			// $attendanceData = $this->select->select_single_data('attendance_employee', 'date', $date);
 			$attendanceData = $this->select->custom_qry("SELECT * FROM attendance WHERE date = '$date' AND user_id = ".$u_id);
+			$payroleHolidayData = $this->select->custom_qry("SELECT * FROM payroll_holiday WHERE '$date' BETWEEN start_date AND end_date");
+			$weekliHolidayData = $this->select->select_single_data('weekly_holiday','wk_id',1);
 			
+			$is_holiday = false;
+			if($weekliHolidayData){
+				$weekdata = explode(',',$weekliHolidayData[0]->dayname); 
+				foreach ($weekdata as $wholiday) {
+					$current_day = date("l",$currentDateTimestamp);
+					// $is_holiday = true;
+					if($current_day == $wholiday){
+						$formattedData[] = array(
+							'title' => 'Weekend',
+							'start' => $date,
+							'allDay' => true,
+							'className' => 'bg-dark'
+						);
+					}
+				}
+			}
+			if($payroleHolidayData){
+				foreach ($payroleHolidayData as $holiday) {
+					$is_holiday = true;
+					$formattedData[] = array(
+						'title' => $holiday->holiday_name,
+						'start' => $date,
+						'allDay' => true,
+						'className' => 'bg-primary'
+					);
+				}
+			}
 			if ($attendanceData) {
 				$attendanceData = $attendanceData[0];
 				if(!empty($attendanceData->check_in_time)){
@@ -236,13 +267,13 @@ class Attendance extends Core_Controller {
 				// 		'className' => $attendance->status == 'Check In' ? 'bg-success' : 'bg-warning'
 				// 	);
 				// }
-			} else {
-				if ($date != $currentDate) {
+			}else {
+				if ($date != $currentDate && $date < $currentDate && $is_holiday == false) {
 					$leaveData = $this->select->custom_qry("SELECT * FROM leave_apply WHERE employee_id = '$u_id' AND '$date' BETWEEN apply_strt_date AND DATE_ADD(apply_strt_date, INTERVAL (num_aprv_day-1) DAY) AND status = 1");
 					if ($leaveData) {
 						foreach ($leaveData as $leave) {
 							$formattedData[] = array(
-								'title' => 'Leave',
+								'title' => get_name("leave_type_master",$leave->leave_type_id),
 								'start' => $date,
 								'allDay' => true,
 								'className' => 'bg-info'
