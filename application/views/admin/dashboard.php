@@ -835,7 +835,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="card mini-stat bg-primary text-white">
-                                            <a href="<?= employee_url('attendance/emp-attendance')?>">
+                                            <a href="javascript:void(0);">
                                                 <div class="card-body">
                                                     <div class="mb-4">
                                                         <div class="float-start mini-stat-img me-4">
@@ -850,7 +850,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="card mini-stat bg-primary text-white">
-                                            <a href="<?= admin_url('orders/dristibuter-order')?>">
+                                            <a href="javascript:void(0);">
                                                 <div class="card-body">
                                                     <div class="mb-4">
                                                         <div class="float-start mini-stat-img me-4">
