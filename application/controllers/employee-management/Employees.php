@@ -854,4 +854,144 @@ class Employees extends Core_Controller {
 		echo json_encode(array('status'=>$status,'msg'=>$msg));
 	}
 
+
+	//========== for employee details edit from employee personal profile ==============
+	public function emp_details_edit(){
+		$id=$this->uri->segment(4);
+		$header['pagecss']="contentCss";
+		$header['title']='Edit Profile';
+		$this->load->view('admin/partials/header',$header);
+		
+        $user=$this->auth_model->get_user_by_id($id);
+		$data['user']=$user;
+
+		$salary_config = array(
+			'tblName'=>$this->salary_configuration,
+			'where'=> array(
+				'user_id'=> $id
+			)
+		);
+		$salary_configs= $this->select->getResult($salary_config);
+		if(!empty($salary_configs[0])){
+			$data['salary_config']= $this->select->getResult($salary_config)[0];
+		}else{
+			$data['salary_config']= $this->select->getResult($salary_config);
+		}
+
+        $stateCon = array(
+			'tblName'=>$this->state,
+			'where'=> array(
+					'country_id'=> $user->country_id
+				)
+		);
+		$data['stateData']= $this->select->getResult($stateCon);
+
+        $cityCon = array(
+			'tblName'=>$this->city,
+			'where'=> array(
+					'state_id'=> $user->state_id
+				)
+		);
+		$data['cityData']= $this->select->getResult($cityCon);
+
+
+        $pmstateCon = array(
+			'tblName'=>$this->state,
+			'where'=> array(
+					'country_id'=> $user->pn_country_id
+				)
+		);
+		$data['pmstateData']= $this->select->getResult($pmstateCon);
+
+        $pmcityCon = array(
+			'tblName'=>$this->city,
+			'where'=> array(
+					'state_id'=> $user->pn_state_id
+				)
+		);
+		$data['pmcityData']= $this->select->getResult($pmcityCon);
+
+
+        $memberCon = array(
+			'tblName'=>$this->users,
+			'where'=> array(
+				'id'=> $id
+			)
+		);
+		$memberData= $this->select->getResult($memberCon);
+		
+		
+        $data['member'] = $memberData[0];
+
+		$genderCon = array(
+			'tblName'=>'gender_master',
+			'where'=> array(
+					'is_visible'=>1
+				)
+		);
+		$data['gender_master']= $this->select->getResult($genderCon);
+		
+		$medicalHistoryCon = array(
+				'tblName'=>'medical_history_master',
+				'where'=> array(
+						'is_visible'=>1
+					)
+			);
+		$data['medical_history_master']= $this->select->getResult($medicalHistoryCon);
+
+		$bloodGroupCon = array(
+				'tblName'=>'blood_group_master',
+				'where'=> array(
+						'is_visible'=>1
+					)
+			);
+		$data['blood_group_master']= $this->select->getResult($bloodGroupCon);
+
+		$maritialstatusCon = array(
+				'tblName'=>'marital_status_master',
+				'where'=> array(
+						'is_visible'=>1
+					)
+			);
+		$data['marital_status_master']= $this->select->getResult($maritialstatusCon);
+
+		$religionCon = array(
+				'tblName'=>'religion_master',
+				'where'=> array(
+						'is_visible'=>1
+					)
+			);
+		$data['religion_master']= $this->select->getResult($religionCon);
+
+		$nationalityCon = array(
+				'tblName'=>'nationality_master',
+				'where'=> array(
+						'is_visible'=>1
+					)
+			);
+		$data['nationality_master']= $this->select->getResult($nationalityCon);
+		
+		
+		$shiftCon = array(
+				'tblName'=>'shift_master',
+				'where'=> array(
+						'is_visible'=>1
+					)
+			);
+		$data['shift_master']= $this->select->getResult($shiftCon);
+
+		$countryConnections = array(
+				'tblName' => 'location_countries',
+				'where' => array(
+						'is_visible'=>1
+					)
+			);
+		$data['countries']= $this->select->getResult($countryConnections);
+		
+		$data['page_head'] = "Employee Details";
+		$this->load->view($this->view_path.'edit_details',$data);
+		$script['pagescript']='employeeScript';
+		$this->load->view('admin/partials/footer',$script);
+	}
+
 }

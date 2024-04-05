@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-body">
         <h4 class="card-title">Profie Picture</h4>
-         <p class="card-title-desc"><?= $user->full_name;?></p>
+        <p class="card-title-desc"><?= $user->full_name;?></p>
         <div class="row">
             <!-- <div class="col-md-6">
                 <div class="mt-4 mt-md-0">
